@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+        
+    // function Person(name){
+    //     this.name=name
+    // }
+    // var global=Person('global')
+    // xiaoming=new Person('xiaoming')
+    // console.log(window.name)
+    // console.log(xiaoming.name)
+    // console.log(xiaoming.constructor)
+
+    // 1.实例化对象会继承构造函数的原型，可以调用构造函数原型上的所有方法
+    // function Person(name){
+    //     this.name=name
+    // }
+    // Person.prototype={
+    //     showName:function(){
+    //         console.log(this.name)
+    //     }
+    // }
+    // var xiaoming=new Person('xiaoming')
+
+    // xiaoming.showName()
+
+    function Person(name,age){
+        this.anem=name
+        this.age=age
+        return {
+            name:'lifan'
+        }
+    }    
+    Person.prototype={
+        showName:function(){
+            console.log(this.name)
+        }
+    }
+    var xiaoming=new Person('xiaoming',18)
+    console.log(xiaoming)     //{name:lifan}          //如果构造函数返回了一个对象，那么实例对象就是返回的对象，所有通过this赋值的属性都将不存在
+</script>
+
+</body>
+</html>

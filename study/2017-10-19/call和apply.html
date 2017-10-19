@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            var person={
+                name:'lifan'
+            }
+            function changes(company,work){
+                this.company=company;
+                this.work=work
+            }
+
+            changes.call(person,'fan','wanliang')
+            console.log(person.company)
+
+            changes.apply(person,['123','666'])
+            console.log(person.work)
+
+
+
+            var number=1,string='string'
+            function getType(){
+                console.log(typeof this)
+            }
+            var a=getType.call(number)
+            var b=getType.apply(string)
+            console.log('a='+a+'----------'+'b='+b)
+    </script>
+</body>
+</html>

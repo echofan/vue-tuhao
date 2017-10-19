@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //    (function(){
+    //        'use strict'   //严格模式下  禁止this指向全局对象
+    //         console.log(this)
+    //    })()
+        
+        function showName(){
+            console.log(this.name)
+        }      
+        var person={
+            'name':'lifan',
+            'bagName':{
+                'name':'wanliang',
+                'showName':showName
+            },
+            'showName':showName
+        }
+
+        console.log(person.showName())
+        console.log(person.bagName.showName())
+    </script>
+</body>
+</html>
