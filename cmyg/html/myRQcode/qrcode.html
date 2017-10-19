@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="format-detection" content="telephone=no" />
+<title>我的邀请码</title>
+<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+<style>
+.Box{background: #111;margin: 0 auto;width: 100%;height: 100%;padding: 6% 6%;}
+.content{border-radius:10px; width: 100%;height: 94%;background: #fff;}
+
+.topBox{ height: 65%;background: #ccc;border-top-left-radius: 6px;border-top-right-radius: 6px;background: url(../../image/69.jpg) no-repeat;background-size:100%;}
+
+.centerBox{width: 100%; height: 0; border-bottom: 29px solid #fff;  border-left: solid transparent; position: relative; top: -29px; left: 0px; }
+.bottomBox{height:35%;position: relative;top:-20px;text-align: center;z-index: 99;}
+.headImg{overflow: hidden;width: 70px;height: 70px;border-radius: 50%;border:1px solid #ccc;position: relative;top:-84px;left:30px;}
+.headImg img{width: 100%;}
+.moda{width: 100%;height: 100%;background: rgba(0,0,0,.7);position: absolute;top: 0;left: 0;z-index: 999;display: none;}
+.modaCont{width: 80%;height:34%;margin:40% 10%;background: #fff;border-radius: 6px;}
+.modaTitle{text-align: center;padding:20px;border-bottom: 1px solid #ccc;}
+.modaTitle span{margin-left: 20px}
+.modaText{}
+.modaText span{width: 49%;text-align: center;padding-top:30px;}
+.modaText span img{width: 40%;}
+.mui-icon-close{float:right;}
+.leftDiv li{margin:6px 6px;color:#fff;background:rgba(0,0,0,.6);height:34px;line-height: 34px;}
+.topBox>div{display: inline-block;font-size: 14px;float: left;margin-top: 10px;}
+.leftDiv{width: 60%;}
+.rightDiv{width: 38.5%;border:1px solid #f00;height: 40%;background: #fff;}
+input[type='text']{color:#000;width: 100px !important;height:20px !important;}
+input[type='number']{color:#000;width: 100px !important;height:20px !important;}
+.cmLogo{text-align: center;position: relative;top: -10px;}
+.cmLogo>img{width: 70px;}
+.topLogo{width: 100px;padding-left: 16px;}
+.topText{width: 90px;padding-left: 16px;}
+.name{color:#fff;padding-left: 16px;margin:6px 0;margin-top: 20px;}
+ul{padding-left:10px;}
+h3{margin-bottom: 10px;font-weight: 500;}
+li{padding-left: 4px;}
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){.bottomBox{top:-30px;} .name{margin-top:10px;}}
+</style>
+<body>
+    <div class="Box" id="Box">
+        <div class="content">
+            <div class="topBox" id="topBox">
+                <div class="leftDiv">
+                    <img src="../../image/rqcode1.png" alt="" class="topLogo">
+                    <h4 class="name"></h4>
+                    <img src="../../image/rqcode2.png" alt="" class="topText">
+                    <ul>
+                        <li class="one"></li>
+                        <li class="tow"></li>
+                        <li class="three"></li>
+                        <li class="four"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="centerBox"></div>
+            <div class="bottomBox">
+                <h3>邀您加入创客</h3>
+                <div id="qrcode"></div>
+                <p style="font-size:12px;">长按扫描二维码了解更多</p>
+            </div>
+            <div class="cmLogo">
+                <img src="../../image/rqcodeLogo.png" alt="">
+            </div>
+        </div>
+        <!-- 分享蒙板 -->
+        <div class="moda">
+            <div class="modaCont">
+                <div class="modaTitle">
+                    <span>分享至</span>
+                    <i class="mui-icon mui-icon-close"></i>
+                </div>
+                <div class="modaText">
+                    <span class="wxpyq">
+                        <img src="../../image/325I.png" alt="">
+                        <p>微信朋友圈</p>
+                    </span>
+                    <span class="wxhy">
+                        <img src="../../image/235234.png" alt="">
+                        <p>微信好友</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img id="canvasImg" style="" src="">
+
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/jquery.min.js"></script>
+<script type="text/javascript" src="../../script/qrcode.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/html2canvas.js"></script>
+
+<script>
+
+apiready = function() {
+    var indexUrl = (new Date()).valueOf();
+    api.addEventListener({
+        name:'longpress'
+    }, function(ret, err){
+        var screenClip = api.require('screenClip');
+            screenClip.screenShot({
+                album:true,
+                imgPath:"fs://image/",
+                imgName:"cmygfx"+indexUrl+".png"
+            },function(ret, err) {
+                console.log("截图"+JSON.stringify(ret));
+                if (ret.status) {
+                //    alert("截图成功");
+                 $(".moda").show()
+                } else {
+                    // alert(JSON.stringify(err));
+                }
+            });
+    });
+    $(".centerBox").css("border-left-width",$(".content").width());
+    var url = app.fxUrl + 'shares/article/QRcode.html';
+    var id = $api.getStorage('memberId');
+
+    function utf(str) {
+        var out, i, len, c;
+        out = "";
+        len = str.length;
+        for(i = 0; i < len; i++) {
+            c = str.charCodeAt(i);
+            if ((c >= 0x0001) && (c <= 0x007F)) {
+                out += str.charAt(i);
+            } else if (c > 0x07FF) {
+                out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            } else {
+                out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            }
+        }
+        return out;
+    };
+
+    $('#qrcode').qrcode({
+        render: "canvas", // 渲染方式有table方式和canvas方式
+        width: 110,   //默认宽度
+        height: 110, //默认高度
+        text: utf(url+"?id="+id), //二维码内容
+        typeNumber: -1,   //计算模式一般默认为-1
+        correctLevel: 2, //二维码纠错级别
+        background: "#ffffff",  //背景颜色
+        foreground: "#000000"  //二维码颜色
+    });
+    $(".mui-icon-close").on("tap",function(){
+        $(".moda").hide()
+    });
+    app.ajax({
+        url:'memberPromotion/findOne',
+        type:'get',
+        data:{
+            token:$api.getStorage('token'),
+            memberId:$api.getStorage('memberId'),
+            // memberId:'74bcf80b14b24741b34cb3dd43477b14'
+        },
+        success : function(res){
+            console.log(JSON.stringify(res));
+            $(".one").text(res.data.oneDeclaration);
+            $(".tow").text(res.data.twoDeclaration);
+            $(".three").text(res.data.threeDeclaration);
+            $(".four").text(res.data.fourDeclaration);
+            document.getElementById("topBox").style.backgroundImage="url("+$api.getStorage("cliUrl")+")";
+        },
+    });
+    app.ajax({
+        url:'member/getMyInfo',
+        type:'post',
+        data:{
+            token:$api.getStorage('token'),
+            memberId:$api.getStorage('memberId'),
+        },
+        success:function(res){
+            if(res.data.realname == null || res.data.realname == undefined){
+                $(".name").css("visibility","hidden")
+            }else{
+                $(".name").text(res.data.realname)
+            }
+        }
+    })
+    // 图片地址 后面加时间戳是为了避免缓存session   timeline
+    var wx = api.require('wx');
+        //朋友圈
+        $(".wxpyq").on("tap",function(){
+            wx.shareImage({
+                apiKey: 'wxdace5ee36e9b94bf',
+                scene: 'timeline',
+                thumb: app.Imgurl,
+                contentUrl: 'fs://image/cmygfx'+indexUrl+'.png'
+            }, function(ret, err) {
+                 $(".moda").hide()
+                if (ret.status) {
+                    alert('分享成功');
+                } else {
+                    // alert(err.code);
+                }
+            });
+        });
+        //好友
+        $(".wxhy").on("tap",function(){
+            wx.shareImage({
+                apiKey: 'wxdace5ee36e9b94bf',
+                scene: 'session',
+                thumb: app.Imgurl,
+                contentUrl: 'fs://image/cmygfx'+indexUrl+'.png'
+            }, function(ret, err) {
+                console.log('===============>'+JSON.stringify(ret))
+                 $(".moda").hide()
+                if (ret.status) {
+                    alert('分享成功');
+                } else {
+                    // alert(err.code);
+                }
+            });
+        });
+}
+
+</script>
+</html>

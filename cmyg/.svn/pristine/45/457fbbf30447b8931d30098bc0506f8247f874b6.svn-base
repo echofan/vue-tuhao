@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <widget id="A6941662750822"  version="0.0.1">
+    <name>创盟易购</name>
+    <description>
+        创盟易购商城
+    </description>
+    <author email="1193486072@qq.com" href="https://acejerry.github.io/">
+        AceJerry
+    </author>
+    <!-- <content src="./html/win/welcomePage.html" /> -->
+    <content src="index.html" />
+    <access origin="*" />
+  <!-- <preference name="customRefreshHeader" value="UIPullRefresh"/> -->
+
+    <preference name="pageBounce" value="false"/>
+    <preference name="backgroundMode" value="remote-notification"/>
+	<preference name="appBackground" value="rgba(255,255,255,1)"/>
+	<preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
+	<preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
+
+	<preference name="appCertificateVerify" value="false"/>
+	<preference name="hScrollBarEnabled" value="true"/>
+	<preference name="vScrollBarEnabled" value="true"/>
+	<preference name="autoLaunch" value="true"/>
+	<preference name="fullScreen" value="false"/>
+	<preference name="autoUpdate" value="true" />
+	<preference name="smartUpdate" value="false" />
+	<preference name="debug" value="false"/>
+	<preference name="statusBarAppearance" value="false"/>
+    <preference name="backgroundMode" value="remote-notification"/>
+
+	<permission name="readPhoneState" />
+
+	<permission name="camera" />
+
+	<permission name="record" />
+
+	<permission name="location" />
+
+	<permission name="fileSystem" />
+
+	<permission name="internet" />
+
+	<permission name="bootCompleted" />
+
+	<permission name="hardware" />
+
+
+
+<!-- wx_login -->
+  <feature name="wx">
+    <param name="urlScheme" value="wxdace5ee36e9b94bf" />
+    <param name="apiKey" value="wxdace5ee36e9b94bf" />
+    <param name="apiSecret" value="b5a7c1180550e379c194ec46512ee516" />
+  </feature>
+<!-- wx_play -->
+  <feature name="wxPay">
+    <param name="urlScheme" value="wxdace5ee36e9b94bf"/>
+    <param name="apiKey" value="wxdace5ee36e9b94bf"/>
+    <param name="apiSecret" value="b5a7c1180550e379c194ec46512ee516"/>
+  </feature>
+  <!--zfb_play-->
+  <feature name="aliPay">
+     <param name="urlScheme" value="wxdace5ee36e9b94bf" />
+ </feature>
+
+<!--
+
+
+ -->
+<feature name="ajpush">
+      <param name="app_key" value="c5efb88800ee3b56da375d91" />
+      <param name="channel" value="your channel" />
+</feature>
+
+<!-- 七牛 -->
+<feature name="qiniuUpfile">
+    <param name="bucket" value="cmyg" />
+    <param name="SecretKey" value="4eFCqIegLvRWAWYZyNCBJcbJ7WQf9E7pWBQ9mplJ" />
+    <param name="AccessKey" value="kBcJ9krT19qwhUsTvOb5srMla45IGWDgiUEnfFio" />
+</feature>
+
+<!-- 云修复 -->
+<preference name="autoUpdate" value="true"/>
+<preference name="smartUpdate" value="true" />
+
+</widget>

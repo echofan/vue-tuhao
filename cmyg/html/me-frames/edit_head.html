@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>修改昵称</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        .add_button {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .add_button button {
+            border-radius: 5px;
+            height: 40px;
+            width: 80%;
+
+        }
+
+        .detail {
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .detail span {
+            font-size: 11px;
+        }
+
+        .headimg {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 15px;
+            margin-top: 7px;
+            border: 1px solid #ccc;
+        }
+
+        .nickname {
+            border-bottom: 0!important;
+            padding-right: 0!important;
+            height: 75px!important;
+        }
+
+        .setimg {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+            margin-top: 22px;
+        }
+        .headImg{
+          width: 100px;
+        }
+        .nicknameDiv{
+          width: 60% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page-edit-head">
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">修改头像</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div style="width:100%;height:35px">
+
+                </div>
+                <div class="mui-input-group">
+                    <div class="mui-input-row" style="height: 75px;">
+                        <div class="mui-row">
+                            <div class="mui-col-sm-4 headImg">
+                                <img class="headimg" id="userImg"/>
+                            </div>
+                            <div class="mui-col-sm-4 nicknameDiv">
+                                <input class="nickname" type="text" readonly="readonly" value="昵称：">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="mui-input-row" style="height:20px">
+
+                    </div>
+
+                    <div class="mui-input-row">
+                        <label>修改昵称</label>
+                        <input type="text" class="mui-input-clear" placeholder="填写昵称">
+                    </div>
+                </div>
+
+                <div class="add_button">
+                    <button type="button" class="mui-btn mui-btn-danger">确认</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+      var gToken  = $api.getStorage('token');
+      var gMemberId = $api.getStorage('memberId');
+      getMyInfo()
+
+      function getMyInfo(){
+        app.ajax({
+          url:'member/getMyInfo',
+          type:'POST',
+          data:{
+            memberId: gMemberId,
+            token:gToken,
+          },
+          success:function(ret){
+              console.log(JSON.stringify(ret.data))
+              if (ret.data.nickname == null) {
+                  $(".nickname").val("请设置昵称！");
+              } else {
+                  $(".nickname").val("昵称:" + ret.data.nickname);
+              };
+
+              if(ret.data.headImg == '' || null){
+                $("#userImg").attr('src','../../image/2431UI.png');
+              }else{
+                $("#userImg").attr('src',ret.data.headImg);
+              }
+
+              $(".mui-btn").click(function(){
+                  var nickName = $(".mui-input-clear").val();
+                  var userImg = ret.data.headImg;
+                //   console.log(userImg)
+                  if(nickName == '' || nickName == null){
+                    alert('昵称不能设置为空！')
+                  }else{
+                    // app.ready()
+                    app.ajax({
+                      url:'member/updateImgAndNickName',
+                      type:'POST',
+                      data:{
+                        memberId: gMemberId,
+                        token:gToken,
+                        nickname : nickName
+                      },
+                      success : function(ret) {
+                          alert("修改成功！");
+                      },
+                      error:function(err){
+                          alert("修改失败！")
+                      }
+                    })
+                  }
+
+
+              })
+          },error:function(err){
+            mui.alert('获取失败！')
+          }
+        })
+      }
+
+    };
+
+</script>
+
+</html>

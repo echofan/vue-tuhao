@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  		<link rel="stylesheet" href="../../css/aui.css">
+  		<link rel="stylesheet" href="../../css/mui.min.css">
+  		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+      <style>
+          body{
+              background-color: #f5f5f5 !important;
+          }
+      </style>
+  </head>
+  <body>
+    <header id="header" class="mui-bar mui-bar-nav  page-give">
+         <h1 class="mui-title">商品分类</h1>
+         <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+     </header>
+     <main>
+
+     </main>
+
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script src="../../script/zepto.min.js"></script>
+  <script src="../../script/mui.min.js"></script>
+  <script src="../../script/common.js"></script>
+  <script type="text/javascript">
+
+        apiready = function(){
+          app.ready()
+                // alert(api.winHeight)
+                api.openFrame({
+                    name: 'give-page1',
+                    url: 'giveIntegral.html',
+                    rect: {
+                        x: 0,
+                        y: 43,
+                        w: 'auto',
+                        h: api.winHeight - $("header").height() - $("nav").height() + 6
+                    },
+                    pageParam: {
+                        name: 'test'
+                    },
+                    bounces: true,
+                    bgColor: 'rgba(0,0,0,0)',
+                    vScrollBarEnabled: true,
+                    hScrollBarEnabled: true
+                });
+        }
+        //点击商品查看详情
+        mui('.goodsCont').on('tap', '.itemClass', function(e){
+          var $that = $(this)
+          api.openWin({
+              name: 'product-detail',
+              url : './../shop-frames/product-detail.html',
+              reload: true,
+              pageParam: {
+                  goodsId: $that.data('goodsid'),
+                  productId: $that.data('productid')
+              },
+              animation: {
+                type: 'movein',
+                duration: 200
+              }
+          })
+        })
+
+  </script>
+  </html>

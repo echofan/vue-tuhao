@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+		<title>商品分类</title>
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" href="../../css/aui.css">
+		<link rel="stylesheet" href="../../css/mui.min.css">
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+
+		<style>
+			body {
+				background: #f2f2f2;
+			}
+			.claer{clear: both;}
+			.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+			.aui-bar-nav {
+				background-color: #DCDEDD;
+				color: #DCDEDD;
+				position: fixed;
+			}
+
+			.aui-title {
+				color: #757575;
+			}
+
+			.aui-bar-nav.aui-bar-light .aui-iconfont {
+				color: #757575;
+			}
+
+			.aui-bar-tab-item>span {
+				font-size: 1rem;
+			}
+			main{
+				height:100%;
+				position: relative;
+				background: #F2F2F2;
+			}
+			aside{
+				width: 30%;
+				display: inline-block;
+				height:100%;
+				background: #fff;
+				padding-top:20px;
+				position:fixed;
+			}
+			aside ul {display: inline-block;width: 100%;}
+			aside ul li{
+				height:40px;
+				width: 100%;
+				line-height: 40px;
+				text-align: center;
+			}
+			section{
+				width: 66%;
+				padding-top: 20px;
+				display: inline-block;
+				background: #F2F2F2;
+				height: 100%;
+
+			}
+			section ul li {
+				float: left;
+				width: 45%;
+				background: #F2F2F2;
+				margin-right: .4rem;
+				margin-bottom: .5rem;
+			}
+			section ul li a{
+				display: block;
+			}
+			section ul li a p{
+				text-align: center;
+				font-size: .7rem;
+				margin-bottom: .2rem;
+				overflow: hidden;
+				text-overflow:ellipsis;
+				white-space: nowrap;
+				padding: 0 .2rem;
+
+			}
+			.mui-search{
+				margin-right: .8rem;
+			}
+			.active{
+				color:#900874;
+			}
+			aside ul li:hover{
+				color:#900874;
+			}
+			.aui-bar-tab {box-shadow: 0px 0px 10px 1px;}
+			.itemClass{width: 100%;height: 110px;}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="page-give" >
+			<!-- <header class="aui-bar aui-bar-nav aui-bar-light">
+				<div class="aui-pull-left aui-btn">
+					<span class="aui-iconfont aui-icon-left"></span>
+				</div>
+				<div class="aui-title">商品分类	</div>
+			</header>  -->
+
+
+
+			<main class="main clearfix" id="orderList">
+				<aside style="display: inline-flex;">
+					<ul>
+						<li class="tabLi active" value="1" @click="getOrderListByState(1)">特惠套餐</li>
+						<li class="tabLi" value="2" @click="getOrderListByState(2)">日化用品</li>
+						<li class="tabLi" value="3" @click="getOrderListByState(3)">时尚电器</li>
+						<li class="tabLi" value="4" @click="getOrderListByState(4)">生态生鲜</li>
+						<li class="tabLi" value="5" @click="getOrderListByState(5)">新品港货</li>
+						<li class="tabLi" value="6" @click="getOrderListByState(6)">海外潮品</li>
+						<li class="tabLi" value="7" @click="getOrderListByState(7)">吃货天堂</li>
+					</ul>
+				</aside>
+
+				<section class="section" style="float: right;">
+					<div class="mui-input-row mui-search">
+						<input type="text" class="mui-input-clear" placeholder="搜索" style="border: none;" disabled="disabled">
+						<p></p>
+					</div>
+					<div class="mui-content clearfix">
+					<ul class="clearfix cont-ul" style="background: #F2F2F2;">
+						<li>
+							<a href="">
+								<img src="../../image/keji.jpg" alt="" />
+								<p>{_data[i].imgurl}</p>
+							</a>
+						</li>
+
+
+					</ul>
+					</div>
+
+				</section>
+
+			</main>
+
+		
+
+		</div>
+
+
+	</body>
+	<!-- <script src="https://cdn.bootcss.com/vue/2.2.2/vue.min.js"></script> -->
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script src="../../script/zepto.min.js"></script>
+	<script src="../../script/mui.min.js"></script>
+	<script src="../../script/common.js"></script>
+	<script>
+
+				var showLoad = function(){
+					api.showProgress({
+							style: 'default',
+							animationType: 'fade',
+							title: '加载中...',
+							text: '请稍后...',
+							modal: false
+					});
+				}
+
+				$(function(){
+					app.ajax({
+						url: 'goods/list',
+						type: 'GET',
+						success : function(rst) {
+								$(".cont-ul").html('');
+								for(i in rst.data){
+											if(rst.data[i].classid === '57c056a8e6d74a5ebfad85141f9a5c84'){
+												// alert(JSON.stringify(rst.data[i].goodsid))
+											var htmlA = '<li data-id="'+ rst.data[i].id +'"  data-productid="'+ rst.data[i].productid+'" data-goodsid="'+ rst.data[i].goodsid+'" data-classid="'+ rst.data[i].classid +'" data-typeid="'+ rst.data[i].typeId +'">'+
+													'<a href="">'+
+													'<img src="'+ rst.data[i].imgurl +'" class="itemClass"/>'+
+													'<p>'+ rst.data[i].name +'</p>'+
+													'</a>'+
+													'</li>';
+											$(".cont-ul").append(htmlA);
+
+										}
+								}
+						},
+						error : function(err){
+							alert('错误')
+						}
+					})
+				})
+
+
+				$(".tabLi").each(function(){
+					$(this).click(function(){
+						if( $(this).val() === 1){
+							showLoad()
+							app.ajax({
+								url: 'goods/list',
+								type: 'GET',
+								success : function(rst) {
+										$(".cont-ul").html('');
+										for(i in rst.data){
+													if(rst.data[i].classid === '57c056a8e6d74a5ebfad85141f9a5c84'){
+													var htmlA = '<li {{data-id:classid}}>'+
+															'<a href="">'+
+															'<img src="'+ rst.data[i].imgurl +'" class="itemClass"/>'+
+															'<p>'+ rst.data[i].name +'</p>'+
+															'</a>'+
+															'</li>';
+													$(".cont-ul").append(htmlA);
+												}
+										}
+										api.hideProgress();
+								},
+								error : function(err){
+									alert('错误')
+								}
+							})
+
+						}else if($(this).val() === 2){
+							showLoad()
+							app.ajax({
+								url: 'goods/list',
+							  type: 'GET',
+								success : function(rst) {
+										$(".cont-ul").html('');
+										for(i in rst.data){
+													if(rst.data[i].classid === '57c056a8e6d74a5ebfad85141f9a5c84'){
+													var htmlA = '<li {{data-id:classid}}>'+
+															'<a href="">'+
+															'<img src="'+ rst.data[i].imgurl +'" class="itemClass"/>'+
+															'<p>'+ rst.data[i].name +'</p>'+
+															'</a>'+
+															'</li>';
+													$(".cont-ul").append(htmlA);
+												}
+										}
+										api.hideProgress();
+								},
+								error : function(err){
+									alert('错误')
+								}
+							});
+
+						}else if($(this).val() === 3){
+							showLoad()
+							app.ajax({
+								url: 'goods/list',
+							  type: 'GET',
+								success : function(rst) {
+										$(".cont-ul").html('');
+										for(i in rst.data){
+													if(rst.data[i].classid === '470197f2e30e47469d5a165c57ce2ec3'){
+													var htmlA = '<li {{data-id:classid}}>'+
+															'<a href="">'+
+															'<img src="'+ rst.data[i].imgurl +'" class="itemClass"/>'+
+															'<p>'+ rst.data[i].name +'</p>'+
+															'</a>'+
+															'</li>';
+													$(".cont-ul").append(htmlA);
+												}
+										}
+										api.hideProgress();
+								},
+								error : function(err){
+									alert('错误')
+								}
+							});
+
+						}else if($(this).val() === 4){
+							showLoad()
+							app.ajax({
+								url: 'goods/list',
+							  type: 'GET',
+								success : function(rst) {
+										$(".cont-ul").html('');
+										for(i in rst.data){
+													if(rst.data[i].classid === ''){
+													var htmlA = '<li {{data-id:classid}}>'+
+															'<a href="">'+
+															'<img src="'+ rst.data[i].imgurl +'" class="itemClass"/>'+
+															'<p>'+ rst.data[i].name +'</p>'+
+															'</a>'+
+															'</li>';
+													$(".cont-ul").append(htmlA);
+												}
+										}
+										api.hideProgress();
+								},
+								error : function(err){
+									alert('错误')
+								}
+							});
+
+						}else if($(this).val() === 5){
+							showLoad()
+							app.ajax({
+								url: 'goods/list',
+							  type: 'GET',
+								success : function(rst) {
+										$(".cont-ul").html('');
+										for(i in rst.data){
+													if(rst.data[i].classid === '470197f2e30e47469d5a165c57ce2ec3'){
+													var htmlA = '<li {{data-id:classid}}>'+
+															'<a href="">'+
+															'<img src="'+ rst.data[i].imgurl +'" class="itemClass"/>'+
+															'<p>'+ rst.data[i].name +'</p>'+
+															'</a>'+
+															'</li>';
+													$(".cont-ul").append(htmlA);
+												}
+										}
+										api.hideProgress();
+								},
+								error : function(err){
+									alert('错误')
+								}
+							});
+						}else if($(this).val() === 6){
+							console.log("海外潮品");
+						}else if($(this).val() === 7){
+							console.log("吃货天堂");
+						}
+					})
+				})
+	//openFrameGroup
+				apiready = function(){
+					  $('.cont-ul').html('');
+						$('.mui-search').click(function(){
+							api.openFrameGroup({
+							    name: 'group1',
+							    rect: {
+							        x: 0,
+							        y: 0,
+							        w: 'auto',
+							        h: 'auto'
+							    },
+							    frames: [{
+							        name: 'frame11',
+							        url: '../goods/goodsSearch-frames.html',
+							        bgColor: '#fff'
+							    }]
+							}, function(ret, err) {
+							    var index = ret.index;
+							});
+						})
+
+				}
+		//计算高度
+
+
+
+
+
+
+
+
+
+
+
+		$(".main").css("top",$(".aui-bar-nav").height());
+		$(".main").css("margin-bottom",$("nav").height())
+
+		//tab切换
+		$("aside>ul>li").each(function(){
+			$(this).click(function(){
+					$("aside>ul>li").removeClass("active");
+				$(this).addClass("active");
+			})
+		});
+
+
+		//点击商品查看详情
+		mui('body').on('tap', '.cont-ul>li', function(e){
+			var $that = $(this)
+			api.openWin({
+					name: 'product-detail',
+					url : './../shop-frames/product-detail.html',
+					reload: true,
+					pageParam: {
+							goodsId: $that.data('goodsid'),
+							productId: $that.data('productid')
+					},
+					animation: {
+						type: 'movein',
+						duration: 200
+					}
+			})
+		})
+
+
+
+
+
+
+	</script>
+
+</html>

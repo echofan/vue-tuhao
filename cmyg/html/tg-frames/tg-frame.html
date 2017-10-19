@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, initial-scale=1.0, width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>创盟推广</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+  .jifen{padding:0 15px;border-radius:10px;display:flex;margin: 0 auto;margin-top:15px;}
+  .jifen .left,.right{flex:1;font-size:15px;text-align: center;height: 100%;}
+  .jifen .right{color:green;}
+  .containers{margin-bottom:200px;}
+  .uls_kat{padding-bottom:150px;}
+  .uls_kat .item{padding:0 20px;display:block;margin:0 auto;margin-top:20px;position:relative;}
+  .uls_kat .pt{background:url(../../image/132532.png) no-repeat;width: 90%;height: 80px;background-size: 100%;}
+  .uls_kat .by{background:url(../../image/23463446.png) no-repeat;width: 90%;height: 80px;background-size: 100%;}
+  .uls_kat .hj{background:url(../../image/2345354.png) no-repeat;width: 90%;height: 80px;background-size: 100%;}
+  .uls_kat .zs{background:url(../../image/3246534.png) no-repeat;width: 90%;height: 80px;background-size: 100%;}
+
+  .uls_kat .item .top{height: 55px;line-height: 55px;}
+  .uls_kat .item .top span:nth-child(1){float:left;font-size:20px;color:#fff;}
+  .uls_kat .item .top span:nth-child(2){float:right;line-height:40px;}
+  .uls_kat .item .top span:nth-child(2) i{vertical-align: sub;margin-right:3px;background:url(../../image/23643634.png) no-repeat;width: 20px;height: 20px;background-size: 100%;display:inline-block;}
+  .uls_kat .item .bot{height: 25px;line-height: 16px;font-size:12px;}
+  .uls_kat .item .bot span:nth-child(2){}
+  .uls_kat .pt .bot span:nth-child(2){background:url(../../image/324234.png) no-repeat;position:absolute;width: 60px;right:5%;top:45%;height: 30px;background-size:100%;}
+  .uls_kat .by .bot span:nth-child(2){background:url(../../image/3215345.png) no-repeat;position:absolute;width: 85px;right:5%;top:45%;height: 31px;background-size:cover;}
+  .uls_kat .hj .bot span:nth-child(2){background:url(../../image/2436534.png) no-repeat;position:absolute;width: 85px;right:5%;top:45%;height: 31px;background-size:cover;}
+  .uls_kat .zs .bot span:nth-child(2){background:url(../../image/236436.png) no-repeat;position:absolute;width: 85px;right:5%;top:45%;height: 31px;background-size:cover;}
+  .player{width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);position:fixed;top:0;left:0;display:none;}
+  .player .player_box{width: 80%;position:absolute;height: 50%;left:50%;margin-left:-40%;top:15%;border-radius:10px;padding:0 15px;}
+  .player .player_box h1{font-size:20px;text-align: center;margin-top:10px;color:#fff;}
+  .player .player_box .jf{font-size: 20px;text-align: center;color:#fff;margin-top:15px;}
+  .player .player_box .jf i{vertical-align: sub;margin-right:3px;background:url(../../image/23643634.png) no-repeat;width: 20px;height: 20px;background-size: 100%;display:inline-block;}
+  .player .player_box p{font-size:17px;color:#fff;margin-top:15px;}
+  .player .player_box .foot{font-size:22px;position:absolute;bottom:5px;left:50%;margin-left:-75px;border-radius:8px;text-align: center;color:#fff;background-color: green;width: 150px;height: 40px;line-height: 40px;margin-top:15px;}
+  .player .player_box .delete{background: url(../../image/delete.png) no-repeat;width: 25px;height: 25px;background-size: 25px;position:absolute;right:10px;top:10px;}
+  .tg-type{position:fixed;top:0;left:0;background:#fff;z-index:1000;height: 100%;display:none;}
+  .tg-type .header{font-size:20px;color:#ccc;text-align: center;margin-top:15px;}
+  .tg-type .contTitle{padding: 20px 0;}
+  .tg-type .contTitle>div{font-size: 14px;height: 24px;line-height: 24px;text-align: center;display: inline-block;width: 100%;color: #659B73;text-align: center;}
+  .tg-type  .contTitle>div:nth-child(2){width: 48%;color: #E53A0A;border-left: 1px solid #ccc;}
+  .tg-type .img{text-align: center;padding:0 10%;margin-top:15px;}
+  .tg-type .moneryNum{padding:0 !important;}
+  .tg-type .mui-btn-warning{margin: 40px 0;}
+  .tg-type button{height: 42px !important;font-size: 16px !important;border: none !important;}
+  .tg-type mui-btn-warning{background-color: #F56F1F !important;}
+  .tg-type .mui-btn-success{background-color: #039BE5 !important;}
+  /*.userType{width: 100px;height: 100px;}*/
+  .tg-type .userType img{width: 30%;height: 30%;background-size: 100%;margin-top: 10px;}
+  .tg-type .userType p{text-align: left;}
+  .tg-type .experience p{color: #A7A7A7;margin-top:12px;}
+  .tg-type .chuangmeng p{color: #A7A7A7;margin-top:12px;}
+  .tg-type .titles{margin-top:8px;font-size:20px;}
+  #page-add_address{padding-bottom:50px!importantdasdasdfasfasf;}
+  .top{position: relative;}
+  i.num{border-radius: 50%;background-color: red;color: #fff;text-align: center;width: 15px;height: 15px;font-size: 11px;line-height:15px;
+               position: absolute;top:6%;right:32%;display: block;}
+  .tg-type .type-delete{background: url(../../image/654734.png) no-repeat;width: 20px;height: 20px;background-size: 20px;position:fixed;right:10px;top:10px;}
+  </style>
+</head>
+<body>
+  <div class="containers">
+           <div class="jifen">
+              <div class="left">
+                  占用积分<span class="num_z"></span>
+              </div>
+              <div class="right">
+                  可用积分<span class="num_y"></span>
+              </div>
+           </div>
+           <ul class="uls_kat">
+             <li class="pt item">
+                    <div class="top">
+                        <span>普通版</span>
+                        <span><i></i>购物分</span>
+                    </div>
+                    <div class="bot">
+                       <span>联盟推广任务</span>
+                       <span></span>
+                    </div>
+             </li>
+             <li class="by item">
+               <div class="top">
+                   <span>白银版</span>
+                   <span><i></i>购物分</span>
+               </div>
+               <div class="bot">
+                  <span>联盟推广任务</span>
+                  <span></span>
+               </div>
+             </li>
+             <li class="hj item">
+               <div class="top">
+                   <span>黄金版</span>
+                   <span><i></i>购物分</span>
+               </div>
+               <div class="bot">
+                  <span>联盟推广任务</span>
+                  <span></span>
+               </div>
+             </li>
+             <li class="zs item">
+               <div class="top">
+                   <span>钻石版</span>
+                   <span><i></i>购物分</span>
+               </div>
+               <div class="bot">
+                  <span>联盟推广任务</span>
+                  <span></span>
+               </div>
+             </li>
+           </ul>
+           <div class="player">
+               <div class="player_box">
+                   <h1 class="tgs"></h1>
+                   <div class="jf"><i></i>购物分<span></span></div>
+                   <p class="tiyan"></p>
+                   <button class="foot">任务开始</button>
+                   <div class="delete"></div>
+               </div>
+           </div>
+           <div class="tg-type">
+             <div class="header">请选择推广类型</div>
+             <div class="type-delete"></div>
+             <div class="img">
+               <div class="userType experience" data-type="fast">
+                 <div class="top">
+                   <img src="../../image/bottoms.png" alt="体验会员">
+                   <span class="top_num">
+                   </span>
+                 </div>
+                   <div class="titles">迅捷推广</div>
+                   <p>注：新会员可参与15次，联盟广告推广有效时间24小时可获得1%广告分，无创业分。</p>
+               </div>
+               <div class="userType chuangmeng" data-type="slow ">
+                 <div class="top">
+                   <img src="../../image/tops1.png" alt="创盟会员">
+                   <span class="bot_num">
+                   </span>
+                 </div>
+                 <div class="titles">创客推广</div>
+                   <p>注：联盟广告推广有效时间7&times;24小时获得7%广告分，3%创业分。</p>
+               </div>
+             </div>
+           </div>
+    </div>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+  function shops(title,ids,type){
+     $('.player').show(200)
+     $('.jf span').text(title)
+     $('.player').attr('foot-id',ids)
+     $('.player').attr('foot-type',type)
+
+  }
+      apiready=function(){
+          app.ready()
+          // api.addEventListener({
+          //     name: 'begins'
+          // }, function(ret, err){
+          //     if( ret ){
+          //          alert( $api.getStorage('tgType') );
+          //     }else{
+          //          alert( JSON.stringify( err ) );
+          //     }
+          // });
+
+          // var types=$api.getStorage('types')
+          // var idx=$api.getStorage('idx')
+          // $('.player').attr('data-types',types)
+
+          // if(idx=='0'){
+          //   $('.tiyan').html('参与推广时间内您的申请金额购物分将冻结24小时后释放。你将获得1%的广告分奖励')
+          //   $('.player_box').css('background-color','green')
+          //   $('.tgs').html('迅捷推广')
+          //   $('.foot').css('background-color','#F9690E!important')
+          // }else{
+          //   $('.tiyan').html('参与推广时间内您的申请金额购物分将冻结7&times;24小时（不含周日暂停）后释放。你将获得7%广告分、3%创业分奖励')
+          //   $('.player_box').css('background-color','#F9690E')
+          //   $('.tgs').html('创盟推广')
+          // }
+          app.ajax({
+             url:'member/getMyInfo',
+             data:{
+               memberId:$api.getStorage('memberId'),
+               token: $api.getStorage('token')
+             },
+             success:function(data){
+                console.log(JSON.stringify(data.data))
+                $('.num_z').html(data.data.memberAccout.freezeShopScore)
+                $('.num_y').html(data.data.memberAccout.shopScore)
+
+             }
+          })
+          app.ajax({
+            url:'score/getPromotionModel',
+            type:'GET',
+            data:{
+                memberId:app.memberId,
+                token:app.token
+            },
+            success:function(data){
+               console.log(JSON.stringify(data))
+               if(data.code==0){
+                  $('.item').each(function(index){
+                    $(this).attr('data-ids',data.data[$(this).index()].id)
+                    $(this).attr('data-shops',data.data[$(this).index()].shopScore)
+                  })
+               }
+            }
+          })
+          api.sendEvent({
+              name: 'tg',
+              extra: {
+                  key1: 'value1',
+                  key2: 'value2'
+              }
+          });
+          api.execScript({
+              frameName: 'rob-frame',
+              script: 'stops();'
+          });
+          // 下拉刷新
+          api.setRefreshHeaderInfo({
+                  bgColor: '#fff',
+                  textColor: '#333',
+                  textDown: '下拉刷新...',
+                  textUp: '松开刷新...'
+
+              }, function(ret, err) {
+                  //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+                  window.location.reload()
+                api.refreshHeaderLoadDone()
+
+              })
+
+      }
+  var items=$('.item')
+  for(var i=0;i<items.length;i++){
+       $(items[i]).on('tap',function(){
+         var shop=$(this).attr('data-shops')
+         var ids=$(this).attr('data-ids')
+         $('.tg-type').attr('nums',shop)
+         $('.tg-type').attr('ids',ids)
+         $('.tg-type').show()
+         //判断会员类型
+         app.ajax({
+           url: 'score/getPromotionTimes',
+           data: {
+               token: $api.getStorage('token'),
+               memberId: $api.getStorage('memberId')
+           },
+           showLoading: false,
+           success:function(data){
+              if(data.data.experienceFlag==true){
+                $('.experience').attr('totals',data.data.fastCount)
+                $('.chuangmeng').attr('totals',data.data.slowCount)
+                $('.userType').attr('flags',1)
+                  if(data.data.fastCount>0){
+                    $('.top_num').html('<i class="num">'+data.data.fastCount+'</i>')
+                  }
+                  if(data.data.slowCount>0){
+                    $('.bot_num').html('<i class="num">'+data.data.slowCount+'</i>')
+                  }
+              }
+              console.log(JSON.stringify(data))
+           }
+         })
+       $('.userType').on('tap',function(){
+         var idx=$(this).index()
+         var totals=$(this).attr('totals')
+         var flags=$(this).attr('flags')
+         var type=$(this).attr('data-type')
+         var nums=$(this).parents('.tg-type').attr('nums')
+         var ids=$(this).parents('.tg-type').attr('ids')
+         if(flags==='1'){
+           if(totals>0){
+             $(this).parents('.tg-type').hide()
+             shops(nums,ids,type)
+           }else{
+             app.toast('您的次数已用完！')
+           }
+         }else{
+           $(this).parents('.tg-type').hide()
+           shops(nums,ids,type)
+         }
+        if(type=='fast'){
+          $('.tiyan').html('参与推广时间内您的申请金额购物分将冻结24小时后释放。你将获得1%的广告分奖励')
+          $('.player_box').css('background-color','green')
+          $('.tgs').html('迅捷推广')
+          $('.foot').css('background-color','#F9690E!important')
+        }else{
+          $('.tiyan').html('参与推广时间内您的申请金额购物分将冻结7&times;24小时（不含周日暂停）后释放。你将获得7%广告分、3%创业分奖励')
+          $('.player_box').css('background-color','#F9690E')
+          $('.tgs').html('创盟推广')
+          $('.foot').css('background-color','green!important')
+        }
+
+       })
+
+      })
+    }
+    $('.player').find('.foot').on('tap',function(event){
+      var typesId=$('.player').attr('foot-type')
+      $(this).attr("disabled","disabled");
+      myFunc();
+                   app.ajax({
+                      url:'score/orderPromotion',
+                     //  type:'GET',
+                      data:{
+                          memberId:app.memberId,
+                          token:app.token,
+                          promotionModelId:$(this).parents('.player').attr('foot-id'),
+                          type:typesId
+                      },
+                      success:function(data){
+                          if(data.code==0){
+                            api.openWin({
+                                name: 'tg-frames',
+                                url: './index.html',
+                                reload: true,
+                                pageParam: {
+                                   //  tg_id: 3,
+                                    homes: 1,
+                                    backs:0
+                                },
+                                animation: {
+                                    type: 'none',
+                                    duration: 200
+                                }
+                            });
+                          }else{
+                             //  alert(data.msg)
+                             window.location.reload()
+                          }
+                      }
+                   })
+                 })
+      function myFunc(){
+        setTimeout(function(){
+          $(".foot").removeAttr("disabled");
+        },1000)
+      }
+      $('.type-delete').on('tap',function(){
+          $(this).parents('.tg-type').hide()
+      })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>收益消息</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    .mui-scroll-wrapper{position:relative!important;}
+    .boxs ul li{border-bottom:1px solid #f0f0f0;height: 80px;font-size:14px;-webkit-transition: all 0.1s linear;transition: all 0.1s linear;overflow:hidden;width: 119%;color:#B2B2B2;}
+    .boxs li .delet {float: right;width: 15%;text-align: center;background: #E2421B;color: #fff;display:block;height: 100%;line-height: 70px;z-index:100;font-size:15px;text-align: center;}
+    .boxs ul li div:nth-child(2){float:left;width: 17%;line-height:80px;}
+    .boxs ul li div:nth-child(1){float: left;padding:0 25px 0 20px;width: 67%;}
+    .boxs ul li div:nth-child(1) span:nth-child(2){display:block;}
+    .boxs ul li div:nth-child(1) span:nth-child(1){margin-top:10px;position:relative;color:#474747;}
+    .detail{font-size:14px;color:#B2B2B2;}
+    .kong{background: url(../../image/shop-empty.png) 50% 50% no-repeat;position: fixed;top: 40%;width: 100%;text-align: center;height: 64px;line-height: 140px;display:none;
+        transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #bfbfbf;}
+    .odds{font-size:17px;}
+    /*.boxs ul li div:nth-child(1) span:nth-child(2){overflow: hidden;white-space: nowrap;text-overflow:ellipsis;}*/
+    .swipeleft {
+            transform: translateX(-15%);
+            -webkit-transform: translateX(-15%);
+        }
+    </style>
+</head>
+<body>
+  <div id="list_address">
+      <div class="mui-inner-wrap">
+          <!-- 主页面标题 -->
+          <header id="header" class="mui-bar mui-bar-nav">
+              <h1 class="mui-title">收益消息</h1>
+              <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+          </header>
+          <div class="mui-content mui-scroll-wrapper">
+            <div class="boxs">
+                <ul class="uls">
+
+                </ul>
+                <div class="kong">暂无收益消息</div>
+                <p class="load-more"></p>
+            </div>
+          </div>
+      </div>
+  </div>
+  <script id="temID" type="text/template">
+    <%for(var i=0;i<list.length;i++){%>
+    <li data-id="<%=list[i].id%>">
+       <div>
+         <span class="odds">推广单号<%=list[i].params%></span>
+         <span class="detail"><%=list[i].title%></span>
+       </div>
+       <div class="times">
+           <%=list[i].opAt%>
+       </div>
+       <span class="delet">刪除</span>
+    </li>
+    <%}%>
+  </script>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+apiready=function(){
+  app.ready()
+  api.sendEvent({
+      name: 'removes',
+      extra: {
+          key1: 'value1',
+          key2: 'value2'
+      }
+  });
+  // app.ready()
+    var datas
+    var allMsg=app.ajaxWithLoadMorePush({
+       url:'message/getMessageList',
+       type:'GET',
+       data:{
+         'memberId': $api.getStorage('memberId'),
+         'token':$api.getStorage('token'),
+         'messageType':5,
+       },
+       success:function(data){
+         datas=data.data.data
+         console.log(JSON.stringify(data))
+          for(var i=0;i<datas.length;i++){
+             var times=app.formatMsgTime((datas[i].opAt)*1000)
+             datas[i].opAt=times
+          }
+
+         if(allMsg.status === 'NOMORE') return;
+         if (allMsg.status === 'REFRESH') $('.uls').html('') // 刷新 清空数据
+         var info={
+           list:datas
+         }
+         var text = template('temID',info)
+         $(".uls").append(text)
+         var items=$('.uls li')
+         if(items.length>9){
+           $('.load-more').show()
+         }
+         if(items.length<1){
+            $('.kong').show()
+         }else{
+           $('.kong').hide()
+         }
+         for(var i=0;i<items.length;i++){
+           $(items[i]).find('.delet').on('tap',function(event){
+              var ids=$(this).parents('li').attr('data-id')
+              $(this).parents('li').remove()
+                app.ajax({
+                   url:'message/delMessageById',
+                   type:'post',
+                   data:{
+                     'memberId': $api.getStorage('memberId'),
+                     'token':$api.getStorage('token'),
+                     'id':ids
+                   },
+                   success:function(data){
+                     console.log(JSON.stringify(data))
+                      //  app.toast(data.msg)
+                   }
+                })
+                event.stopPropagation();
+                api.sendEvent({
+                    name: 'count',
+                    extra: {
+                        key1: 'value1',
+                        key2: 'value2'
+                    }
+                });
+           })
+         }
+         app.touchs()
+         api.refreshHeaderLoadDone()
+       }
+    })
+    // 下拉刷新
+    api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            allMsg.init()()
+            // window.location.reload()
+        })
+    // 底部加载更多
+    api.addEventListener({
+        name: 'scrolltobottom'
+    }, function(ret, err) {
+        app.throttle(allMsg)
+    })
+    allMsg.init()()
+}
+</script>
+
+</html>

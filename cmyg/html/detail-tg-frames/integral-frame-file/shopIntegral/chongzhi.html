@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物分明细</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../fonts/iconfont.css" />
+    <style>
+    body {
+        position: relative;
+        width: 100%;
+        background: #fff;
+    }
+    /*.nav{overflow: hidden;}*/
+
+    .clear {
+        clear: both;
+    }
+    /*.navTab{width: 120%;overflow-x: scroll;position: absolute;}*/
+
+    .shoping {
+        margin-top: 60px;
+        position: fixed;
+        width: 100%;
+    }
+    /*.nav{position: relative;}*/
+
+    .nav ul li {
+        float: left;
+        width: 16.66%;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        color: #666;
+        border-bottom: 1px solid #666
+    }
+
+    .nav ul .thisLi {
+        color: #E71C4C;
+        border-bottom: 3px solid #E71C4C
+    }
+
+    .allOrder {
+        text-align: center;
+        padding: 14px 0;
+    }
+
+    .allOrder i {
+        background: url(../../../../image/3452342.png) no-repeat;
+        width: 20px;
+        height: 20px;
+        background-size: 20px;
+        vertical-align: sub;
+        display: inline-block;
+        margin-right: 3px;
+    }
+
+    .times {
+        width: 15%;
+    }
+
+    .nos {
+        width: 30%;
+    }
+
+    .tablesTitle {
+        background-color: #8B8B8B;
+        height: 30px;
+        line-height: 30px;
+        margin-bottom: 10px;
+    }
+
+    .tablesTitle span {
+        display: inline-block;
+        text-align: center;
+        font-size: .6rem;
+        color: #fff;
+    }
+
+    .tablesCont {
+        /*overflow: hidden;*/
+        height: 100%;
+        top: 90px;
+    }
+
+    /*.tablesContUl {
+        -webkit-overflow-scrolling: touch;
+    }*/
+
+    .tablesTitle {
+        overflow: hidden;
+    }
+
+    .tablesCont ul li span {
+        display: inline-block;
+        font-size: .6rem;
+        text-align: center;
+        color: #747474
+    }
+
+    .titTime,
+    .contTime {
+        width: 25%;
+    }
+
+    .titShop,
+    .contShop {
+        width: 35%;
+    }
+
+    .titOrder,
+    .contOrder {
+        width: 18%;
+    }
+
+    .titInt,
+    .contInt {
+        width: 13%;
+    }
+
+    .contShop,
+    .contOrder,
+    .contInt,
+    .contRatio {
+        line-height: 46px;
+        position: relative;
+        top: -8px;
+    }
+
+    .contTime {
+        margin-top: 5px;
+    }
+
+    .tablesContUl li {
+        height: 50px;
+    }
+
+    .tablesContUl li:nth-child(odd) {
+        background-color: #DCDEDD
+    }
+
+    .tablesContUl li:nth-child(even) {
+        background-color: #EEEEEE
+    }
+
+    .contTime,.titTime{
+        width: 20%;
+    }
+    .contShop,.titShop{
+        width: 30%;
+    }
+    .contOrder,.titOrder{
+        width: 20%;
+    }
+    .contRatio,.titRatio{
+        width: 10%;
+    }
+    .contInt,.titInt{
+        width: 15%;
+    }
+    .tablesContUl span:not(:first-child){
+        margin-left: 4px;
+    }
+    </style>
+</head >
+
+<body>
+    <div class="allOrder">
+        <span class="allOrderTitle">充值获得</span>
+        <i></i>
+        <span class="allOrderNum"></span>
+    </div>
+    <!-- 购物分 -->
+    <div class="tables recharge">
+       <div class="tablesTitle">
+           <span class="titTime">时间</span>
+           <span class="titShop">充值单号</span>
+           <span class="titOrder">充值金额</span>
+           <span class="titRatio">比例</span>
+           <span class="titInt">购物分</span>
+       </div>
+       <div class="tablesCont">
+           <ul class="tablesContUl">
+               <!-- <li>
+             <span class="contTime">2017-04-29  10:59</span>
+             <span class="contShop">45278121</span>
+             <span class="contOrder">10000</span>
+             <span class="contRatio">100%</span>
+             <span class="contInt">30</span>
+           </li> -->
+
+           </ul>
+           <div class="thisNull" style="margin-top:200px;display:none;">
+               <p style="text-align:center;">暂无数据...</p>
+           </div>
+       </div>
+   </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../../script/common.js"></script>
+<script src="./index.js"></script>
+<script>
+apiready = function(){
+    app.ajax({
+        url: 'score/record/rechargeDetail',
+        type: 'get',
+        data: {
+            token: $api.getStorage('token'),
+            memberId: $api.getStorage('memberId'),
+            pageSize: '10',
+            pageNum: '1'
+        },
+        success: function(ret) {
+            // alert(JSON.stringify(ret))
+            if(ret.data == '' || null){
+                $(".thisNull").show()
+            }else{
+                $(".thisNull").hide()
+            }
+            $(".tablesContUl").html('');
+            for (i in ret.data) {
+                var times = formatDateTime(ret.data[i].rechargeDate)
+                var gouwuHtml = '<li>' +
+                    '<span class="contTime">' + times + '</span>' +
+                    '<span class="contShop">' + ret.data[i].orderNo + '</span>' +
+                    '<span class="contOrder">￥'+ret.data[i].amount+'</span>'+
+                    '<span class="contRatio">'+ret.data[i].radio+'</span>'+
+                    '<span class="contInt">' + ret.data[i].shopScore + '</span></li>';
+                $(".tablesContUl").append(gouwuHtml);
+            }
+        }
+    })
+    app.ajax({
+        url: 'score/record/buyDetailCount',
+        type: 'get',
+        data: {
+            token: $api.getStorage('token'),
+            memberId: $api.getStorage('memberId')
+        },
+        success: function(ret) {
+            // alert(JSON.stringify(ret.data.count))
+            $(".allOrderNum").text(ret.data.count)
+        }
+    })
+    // 下拉刷新
+    api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            window.location.reload()
+            api.refreshHeaderLoadDone()
+    })
+}
+</script>
+
+</html>

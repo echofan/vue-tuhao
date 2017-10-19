@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>广告分明细</title>
+  <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+  <style>
+       body{position:relative;width: 100%;background: #fff;}
+       /*.nav{overflow: hidden;}*/
+       .clear{clear: both;}
+       /*.navTab{width: 120%;overflow-x: scroll;position: absolute;}*/
+       .shoping{margin-top:50px;position:absolute;width: 100%;}
+       /*.nav{position: relative;}*/
+       .nav ul li{float: left;width:25%;text-align: center;height: 40px;line-height: 40px;color:#666;border-bottom: 1px solid #666}
+       .nav ul .thisLi{color:#E71C4C;border-bottom: 3px solid #E71C4C}
+       .allOrder{text-align: center;margin: 20px 0;}
+       .allOrder i{background:url(../../../image/23442I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+       .times{width: 15%;}
+       .nos{width: 30%;}
+       .tablesTitle{background-color: #ED7020;height: 30px;line-height: 30px;margin-bottom: 10px;}
+       .tablesTitle span{display: inline-block;text-align: center;font-size: .6rem;color:#fff;}
+       .tablesCont ul li span{display: inline-block;font-size: .6rem;text-align: center;color: #747474}
+       .titTime,.contTime{width: 23%;}
+       .titShop,.contShop{width: 25%;}
+       .titOrder,.contOrder{width: 15%;}
+       .titInt,.contInt{width: 13%;}
+       .contShop,.contOrder,.contInt,.contRatio,.contggf{line-height: 46px;position: relative;top:-8px;}
+       .contTime{margin-top: 5px;}
+       .tablesContUl li{height: 50px;}
+       .tablesContUl li:nth-child(odd){background-color: #FFF9B1  }
+       .tablesContUl li:nth-child(even){background-color: #FFFCDB  }
+       .hide{display:none;;}
+       .duihuan .titShop,.duihuan .contShop{width: 58%;}
+       .recharge .titTime,.recharge .contTime{width: 23%}
+       .recharge .titShop,.recharge .contShop{width: 13%}
+       .recharge .titOrder,.recharge .contOrder{width: 27%}
+       .recharge .titRatio,.recharge .contRatio{width: 14%}
+       .recharge .titInt,.recharge .contInt{width: 16%}
+       .zengsong .titShop,.zengsong .contShop{width: 30%}
+       .zengsong .titInt,.zengsong .contInt{width: 12%}
+       .zengsong .titOrder,.zengsong .contOrder{width: 27%}
+       .fenxiang .titInt,.fenxiang .contInt{width: 28%;}
+       .contggf,.jl{width: 12%;}
+
+  </style>
+</head
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+      <h1 class="mui-title">广告分明细</h1>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  </header>
+   <div class="shoping" id="shoping">
+      <div class="nav">
+        <ul class="navTab">
+          <li class="thisLi">推广</li>
+          <li>人脉</li>
+          <li>出售</li>
+          <li>购入</li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="content">
+
+      </div>
+   </div>
+  <script type="text/javascript" src="../../../script/api.js"></script>
+  <script type="text/javascript" src="../../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../../script/common.js"></script>
+  <script>
+  var shopingH = 100
+  apiready = function(){
+      api.openFrameGroup ({
+          name: 'advertisement',
+          background: '#fff',
+          scrollEnabled: false,
+          vScrollBarEnabled:false,
+          preload: 0,
+          reload:true,
+          index:0,
+          rect: {
+              x: 0,
+              y: 100,
+              w: 'auto',
+              h: api.winHeight - shopingH
+          },
+          frames: [{
+              name: 'tuiguang',
+              url: './advertisement/tuiguang.html',
+              bgColor: '#fff'
+          },{
+              name: 'renmai',
+              url: './advertisement/renmai.html',
+              bgColor: '#fff'
+          },{
+              name: 'chushou',
+              url: './advertisement/chushou.html',
+              bgColor: '#fff'
+          },{
+              name: 'gouru',
+              url: './advertisement/gouru.html',
+              bgColor: '#fff'
+          }]
+      }, function(ret, err){
+          // alert(11)
+      })
+  }
+
+  $(".navTab").on("tap","li",function() {
+      var $this = $(this)
+      name2Index = {
+          'tuiguang' : 0,
+          'renmai' : 1,
+          'chushou' : 2,
+          'gouru' : 3,
+          'zengsong' : 4
+      }
+      api.setFrameGroupIndex({
+          name: 'advertisement',
+          index: $this.index(),
+          scroll: true
+      });
+      $(".navTab>li").removeClass();
+      $(this).addClass("thisLi");
+      $(".tables").hide()
+      $(".tables").eq($this.index()).show();
+  })
+
+  </script>
+</body>
+</html>

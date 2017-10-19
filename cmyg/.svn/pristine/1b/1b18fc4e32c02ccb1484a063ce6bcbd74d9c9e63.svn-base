@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>物流</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        body{background-color: #fff;width: 100%;height: 100%;position:relative;}
+        #page-bag .mui-scroll-wrapper {
+            position: relative;
+        }
+        .clear{clear:both;}
+        .mui-content{background-color: #f0f0f2!important;}
+        header{margin-bottom:10px;}
+        main{height: 100%;}
+        .fl{float:left;}
+        .pd{padding:10px;}
+        .pdl_20{padding-left: 20px;}
+        .headImgBox{border-bottom: 1px solid #999;}
+        .headImg{border:1px solid #ccc;width: 80px;height: 70px; position: relative;}
+        .headImg img{width: 100%;height: 100%;}
+        .headInfo p{margin-bottom: 4px;}
+        .orderNum{position: absolute;bottom: 0px;font-size: 14px;text-align: center;background: rgba(0,0,0,.5);color:#fff;width: 100%;}
+        strong{font-size: 16px;}
+        .courierBox{border-bottom: 1px solid #999;}
+        .courierImg{width: 60px;height: 60px;border-radius: 50%;border: 1px solid #ccc;overflow: hidden;}
+        .courierImg img{width: 100%;}
+        .courierInfo p{margin-top: 8px;}
+        .courierInfo p a{color:#00f;}
+        .courierContUl{padding:20px;}
+        .courierLi{border-left:1px solid #999;min-height: 40px;padding-bottom: 6px;}
+        .courierLi:last-child{border:none;}
+        .courierLi::before{
+            content: '';
+            border: 3px solid #f3f3f3;
+            background-color: #999;
+            display: inline-block;
+            width: 5px;
+            height: 5px;
+            border-radius: 5px;
+            margin-left: -6px;
+            margin-right: 10px;
+            position: relative;
+            top: -5px;
+        }
+        .courierLi:first-child::before{
+            background-color: #fe4300;
+            border-color: #f8e9e4;
+        }
+        .date{  margin-left: 20px;  }
+        .date,.time{font-size: 12px;}
+        .text{   display: inline-block;    vertical-align: text-top; width: 90%; font-size: 14px;}
+    </style>
+</head>
+
+<body>
+    <div class="page">
+      <header id="header" class="mui-bar mui-bar-nav  page-give">
+  			<h1 class="mui-title">物流详情</h1>
+  			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  		</header>
+      <div style="height:44px;"></div>
+      <main id="wlcontent">
+        <div class="headImgBox pd pdl_20">
+          <div class="headImg fl ">
+            <img src="../../image/43UI.png" alt="" class="orderImg">
+            <!-- <div class="orderNum">3件商品</div> -->
+          </div>
+          <div class="headInfo fl pdl_20">
+            <p>物流状态：<strong></strong></p>
+            <p>物流公司：<span class="wuliugs"> </span></p>
+            <p>物流编号：<span class="wuliuNum"> </span></p>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+        <div class="courierBox pdl_20 pd">
+          <div class="courierImg fl">
+            <img src="../../image/43UI.png" alt="">
+          </div>
+          <div class="courierInfo fl pdl_20">
+              <p>快&nbsp;&nbsp;递&nbsp;&nbsp;员：<span class="courierName"></span></p>
+              <p>联系电话：<a href="tel:" id="telNum"></a></p>
+          </div>
+          <div class="clear"></div>
+        </div>
+
+        <div class="courierCont">
+
+          <ul class="courierContUl">
+
+          </ul>
+          <div class="thisNull" style="margin-top:100px;display:none;">
+              <p style="text-align:center;">暂无物流数据...</p>
+          </div>
+        </div>
+      </main>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+
+        // app.ready()
+        var types=api.pageParam.types
+        // alert(types)
+            if(types==1){
+               var orderId=api.pageParam.orderId1
+               var orderImg=api.pageParam.orderImg1
+            }else{
+              var orderId=api.pageParam.orderId2
+              var orderImg=api.pageParam.orderImg2
+            }
+            // alert(orderImg)
+        app.ajax({
+          url:'express/get',
+          type:'post',
+          data:{
+            id : orderId
+            // id:'548aff0ede6c4336be4041750b57514c'
+          },
+          success : function(ret){
+            // console.log(JSON.stringify(ret))
+            console.log(JSON.stringify(ret.data.traces))
+            $(".orderImg").attr("src",orderImg)
+            $(".courierContUl").html('');
+            var datas =  ret.data.traces.replace('\/','');
+            var dataJson = JSON.parse(datas);
+            console.log(dataJson)
+            if(dataJson.Traces == '' || null){
+                $(".thisNull").show()
+            }else{
+                $(".thisNull").hide()
+                var str = JSON.stringify(dataJson.Traces[dataJson.Traces.length-2].AcceptStation);
+                var num = str.replace(/[^0-9]/ig,"");
+                $(".wuliuNum").text(dataJson.LogisticCode);
+            }
+            $("#telNum").attr('href','tel:'+num+'')
+            $("#telNum").text(num);
+            if(dataJson.State == 2){
+                $("strong").text("运输中");
+            }else if(dataJson.State == 3){
+                $("strong").text("已签收");
+            }else if(dataJson.State == 4){
+               $("strong").text("问题件");
+            };
+            $(".wuliugs").text(ret.data.company);
+
+
+            for(var i=dataJson.Traces.length;i--;){
+              var listHtml ='<li class="courierLi">'+
+                              '<span class="text">'+ dataJson.Traces[i].AcceptStation +'</span><br>'+
+                              '<span class="date">'+ dataJson.Traces[i].AcceptTime +'</span>'+
+                          '</li>';
+                          $(".courierContUl").append(listHtml);
+            }
+
+          },
+          error : function(err){
+            alert(JSON.stringify(err))
+
+          }
+        })
+
+
+    }
+</script>
+</html>

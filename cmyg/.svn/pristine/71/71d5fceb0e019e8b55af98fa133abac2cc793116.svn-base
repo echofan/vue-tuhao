@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no" />
+  <title>已完成订单</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+  .product-list {
+      /*margin-bottom: 60px;*/
+  }
+  #page-bag-frame{
+      height: 100%;
+      position:relative;
+  }
+  span.submit-order {
+      height: 100%;
+      line-height: 50px;
+      padding: 0 15px;
+  }
+
+  .product-list li {
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+      padding:10px 20px 10px 25px;
+      display: flex;
+      display: -webkit-flex;
+      align-items: center;
+      position:relative;
+  }
+
+  .product-list li .product-img {
+      width: 3.5rem;
+      height: 3.5rem;
+      border: 1px solid #ddd;
+      flex-shrink: 0;
+      margin-right: 10px;
+  }
+
+  .product-list li .title {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+  }
+  .product-list.editable li i.i-del {
+      display: inline-block;
+  }
+  .mui-bar,.mui-bar-tab{
+    /*position:!important;*/
+    width: 100%;
+    bottom:0;
+    overflow-y: auto!important;
+    -webkit-overflow-scrolling: touch;
+  }
+  .foots{display:flex;width: 100%;font-size:14px;justify-content: space-between;height: 50px;
+    background-color: #fff;border-top:1px solid #f0f0f2;position:fixed;bottom:50px;line-height: 50px;padding:0 10px;box-sizing:border-box;}
+  .foots .item{flex:1;}
+  .foots .item i{float:left;}
+  .foots .item span{float:left;}
+  div.lefts{float:left!important;}
+  .delete{position:absolute;right:15px;top:25px;font-size:30px;font-weight:500;}
+  .dingdan{padding:5px 15px 5px 25px;color:#999999; position:relative;background-color: #EEEEEE;position:relative;border-bottom:1px solid #ccc;}
+  .dingdan_to{padding:5px 15px 5px 25px;color:#999999; position:relative;background-color: #fff;position:relative;border-bottom:1px solid #ccc;}
+  .times{box-sizing: border-box;}
+  .dingdan .bot_img{background: url(../../image/bots.png) no-repeat;height: 30px;width: 30px;background-size: 30px;position:absolute;right:20px;top:18px;}
+  .dingdan .top_img{background: url(../../image/tops.png) no-repeat;height: 30px;width: 30px;background-size: 30px;position:absolute;right:20px;top:18px;}
+  i{overflow:visible!important;}
+  i.checkboxs {font-style: normal;}
+  i.checkboxs::before {content: '\e65d';color: #ccc;margin-right: 5px;font-size: 18px;margin-top: -10px;width: 10px;}
+  i.checkboxs.checked::before {content: '\e663';color: #E50043;}
+  .deletes{float:right;}
+  .deletes i{background:url(../../image/654734.png) no-repeat;width: 20px;margin-top:12px;margin-right:3px;vertical-align: sub;height: 20px;background-size:20px;}
+  .bh{font-size:15px;}
+  .location{background-color: #fff;padding:20px 15px 10px 25px;height: 80px;}
+  .location .location_img{background:url(../../image/45788787.png) no-repeat; width: 20px;height: 30px;background-size:100%;display:inline-block;float:left;margin-top:10px;}
+  .location .cent{float:left;font-size:13px;margin-left:5px;width: 85%;}
+  .location .cent .xxdz{color:#A0A0A0;line-height: 16px;}
+  .location .foot_img{background:url(../../image/7878UI.png) no-repeat;width: 20px;height: 20px;background-size:20px;float:right;margin-right:3px;margin-top:13px;}
+  .wuliu{height: 60px;line-height: 60px;text-align:right;border-bottom:1px solid #ccc;padding-right:20px;}
+  .plays{height: 60px;line-height:60px;background-color: #f0f0f2;position:fixed;bottom:0px;width: 100%;box-sizing: border-box;display:none;}
+  .plays .left{width: 70%;float:left;padding-left:25px;box-sizing: border-box;}
+  .plays .play_to{width: 30%;float:right;background-color: red;color:#fff;font-size:18px;text-align: center;}
+  /*---------*/
+  .numbox{border:none!important;margin-right:25px;}
+  .box-item-line{width: 100%;height: 10px;background-color: #f0f0f2;}
+  .foot_box{display:flex;padding:20px 15px 20px 25px;font-size:14px;}
+  .foot_box div:nth-child(1){flex:3;}
+  .foot_box div:nth-child(2){flex:2;}
+  .foot_box div:nth-child(3){flex:3;}
+  .foot_box .shopings i{background:url(../../image/u200.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;vertical-align: middle;margin-left:3px;margin-right:3px;}
+  .cents{margin-top:14px;}
+  .foot_wuliu{border-bottom:1px solid #ccc;height: 50px;line-height:50px;display:flex;font-size: 14px;padding:0 20px;}
+  .xjs span{display:block;text-align: center;}
+  .haos{font-size:13px;}
+  .play_foot{height: 50px;line-height: 50px;position: fixed;bottom:0;background-color: #EFEFEF;width: 100%;z-index:1000;padding-left:20px;}
+  .checkbox_no{background:url(../../image/no.png) no-repeat; width: 15px;height: 15px;background-size: 15px;display: inline-block;margin-top:15px;margin-left:15px;vertical-align:sub;  }
+  .checkbox_yes{background:url(../../image/yes.png) no-repeat; width: 15px;height: 15px;background-size: 15px;display: inline-block;margin-top:15px;margin-left:15px;vertical-align:sub;  }
+  .play_foot span{text-align: center;font-size:18px;margin-left:50px;}
+  .play_foot .oks{width: 100px;background-color: #E60145;color:#fff;float:right;font-size: 20px;text-align: center;}
+  .play_foot label{margin-left:5px;}
+  .wins{position:relative;}
+  .wins .head{height: 35px;background-color: #DDDDDD;color:#000;font-size:18px;text-align: center;line-height: 35px;position:relative;}
+  .wins .head span{position:absolute;top:0px;left:8px;padding:5px;}
+  .wins .head i{background:url(../../image/zuo.png) no-repeat;display:inline-block;height: 20px;width: 20px;background-size: 20px;}
+  .hide_box{display:none;}
+  .load-more {text-align: center;padding: 10px;position: absolute;left: 36%;bottom: -50px;}
+  .kong{background: url(../../image/shop-empty.png) 50% 50% no-repeat;position: fixed;top: 40%;width: 100%;text-align: center;height: 64px;line-height: 140px;display:none;
+      transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #bfbfbf;}
+  .load-more{display:none;}
+  .xj{background: url(../../image/xj.png) no-repeat;width: 65px;height: 17px;background-size: 100%;display:inline-block;margin-left:15px;}
+  .xff{background: url(../../image/xff.png) no-repeat;width: 65px;height: 17px;background-size: 100%;display:inline-block;margin-left:15px;}
+  .gwf{background: url(../../image/gwf.png) no-repeat;width: 65px;height: 17px;background-size: 100%;display:inline-block;margin-left:15px;}
+  .wuliuBtn>span{height: 20px;line-height: 12px;padding: 5px 10px;background: #f55;text-align: center;color:#fff;border-radius: 3px;}
+  .foot_wuliu {border-bottom: 1px solid #ccc;height: 50px;line-height: 50px;display: flex;font-size: 14px;padding: 0 20px;}
+  .foot_wuliu div:nth-child(1) {flex: 1;}
+  .foot_wuliu div:nth-child(2) { flex: 1;}
+  .foot_wuliu div:nth-child(3) {flex: 2;}
+  </style>
+</head>
+<body>
+  <div class="wins">
+         <div class="head">
+            <span><i></i></span>
+            已完成订单
+         </div>
+         <div class="boxs">
+
+         </div>
+         <div class="kong">当前没有完成的订单</div>
+         <p class="load-more"></p>
+  </div>
+
+  <script type="text/template" id="temID">
+    <%for(var i=0;i<list.length;i++){%>
+  <div class="box_item" data-id="<%=list[i].id%>">
+      <div class="dingdan">
+          <div class="times">
+            <span><%=list[i].createTime%></span>
+            <%if(list[i].prePayType==1){%>
+             <span class="times_r xj"></span>
+            <%}%>
+            <%if(list[i].prePayType==2){%>
+             <span class="times_r xff"></span>
+            <%}%>
+            <%if(list[i].prePayType==3){%>
+             <span class="times_r gwf"></span>
+            <%}%>
+          </div>
+          <div class="tops">
+            <span>订单编号:</span><span class="bh"><%=list[i].orderNum%></span>
+          </div>
+          <span class="bot_img"></span>
+      </div>
+    <div class="hide_box">
+      <div class="location">
+          <span class="location_img"></span>
+          <div class="cent">
+              <div>
+                 <span class="names"><%=list[i].memberAddress.receiver%></span>
+                 <span class="iphone"><%=list[i].memberAddress.phone%></span>
+              </div>
+              <div class="xxdz"><%=list[i].memberAddress.address%></div>
+          </div>
+      </div>
+      <div class="lines"></div>
+      <div style="clear:both"></div>
+      <ul class="product-list">
+        <%for(var j=0;j<list[i].orderGoodsItemList.length;j++){%>
+      <li class="iconfont" data-goodsid="<%=list[i].orderGoodsItemList[j].goodsId%>" data-productid="<%=list[i].orderGoodsItemList[j].productId%>">
+        <i class="product-img">
+          <img src="<%=list[i].orderGoodsItemList[j].imgUrl%>" alt="">
+        </i>
+        <div class="lefts">
+          <h1 class="title"><%=list[i].orderGoodsItemList[j].title%></h1>
+          <div class="price-line">
+          <div>
+            <i class="iconfont icon-qian red">
+              <span class="price"><%=list[i].orderGoodsItemList[j].price/100%></span>
+            </i>
+          </div>
+          <div>
+            <em>赠</em>
+            <i class="iconfont icon-jewelry">
+              <span class="points"><%=list[i].orderGoodsItemList[j].shopScore%></span>
+            </i>
+          </div>
+          <div class="numbox"><%=list[i].orderGoodsItemList[j].num%></div>
+        </div>
+      </div>
+    </li>
+    <%}%>
+      </ul>
+      <div class="foot_wuliu">
+          <%if(list[i].courierFirm=="SF"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">顺丰</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="STO"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">申通</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="YD"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">韵达</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="YTO"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">圆通</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="ZTO"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">中通</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="ZJS"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">宅急送</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="EMS"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">EMS</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+          <%if(list[i].courierFirm=="HTKY"){%>
+            <div class="wuliuBtn"><span>查看物流</span></div>
+            <div class="kdgs">百世汇通</div>
+            <div>单号:<span class="haos"><%=list[i].courierNum%></span></div>
+          <%}%>
+      </div>
+      <div class="foot_box">
+        <%if(list[i].prePayType==1){%>
+         <div class="shopings xjs">
+             <span>购物分<i></i></span><span class="red"><%=list[i].getShopScore%></span>
+         </div>
+         <div class="wuliu_price xjs">
+             <span>物流费用</span><span class="red">
+               <%if((list[i].totalPrice/100)>90){%>
+                  0.00
+               <%}else{%>
+                 10.00
+               <%}%>
+             </span>
+         </div>
+         <div class="total_price xjs">
+             <span>总计金额</span><span class="red">￥<%=(list[i].totalPrice)/100%></span>
+         </div>
+         <%}%>
+         <%if(list[i].prePayType==2){%>
+          <div class="wuliu_price_type">
+              物流费用<span class="red">10.00</span>
+          </div>
+          <div class="total_price_type">
+              总计金额：<span class="red">￥<%=(list[i].totalPrice)/100%></span>
+          </div>
+          <%}%>
+          <%if(list[i].prePayType==3){%>
+           <div class="wuliu_price_type">
+               物流费用<span class="red">10.00</span>
+           </div>
+           <div class="total_price_type">
+               总计购物分:<span class="red">￥<%=list[i].shopScore%></span>
+           </div>
+           <%}%>
+      </div>
+    </div>
+</div>
+<%}%>
+
+    </script>
+
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+  //打开查看物流
+  mui('.boxs').on('tap', '.wuliuBtn', function() {
+      var orderIdlz = $(this).parents('.box_item').attr("data-id");
+      var orderImg = $(this).parents('.box_item').find(".product-img > img").attr('src')
+      // alert(orderIdlz)
+      // alert(JSON.stringify(orderImg))
+      api.openWin({
+          name: 'wuliu',
+          url: './logistics-wl.html',
+          pageParam: {
+              orderId2: orderIdlz,
+              orderImg2 :orderImg,
+              types:2
+          }
+      });
+  })
+  function hides(){
+    if($('.boxs .box_item').length>0){
+      $('.kong').hide()
+    }else{
+      $('.kong').show()
+    }
+  }
+  apiready = function() {
+      app.ready()
+      hides()
+      var bagListAjax = app.ajaxWithLoadMore({
+        url : 'ordergoods/queryOrdergoods',
+        data: {
+          memberId: $api.getStorage('memberId'),
+          token:app.token,
+          status:5,
+          pageSize:10,
+          pageNum:1
+        },
+        success: function(rst){
+          if(bagListAjax.status === 'REFRESH') $('.boxs').html('') // 刷新 清空数据
+          var datas=rst.data
+          console.log(JSON.stringify(datas))
+          for(var i=0;i<datas.length;i++){
+               var times=app.times((datas[i].createTime)*1000)
+               datas[i].createTime=times
+          }
+          var info={
+             list:datas
+          }
+          var text=template('temID',info)
+          $(".boxs").append(text)
+          hides()
+          api.refreshHeaderLoadDone()
+          var items=$('.box_item')
+          if(items.length>9){
+              $('.load-more').show()
+          }
+          for(var i=0;i<items.length;i++){
+             $(items[0]).find('.hide_box').show()
+             $(items[0]).find('.bot_img').addClass('top_img')
+             $(items[0]).find('.dingdan').addClass('dingdan_to')
+          }
+          var ua = navigator.userAgent.toLowerCase();
+          if (/iphone|ipad|ipod/.test(ua)) {
+              $('.plays').css({
+                 'position':'fixed!important',
+                 'bottom':'0px!important'
+              })
+              $("#page-bag-frame").css({
+                 'position':'relative',
+                 'height':'100%'
+              })
+          } else if (/android/.test(ua)) {
+          }
+
+        }
+      })
+      // tab切换
+      $('.wins').on('tap','.dingdan',function(){
+          $(this).siblings('.hide_box').toggle()
+          $(this).find('.bot_img').toggleClass('top_img')
+          $(this).toggleClass('dingdan_to')
+      })
+      //关闭当前窗口
+      $(".head i").on('tap',function(){
+        api.closeWin();
+      })
+      // 下拉刷新
+      api.setRefreshHeaderInfo({
+          bgColor  : '#fff',
+          textColor: '#333',
+          textDown : '下拉刷新...',
+          textUp   : '松开刷新...'
+      }, function(ret, err) {
+          //在这里从服务器加载数据，加载完成后调用方法恢复组件到默认状态
+          // api.refreshHeaderLoadDone()
+          hides()
+          bagListAjax.init()()
+          // window.location.reload()
+      })
+      // 底部加载更多
+      api.addEventListener({
+          name: 'scrolltobottom'
+      }, function (ret, err) {
+        setTimeout(function(){
+           bagListAjax()
+        },1000)
+      })
+      bagListAjax.init()()
+  }
+  $('.head span').on('tap',function(){
+     api.closeWin()
+  })
+
+  </script>
+</body>
+</html>

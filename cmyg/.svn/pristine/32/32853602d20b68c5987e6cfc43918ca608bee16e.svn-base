@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>title</title>
+      <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+      <link rel="stylesheet" href="../../css/aui.css">
+      <link rel="stylesheet" href="../../css/mui.min.css">
+      <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+      <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+      <style>
+          body{ background-color: #fff; }
+          .UsText{ padding:4rem .8rem 1rem .8rem; text-indent:2em; line-height: 26px; font-size: .64rem; }
+          #footer{ width: 100%; margin-top: 40px; position:absolute; bottom:0;  }
+          #footer p { width: 100%; text-align: center; font-size: .5rem; }
+          #footer p:first-child{ margin: 0; }
+          .mui-table-view-cell:after { left: 0px !important; }
+          .mui-table-view>li{ font-size: .6rem; }
+      </style>
+  </head>
+  <body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">关于我们</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <main>
+      <div class="UsText">
+        创盟是以互联网技术搭建线上交易的平台，以会员制进行平台运营，以口碑、推广的方式达到销售的目的，而会员从联
+        盟中获取平台收益，这种模式使创盟能够有效连接广告商、品牌商。相当于平台监督检核产品，消费者变成了销售员，形
+        成消费者权利居于主导地位，层层批发带来加价逐步消失，从而通过扁平化的营销渠道，精简流通环节，对消费者需求作
+        出快速反应，生产定制符合市场需求的产品，这一创新已经成为创盟品的核心竞争力。
+      </div>
+      <div class="btnLz">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">欢迎页</a>
+            </li>
+            <li class="mui-table-view-cell">
+                <a class="mui-navigate-right">版权信息</a>
+            </li>
+        </ul>
+      </div>
+      <div id="footer">
+        <p>广东创盟易购科技发展有限公司</p>
+        <p>Copyright &copy; 2017-2023 Cmyg.</p>
+      </div>
+    </main>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script src="../../script/zepto.min.js"></script>
+  <script src="../../script/mui.min.js"></script>
+  <script src="../../script/common.js"></script>
+  <script type="text/javascript">
+      apiready = function(){
+
+      };
+  </script>
+  </html>

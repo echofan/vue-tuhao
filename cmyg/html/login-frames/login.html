@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>登陆</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <style type="text/css">
+        #page-login,
+        #page-login-main {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #page-login-main {
+            background: url(../../image/page-bk.png) -1px -1px no-repeat;
+            background-size: 101% 101%;
+        }
+
+        #page-login .mui-input-group {
+            background: transparent;
+            color: #999;
+        }
+
+        #page-login-main .content-wrap {
+            margin: 0 2rem;
+        }
+
+        #page-login-main .mui-input-group::before,
+        #page-login-main .mui-input-group::after {
+            display: none;
+        }
+
+        .lg-input-group {
+            margin: 1rem 0;
+        }
+
+        i.i-lg-logo {
+            margin: 3rem 1rem;
+        }
+
+        #page-login-main .mui-input-group .mui-input-row {
+            margin-top: 0.7rem;
+        }
+
+        #page-login-main .mui-input-group .mui-input-row::after {
+            display: none;
+        }
+
+        #page-login-main .mui-input-row label {
+            width: 2.5rem;
+            padding-right: 0;
+        }
+
+        .mui-input-row label~input {
+            width: calc(100% - 2.5rem);
+            border-bottom: 1px solid;
+            padding: 0 .5rem;
+            color: #eee;
+            border-color: rgb(153, 153, 153);
+        }
+
+        .content-footer {
+            font-size: 16px;
+            padding-top: 20px;
+            margin-bottom: calc(6rem - 40px);
+        }
+
+        .content-footer>div {
+            /*display: flex;*/
+            /*display: -webkit-flex;*/
+            justify-content: space-between;
+            height: 40px;
+            align-items: center;
+        }
+
+        .content-footer i.wc-logo {
+            float: left;
+            width: 32px;
+            margin-right: 10px;
+        }
+
+        .to-register {
+            text-align: center;
+            border-bottom: 1px solid;
+            font-size: 16px;
+        }
+        .fg-password{
+          display: inline-block;
+          /*float:right !important;*/
+          margin-left: 10px;
+        }
+        #page-login-main{
+          /*padding-bottom:500px;*/
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page-login">
+        <div id="page-login-main">
+            <div class="content-wrap">
+                <i class="i-lg-logo"><img src="../../image/lg-logo.png" alt=""></i>
+                <form class="mui-input-group lg-input-group">
+                    <div class="mui-input-row">
+                        <label>账号</label>
+                        <input type="tel" class="mui-input-clear lg-phone" placeholder="请输入手机号码">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>密码</label>
+                        <input type="password" class="mui-input-password lg-password" placeholder="请输入密码">
+                    </div>
+                    <div class="mui-button-row">
+                        <button type="button" class="m active bt-login">登陆</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="content-footer">
+                <p class="to-register">没有账号我要注册》</p>
+                <div>
+                    <div class="wechat-login" style="width: 120px;float:left;" onclick="wechatLogin()">
+                        <i class="wc-logo"><img src="../../image/wx_logo.png" alt=""></i>
+                        <span>微信登陆</span>
+                    </div>
+                    <span class="fg-password" style="float:right;">忘记密码</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/md5.min.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+        var homes = api.pageParam.homes
+        var quit=api.pageParam.quit
+        var tuichu=api.pageParam.tuichu
+        wechatLogin = function() {
+            var wx = api.require('wx');
+
+            wx.auth({
+                apiKey: 'wxdace5ee36e9b94bf'
+            }, function(ret, err) {
+                if (ret.status) {
+                    wx.getToken({
+                        code: ret.code
+                    }, function(ret, err) {
+                        if (ret.status) {
+                            //获取用户信息
+                            var accessToken = ret.accessToken;
+                            var openId = ret.openId;
+                            wx.getUserInfo({
+                                accessToken: ret.accessToken,
+                                openId: ret.openId
+                            }, function(ret, err) {
+                                if (ret.status) {
+                                    app.ajax({
+                                        url: 'member/wxLogin',
+                                        type: 'post',
+                                        dataType: 'json',
+                                        cache: true,
+                                        data: {
+                                            openid: ret.openid,
+                                            nickname: ret.nickname,
+                                            sex: ret.sex,
+                                            headimgurl: ret.headimgurl
+                                        },
+                                        success: function(rst) {
+                                            // alert(JSON.stringify(rst))
+                                            if (rst.code === 0 && rst.data.toWhere === 'register') {
+                                                api.hideProgress();
+                                                api.openWin({
+                                                    name: 'register',
+                                                    url: './register.html',
+                                                    reload: true,
+                                                    pageParam: {
+                                                        openid: rst.data.openid
+                                                    }
+                                                });
+                                            } else {
+                                                api.hideProgress();
+                                                api.toast({
+                                                    msg: '登录成功',
+                                                    duration: 2000,
+                                                    location: 'top'
+                                                });
+                                                api.sendEvent({
+                                                    name: 'tuichu',
+                                                    extra: {
+                                                        key1: 'value1',
+                                                        key2: 'value2'
+                                                    }
+                                                });
+
+                                                console.log(rst.data.memberId)
+                                                var ajpush = api.require('ajpush');
+                                                var param = {alias:rst.data.memberId};
+                                                ajpush.resumePush(function(ret) {
+                                                  if(ret && ret.status){
+                                                    //success
+                                                  }
+                                                });
+                                                ajpush.bindAliasAndTags(param,function(ret) {
+                                                    var statusCode = ret.statusCode;
+                                                    console.log(statusCode)
+                                                    // alert('statusCode='+statusCode)
+                                                  });
+                                                $api.setStorage('token', rst.data.token)
+                                                $api.setStorage('memberId', rst.data.memberId)
+                                                api.openWin({
+                                                    name: 'root',
+                                                    url: '../../index.html',
+                                                    reload: true,
+                                                    pageParam: {
+                                                        tuichu:tuichu
+                                                    }
+                                                })
+                                                api.closeWin();
+                                            }
+                                        }
+                                    })
+                                }
+                            });
+                        }
+                    });
+
+                } else {
+                    if (api.systemType == 'android' && err.code == 3) {
+                        alert("请安装微信客户端");
+                    }
+                }
+            })
+        }
+
+
+
+        mui('#page-login').on('tap', '.bt-login', function() {
+            var _data = app.validate({
+                loginname: {
+                    type: 'PHONE',
+                    value: $('.lg-phone').val()
+                },
+                password: {
+                    type: 'PASSWORD',
+                    value: $('.lg-password').val()
+                }
+            })
+            if (!_data) return;
+            _data.password = md5(_data.password);
+            app.ajax({
+                url: 'member/login',
+                data: _data,
+                success: function(rst) {
+                  api.sendEvent({
+                      name: 'logins',
+                      extra: {
+                          key1: 'value1',
+                          key2: 'value2'
+                      }
+                  });
+                  api.sendEvent({
+                      name: 'tuichu',
+                      extra: {
+                          key1: 'value1',
+                          key2: 'value2'
+                      }
+                  });
+                    $api.setStorage('token', rst.data.token)
+                    $api.setStorage('memberId', rst.data.memberId)
+                    console.log(rst.data.memberId)
+                    var ajpush = api.require('ajpush');
+                    var param = {alias:rst.data.memberId};
+                    ajpush.resumePush(function(ret) {
+                      if(ret && ret.status){
+                        //success
+                      }
+                    });
+                    ajpush.bindAliasAndTags(param,function(ret) {
+                        var statusCode = ret.statusCode;
+                        // alert('statusCode='+statusCode)
+                      });
+                    api.openWin({
+                        name: 'root',
+                        url: '../../index.html',
+                        reload: true,
+                        pageParam: {
+                            homes: homes,
+                            tuichu:tuichu
+                        }
+                    })
+                    // api.closeWin({})
+
+                },
+                error:function(err){
+                    alert(JSON.stringify(err))
+                }
+            })
+        })
+
+        mui('#page-login').on('tap', '.to-register', function() {
+            api.openWin({
+                name: 'register',
+                url: './register.html',
+                animation: {
+                    type: 'movein',
+                    duration: 200
+                },
+                rect: {
+                    x: 0,
+                    y: 0,
+                    w: api.winWidth,
+                    h: api.winHeight
+                }
+            });
+            // api.closeWin({});
+
+        })
+        mui('#page-login').on('tap', '.fg-password', function() {
+            api.openWin({
+                name: 'pwforget',
+                url: './pwforget.html',
+                animation: {
+                    type: 'movein',
+                    duration: 200
+                },
+                rect: {
+                    x: 0,
+                    y: 0,
+                    w: api.winWidth,
+                    h: api.winHeight
+                }
+            });
+        })
+    }
+</script>
+
+</html>

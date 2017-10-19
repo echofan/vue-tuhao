@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="format-detection" content="telephone=no" />
+  <title>推荐商品</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="../../css/common.css" /> -->
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+    body{}
+    .icon-jewelry{margin: 0 !important;padding: 0 !important;}
+    span,i{display: inline-block;}
+    .recommend{width: 100%;margin: 0 auto;}
+    .orderList{
+        overflow:auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .listCont{margin: 13px;list-style:none;}
+    .listCont img{width: 100%;}
+    .title{text-align: center;color: #111 !important;}
+    .icon-qian:before {color: #E60144;font-size: 14px;position: relative;top: -1px;}
+    .icon-jewelry::before {color: #999;font-size: 14px !important;}
+    .icon-jewelry{float: right;padding: 0 12px;}
+    .price,.points{vertical-align: inherit;padding: 0 3px;}
+    .icon-qian{padding: 0 12px;}
+    .mui-action-back{color:#000 !important;}
+    .load-more{text-align: center;margin-bottom: 10px;}
+    .mui-content{background-color: #fff;}
+  </style>
+</head>
+<body>
+    <div class="recommend">
+        <header id="header" class="mui-bar mui-bar-nav  page-give">
+           <h1 class="mui-title">最新推荐</h1>
+           <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+       </header>
+       <!-- <div style="height:44px;"></div> -->
+       <div class="contentList mui-content">
+           <ul class="orderList">
+               <!-- <li class="listCont">
+                   <img src="../../image/list1.png" alt="">
+               </li> -->
+           </ul>
+           <p class="load-more">暂无更多数据</p>
+       </div>
+    </div>
+
+</body>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/mui.min.js"></script>
+    <script type="text/javascript" src="../../script/template-native.js"></script>
+    <script type="text/javascript" src="../../script/zepto.min.js"></script>
+    <script type="text/javascript" src="../../script/common.js"></script>
+    <script>
+        apiready = function(){
+            var tmpData = app.ajaxWithLoadMore({
+                url: 'goods/list',
+                type: 'GET',
+                data: {
+                    pageSize: 20,
+                    pageNum: 1,
+                    keyword : '活动商品'
+                },
+                showLoading: false,
+                success: function(rst) {
+                    if(tmpData.status === 'NOMORE') return;
+                    if (tmpData.status === 'REFRESH') $(".cont-ul").html('');
+                    for (i in rst.data) {
+                        var htmlA = '<li class="listCont" data-id="' + rst.data[i].id + '"  data-productid="' + rst.data[i].productid + '" data-goodsid="' + rst.data[i].goodsid + '" data-classid="' + rst.data[i].classid + '" data-typeid="' + rst.data[i].typeId + '">' +
+                            '<a href="">' +
+                            '<img src="' + rst.data[i].imgurl + '" class="itemClass"/>' +
+                            // '<p>' + rst.data[i].name + '</p>' +
+                            '</a>' +
+                            '</li>';
+                        $(".orderList").append(htmlA);
+                    }
+                    api.refreshHeaderLoadDone()
+                    if($(".cont-ul").html() == '' || null){
+                        $(".thisNull").show()
+                        $(".load-more").hide()
+                    }else if($(".cont-ul li").length<=9){
+                        $(".load-more").show()
+                        $(".thisNull").hide()
+                    }else{
+                        $(".thisNull").hide()
+                    }
+                }
+            })
+            $(".mui-content").on("swipeup",function(){
+                // app.throttle(tmpData);
+                tmpData()
+                $(".load-more").show()
+                $(".thisNull").hide()
+                if($(".cont-ul").html() == '' || null){
+                    $(".thisNull").show()
+                    $(".load-more").hide()
+                }else{
+                    $(".thisNull").hide()
+                }
+            })
+            tmpData.init()();
+
+            //点击商品查看详情
+        	mui('body').on('tap', '.orderList>li', function(e) {
+        		var $that = $(this)
+        		api.openWin({
+        			name: 'product-detail',
+        			url: './../shop-frames/product-detail.html',
+        			reload: true,
+        			pageParam: {
+        				goodsId: $that.data('goodsid'),
+        				productId: $that.data('productid')
+        			},
+        			animation: {
+        				type: 'movein',
+        				duration: 200
+        			}
+        		})
+        	})
+
+        }
+    </script>
+</html>

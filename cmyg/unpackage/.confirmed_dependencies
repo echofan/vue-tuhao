@@ -1,0 +1,121 @@
+{
+  "index.html": {
+    "resources": [
+      "script/common.js",
+      "fonts/iconfont.css",
+      "css/common.css",
+      "script/zepto.min.js",
+      "css/mui.min.css",
+      "script/mui.min.js",
+      "script/api.js",
+      "css/api.css",
+      "fonts/iconfont.woff"
+    ],
+    "refer": [
+      "html/login-frames/login.html",
+      "html/common-frames/search-bar.html"
+    ]
+  },
+  "html/login-frames/pwsetting.html": {
+    "href": "html/login-frames/pwsetting.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "script/md5.min.js",
+      "css/mui.min.css",
+      "css/api.css",
+      "css/common.css"
+    ],
+    "refer": [
+      "html/login-frames/login.html"
+    ],
+    "priority": 0
+  },
+  "html/login-frames/register.html": {
+    "href": "html/login-frames/register.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "css/mui.min.css",
+      "css/api.css",
+      "css/common.css"
+    ],
+    "refer": [
+      "html/login-frames/pwsetting.html"
+    ],
+    "priority": 0
+  },
+  "html/login-frames/amend.html": {
+    "href": "html/login-frames/amend.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "script/md5.min.js",
+      "css/mui.min.css",
+      "css/api.css",
+      "css/common.css"
+    ],
+    "refer": [
+      "html/login-frames/login.html"
+    ],
+    "priority": 0
+  },
+  "html/login-frames/pwforget.html": {
+    "href": "html/login-frames/pwforget.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "css/mui.min.css",
+      "css/api.css",
+      "css/common.css"
+    ],
+    "refer": [
+      "html/login-frames/amend.html"
+    ],
+    "priority": 0
+  },
+  "html/login-frames/login.html": {
+    "href": "html/login-frames/login.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "script/md5.min.js",
+      "css/mui.min.css",
+      "css/api.css",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/lg-logo.png",
+      "image/wx_logo.png"
+    ],
+    "refer": [
+      "html/login-frames/register.html",
+      "html/login-frames/pwforget.html"
+    ],
+    "priority": 0
+  },
+  "html/common-frames/search-bar.html": {
+    "href": "html/common-frames/search-bar.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "css/mui.min.css",
+      "css/api.css",
+      "css/common.css",
+      "fonts/iconfont.css"
+    ],
+    "refer": [],
+    "priority": 0
+  }
+}

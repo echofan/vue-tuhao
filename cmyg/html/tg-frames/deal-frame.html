@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, initial-scale=1.0, width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>积分转让</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+  .head{padding:20px;display:flex;}
+  .head div{text-align: center;font-size:13px;flex:1;}
+  .head .left{color:#747474;border-right:1px solid #ccc;}
+  .head .left span i{background: url(../../image/234634646.png) no-repeat;width: 20px;height: 20px;background-size: 20px;display:inline-block;vertical-align: top;margin-right: 5px;}
+  .head .right span i{background: url(../../image/3245643243.png) no-repeat;width: 20px;height: 20px;background-size: 20px;display:inline-block;vertical-align: top;margin-right: 5px;}
+  .head .right{color:#AECEB8;}
+  .deal .uls{margin-top:15px;font-size:20px;}
+  .deal .uls li{height: 60px;line-height: 60px;border-top: 1px solid #ccc;border-bottom:1px solid #ccc;color:#fff;margin-bottom:30px;}
+  .deal .uls li .buy{background:url(../../image/61UI.png) no-repeat;width: 55%;height: 59px;background-size: 100%;display:inline-block;float:left;text-align: center;}
+  .deal .uls li span:nth-child(2){color:#747474;width: 40%;text-align: center;position:relative;}
+  .deal .uls li .buy i{background:url(../../image/589.png) no-repeat;width: 30px;height: 30px;background-size: 30px;display:inline-block;vertical-align: middle;margin-right:5px;}
+  .deal .uls li .sell i{background:url(../../image/589.png) no-repeat;width: 30px;height: 30px;background-size: 30px;display:inline-block;vertical-align: middle;margin-right:5px;}
+  .deal .uls li .sell{background:url(../../image/861UI.png) no-repeat;width: 55%;height: 59px;background-size: 100%;display:inline-block;float:left;text-align: center;}
+  .deal .num{width: 20px;height: 20px;border-radius:50%;background-color: #E71B4C;position:absolute;right:15px;top:5px;color:#fff;font-size: 15px;}
+  .play_foot{height: 50px;line-height: 50px;background-color: #E71B4C;color:#fff;font-size:18px;text-align: center;border-radius: 8px;width: 50%;margin:100px auto;}
+  .kong{background: url(../../image/shop-empty.png) 50% 50% no-repeat;position: fixed;top: 40%;width: 100%;text-align: center;height: 64px;line-height: 140px;display:none;
+      transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #bfbfbf;}
+  .players{position:fixed;width: 100%;height: 100%;background-color: rgba(0,0,0,0.4);top:0;display:none;}
+  .buysell{background-color: #5B5555;width: 80%;padding:15px 20px 25px 20px;position:fixed;top:10%;left:50%;margin-left:-40%;}
+  .buysell .deletes{background:url(../../image/delete.png) no-repeat;width: 20px;height: 20px;background-size: 20px;position:absolute;right:10px;top:10px;}
+  .buysell .heads{font-size:18px;color:#fff;text-align: center;height: 35px;line-height: 35px;width: 100%;}
+  .buysell ul li{width: 50%;float:left;border:none;}
+  .buysell ul li:nth-child(1) div{background-color: #FFFCDB;}
+  .buysell ul li:nth-child(2) div{background-color: #FFF582;}
+  .buysell ul li:nth-child(3) div{background-color: #FDD100;}
+  .buysell ul li:nth-child(4) div{background-color: #F08619;}
+  .buysell ul li div span{color:#F08619;width: 100%;text-align: center;margin-bottom:5px;}
+  .buysell ul li:nth-child(1) div span:nth-child(2) i{background: url(../../image/324234.png) no-repeat;width: 50px;height: 24px;vertical-align: middle;background-size:cover;display: inline-block;margin-right:3px;}
+  .buysell ul li:nth-child(2) div span:nth-child(2) i{background: url(../../image/3215345.png) no-repeat;width: 65px;height: 24px;vertical-align: middle;background-size:cover;display: inline-block;margin-right:3px;}
+  .buysell ul li:nth-child(3) div span:nth-child(2) i{background: url(../../image/2436534.png) no-repeat;width: 65px;height: 24px;vertical-align: middle;background-size:cover;display: inline-block;margin-right:3px;}
+  .buysell ul li:nth-child(4) div span:nth-child(2) i{background: url(../../image/236436.png) no-repeat;width: 65px;height: 24px;vertical-align: middle;background-size:cover;display: inline-block;margin-right:3px;}
+  .buysell ul li div span:nth-child(1) i{background: url(../../image/3245643243.png) no-repeat;width: 15px;height: 15px;vertical-align: middle;background-size:15px;display: inline-block;margin-right:3px;}
+  .buysell ul li:nth-child(4) div span:nth-child(1) i{background: url(../../image/23432565632.png) no-repeat;width: 15px;vertical-align: middle;height: 15px;background-size:15px;display: inline-block;margin-right:3px;}
+  .buysell ul li:nth-child(4) div span{color:#fff;}
+  .buysell ul li div{width: 90%;margin:0 auto;height: 80%;margin-top:10%;border-radius:8px;padding:5px 0;}
+      .kongs{text-align: center;color:#ccc;font-size:18px;margin-top:100px;}
+  </style>
+</head>
+<body>
+  <!-- <div class="deal" id="deal">
+    <div class="head">
+
+    </div>
+    <script type="text/template" id="temID">
+      <div class="left">
+         <span><i></i>可用购物分</span>
+         <span><%=list.shopScore%></span>
+      </div>
+      <div class="right">
+         <span><i></i>广告分</span>
+         <span><%=list.adSscore%></span>
+      </div>
+    </script>
+    <div class="deal">
+        <ul class="uls">
+          <li>
+              <span class="buy items">
+                   <span><i></i>我要买分</span>
+              </span>
+              <span class="detail_buy">交易详情<i class="num">1</i></span>
+          </li>
+          <li>
+            <span class="sell items">
+                 <span><i></i>我要卖分</span>
+            </span>
+            <span class="detail_sell">交易详情<i class="num">2</i></span>
+          </li>
+        </ul>
+    </div>
+    <div class="play_foot">
+        兑换购物分
+    </div>
+    <div class="players1 players">
+      <div class="buysell" id="buysell">
+        <span class="heads">我要买分</span>
+        <ul>
+          <li data-attr="500">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+          <li data-attr="1000">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+          <li data-attr="2000">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+          <li  data-attr="3000">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+        </ul>
+        <div class="deletes"></div>
+      </div>
+    </div>
+
+    <div class="players2 players">
+      <div class="buysell" id="buysell">
+        <span class="heads">我要卖分</span>
+        <ul>
+          <li data-attr="500">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+          <li data-attr="1000">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+          <li data-attr="2000">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+          <li data-attr="3000">
+            <div>
+              <span><i></i>广告分</span>
+              <span>
+                <i></i>
+              </span>
+            </div>
+          </li>
+        </ul>
+        <div class="deletes"></div>
+      </div>
+    </div> -->
+    <div class="kongs">敬请期待中哦！~~</div>
+  </div>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+    //  apiready=function(){
+    //      app.ready()
+    //      api.sendEvent({
+    //          name: 'deal',
+    //          extra: {
+    //              key1: 'value1',
+    //              key2: 'value2'
+    //          }
+    //      });
+    //      api.execScript({
+    //          frameName: 'rob-frame',
+    //          script: 'stops();'
+    //      });
+    //      app.tgNum('temID','head')
+    //  }
+    //   app.players('.players','buysell')
+    //  $('.deletes').on('tap',function(event){
+    //     $(this).parents('.players').hide()
+    //  });
+    //  $('.buy').on('tap',function(){
+    //     $('.players1').show()
+    //  })
+    //  $('.players1 .buysell ul li').on('tap',function(){
+    //    alert($(this).attr('data-attr'))
+    //  })
+    //  $('.sell').on('tap',function(){
+    //    $('.players2').show()
+    //  })
+    //  $('.players2 .buysell ul li').on('tap',function(){
+    //    alert($(this).attr('data-attr'))
+    //  })
+    //   $('.play_foot').on('tap',function(){
+    //       api.openWin({
+    //           name: 'repay',
+    //           url: './deal-frame/index.html',
+    //           pageParam: {
+    //               name: 'test'
+    //           }
+    //       });
+    //   })
+    //   $('.detail_buy').on('tap',function(){
+    //     api.openWin({
+    //         name: 'repay',
+    //         url: './deal-frame/buy-detail.html',
+    //         pageParam: {
+    //             name: 'test'
+    //         }
+    //     });
+    //   })
+    //   $('.detail_sell').on('tap',function(){
+    //     api.openWin({
+    //         name: 'repay',
+    //         url: './deal-frame/sell-detail.html',
+    //         pageParam: {
+    //             name: 'test'
+    //         }
+    //     });
+    //   })
+  </script>
+</body>
+</html>

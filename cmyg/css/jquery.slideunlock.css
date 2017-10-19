@@ -1,0 +1,90 @@
+
+
+#slide-wrapper{
+    height: 70px;
+    position: fixed;
+    padding: 15px 25px;
+    background:#484443;
+    bottom:106px;
+    width: 100%;
+    z-index:1000;
+}
+#slider{
+    padding:0 32px;
+    height: 45px;
+    position: relative;
+    border-radius: 10px;
+    border:2px solid #A7A7A7;
+    background-color: #000000;
+    overflow: hidden;
+    text-align: center;
+}
+#slider.success{
+    background-color: #E61C4C;
+}
+#label{
+    height: 100%;
+    background: #E67E22;
+    z-index: 999;
+    cursor: pointer;
+    background: url(../image/7UI.png) no-repeat;width: 50px;height: 100%;background-size: cover;
+    position: absolute;
+    width: 65px;
+    left: 0;
+    top: 0;
+}
+.rights{
+   z-index:99;
+   position:absolute;
+   background: url(../image/8UI.png) no-repeat;width: 50px;height: 100%;background-size: cover;
+   width: 63px;
+   height: 100%;
+   background-size: 100%;
+   right:0;
+   top:0;
+}
+#labelTip{
+    z-index: 9;
+    color:#fff!important;
+    line-height: 45px!important;
+}
+
+#reset-btn{
+   background:rgba(0,0,0,0.4);
+   width: 100%;
+   height: 100%;
+   position:fixed;
+   left:0;
+   top:0;
+   display:none;
+}
+#reset-btn .box{
+   height: 100px;
+   width: 200px;
+   background-color: #fff;
+   position:absolute;
+   left:50%;
+   margin-left:-100px;
+   top:30%;
+   margin-top:-50px;
+   border-radius: 10px;
+   text-align: center;
+}
+#reset-btn .box div:nth-child(1){
+     height: 40px;line-height: 40px;
+     color:#000;
+     font-size:18px;
+}
+#reset-btn .box div:nth-child(2){
+    height: 30px;
+    line-height: 30px;
+    background-color: red;
+    color:#fff;
+    width: 50%;
+    border-radius: 8px;
+    position:absolute;
+    left:50%;
+    margin-left:-25%;
+    bottom:5px;
+    text-align: center;
+}

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物分明细</title>
+    <link rel="stylesheet" type="text/css" href="../../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../fonts/iconfont.css" />
+    <link rel="stylesheet" href="./index.css">
+    <style>
+    .tablesContUl span:not(:first-child){
+        margin-left:3px;padding: 0;
+        text-align: center;
+    }
+        .titTime,.contTime{
+            width: 25% !important;
+        }
+        .titShop,.contShop{
+            width: 50% !important;
+        }
+        .titInt,.contInt{
+            width: 22% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="allOrder">
+        <span class="allOrderTitle">合计获得</span>
+        <i></i>
+        <span class="allOrderNum">0</span>
+    </div>
+    <!-- 购物分 -->
+    <div class="tables duihuan">
+        <div class="tablesTitle">
+            <span class="titTime">时间</span>
+            <span class="titShop">购物单号</span>
+            <span class="titInt">购物分</span>
+        </div>
+        <div class="tablesCont">
+            <ul class="tablesContUl"></ul><!-- <li>
+          <span class="contTime">2017-04-29  10:59</span>
+          <span class="contShop">45278121000000</span>
+          <span class="contInt">30</span>
+        </li> -->
+            <div class="thisNull" style="margin-top:160px;text-align:center;display:none;">
+                <img src="../../../../image/shop-empty.png" alt="" style="width:40px;">
+                <p style="text-align:center;">暂无更多数据</p>
+            </div>
+            <p class="load-moreLz"></p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../../script/api.js"></script>
+<script type="text/javascript" src="../../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../../script/common.js"></script>
+<script src="./index.js"></script>
+<script>
+    apiready = function() {
+        app.ready()
+        var tmpData = app.ajaxWithLoadMore({
+            url: 'score/record/buyDetail',
+            type: 'get',
+            data: {
+                token: $api.getStorage('token'),
+                memberId: $api.getStorage('memberId'),
+                pageSize: '10',
+                pageNum: '1'
+            },
+            showLoading: false,
+            success: function(ret) {
+            moreLy(ret)
+                if (tmpData.status === 'NOMORE') return;
+                if (tmpData.status === 'REFRESH')  $(".tablesContUl").html('')
+
+                for (i in ret.data) {
+                    var times = formatDateTime(ret.data[i].paymentTime)
+                    var gouwuHtml = '<li>' +
+                        '<span class="contTime">' + times + '</span>' +
+                        '<span class="contShop">' + ret.data[i].orderGoodsNum + '</span>' +
+                        // '<span class="contOrder">￥'+(ret.data[i].totalPrice)/100+'</span>'+
+                        '<span class="contInt">' + ret.data[i].shopScore + '</span></li>';
+                    $(".tablesContUl").append(gouwuHtml);
+                }
+                api.refreshHeaderLoadDone()
+            }
+        })
+function scNum(){
+        app.ajax({
+                url: 'score/record/buyDetailCount',
+                type: 'get',
+                data: {
+                    token: $api.getStorage('token'),
+                    memberId: $api.getStorage('memberId')
+                },
+                success: function(ret) {
+                    // alert(JSON.stringify(ret.data.count))
+                    $(".allOrderNum").text(ret.data.count)
+                }
+            })
+        }scNum()
+            // 下拉刷新
+            // 下拉刷新
+              var f=true;
+              api.setRefreshHeaderInfo({
+                  bgColor: '#fff',
+                  textColor: '#333',
+                  textDown: '下拉刷新...',
+                  textUp: '松开刷新...'
+              }, function(ret, err) {
+                  if(f){
+                      f=false;
+                      tmpData.init()()
+                      $(".load-moreLz").hide()
+                      scNum()
+                      setTimeout(function(){
+                          f=true;
+                      },1000);
+                  }
+              })
+
+              api.addEventListener({
+                  name: 'scrolltobottom'
+              }, function (ret, err) {
+                      if(f){
+                          f=false
+                         app.throttle(tmpData)
+                          footerFn()
+                          f=true;
+                      }
+              })
+            tmpData.init()()
+    }
+</script>
+
+</html>

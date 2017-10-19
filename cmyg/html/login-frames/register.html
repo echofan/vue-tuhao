@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,initial-scale=1.0,width=device-width"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>注册</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../../css/common.css" /> -->
+    <style media="screen">
+        body {
+            height: 100%;
+        }
+
+        #page-register {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .page-lr-main {
+            background: url(../../image/page-bk.png) -1px -1px no-repeat;
+            background-size: 101% 101%;
+            width: 100%;
+            height: 100%;
+        }
+
+        .page-lr-main .content-wrap {
+            height: 80%;
+            margin: 0 2rem;
+        }
+
+        .content-title {
+            font-size: 1.5rem;
+            text-align: center;
+            line-height: 1;
+            padding-top: 2rem;
+            color: #E50043;
+        }
+
+        .page-lr-main .mui-input-group {
+            background: transparent;
+            color: #999;
+        }
+
+        .page-lr-main .mui-input-group {
+            background: transparent;
+            color: #999;
+        }
+
+        .page-lr-main .mui-input-group .mui-input-row {
+            margin-top: 1rem;
+        }
+
+        .mui-input-row input {
+            border-bottom: 1px solid;
+            padding-right: 38px;
+        }
+
+        button.m.active {
+            border: 1px solid #E50043;
+            background-color: #E50043;
+        }
+
+        button.m {
+            border: 1px solid #bbb;
+            background-color: #bbb;
+            margin: 2rem auto;
+            width: 76%;
+            line-height: 26px;
+            font-size: 18px;
+            padding: 8px 0;
+            color: #fff;
+        }
+
+        .mui-input-group:before,
+        .mui-input-group:after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            height: 0px !important;
+            content: '';
+            -webkit-transform: scaleY(.5);
+            transform: scaleY(.5);
+            background-color: #c8c7cc;
+        }
+
+        .content-footer {
+            font-size: 14px;
+            color: #999;
+            margin: 2rem 1rem 2rem;
+            line-height: 2;
+        }
+
+        .content-footer label {
+            marign-left: 10px;
+            border-bottom: 1px solid;
+        }
+
+        .page-lr-main .mui-checkbox.mui-left label {
+            padding-left: 46px;
+        }
+        .span-code{
+          /*position: relative;  float: right;  top: -30px;background: #fff;display: inline-block;padding:4px;*/
+          padding: 4px;
+          border-radius: 4px;
+          position: absolute;
+          bottom: 0;
+          font-size: 14px;
+          color: #efefef;
+          right: 0;
+          margin-bottom: 5px;
+          background: #999;
+          min-width: 5em;
+          text-align: center;
+        }
+        .active{
+          background: #E61C4C;
+        }
+    </style>
+</head>
+<body>
+    <div id="page-register">
+        <div id="page-register-main" class="page-lr-main">
+          <div class="content-wrap">
+            <p class="content-title">用户注册</p>
+            <form class="mui-input-group rg-input-group">
+              <div class="mui-input-row">
+                <input type="text" class="mui-input-clear" id="rg-phone-input" placeholder="请输入手机号码" required>
+              </div>
+              <div class="mui-input-row">
+                  <input type="number" class="input-code" placeholder="请输入验证码" required>
+                  <span data-for="#rg-phone-input" class="span-code active" data-type="REGISTER">获取验证码</span>
+              </div>
+              <div class="mui-input-row">
+                  <input type="text" class="mui-input-clear input-prarent" placeholder="请输入推荐人账户">
+              </div>
+              <div class="mui-button-row">
+                  <button type="button" class="m bt-register-next active" >下一步</button>
+              </div>
+            </form>
+          </div>
+          <div class="content-footer">
+            <div class="mui-input-row mui-checkbox mui-left">
+              <label>我已阅读并同意创盟易购注册协议</label>
+              <input name="protocal-agreed" ref='.bt-register-next' type="checkbox" checked>
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+
+  apiready = function(){
+      app.ready();
+        mui('#page-register').on('tap', '.bt-register-next.active', function(){
+          var _data = app.validate({
+            loginname: {
+              type : 'PHONE',
+              value: $('#rg-phone-input').val()
+            },
+            verifyCode: {
+              type : 'CODE',
+              value: $('.input-code').val()
+            },
+            openId : {
+              value : api.pageParam.openid == undefined ? "" : api.pageParam.openid
+            }
+            ,
+            invateLoginname : {
+                value : $(".input-prarent").val()
+            }
+
+          })
+          if(!_data) return;
+          _data.parentId = $('.input-prarent').val().trim()
+
+
+      api.openWin({
+          name: 'register-pwsetting',
+          url: './pwsetting.html',
+          pageParam: _data,
+          animation: {
+            delay: 100,
+            type: 'movein',
+            duration: 200
+          },
+          rect: {
+              x: 0,
+              y: 0,
+              w: api.winWidth,
+              h: api.winHeight
+          }
+      });
+    //   api.closeWin({});
+    })
+  }
+</script>
+</html>

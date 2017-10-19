@@ -1,0 +1,190 @@
+body {
+    position: relative;
+    width: 100%;
+    background: #fff;
+}
+/*.nav{overflow: hidden;}*/
+
+.clear {
+    clear: both;
+}
+/*.navTab{width: 120%;overflow-x: scroll;position: absolute;}*/
+
+.shoping {
+    margin-top: 60px;
+    position: fixed;
+    width: 100%;
+}
+/*.nav{position: relative;}*/
+
+.nav ul li {
+    float: left;
+    width: 16.66%;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
+    color: #666;
+    border-bottom: 1px solid #666
+}
+
+.nav ul .thisLi {
+    color: #E71C4C;
+    border-bottom: 3px solid #E71C4C
+}
+
+.allOrder {
+    text-align: center;
+    padding: 14px 0;
+}
+
+.allOrder i {
+    background: url(../../../../image/3452342.png) no-repeat;
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    vertical-align: sub;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+.times {
+    width: 15%;
+}
+
+.nos {
+    width: 30%;
+}
+
+.tablesTitle {
+    background-color: #8B8B8B;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+.tablesTitle span {
+    display: inline-block;
+    text-align: center;
+    font-size: .6rem;
+    color: #fff;
+}
+
+.tablesCont {
+    /*overflow: hidden;*/
+    height: 100%;
+    top: 90px;
+}
+
+/*.tablesContUl {
+    -webkit-overflow-scrolling: touch;
+}*/
+
+.tablesTitle {
+    overflow: hidden;
+}
+
+.tablesCont ul li span {
+    display: inline-block;
+    font-size: .6rem;
+    text-align: center;
+    color: #747474
+}
+
+.titTime,
+.contTime {
+    width: 25%;
+}
+
+.titShop,
+.contShop {
+    width: 35%;
+}
+
+.titOrder,
+.contOrder {
+    width: 18%;
+}
+
+.titInt,
+.contInt {
+    width: 13%;
+}
+
+.contShop,
+.contOrder,
+.contInt,
+.contRatio {
+    line-height: 46px;
+    position: relative;
+    top: -8px;
+}
+
+.contTime {
+    margin-top: 5px;
+}
+
+.tablesContUl li {
+    height: 50px;
+}
+
+.tablesContUl li:nth-child(odd) {
+    background-color: #DCDEDD
+}
+
+.tablesContUl li:nth-child(even) {
+    background-color: #EEEEEE
+}
+
+.hide {
+    display: none;
+    ;
+}
+
+.duihuan .titShop,
+.duihuan .contShop {
+    width: 58%;
+}
+
+.recharge .titTime,
+.recharge .contTime {
+    width: 23%
+}
+
+.recharge .titShop,
+.recharge .contShop {
+    width: 20%
+}
+
+.recharge .titOrder,
+.recharge .contOrder {
+    width: 20%
+}
+
+.recharge .titRatio,
+.recharge .contRatio {
+    width: 10%
+}
+
+.recharge .titInt,
+.recharge .contInt {
+    width: 20%
+}
+
+.zengsong .titShop,
+.zengsong .contShop {
+    width: 28%
+}
+
+.zengsong .titInt,
+.zengsong .contInt {
+    width: 14%
+}
+
+.zengsong .titOrder,
+.zengsong .contOrder {
+    width: 27%
+}
+
+.guanggao .contShop {
+    width: 38% !important;
+}

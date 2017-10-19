@@ -1,0 +1,146 @@
+{
+  "html/login-frames/pwsetting.html": {
+    "href": "html/login-frames/pwsetting.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "script/md5.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/api.css",
+      "image/loading_more.gif",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/shop-empty.png"
+    ],
+    "refer": [
+      "html/login-frames/login.html"
+    ],
+    "priority": 0
+  },
+  "html/login-frames/register.html": {
+    "href": "html/login-frames/register.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/api.css",
+      "image/loading_more.gif",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/shop-empty.png"
+    ],
+    "refer": [
+      "html/login-frames/pwsetting.html"
+    ],
+    "priority": 0
+  },
+  "html/login-frames/amend.html": {
+    "href": "html/login-frames/amend.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "script/md5.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/api.css",
+      "image/loading_more.gif",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/shop-empty.png"
+    ],
+    "refer": [
+      "html/login-frames/login.html"
+    ],
+    "priority": 1
+  },
+  "html/login-frames/pwforget.html": {
+    "href": "html/login-frames/pwforget.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/api.css",
+      "image/loading_more.gif",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/shop-empty.png"
+    ],
+    "refer": [
+      "html/login-frames/amend.html"
+    ],
+    "priority": 1
+  },
+  "html/login-frames/login.html": {
+    "href": "html/login-frames/login.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "script/md5.min.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/api.css",
+      "image/loading_more.gif",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/shop-empty.png",
+      "image/page-bk.png",
+      "image/lg-logo.png",
+      "image/wx_logo.png"
+    ],
+    "refer": [
+      "html/login-frames/register.html",
+      "html/login-frames/pwforget.html"
+    ],
+    "priority": 0
+  },
+  "html/common-frames/search-bar.html": {
+    "href": "html/common-frames/search-bar.html",
+    "resources": [
+      "script/api.js",
+      "script/mui.min.js",
+      "script/zepto.min.js",
+      "script/common.js",
+      "css/mui.min.css",
+      "fonts/mui.ttf",
+      "css/api.css",
+      "image/loading_more.gif",
+      "css/common.css",
+      "image/page-bk.png",
+      "image/shop-empty.png",
+      "fonts/iconfont.css",
+      "fonts/iconfont.woff",
+      "fonts/iconfont.ttf",
+      "fonts/iconfont.svg"
+    ],
+    "priority": 1
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [
+      "fonts/mui.ttf",
+      "image/loading_more.gif",
+      "image/page-bk.png",
+      "image/shop-empty.png",
+      "fonts/iconfont.ttf",
+      "fonts/iconfont.svg"
+    ],
+    "refer": [
+      "html/login-frames/login.html",
+      "html/common-frames/search-bar.html"
+    ],
+    "priority": 0
+  }
+}

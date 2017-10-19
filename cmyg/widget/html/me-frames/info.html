@@ -1,0 +1,422 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>完善个人资料</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        .add_button {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .add_button button {
+            border-radius: 5px;
+            height: 40px;
+            width: 240px;
+            /*font-size: 16px;*/
+            /*background-color: #ec4a4a;*/
+            /*color: white;*/
+        }
+
+        .detail {
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        .detail span {
+            font-size: 11px;
+        }
+
+        .headimg {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 15px;
+            margin-top: -40px;
+            border: 1px solid #ccc;
+        }
+
+        .nickname {
+            border-bottom: 0!important;
+            padding-right: 0!important;
+            padding: 0 15px;
+            margin-top: 10px;
+        }
+
+        .setimg {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 15px;
+            position: relative;
+            top: -20px;
+        }
+
+        .cb_1 {
+            display: inline-block;
+            width: 30%;
+        }
+
+        .cb_2 {
+            display: inline-block;
+            width: 55%;
+        }
+
+        .cb_3 {
+            display: inline-block;
+            width: 10%;
+        }
+
+        .mui-input-group .mui-input-row:after {
+            left: 0px !important;
+        }
+
+        .wechatBind {
+            position: relative;
+            top: 10px;
+            left: 15px;
+        }
+
+        .wechatImg {
+            width: 20px;
+            position: relative;
+            top: 4px;
+        }
+
+        .detail {
+            padding: 0 10px;
+        }
+
+        .detail li {
+            font-size: 12px;
+            text-align: left;
+            color: #888;
+        }
+
+        .detail li:not(:first-child) {
+            padding-left: 20px;
+        }
+
+        .code {
+            position: absolute;
+            right: 24px;
+            display: inline-block;
+            background: #999;
+            padding: 6px;
+            margin-top: 3px;
+            color: #fff;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .active {
+            background: #E61C4C;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page-add_address">
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">完善个人资料</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="mui-input-group">
+                    <div class="mui-input-row" style="height: 75px;">
+                        <div class="mui-row">
+                            <div class="cb_1">
+                                <img class="headimg" src="../../image/2431UI.png" />
+                            </div>
+                            <div class="cb_2">
+                                <div class="wechatBind"><img src="../../image/wx_logo.png" alt="" class="wechatImg">微信绑定</div>
+                                <!-- <input type="text" class="nickname" readonly="readonly" value="微信："> -->
+                                <input class="nickname" type="text" readonly="readonly" value="昵称：">
+                            </div>
+                            <div class="cb_3">
+                                <img id="setimg" class="setimg" src="../../image/87915454.png" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mui-input-row" style="height:20px">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>真实姓名</label>
+                        <input type="text" class="mui-input-clear dsbInput" placeholder="请输入您的真实姓名" id="userName">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>手机</label>
+                        <input type="text" class="mui-input-clear dsbInput" placeholder="请输入您的手机号码" id="userPhone">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>支付宝</label>
+                        <input type="text" class="mui-input-clear dsbInput" placeholder="请输入您的支付宝账户" id="aliPay">
+                    </div>
+
+                    <div class="mui-input-row" style="height:20px">
+
+                    </div>
+
+                    <div class="mui-input-row">
+                        <label>交易密码</label>
+                        <input type="tel" class="mui-input-clear" placeholder="请输入6位数字交易密码" id="pwd1" maxlength="6">
+                    </div>
+                    <div class="mui-input-row">
+                        <label>确认密码</label>
+                        <input type="tel" class="mui-input-clear" placeholder="请输入重新输入交易密码" id="pwd2" maxlength="6">
+                    </div>
+                    <div class="mui-input-row" class="position:relative;display:hide;" id="codeBox">
+                        <label>验证码</label>
+                        <input type="tel" class="mui-input-clear" placeholder="请输入验证码" id="code1" maxlength="5">
+                        <!-- <span class="active code">获取验证码</span> -->
+                        <span data-for="#rg-phone-input" class="code active" data-type="REGISTER" id="codeBtn">获取验证码</span>
+                    </div>
+                </div>
+                <div class="add_button">
+                    <button type="button" class="mui-btn mui-btn-danger" id="btn-action">修改资料</button>
+
+                </div>
+                <div class="detail">
+                    <ul>
+                        <li>注：</li>
+                        <li>1、真实姓名与支付宝帐号相对应的实名必须一致，否则提现将无法到账。</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/md5.min.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+            //获取登录状态token
+        var gToken = $api.getStorage('token');
+        var gMemberId = $api.getStorage('memberId');
+        var task = api.pageParam.task;
+
+        if (task == 1) {
+            $('.mui-action-back').on('tap', function() {
+                api.sendEvent({
+                    name: 'ziliao',
+                    extra: {
+                        key1: 'value1',
+                        key2: 'value2'
+                    }
+                });
+
+                api.closeToWin({
+                    name: 'root'
+                });
+            })
+        }
+        userInfo()
+        mui('#page-add_address').on('tap', '#setimg', function() {
+            api.openWin({
+                name: 'edit_head',
+                url: './edit_head.html',
+                animation: {
+                    type: 'movein',
+                    duration: 200
+                }
+            });
+        });
+
+
+        $(".code").on("tap", function() {
+            app.ajax({
+                url: 'member/sendModifySms',
+                type: 'post',
+                data: {
+                    memberId: gMemberId,
+                    token: gToken,
+                },
+                showLoading: false,
+                success: function(ret) {
+                    console.log(JSON.stringify(ret))
+                    $("#codeBtn").removeClass('active').addClass('loading').html('获取中....');
+                    $("#codeBtn").removeClass('loading')
+                    if (ret.msg === 'ok') {
+                        var count = 60;
+                        $("#codeBtn").html(count + 's后重新获取');
+                        var cl = setInterval(function() {
+                            if (--count > 0) {
+                                $("#codeBtn").text(count + 's后重新获取');
+                            } else {
+                                $("#codeBtn").addClass('active').html('获取验证码');
+                                clearInterval(cl);
+                            }
+                        }, 1000);
+                    } else {
+                        $("#codeBtn").addClass('active').html('获取验证码');
+                        app.toast(ret.msg);
+                    }
+                },
+                error: function(err) {
+                    // alert(JSON.stringify(err));
+                }
+            })
+        })
+
+        $(".wechatBind").on("tap", function() {
+            var wx = api.require('wx');
+            wx.auth({
+                apiKey: 'wxdace5ee36e9b94bf'
+            }, function(ret, err) {
+                if (ret.status) {
+                    wx.getToken({
+                        code: ret.code
+                    }, function(ret, err) {
+                        if (ret.status) {
+                            //获取用户信息
+                            var accessToken = ret.accessToken;
+                            var openId = ret.openId;
+                            wx.getUserInfo({
+                                accessToken: ret.accessToken,
+                                openId: ret.openId
+                            }, function(ret, err) {
+                                if (ret.status) {
+                                    app.ajax({
+                                        url: 'member/buildWx',
+                                        type: 'post',
+                                        dataType: 'json',
+                                        cache: true,
+                                        data: {
+                                            openid: ret.openid,
+                                            nickname: ret.nickname,
+                                            sex: ret.sex,
+                                            headimgurl: ret.headimgurl,
+                                            token: gToken,
+                                            memberId: gMemberId
+                                        },
+                                        success: function(rst) {
+                                            app.toast(rst.msg)
+                                        }
+                                    })
+                                }
+                            });
+                        }
+                    });
+
+                } else {
+                    if (api.systemType == 'android' && err.code == 3) {
+                        alert("请安装微信客户端");
+                    }
+                }
+            })
+
+        })
+
+
+        function userInfo() {
+            app.ajax({
+                url: 'member/getMyInfo',
+                type: 'POST',
+                data: {
+                    memberId: gMemberId,
+                    token: gToken,
+                },
+                showLoading: false,
+                success: function(ret) {
+                    //获取个人信息
+                    if (ret.data.fillFlag === false) {
+                        $("#codeBox").hide()
+                    } else {
+                        $("#codeBox").show()
+                    }
+                    console.log(JSON.stringify(ret.data))
+                    $("#userName").val(ret.data.realname);
+                    $("#userPhone").val(ret.data.phone);
+                    $("#aliPay").val(ret.data.alipayAccount);
+                    if (ret.data.nickname == null) {
+                        $(".nickname").val("请设置昵称！");
+                    } else {
+                        $(".nickname").val("昵称:" + ret.data.nickname);
+                    };
+                    if (ret.data.headImg == null) {
+                        $(".headimg").attr('src', '../../image/2431UI.png');
+                    } else {
+                        $(".headimg").attr('src', ret.data.headImg);
+                    }
+                    //修改用户信息
+                    $("#btn-action").on("tap", function() {
+                        var userName = $("#userName").val();
+                        var userPhone = $("#userPhone").val();
+                        var aliPay = $("#aliPay").val();
+                        var pwd1 = $("#pwd1").val().trim();
+                        var pwd2 = $("#pwd2").val().trim();
+                        var codeNum = $("#code1").val().trim();
+                        var phone = userPhone.replace(/(^\s+)|(\s+$)/g, '');
+                        var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+                        var email = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
+                            // var email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                        var pwdreg = /^[0-9]*$/;
+                        if (pwd1 != pwd2) {
+                            app.toast("两次密码不一至")
+                        } else if (userName == '') {
+                            app.toast("实名不能为空！")
+                        } else if (userName != '' && userPhone != '' && !myreg.test(phone)) {
+                            app.toast("手机号错误！")
+                        } else if (pwd2.length != 6) {
+                            app.toast("支付密码只能为6位数")
+                        } else if (!pwdreg.test($("#pwd1").val())) {
+                            app.toast("交易密码只能为数字")
+                        } else if (userName != '' && userPhone != '' && aliPay != '' && pwd2 != '' && pwd2.length == 6) {
+                            var pwdMd5 = md5($("#pwd2").val().trim());
+                            app.ajax({
+                                url: 'member/fullMyInfo',
+                                type: 'POST',
+                                data: {
+                                    memberId: gMemberId,
+                                    token: gToken,
+                                    realname: userName,
+                                    phone: userPhone,
+                                    alipayAccount: aliPay,
+                                    payPassword: pwdMd5,
+                                    verifyCode: codeNum
+                                },
+                                success: function(rst) {
+                                    console.log(JSON.stringify(rst))
+                                    if (rst.msg === 'ok') {
+                                        alert("修改成功！");
+                                        // $(".dsbInput").attr('disabled', true);
+                                        // $("#btn-action").attr('disabled', true);
+                                        api.closeWin();
+                                    } else {
+                                        alert("修改失败！")
+                                    }
+                                }
+                            })
+                        }
+                    })
+
+
+                },
+                error: function(err) {
+
+                }
+            })
+        }
+    };
+</script>
+
+</html>

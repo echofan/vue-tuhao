@@ -1,0 +1,268 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>商品详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    .product-detail{width: 100% !important;}
+        .product-detail p img{
+            width: 100% !important;
+            margin-top: -8px !important;
+        }
+        .product-detail>*{
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .product-slider-wrap img {
+            /*height: 12rem;*/
+        }
+        .product-detail {
+          padding: 6px;
+        }
+        .price-line {
+          display: flex;
+          display: -webkit-flex;
+          justify-content: space-between;
+          padding: 10px;
+          align-items: stretch;
+        }
+        .mui-bar-tab {
+          table-layout: inherit;
+        }
+        i.icon-qian {
+          color: #E50043;
+        }
+        i.icon-qian,
+        i.icon-jewelry {
+          font-size: 18px;
+        }
+        span.spec {
+          font-size: 13px;
+          color: #999;
+          margin-left: 20px;
+          vertical-align: top;
+        }
+        .amount-line {
+          display: flex;
+          display: -webkit-flex;
+          justify-content: space-between;
+          font-size: 12px;
+          color: #666;
+        }
+        .service-line {
+          display: flex;
+          display: -webkit-flex;
+          justify-content: center;
+          padding: 10px;
+        }
+        .service-line i {
+          width: 40px;
+          height: 40px;
+        }
+        .service-line > div {
+          text-align: center;
+        }
+        .service-line span {
+          font-size: 12px;
+          color: #DBB867;
+        }
+        .add-bags {
+          background: #E50043;
+          font-size: 18px;
+        }
+
+        .note {
+          width: 100%;
+          padding: 10px;
+          overflow: hidden;
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+        }
+        .note img {
+          max-width: 100%;
+          margin: 0 auto;
+        }
+        .mui-content {
+          padding-bottom: 50px;
+          margin-bottom: 20px;
+        }
+        .title{font-size: .8rem !important;}
+        .price-line div:nth-child(1){
+            position: static;
+        }
+        .price-line div:nth-child(2){
+            position: static;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page page-status-bar">
+        <!-- 主页面容器 -->
+        <!-- <div class="mui-inner-wrap"> -->
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">商品详情</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="mui-content">
+                <div class="product-slider-wrap"></div>
+
+                <div class="product-detail"></div>
+            </div>
+            <nav class="mui-bar mui-bar-tab">
+                <a class="mui-tab-item" href="#home">
+                    <span class="mui-icon iconfont icon-home"></span>
+                    <span class="mui-tab-label">首页</span>
+                </a>
+                <a class="mui-tab-item" href="#Give">
+                    <span class="mui-icon iconfont icon-category"></span>
+                    <span class="mui-tab-label">分类</span>
+                </a>
+                <a class="mui-tab-item" href="#bag">
+                    <span class="mui-icon iconfont icon-bag"></span>
+                    <span class="mui-tab-label">购物袋</span>
+                </a>
+                <a class="mui-tab-item add-bags">
+                    <span class="white">加入购物袋</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+
+    function render(list) {
+        var slider,
+            _html = '',
+            data  = list.data
+
+        $('.product-slider-wrap').html(app.template.slider({
+          id: 'home-slider',
+          data: list.data.imagesList.map(function(d){
+            return {
+              picurl : d.imgurl
+            }
+          })
+        }))
+        slider = mui('#home-slider')
+        slider.slider({
+          interval: 0
+        })
+
+        _html = '<h1 class="title">' + data.title + '</h1>' +
+                '<div class="price-line">' +
+                    '<div>' +
+                        '<i class="iconfont icon-qian"><span class="price">' + (data.productsList[0].price)/100 + '</span></i>' +
+                        // '<span class="spec">500克/袋子</span>' +
+                    '</div>' +
+                    '<div>' +
+                      '<em>赠</em><i class="iconfont icon-jewelry"><span class="points">' + data.productsList[0].shopScore + '</span></i>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="amount-line">' +
+                    '<div><label>库存</label><span>' + data.productsList[0].stock + '</span></div>' +
+                    '<div><label>销量</label><span>' + data.productsList[0].numSale + '</span></div>' +
+                    // '<div><label>价格</label><span>' + (data.productsList[0].price)/100 + '</span></div>' +
+                '</div>'
+
+        _html += '<div class="service-line">' +
+                    '<div>' +
+                        '<i><img src="../../image/ic-sv-shan.png" alt=""></i>' +
+                        '<span>闪电发货</span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<i><img src="../../image/ic-sv-you.png" alt=""></i>' +
+                        '<span>满百包邮</span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<i><img src="../../image/ic-sv-serv.png" alt=""></i>' +
+                        '<span>快速售后</span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<i><img src="../../image/ic-sv-zheng.png" alt=""></i>' +
+                        '<span>正品保证</span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<i><img src="../../image/ic-sv-24.png" alt=""></i>' +
+                        '<span>24小时在线</span>' +
+                    '</div>' +
+                '</div>'
+        _html += '<div class="note">' + data.note + '</div>'
+        $('.product-detail').html(_html)
+        $('.mui-content').show()
+    }
+
+    apiready = function() {
+        app.ready()
+        app.ajax({
+          url : 'goods/one',
+          type: 'GET',
+          data: api.pageParam,
+          success: function(data){
+              // 渲染页面
+              console.log(JSON.stringify(data))
+              render(data)
+          }
+        })
+      api.execScript({
+          name: 'root',
+          script: 'ors();'
+      });
+
+        // 购物车 信息
+        if($api.getStorage('cartItemcount')) {
+          $('.icon-bag').html('<span class="mui-badge">' + $api.getStorage('cartItemcount') + '</span>')
+        }
+    }
+
+    // 底部bar 点击事件
+    mui(".mui-bar-tab").on('tap', '.mui-tab-item:not(.add-bags)', function() {
+        //获取id
+        var id = this.getAttribute("href")
+        api.execScript({
+            name: 'root',
+            script: 'openFrame("' + id.slice(1) + '")'
+        })
+        api.execScript({
+            name: 'root',
+            frameName: 'bag',
+            script: 'reloadFrames(0)'
+        })
+        api.closeWin()
+    })
+    // 添加到购物车
+    mui('.page').on('tap', '.add-bags', function(e){
+        app.ajax({
+          url : 'caritem/addCaritem',
+          data: {
+            memberId : app.memberId,
+            goodsId  : api.pageParam.goodsId,
+            productId: api.pageParam.productId,
+            token:app.token,
+            num : 1,
+            type: 'add'
+          },
+          success: function(rst){
+            app.toast('成功加入购物车')
+            console.log(JSON.stringify(rst))
+            console.log('nums='+rst.data.cartCount)
+            window.refreshAllCartItemcount(rst.data.cartCount)
+
+          }
+        })
+    })
+</script>
+
+</html>

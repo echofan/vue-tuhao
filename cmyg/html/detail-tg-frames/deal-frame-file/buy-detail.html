@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>购买积分detail</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        body{width: 100%;height: 100%;position:relative;background-color: #f0f0f2;}
+        #page-bag .mui-scroll-wrapper {
+            position: relative;
+        }
+        .mui-content{background-color: #f0f0f2!important;}
+         header{margin-bottom:10px;}
+        .boxs_item{padding:20px 10px;margin-top:20px;}
+        .boxs_item ul{border-left: 1px solid #ccc;border-top:1px solid #ccc;font-size:13px;}
+        .boxs_item ul li{background-color: #fff;border-bottom: 1px solid #ccc;display:flex;height: 50px;line-height: 50px;width: 100%;text-align: center;}
+        .boxs_item ul li:nth-child(1){height: 35px;line-height: 35px;background-color: #FF6600;color:#fff;}
+        .boxs_item ul li div:nth-child(1){flex:3;}
+        .boxs_item ul li div:nth-child(2){flex:4;}
+        .boxs_item ul li div:nth-child(n+3){flex:2;}
+        .boxs_item ul li div{border-right:1px solid #ccc;}
+        .boxs_item ul li:nth-child(n+2) div:nth-child(1){line-height: 22px;}
+        .boxs_item ul li .set{line-height: 22px;}
+        .boxs_item ul li .set i{background:url(../../../image/7878UI.png) no-repeat;width: 25px;height: 25px;background-size: 25px;display:block;margin:0 auto;margin-top:3px;}
+        .green{color:green;}
+        .red{color:red;}
+        .hide_box{position:fixed;top:0;left:0;background-color:rgba(0,0,0,0.4);width: 100%;height: 100%;z-index:1000;display:none;}
+        .hide_box .boxs{position:fixed;width: 90%;height: 80%;left:50%;margin-left:-45%;top:55%;margin-top:-70%;background-color: #FF6600;border-radius:10px;}
+        .hide_box .boxs .conts{height: 100%;position:relative;}
+        .hide_box .boxs .top{height: 17%;}
+        .hide_box .boxs .head{height: 50px;line-height: 50px;color:#fff;font-size:23px;padding:0 15px;position:relative;}
+        .hide_box .boxs .head i{background:url(../../../image/shouhuo_delet.png) no-repeat;width: 25px;height: 25px;background-size: 25px;position:absolute;right:10px;top:12px;}
+        .hide_box .boxs .time{height: 30px;line-height: 30px;padding:0 15px;color:#000;font-size:20px;}
+        .hide_box .content{padding:0 15px;height: 57%;}
+        .hide_box .content .left{width: 50%;float:left;font-size:15px;height: 100%;}
+        .hide_box .content .left div{height: 20%;margin-top:5px;}
+        .hide_box .content .left div span{display:block;}
+        .hide_box .content .left .foot{background-color: #66CC33;width: 75%;height: 35px;line-height: 35px;text-align: center;border-radius:5px;color:#fff;font-size:16px;}
+        .hide_box .content .right{width: 50%;float:right;height: 100%;}
+        .hide_box .content .right img{width: 100%;height: 100%;background-size: 100%;}
+        .hide_box .foot_box{padding:0 15px;margin-top:5px;height: 20%;position: absolute;bottom:0;width: 100%;box-sizing: border-box;}
+        .hide_box .foot_box ul{border:1px solid #ccc;background-color: #fff;font-size:13px;}
+        .hide_box .foot_box ul li{height: 35px;line-height: 35px;display: flex;}
+        .hide_box .foot_box ul li:nth-child(1){border-bottom:1px solid #ccc;}
+        .hide_box .foot_box ul li span{text-align: center;top:0;left:0;}
+        .hide_box .foot_box ul li span{flex:1;border-right: 1px solid #ccc;}
+        .hide_box .foot_box ul li span:last-child{flex:2;border-right:none;}
+    </style>
+</head>
+
+<body>
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+          <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">我要买分</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+            <div class="boxs_item">
+                <ul>
+                  <li class="items">
+                      <div>购买时间</div>
+                      <div>订单号</div>
+                      <div>广告分</div>
+                      <div>金额</div>
+                      <div>状态</div>
+                  </li>
+                  <li>
+                      <div>2017-4-29 10.59</div>
+                      <div>4200856963</div>
+                      <div>2000</div>
+                      <div>1800</div>
+                      <div class="state set">
+                          <i></i>
+                          <span class="green">已付款</span>
+                      </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state set">
+                        <i></i>
+                        <span class="red">已取消</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                  <li>
+                    <div>2017-4-29 10.59</div>
+                    <div>4200856963</div>
+                    <div>2000</div>
+                    <div>1800</div>
+                    <div class="state">
+                        已完成
+                    </div>
+                  </li>
+                </ul>
+            </div>
+            </div>
+            <div class="hide_box">
+               <div class="boxs">
+                 <div class="conts">
+                 <div class="top">
+                    <div class="head">我已付款<i class="delete"></i></div>
+                   <div class="time">00时29分14秒</div>
+                 </div>
+                 <div class="content">
+                    <div class="left">
+                         <div class="bx">
+                             <span>订单编号</span>
+                             <span>51564542121</span>
+                         </div>
+                         <div class="play_t">
+                             <span>支付时间</span>
+                             <span class="play_time">2017-4-29 10.59</span>
+                         </div>
+                         <div class="account">
+                             <span>账户</span>
+                             <span>1518433573</span>
+                         </div>
+                         <div class="phone">
+                             <span>手机号码</span>
+                             <span>13277212687</span>
+                         </div>
+                         <div class="foot">投诉系统</div>
+                    </div>
+                    <div class="right">
+                         <img src="../../../image/page-bk.png" alt="">
+                    </div>
+                 </div>
+                 <div class="foot_box">
+                     <ul>
+                       <li>
+                           <span>金额</span>
+                           <span>广告分</span>
+                           <span>实名</span>
+                           <span>转账支付宝</span>
+                       </li>
+                       <li>
+                           <span>1000</span>
+                           <span>1000</span>
+                           <span>王牌第一</span>
+                           <span>151843873</span>
+                       </li>
+                     </ul>
+                 </div>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+    apiready = function() {
+        app.ready()
+    }
+    $('.hides').on('tap',function(){
+       api.closeWin()
+    })
+    $('.set').on('tap',function(){
+       $('.hide_box').show()
+    })
+    $('.delete').on('tap',function(){
+      $('.hide_box').hide()
+    })
+
+</script>
+
+</html>

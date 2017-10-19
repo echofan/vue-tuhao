@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+        <title>图片裁剪</title>
+        <!-- 在IOS设备上，有时会将数字转为手机号，这里也要禁止下 -->
+        <meta name="format-detection" content="telephone=no"/>
+        <link rel="stylesheet" type="text/css" href="../../css/aui.css" />
+        <style>
+                html, body {
+                        /*background-color: transparent;
+                        background: rgba(0,0,0,0);*/
+                }
+
+                #foot_div {
+                        display: block;
+                        bottom: 0px;
+                        padding-left : 20px;
+                        padding-right : 20px;
+                        /*right: 18px;*/
+                        min-width: 200px;
+                        line-height: 30px;
+                        width:100%;
+                        position: fixed;
+                        /*border: 1px solid #fff;*/
+                        text-align: center;
+                        color: #fff;
+                        background: #000;
+                }
+        </style>
+    </head>
+    <body>
+            <div id="foot_div">
+                    <!--<div id="container" class="aui-button-row">-->
+                <span>
+                    <font class="aui-pull-left" onclick="back();">取消</font>
+                    <font onclick="resetImageClip();">重置</font>
+                    <font onclick="saveImageClip();" class="aui-pull-right">选取</font>
+                </span>
+            </div>
+            <div style="display:none;">
+                上传进度：<p id="progress"></p>
+                <div id="topBox"></div>
+            </div>
+            <p id="backurl" style="display:none;"></p>
+        </body>
+    <script type="text/javascript" src="../../script/api.js"></script>
+    <script type="text/javascript" src="../../script/base_config.js" ></script>
+    <script type="text/javascript" src="../../script/zepto.min.js"></script>
+    <script type="text/javascript" src="../../script/common.js"></script>
+        <script type="text/javascript">
+                var FNImageClip;
+                apiready = function() {
+                        var img_src = api.pageParam.img_src;
+                        FNImageClip = api.require('FNImageClip');
+                        openImageClip(img_src);
+                        //安卓关闭
+                        if (api.systemType == 'android') {
+                                backForAndroid();
+                        }
+                };
+
+                function openImageClip(img_src){
+                        var rect_w = api.winWidth;
+                        var rect_h = api.winHeight;
+                        var clip_w = parseInt(rect_w - 2);
+                        var clip_y = parseInt((rect_h - clip_w ) / 2);
+                        FNImageClip.open({
+                            rect: {
+                                x: 0,
+                                y: 0,
+                                w: rect_w,
+                                h: rect_h - 30
+                            },
+                            srcPath: img_src,
+                            style: {
+                                    //（可选项）字符串类型；图片裁剪控件遮罩层背景，支持 rgb，rgba，#；默认：#888
+                                mask: 'rgba(0,0,0,0.3)',
+                                clip: {
+                                        //（可选项）数字类型；裁剪区域的宽度，当 appearance 为 circular 时，w 为半径；默认：rect.w / 2
+                                    w:320,
+                                    h:400,
+                                    x:(rect_w-(320))/2,
+                                    y:(rect_h-(400))/2,
+                                    //（可选项）数字类型；裁剪区域的高度，当 appearance 为 circular 时，h 无效；默认：w
+                                    // w: rect_w-100,
+                                    // h:rect_h-250,
+                                    // x: (rect_w-(rect_w-100))/2,
+                                    // y: (rect_h-(rect_h-250))/2,
+                                    borderColor: '#0f0',
+                                    borderWidth: 1,
+                                    //（可选项）字符串类型；裁剪区域的形状，支持 circular | rectangle；默认：rectangle
+                                    appearance: 'rectangle'
+                                }
+                            },
+                            mode : 'image',
+                            fixedOn: api.frameName
+                        }, function(ret, err){
+
+                        });
+                }
+
+                /**
+                 * 安卓点击返回的时候
+                 */
+                function backForAndroid() {
+                        api.addEventListener({
+                                name : "keyback"
+                        }, function(ret, err) {
+                                back();
+                        });
+                }
+
+                /**
+                 * 返回应用页面
+                 */
+                function back() {
+                        closeImageClip();
+                        api.closeFrame({
+                                name : 'w_imageclip_frame'
+                        });
+                }
+
+                /**
+                 * 关闭裁剪组件
+                 */
+                function closeImageClip(){
+                        FNImageClip.close();
+                }
+
+                /**
+                 * 重置裁剪组件
+                 */
+                function resetImageClip(){
+                        FNImageClip.reset();
+                }
+
+                /**
+                 * 保存裁剪组件
+                 */
+                function saveImageClip(){
+                        FNImageClip.save({
+                            // destPath: BASE_IMG_HEAD_TEMP_PATH,
+                            destPath: "fs://imgaes",
+                            copyToAlbum: false,
+                            quality: 1
+                        },function(ret, err){
+                                if(err) {
+                                    popToast('服务器繁忙，请稍后再试');
+                                } else {
+                                        var img_temp = ret.destPath;
+                                        var file_attrs = [];
+                                        var result_attrs = [];
+                                        file_attrs[0] = img_temp;
+                                        //上传图片
+                                        var a = document.getElementById('progress'); //显示进度，也可用进度条，在进度从95%到100%的时候有个明显停顿，此时文件已经传输完成，是在获取回调信息。
+                                        var b = document.getElementById('topBox');
+                                        var fileurl = ret.destPath; //文件地址，也可通过文件选择器获得
+                                        var baseUrl = 'http://oriuj6hhx.bkt.clouddn.com/'; //七牛给你的测试域名，也可使用自己捆绑的域名youe.xxx.com
+                                        var qiniu = api.require('qiniuUpfile');
+                                        var timestamp=new Date().getTime();
+                                        qiniu.upfile({
+                                            file: fileurl,
+                                            name: timestamp
+                                        },
+                                        function(ret, err) {
+                                            if (ret.status) {
+                                                if(ret.oper == "complete") {
+                                                    //上传成功后组装访问路径，或直接访问文档
+                                                    // console.log(JSON.stringify(ret))
+                                                    document.getElementById("topBox").style.backgroundImage="url("+ baseUrl + ret.info.key +")";
+                                                    $("#topBox").attr("data-url",baseUrl + ret.info.key);
+                                                    $api.setStorage("cliUrl",baseUrl + ret.info.key);
+                                                    api.sendEvent({
+                                                        name: 'backst',
+                                                        extra: {
+                                                            key1: 'value1',
+                                                            key2: 'value2'
+                                                        }
+                                                    });
+                                                    api.openFrame({
+                                                        name: 'makeRQcode',
+                                                        url: './makeRQcode.html',
+                                                        rect: {
+                                                            x: 0,
+                                                            y: 0,
+                                                            w: 'auto',
+                                                            h: 'auto'
+                                                        },
+                                                        pageParam: {
+                                                            cliUrl: baseUrl + ret.info.key
+                                                        }
+                                                    });api.closeFrame({
+
+                                                    });
+                                            } else if (ret.oper == "progress") {
+                                                    //上传过程中获取进度数据
+                                                    api.toast({
+                                                        msg:'上传进度'+ret.percent +'%',
+                                                        duration: 2000,
+                                                        location: 'middle'
+                                                    })
+                                                    // console.log(a, ret.percent);
+                                                }
+                                            }
+                                        });
+                                }
+                        });
+                }
+        </script>
+</html>

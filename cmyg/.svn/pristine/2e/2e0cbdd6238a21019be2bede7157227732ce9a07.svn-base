@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>选择会员类型</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        .contTitle{padding: 20px 0;}
+        .contTitle>div{font-size: 14px;height: 24px;line-height: 24px;text-align: center;display: inline-block;width: 100%;color: #659B73;text-align: center;}
+        .contTitle>div:nth-child(2){width: 48%;color: #E53A0A;border-left: 1px solid #ccc;}
+        .img{text-align: center;padding:0 15%;margin-top:30px;}
+        .moneryNum{padding:0 !important;}
+        .mui-btn-warning{margin: 40px 0;}
+        button{height: 42px !important;font-size: 16px !important;border: none !important;}
+        mui-btn-warning{background-color: #F56F1F !important;}
+        .mui-btn-success{background-color: #039BE5 !important;}
+        /*.userType{width: 100px;height: 100px;}*/
+        .userType img{width: 50%;height: 50%;background-size: 100%;margin-top: 20px;}
+        .userType p{text-align: left;}
+        .experience p{color: #A7A7A7;margin-top:12px;}
+        .chuangmeng p{color: #A7A7A7;margin-top:12px;}
+        .titles{margin-top:8px;font-size:20px;}
+        #page-add_address{padding-bottom:50px!importantdasdasdfasfasf;}
+        .top{position: relative;}
+        i.num{border-radius: 50%;background-color: red;color: #fff;text-align: center;width: 15px;height: 15px;font-size: 11px;line-height:15px;
+                     position: absolute;top:7%;right:21%;display: block;}
+    </style>
+</head>
+
+<body>
+    <div id="page-add_address">
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">选择推广类型</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="img">
+                  <div class="userType experience" data-type="fast">
+                    <div class="top">
+                      <img src="../../image/bottoms.png" alt="体验会员">
+                      <i class="num">15</i>
+                    </div>
+                      <div class="titles">迅捷推广</div>
+                      <p>注：新会员可参与15次，联盟广告推广有效时间24小时可获得1%广告分，无创业分。</p>
+                  </div>
+                  <div class="userType chuangmeng" data-type="slow ">
+                      <img src="../../image/tops1.png" alt="创盟会员">
+                      <div class="titles">创客推广</div>
+                      <p>注：联盟广告推广有效时间7&times;24小时获得7%广告分，3%创业分。</p>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/md5.min.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+        if(api.pageParam.type_ok==1){
+          $('.userType').on('tap',function(){
+            var idx=$(this).index()
+            var type=$(this).attr('data-type')
+            $api.setStorage('tgType', type);
+            api.openWin({
+              name: 'tg',
+              url: '../tg-frames/index.html',
+              scrollEnabled: false,
+              vScrollBarEnabled:false,
+              pageParam: {
+                type:type,
+                idx:idx,
+                ok_yes:1
+              },
+              animation: {
+                type: 'movein',
+                duration: 200
+              }
+            });
+          })
+        }
+    };
+
+</script>
+
+</html>

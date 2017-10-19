@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+	<title>title</title>
+	<!-- <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" /> -->
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+	<link rel="stylesheet" href="article.css">
+	<style>
+
+video,audio{width: 100%  !important;height: auto !important;}
+	body {
+		line-height: normal;
+	}
+		.clear{clear: both;}
+		main {
+			padding-top: 44px;
+			overflow: hidden;
+			margin-bottom: 40px;
+
+		}
+
+		main h2 {
+			margin-top: 20px;
+			text-align: center;
+			padding: 10px 5%;
+		}
+
+		.dataTime {
+			text-align: left;
+			padding-left: 5%;
+			font-size: 13px;
+			margin-bottom: 20px;
+		}
+
+		.contImg {
+			text-align: center;
+		}
+
+		.contImg img {
+			width: 90%;
+		}
+
+		.contText {
+			padding: 20px 5%;
+		}
+
+		.contText img {
+			width: 100%;
+		}
+
+		.contText p {
+			/*width: 100%;*/
+			/*text-indent: 2em;*/
+			/*display: inline-block;*/
+			word-break: break-word;
+		}
+
+			.mainBtn{
+				height:50px;
+				position: fixed;
+				bottom: 0;
+				width: 100%;
+				background: #DCDEDD;
+				padding: 0 20px;
+				line-height: 50px;
+			}
+			.imgLeft{width: 34px;margin: 6px;float: left;}
+			.imgRight{width: 30px;margin: 10px;float: right;margin-right: 40px;}
+			.mainBtn span{
+				display: inline-block;
+				width: 20%;
+				font-size: .6rem;
+			}
+		.mainBtn-a{background: url("../../image/eye.png")no-repeat;width: 16px;height: 16px;background-size: 16px;display:inline-block;vertical-align: text-top;margin-right:2px;margin-top: 2px;}
+		.mainBtn-b{background: url("../../image/heart.png")no-repeat;width: 16px;height: 16px;background-size: 16px;display:inline-block;vertical-align: text-top;margin-right:2px;}
+		.mainBtn-c{background: url("../../image/78874554.png")no-repeat;width: 16px;height: 16px;background-size: 16px;display:inline-block;vertical-align: text-top;margin-right:2px;}
+
+		.footer{width: 100%;background: #F4F4F4;overflow: hidden;position: fixed;bottom: -10px;border-top: 1px solid #000;}
+		.footer ul li{float: left;width: 50%;text-align: center;padding-top:14px;}
+		.footer ul li img{width: 30%;}
+		.footer ul li span{width: 100%;display: inline-block;text-align: center;font-size: .5rem;}
+		.quxiao{border-top:1px solid #999;text-align: center;color:#000 !important;font-size: .7rem;height:60px;line-height: 50px;}
+		.moda{
+            position: fixed;;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+		h4{padding:20px 20px;text-align: left;font-weight: 400;line-height: 25px;font-size: 24px;padding-bottom: 10px;}
+		iframe{ width: 100%;height: 200px !important;}
+		.mui-action-back{background: url(../../image/zuo.png)no-repeat;background-size: 17px;padding-top: 6px;position: absolute;top:14px;left:12px;}
+		#header{position: fixed;}
+		.RQ{margin-bottom:20px;text-align: center;}
+		.RQ img{width: 40%;}
+		</style>
+	</style>
+</head>
+
+<body>
+	<header id="header" class="mui-bar mui-bar-nav">
+
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+	</header>
+	<main id="main">
+
+	</main>
+	<div class="RQ">
+
+	</div>
+	<div class="mainBtn">
+		<img src="../../image/6666.png" alt="" class="imgLeft">
+		<span style="margin-left:20px;"><i class="mainBtn-a"></i><span class="num">0</span></span>
+		<img src="../../image/23442356.png" alt="" class="imgRight">
+	</div>
+
+	<div class="moda">
+		<div class="footer">
+			<ul>
+				<li class="wxpyq">
+					<img src="../../image/325I.png" alt="">
+					<span>微信朋友圈</span>
+				</li>
+				<li class="wxhy">
+					<img src="../../image/235234.png" alt="">
+					<span>微信好友</span>
+				</li>
+			</ul>
+			<div class="clear"></div>
+			<div class="quxiao">
+				取消
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<!-- <script type="text/javascript" src="../../script/template-native.js"></script> -->
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+
+$(".imgRight").on("tap",function(){
+	$(".moda").show()
+});
+$(".quxiao").on("tap",function(){
+	$(".moda").hide()
+})
+	apiready = function() {
+
+		app.ready()
+		var textId = api.pageParam.name;
+		var imgs= api.pageParam.src;
+		// console.log(textId)
+		app.ajax({
+			// url: 'cms/read',
+			url:'cms/getShareArticle',
+			type: 'get',
+			data: {
+				shareArtcleId : textId
+				// shareArtcleId: "8a17a24fb0ca48af9d840ac401a784d4"
+			},
+			success: function(ret) {
+				// console.log(JSON.stringify(ret))
+				var date = new Date((ret.data.publishAt) * 1000);
+				Y = date.getFullYear() + '-';
+				M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+				D = date.getDate() + ' ';
+				h = date.getHours() + ':';
+				m = date.getMinutes();
+				var datas = ret.data;
+				var titleHtml = '<h3 class="mui-title">' + '社交创业平台'+ '</h3>'
+				var textHtml = '<h4>' + datas.title + '</h4><p class="dataTime">' + Y + M + D + '&nbsp;&nbsp;' + h + m + '</p><div class="contText">' + datas.content + '</div>';
+				$("#header").append(titleHtml);
+				$("#main").append(textHtml);
+				$(".num").text(datas.readNum)
+				// alert($(".mainBtn>span").text());
+				//微信分享
+				var wx
+				api.download({
+					url:imgs,
+					savePath: 'fs://a.png',
+					report: true,
+					cache: false,
+					allowResume: true
+				}, function(ret, err) {
+					$api.attr($api.byId('hc'), 'src', ret.savePath);
+					$api.attr($api.byId('hc'), 'imgs', ret.savePath);
+					urls=$api.attr($api.byId('hc'), 'imgs');
+				 //  alert(urls)
+				});
+				wx  = api.require("wx");
+				$(".wxpyq").on("tap",function(){
+					// alert(1)
+					wx.shareWebpage({
+						apiKey: 'wxdace5ee36e9b94bf',
+						scene: 'timeline',
+						title: '社交创业平台',
+						description: '创盟易购，让创业变得更简单，打造最具信赖感的社交创业平台',
+						thumb: "fs://a.png",
+						contentUrl: app.fxUrl + 'shares/article/getShareArticle.html?id=' + textId
+					}, function(ret, err){
+						$(".moda").hide()
+						if(ret.code==0){ alert('分享成功')}
+					});
+			 });
+			 $(".wxhy").on("tap",function(){
+				 wx.shareWebpage({
+					 apiKey: 'wxdace5ee36e9b94bf',
+					 scene: 'session',
+					 title: '社交创业平台',
+					 description: '创盟易购，让创业变得更简单，打造最具信赖感的社交创业平台',
+					 thumb: "fs://a.png",
+					 contentUrl: app.fxUrl + 'shares/article/getShareArticle.html?id=' +textId
+				}, function(ret, err){
+					$(".moda").hide()
+					if(ret.code==0){ alert('分享成功')}
+				});
+			 })
+
+			},
+			error: function(err) {
+				alert(JSON.stringify(err))
+			}
+		})
+
+
+
+	};
+</script>
+
+</html>

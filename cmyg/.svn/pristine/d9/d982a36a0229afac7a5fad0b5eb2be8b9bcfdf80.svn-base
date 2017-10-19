@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+	<title>商品分类</title>
+	<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+	<link rel="stylesheet" href="../../css/aui.css">
+	<link rel="stylesheet" href="../../css/mui.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+	<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+
+	<style>
+		body {
+			/*background: #f2f2f2;*/
+
+		}
+
+		.claer {
+			clear: both;
+		}
+
+		.clearfix:after {
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+
+		.aui-bar-nav {
+			background-color: #DCDEDD;
+			color: #DCDEDD;
+			position: fixed;
+		}
+
+		.aui-title {
+			color: #757575;
+		}
+
+		.aui-bar-nav.aui-bar-light .aui-iconfont {
+			color: #757575;
+		}
+
+		.aui-bar-tab-item>span {
+			font-size: 1rem;
+		}
+
+		main {
+			/*height:100%;*/
+			/*position: relative;*/
+			background: #F2F2F2;
+		}
+
+		aside {
+			display: inline-block;
+			background: #F2F2F2;
+			position: absolute;
+      top: 44px;
+      left: 0;
+      width: 30%;
+      height: 100%;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+		.mui-content {
+
+		    padding-top: 10px !important;
+		}
+
+		aside ul {
+			display: inline-block;
+			width: 100%;
+
+		}
+
+		aside ul li {
+			height: 40px;
+			width: 100%;
+			line-height: 40px;
+			text-align: center;
+		}
+
+		section {
+			/*padding-top: 20px;*/
+			display: inline-block;
+			background: #fff;
+			position: absolute;
+      top: 44px;
+      left: 30%;
+      width: 70%;
+      /*height: 99%;*/
+      overflow: auto;
+      -webkit-overflow-scrolling: touch
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
+		section ul li {
+			float: left;
+			width: 45%;
+			background: #fff;
+			margin-right: .4rem;
+			margin-bottom: .5rem;
+		}
+
+		section ul li a {
+			display: block;
+		}
+
+		section ul li a p {
+			text-align: center;
+			font-size: .6rem;
+			margin-bottom: .2rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			padding: 0 .2rem;
+		}
+
+		.mui-search {
+			margin-right: .8rem;
+		}
+
+		.active {
+			color: #E9376B;
+		}
+
+		aside ul li:hover {
+			color: #E9376B;
+		}
+
+		.aui-bar-tab {
+			box-shadow: 0px 0px 10px 1px;
+		}
+
+		.itemClass {
+			width: 100%;
+			height: 110px;
+
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="page-give">
+
+		<header id="header" class="mui-bar mui-bar-nav  page-give">
+			<h1 class="mui-title">商品分类</h1>
+			<!-- <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a> -->
+		</header>
+		<div style="height:44px"></div>
+
+		<main class="main" id="orderList">
+			<aside style="display: inline-flex;position: fixed;">
+				<ul id="orderMenu">
+
+
+				</ul>
+			</aside>
+			<section class="section clearfix" style="float: right;">
+				<div class="mui-content clearfix">
+					<ul class="clearfix cont-ul" style="background: #fff;margin-left:.7rem;">
+
+
+
+					</ul>
+				</div>
+
+			</section>
+
+		</main>
+
+	</div>
+
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script src="../../script/zepto.min.js"></script>
+<script src="../../script/mui.min.js"></script>
+<script src="../../script/common.js"></script>
+<script>
+	var showLoad = function() {
+		api.showProgress({
+			style: 'default',
+			animationType: 'fade',
+			title: '加载中...',
+			text: '请稍后...',
+			modal: false
+		});
+	}
+
+	$(function() {
+		app.ajax({
+			url: 'goods/getGoodsClass',
+			type: 'GET',
+			success: function(ret) {
+				$("#orderMenu").html('');
+				for (j in ret.data) {
+					var htmlMenu = '<li class="tabLi" data-id="' + ret.data[j].id + '">' + ret.data[j].name + '</li>';
+					$("#orderMenu").append(htmlMenu);
+					var orderList = app.ajax({
+						url: 'goods/list',
+						type: 'GET',
+						pageSize: '1',
+						pageNum: '2',
+						success: function(rst) {
+							setTimeout(function() {
+								document.getElementsByClassName("tabLi")[0].click();
+								$(".tabLi").eq(0).addClass("active");
+							}, 500);
+							$(".tabLi").each(function() {
+								$(this).click(function() {
+									$(".tabLi").removeClass("active");
+									$(this).addClass("active");
+									$(".cont-ul").html('');
+									for (i in rst.data)
+										if (rst.data[i].classid == $(this).data("id")) {
+											var htmlA = '<li data-id="' + rst.data[i].id + '"  data-productid="' + rst.data[i].productid + '" data-goodsid="' + rst.data[i].goodsid + '" data-classid="' + rst.data[i].classid + '" data-typeid="' + rst.data[i].typeId + '">' +
+												'<a href="">' +
+												'<img src="' + rst.data[i].imgurl + '" class="itemClass"/>' +
+												'<p>' + rst.data[i].name + '</p>' +
+												'</a>' +
+												'</li>';
+											$(".cont-ul").append(htmlA);
+										}
+								})
+							})
+						},
+						error: function(err) {
+							alert('错误')
+						}
+					})
+
+				}
+
+			}
+
+
+		})
+	})
+
+	apiready = function() {
+		$(".section").css("min-height",api.winHeight-95 );
+		app.ready()
+		$('.cont-ul').html('');
+		$('.mui-search').click(function() {
+			api.openWin({
+				name: 'info',
+				url: '../goods/goodsSearch-frames.html',
+				animation: {
+					type: 'movein',
+					duration: 200
+				}
+			});
+
+		})
+
+	}
+
+
+
+
+	//点击商品查看详情
+	mui('body').on('tap', '.cont-ul>li', function(e) {
+		var $that = $(this)
+		api.openWin({
+			name: 'product-detail',
+			url: './../shop-frames/product-detail.html',
+			reload: true,
+			pageParam: {
+				goodsId: $that.data('goodsid'),
+				productId: $that.data('productid')
+			},
+			animation: {
+				type: 'movein',
+				duration: 200
+			}
+		})
+	})
+</script>
+
+</html>

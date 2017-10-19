@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>我的积分</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+       body{position:relative;width: 100%;background: #fff;}
+       /*.nav{overflow: hidden;}*/
+       .clear{clear: both;}
+       /*.navTab{width: 120%;overflow-x: scroll;position: absolute;}*/
+       .shoping{margin-top:70px;position:absolute;width: 100%;padding:0 10px;}
+       /*.nav{position: relative;}*/
+       .nav ul li{float: left;width:16.66%;text-align: center;height: 40px;line-height: 40px;color:#666;border-bottom: 1px solid #666}
+       .nav ul .thisLi{color:#E71C4C;border-bottom: 3px solid #E71C4C}
+       .allOrder{text-align: center;margin: 20px 0;}
+       .allOrder i{background:url(../../image/3452342.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+       .times{width: 15%;}
+       .nos{width: 30%;}
+       .tablesTitle{background-color: #8B8B8B;height: 30px;line-height: 30px;margin-bottom: 10px;}
+       .tablesTitle span{display: inline-block;text-align: center;font-size: .6rem;color:#fff;}
+
+       .tablesCont ul li span{display: inline-block;font-size: .6rem;text-align: center;color: #747474}
+       .titTime,.contTime{width: 25%;}
+       .titShop,.contShop{width: 35%;}
+       .titOrder,.contOrder{width: 18%;}
+       .titInt,.contInt{width: 13%;}
+       .contShop,.contOrder,.contInt,.contRatio{line-height: 46px;position: relative;top:-8px;}
+       .contTime{margin-top: 5px;}
+       .tablesContUl li{height: 50px;}
+       .tablesContUl li:nth-child(odd){background-color: #DCDEDD  }
+       .tablesContUl li:nth-child(even){background-color: #EEEEEE  }
+       .hide{display:none;;}
+       .duihuan .titShop,.duihuan .contShop{width: 58%;}
+       .recharge .titTime,.recharge .contTime{width: 23%}
+       .recharge .titShop,.recharge .contShop{width: 20%}
+       .recharge .titOrder,.recharge .contOrder{width: 20%}
+       .recharge .titRatio,.recharge .contRatio{width: 10%}
+       .recharge .titInt,.recharge .contInt{width: 20%}
+       .zengsong .titShop,.zengsong .contShop{width: 30%}
+       .zengsong .titInt,.zengsong .contInt{width: 12%}
+       .zengsong .titOrder,.zengsong .contOrder{width: 27%}
+
+
+  </style>
+</head
+<body>
+  <header id="header" class="mui-bar mui-bar-nav">
+      <h1 class="mui-title">购物分明细</h1>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+  </header>
+   <div class="shoping" id="shoping">
+
+      <div class="nav">
+        <ul class="navTab">
+          <li class="thisLi">购物</li>
+          <li>兑换</li>
+          <li>充值</li>
+          <li>广告</li>
+          <li>分享</li>
+          <li>赠送</li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+      <div class="allOrder">
+        <span class="allOrderTitle">合计获得</span>
+        <i></i>
+        <span>10000</span>
+      </div>
+      <div class="tables">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">购物单号</span>
+          <span class="titOrder">订单金额</span>
+          <span class="titInt">购物分</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl">
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contOrder">￥35.00</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contOrder">￥35.00</span>
+              <span class="contInt">30</span>
+            </li><li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contOrder">￥35.00</span>
+              <span class="contInt">30</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="tables hide duihuan">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">购物单号</span>
+          <span class="titInt">购物分</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl">
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contInt">30</span>
+            </li><li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contInt">30</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="tables hide recharge">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">充值单号</span>
+          <span class="titOrder">充值金额</span>
+          <span class="titRatio">比例</span>
+          <span class="titInt">购物分</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl">
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121</span>
+              <span class="contOrder">10000</span>
+              <span class="contRatio">100%</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121</span>
+              <span class="contOrder">10000</span>
+              <span class="contRatio">100%</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121</span>
+              <span class="contOrder">10000</span>
+              <span class="contRatio">100%</span>
+              <span class="contInt">30</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="tables hide guanggao">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">广告分</span>
+          <span class="titOrder">比例</span>
+          <span class="titInt">购物分</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl">
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">1000</span>
+              <span class="contOrder">100%</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">1000</span>
+              <span class="contOrder">100%</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">1000</span>
+              <span class="contOrder">100%</span>
+              <span class="contInt">30</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="tables hide fenxiang">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">购物单号</span>
+          <span class="titOrder">订单金额</span>
+          <span class="titInt">购物分</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl">
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contOrder">￥35.00</span>
+              <span class="contInt">30</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contOrder">￥35.00</span>
+              <span class="contInt">30</span>
+            </li><li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">45278121000000</span>
+              <span class="contOrder">￥35.00</span>
+              <span class="contInt">30</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="tables hide zengsong">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">赠送帐号</span>
+          <span class="titInt">购物分</span>
+          <span class="titOrder">接受帐号</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl">
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">15116449612</span>
+              <span class="contInt">-500</span>
+              <span class="contOrder">18122410309</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">15116449612</span>
+              <span class="contInt">-500</span>
+              <span class="contOrder">18122410309</span>
+            </li>
+            <li>
+              <span class="contTime">2017-04-29  10:59</span>
+              <span class="contShop">15116449612</span>
+              <span class="contInt">-500</span>
+              <span class="contOrder">18122410309</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+   </div>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+  function openwin(urls){
+    api.openWin({
+        name: urls,
+        url: '../tg-detail/urls.html',
+        pageParam: {
+            name: 'test'
+        },
+        animation: {
+            type: 'movein',
+            duration: 200
+        }
+    });
+  }
+    apiready=function(){
+
+    }
+    $(".navTab>li").each(function(){
+      $(this).on("tap",function(){
+        var index = $(this).index();
+        $(".navTab>li").removeClass();
+        $(this).addClass("thisLi");
+        $(".tables").hide()
+        $(".tables").eq(index).show();
+        if(index == 0){
+          $(".allOrderTitle").text("合计获得")
+        }else if(index == 1){
+          $(".allOrderTitle").text("合计获得")
+        }else if(index == 2){
+          $(".allOrderTitle").text("充值获得")
+        }else if(index == 3){
+          $(".allOrderTitle").text("广告分奖励")
+        }else if(index == 4){
+          $(".allOrderTitle").text("分享奖励")
+        }else if(index == 5){
+          $(".allOrderTitle").text("赠送购物分")
+        }
+
+      })
+    })
+
+  </script>
+</body>
+</html>

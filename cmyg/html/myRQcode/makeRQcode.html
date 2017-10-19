@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="format-detection" content="telephone=no" />
+<title>生成邀请码</title>
+<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+<style>
+    .clear{clear: both;}
+    .Box{background: #fff;margin: 0 auto;width: 100%;padding: 6% 6%;}
+    .content{border-radius:10px; width: 100%;height: 94%;background: #fff;}
+    .topBox{ height: 300px;background: #ccc;border-top-left-radius: 10px;border-top-right-radius: 10px;background: url(../../image/69.jpg)no-repeat; background-size: 100%;}
+    .centerBox{width: 100%; height: 0; border-bottom: 29px solid #fff;  border-left: solid transparent; position: relative; top: -29px; left: 0px; }
+    .bottomBox{height:32%;position: relative;top:-20px;text-align: center;z-index: 99;}
+    .headImg{overflow: hidden;width: 70px;height: 70px;border-radius: 50%;border:1px solid #ccc;position: relative;top:-84px;left:30px;}
+    .headImg img{width: 100%;}
+    .moda{width: 100%;height: 100%;background: rgba(0,0,0,.7);position: absolute;top: 0;left: 0;z-index: 999;display: none;}
+    .modaCont{width: 80%;height:34%;margin:40% 10%;background: #fff;border-radius: 6px;}
+    .modaTitle{text-align: center;padding:20px;border-bottom: 1px solid #ccc;}
+    .modaTitle span{margin-left: 20px}
+    .modaText{}
+    .modaText span{width: 49%;text-align: center;padding-top:30px;}
+    .modaText span img{width: 40%;}
+    .mui-icon-close{float:right;}
+    .leftDiv li{margin:6px 6px;color:#fff;background:rgba(0,0,0,.6);height:26px;line-height: 26px;text-align: center;}
+    .topBox>div{display: inline-block;font-size: 14px;margin-top: 10px;}
+    .leftDiv{width: 60%;}
+    .rightDiv{width: 38.5%;padding-top: 120px;    float: right;}
+    input[type='text']{color:#000;width: 100% !important;height:40px !important;text-align: center;}
+    input[type='number']{color:#000;width: 100px !important;height:20px !important;}
+    .cmLogo{text-align: center;position: relative;top: -10px;}
+    .cmLogo>img{width: 70px;}
+    .topLogo{width: 80px;padding-left: 16px;}
+    .topText{width: 90px;padding-left: 16px;}
+    .name{color:#fff;padding-left: 16px;margin:6px 0;margin-top: 20px;}
+    ul{padding-left:10px;}
+    h3{margin-bottom: 10px;font-weight: 500;}
+    @media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){.bottomBox{top:-30px;} .name{margin-top:10px;}}
+    .top{height: 520px;background: #111;padding: 20px;}
+    .rightDiv span{color:#fff;text-align: center;display: inline-block;width: 100%;}
+    .puls{font-size: 60px;margin-top: 40px;}
+    .ditorText{padding: 0 6%;padding-bottom: 20px;}
+    .textBtn button{width: 120px;height:36px;margin:20px 0;}
+    .baocun{float:right;}
+    .wxRQcode{width: 140px;height: 140px;text-align: center;border: 1px dashed #ccc;margin: 0 auto;position: relative;}
+    .wxRQcode span{color:#ccc;}
+    #header{z-index: 9999 !important;}
+    #qrcodeImg{position: absolute;top: 0;left: 0;width: 100%;z-index: 99;}
+    .moda{width: 100%;height: 100%;background: rgba(0,0,0,.7);position: flex;bottom: 0;left: 0;z-index: 999;display: none;}
+    .modaCont{width: 80%;height:34%;margin:40% 10%;background: #fff;border-radius: 6px;}
+    .modaTitle{text-align: center;padding:20px;border-bottom: 1px solid #ccc;}
+    .modaTitle span{margin-left: 20px}
+    .modaText{}
+    .modaText span{width: 49%;text-align: center;padding-top:30px;}
+    .modaText span img{width: 40%;}
+    .mui-icon-close{float:right;}
+</style>
+<body>
+    <header id="header" class="mui-bar mui-bar-nav  page-give">
+        <h1 class="mui-title">创客推广</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <div style="height:40px;"></div>
+    <div class="Box">
+        <div class="top">
+            <div class="content">
+                <div class="topBox" id="topBox" data-url="">
+                    <div style="display:none;">
+                        上传进度：<p id="progress"></p>
+                    </div>
+                    <p id="backurl" style="display:none;"></p>
+                    <div class="leftDiv">
+                        <img src="../../image/rqcode1.png" alt="" class="topLogo">
+                        <h4 class="name">姓名</h4>
+                        <img src="../../image/rqcode2.png" alt="" class="topText">
+                        <ul>
+                            <li class="one">创客宣言1</li>
+                            <li class="tow">创客宣言2</li>
+                            <li class="three">创客宣言3</li>
+                            <li class="four">创客宣言4</li>
+                        </ul>
+                    </div>
+                    <div class="rightDiv">
+                        <span class="puls">+</span>
+                        <span>点击上传形象照</span>
+                    </div>
+                    <!-- 分享蒙板 -->
+                <div class="clear"></div>
+                </div>
+                <div class="centerBox"></div>
+                <div class="bottomBox">
+                    <h4 style="margin-bottom:10px;">邀您加入创客</h4>
+                    <div id="qrcode"></div>
+                    <p style="font-size:12px;">长按分享二维码</p>
+                </div>
+                <div class="cmLogo">
+                    <img src="../../image/rqcodeLogo.png" alt="">
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="moda">
+            <div class="modaCont">
+                <div class="modaTitle">
+                    <span>分享至</span>
+                    <i class="mui-icon mui-icon-close"></i>
+                </div>
+                <div class="modaText">
+                    <span class="wxpyq">
+                        <img src="../../image/325I.png" alt="">
+                        <p>微信朋友圈</p>
+                    </span>
+                    <span class="wxhy">
+                        <img src="../../image/235234.png" alt="">
+                        <p>微信好友</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <p>注：请参照样图上传自己的形象照，照片应该选择深底色或纯净底色，图片按照2:3比例上传。</p>
+    </div>
+    <div class="ditorText">
+        <div class="cmTitle">
+            <h3 style="text-align:center;">创客宣言</h3>
+            <input type="text" placeholder="不超过10个字" maxlength="10" class="text1">
+            <input type="text" placeholder="不超过10个字" maxlength="10" class="text2">
+            <input type="text" placeholder="不超过10个字" maxlength="10" class="text3">
+            <input type="text" placeholder="不超过10个字" maxlength="10" class="text4">
+        </div>
+        <div class="wxRQcode">
+            <span class="puls">+</span>
+            <span>点击上传自己的微信二维码</span>
+            <img src="" alt="" id="qrcodeImg">
+        </div>
+        <p>
+            注：<br>
+            此处上传自己的微信二维码，需选择微信正规的二维码保存在手机上，选择上传<br>
+            昵称创客等级将自动获取
+        </p>
+        <div class="textBtn">
+            <button type="button" class="mui-btn mui-btn-royal look">预览</button>
+            <!-- <button type="button" class="mui-btn mui-btn-danger share">分享</button> -->
+            <button type="button" class="mui-btn mui-btn-danger baocun">保存</button>
+
+        </div>
+
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/jquery.min.js"></script>
+<script type="text/javascript" src="../../script/qrcode.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script>
+
+apiready = function() {
+    // function getInfo(){
+    app.ajax({
+        url:'memberPromotion/findOne',
+        type:'get',
+        data:{
+            token:$api.getStorage('token'),
+            memberId:$api.getStorage('memberId'),
+        },
+        success : function(res){
+            if($api.getStorage("cliUrl") == null || ''){
+                document.getElementById("topBox").style.backgroundImage="url(../../image/69.jpg)";
+            }else{
+                document.getElementById("topBox").style.backgroundImage="url("+$api.getStorage("cliUrl")+")";
+            }
+            // alert($api.getStorage("cliUrl")+"=================1212=================");
+            $(".one").text(res.data.oneDeclaration);
+            $(".tow").text(res.data.twoDeclaration);
+            $(".three").text(res.data.threeDeclaration);
+            $(".four").text(res.data.fourDeclaration);
+            $(".text1").val(res.data.oneDeclaration);
+            $(".text2").val(res.data.twoDeclaration);
+            $(".text3").val(res.data.threeDeclaration);
+            $(".text4").val(res.data.fourDeclaration);
+            // document.getElementById("topBox").style.backgroundImage="url("+res.data.memberBackground+")";
+            // alert($api.getStorage("cliUrl")+"===================99999===============");
+
+            $("#qrcodeImg").attr("src",res.data.qrcode)
+        },
+        error: function(err){
+            console.log(stringify(err))
+        }
+    });
+    function show(){
+        // document.getElementById("topBox").style.backgroundImage="url("+$api.getStorage("cliUrl")+")";
+        // console.log(111)
+    }
+
+        // setInterval(show,2000);
+        document.getElementById("topBox").style.backgroundImage="url("+$api.getStorage("cliUrl")+")";
+
+
+        console.log("============>"+$api.getStorage("cliUrl"))
+    //获取名字
+    app.ajax({
+        url: 'member/getMyInfo',
+        data: {
+            token: $api.getStorage('token'),
+            memberId: $api.getStorage('memberId')
+        },
+        success : function(res){
+            if(res.data.realname == null || res.data.realname == undefined){
+                $(".name").css("visibility","hidden");
+            }else{
+                $(".name").text(res.data.realname)
+            }
+        }
+    })
+    // }
+    // getInfo();
+    api.addEventListener({
+       name: 'backst'
+    }, function(ret, err) {
+        // alert("阿德法")
+        // getInfo()
+        window.location.reload();
+    })
+    $(".centerBox").css("border-left-width",$(".content").width()-3);
+    function utf(str) {
+        var out, i, len, c;
+        out = "";
+        len = str.length;
+        for(i = 0; i < len; i++) {
+            c = str.charCodeAt(i);
+            if ((c >= 0x0001) && (c <= 0x007F)) {
+                out += str.charAt(i);
+            } else if (c > 0x07FF) {
+                out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            } else {
+                out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            }
+        }
+        return out;
+    };
+    $('#qrcode').qrcode({
+        render: "canvas", // 渲染方式有table方式和canvas方式
+        width: 80,   //默认宽度
+        height: 80, //默认高度
+        text: utf("这是你的微信二维码"), //二维码内容
+        typeNumber: -1,   //计算模式一般默认为-1
+        correctLevel: 2, //二维码纠错级别
+        background: "#ffffff",  //背景颜色
+        foreground: "#000000"  //二维码颜色
+    });
+
+    //用户头像上传
+    $(".rightDiv").on("tap",function(){
+        function openImageClipFrame(img_src){
+            api.openFrame({
+                    name : 'w_imageclip_frame',
+                    scrollToTop : true,
+                    allowEdit : true,
+                    url : 'w_imageclip_frame.html',
+                    rect : {
+                            x : 0,
+                            y : 0,
+                            w : api.winWidth,
+                            h : api.winHeight,
+                    },
+                    animation : {
+                        type : "reveal", //动画类型（详见动画类型常量）
+                        subType : "from_right", //动画子类型（详见动画子类型常量）
+                        duration : 300
+                    },
+                    pageParam : {
+                            img_src : img_src
+                    },
+                    vScrollBarEnabled : false,
+                    hScrollBarEnabled : false,
+                    //页面是否弹动 为了下拉刷新使用
+                    bounces : false
+            });
+    }
+        function openPicture(sourceType) {
+            //获取一张图片
+            api.getPicture({
+                    sourceType : sourceType,
+                    encodingType : 'png',
+                    mediaValue : 'pic',
+                    destinationType : 'url',
+                    allowEdit : false,
+                    quality : 100,
+                    targetWidth : 1200,
+                    targetHeight : 1920,
+                    saveToPhotoAlbum : true
+            }, function(ret, err) {
+                    if (ret) {
+                        var img_url = ret.data;
+                        if (img_url != "") {
+                            //打开裁剪frame
+                            openImageClipFrame(img_url);
+                        }
+                    }
+            });
+        }
+        openPicture()
+    });
+    //上传微信二维码
+    $(".wxRQcode").on("tap",function(){
+        api.getPicture({
+            sourceType: 'library',
+            encodingType: 'jpg',
+            mediaValue: 'pic',
+            destinationType: 'url',
+            allowEdit: true,
+            quality: 100,
+            targetWidth: 500,
+            targetHeight: 500,
+            saveToPhotoAlbum: false
+        }, function(res, err) {
+            if (res) {
+                var a = document.getElementById('progress'); //显示进度，也可用进度条，在进度从95%到100%的时候有个明显停顿，此时文件已经传输完成，是在获取回调信息。
+                var b = document.getElementById('qrcodeImg');
+                var fileurl = res.data; //文件地址，也可通过文件选择器获得
+                var baseUrl = 'http://oriuj6hhx.bkt.clouddn.com/'; //七牛给你的测试域名，也可使用自己捆绑的域名youe.xxx.com
+                var qiniu = api.require('qiniuUpfile');
+                var timestamp=new Date().getTime();
+                qiniu.upfile({
+                    file: fileurl,
+                    name: timestamp
+                },
+                function(ret, err) {
+                    console.log(JSON.stringify(ret))
+                    if (ret.status) {
+                        if(ret.oper == "complete") {
+                            //上传成功后组装访问路径，或直接访问文档
+                            $("#qrcodeImg").attr("src", baseUrl + ret.info.key);
+
+                        } else if (ret.oper == "progress") {
+                            //上传过程中获取进度数据
+                            console.log(a, ret.percent);
+                        }
+                    }
+                });
+            } else {
+            //    alert(JSON.stringify(err));
+            }
+        });
+    });
+    var FNImageClip = api.require('FNImageClip');
+
+
+    $(".look").on("tap",function(){
+        api.openWin({
+            name: 'qrcode',
+            url: './qrcode.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+    });
+    $(".mui-icon-close").on("tap",function(){
+        $(".moda").hide()
+    });
+    $(".share").on("tap",function(){
+        $(".moda").show();
+        $(".moda").css("top",$(window).scrollTop());
+    });
+
+
+
+
+
+    $(".baocun").on("tap",function(){
+        var text1,text2,text3,text3
+        var text1 = $(".text1").val();
+        var text2 = $(".text2").val();
+        var text3 = $(".text3").val();
+        var text4 = $(".text4").val();
+        var mbBg = $(".topBox").data("url")
+        var qrcodeImg = $("#qrcodeImg").attr("src");
+
+        app.ajax({
+            url:'memberPromotion/savePromotion',
+            type:'post',
+            data:{
+                memberId:$api.getStorage('memberId'),
+                token:$api.getStorage('token'),
+                oneDeclaration:text1,
+                twoDeclaration:text2,
+                threeDeclaration:text3,
+                fourDeclaration:text4,
+                memberBackground:$api.getStorage("cliUrl"),
+                qrcode:qrcodeImg
+            },
+            success : function(res){
+                console.log(JSON.stringify(res));
+                if(res.msg == 'ok'){
+                    alert("保存成功！")
+                }else if(res.msg == '修改成功'){
+                    alert("修改成功！")
+                }
+                // getInfo()
+            },
+            error:function(err){
+                console.log(JSON.stringify(err));
+
+            }
+        })
+
+    })
+
+}
+
+
+</script>
+</html>

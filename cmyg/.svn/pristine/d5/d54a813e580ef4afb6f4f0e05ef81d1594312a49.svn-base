@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>交易详情</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+     .head{height: 40px;position:fixed;width: 100%;background-color: #393A3E;font-size:20px;text-align: center;line-height: 40px;color:#fff;top:0;z-index:1000;}
+     .head span{position:absolute;right:10px;color: #20D81F;font-size:16px;}
+     .title{height: 50px;line-height:50px;color:#20D81F;font-size:20px;padding-left:15px;border-bottom:1px solid #ccc;}
+     .title i{background: url(../../image/cg_03.jpg) no-repeat;width: 25px;height: 25px;background-size: 25px;display:inline-block;vertical-align:middle;margin-right:5px;}
+     .content{background-color: #fff;}
+     .content .top{padding:20px 0;text-align: center;}
+     .content .top div:nth-child(1){font-size: 15px;display:block;}
+     .content .top div:nth-child(2){font-size:25px;font-weight: 600;display:block;margin-top:5px;}
+     .content ul{border-top:1px solid #ccc;padding:0 15px;}
+     .content ul li{height: 45px;line-height: 45px;font-size:15px;}
+     .content ul li span:nth-child(1){float:left;}
+     .content ul li span:nth-child(2){float:right}
+     .type_detail i{margin-right:5px;background: url(../../image/u200.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;vertical-align: sub;}
+  </style>
+</head>
+<body style="background:#EFEFF4;">
+    <div class="container">
+        <div class="head">
+             交易详情
+             <span class="back_to">返回</span>
+        </div>
+        <div class="title"><i></i>支付成功</div>
+        <div class="content">
+            <div class="top">
+                <div>创盟易购</div>
+                <div class="price_detail"></div>
+            </div>
+            <ul>
+               <li>
+                   <span>交易时间</span>
+                   <span class="time_detail"></span>
+               </li>
+               <li>
+                   <span>支付方式</span>
+                   <span class="type_detail"></span>
+               </li>
+               <li>
+                   <span>交易单号</span>
+                   <span class="NUM_detail"></span>
+               </li>
+            </ul>
+        </div>
+    </div>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+      apiready=function(){
+         app.ready()
+        var params=api.pageParam
+        var types=api.pageParam.types
+        var time=api.pageParam.times
+        var orderNum=api.pageParam.orderNum
+        var price=api.pageParam.price
+        var shop=api.pageParam.shoping
+        var times=app.times(new Date().getTime())
+        $('.time_detail').html(times)
+        $('.NUM_detail').html(orderNum)
+        switch (types) {
+          case '1':
+            $('.price_detail').html('￥'+(price)/100)
+            $('.type_detail').html('现金')
+            break;
+          case '2':
+            $('.price_detail').html('￥'+(price)/100)
+            $('.type_detail').html('消费分')
+            break;
+          case '3':
+            $('.price_detail').html('<span><i></i>购物分</span><span class="nums_title"></span>')
+            $('.nums_title').html(shop)
+            $('.type_detail').html('购物分')
+          default:
+        }
+        $('.back_to').on('tap',function(){
+          // api.openWin({
+          //     name: 'bag-frame',
+          //     url: '../bag-frames/index.html',
+          //     reload:true,
+          //     pageParam:{
+          //         backs:3,
+          //         fanst:2
+          //     },
+          //     animation: {
+          //       type: 'movein',
+          //       duration: 200
+          //     }
+          // });
+          api.closeToWin({
+              name: 'root'
+          });
+          api.sendEvent({
+              name: 'kobe',
+              extra: {
+                  key1: 'value1',
+                  key2: 'value2'
+              }
+          });
+        })
+      }
+  </script>
+</body>
+</html>

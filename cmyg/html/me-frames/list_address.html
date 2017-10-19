@@ -1,0 +1,354 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>收货地址</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    #list_address{padding-bottom:50px;}
+        .add_button {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .add_button button {
+            border-radius: 9px;
+            height: 44px;
+            width: 240px;
+            font-size: 16px;
+            background-color: #ec4a4a;
+            color: white;
+        }
+
+        .add_button span {
+            font-size: 24px;
+            color: #3bab4e;
+        }
+
+        .addressimg {
+            margin-left: 30px;
+            display: inline-block;
+            width: 25px;
+            text-align: center;
+        }
+
+        .addrestext {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .phone {
+            margin-left: 15px;
+        }
+
+        .ad_img_div {}
+
+        .t_img {
+            width: 15px;
+        }
+
+        .t_text {
+            font-size: 14px;
+        }
+
+        .t_div {
+            display: inline-block;
+            margin-right: 30px;
+            float: right;
+        }
+
+        .check_box {
+            width: 17px;
+            height: 17px;
+        }
+
+        .add_tb-1 {
+            margin-top: 11px;
+            width: 20%;
+            display: inline-block;
+        }
+
+        .add_tb-2 {
+            width: 80%;
+            display: inline-block;
+        }
+
+        .add_tb-3 {
+            width: 20%;
+            display: inline-block;
+        }
+        .items{padding-top:20px;}
+        .mui-scroll-wrapper{position:relative!important;}
+        .items .no_img{background: url(../../image/nono.png) no-repeat;width: 20px;height: 20px;background-size:20px;display:inline-block;float:right;margin-right:20px;}
+        .items .yes_img{background: url(../../image/yesyes.png) no-repeat;width: 20px;height: 20px;background-size:20px;display:inline-block;float:right;margin-right:20px;}
+        .title_show{text-align:center;font-size:15px;margin-top:50px;display:none;}
+        .add_button{display:none;}
+        .mui-inner-wrap img{vertical-align: middle;}
+        .linest{height: 10px;background-color:#f0f0f2;}
+        #add_but{border:none;outline: none;border-radius: 8px;}
+    </style>
+</head>
+
+<body>
+    <div id="list_address">
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">收货地址</h1>
+                <a class="mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+              <div class="title_show">
+                   当前没有收货地址，马上新建
+              </div>
+              <!-- <div class="deafult_title">
+                  当前没有默认地址，请设置
+              </div> -->
+                <div class="items_box"></div>
+                <div class="add_button">
+                    <button id="add_but" type="button" class="mui-btn">新建收货地址</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script id="list_box_deafult" type="text/template">
+      <div class="items" data-id='<%=demos.id%>'>
+        <div class="mui-row">
+            <div class="mui-col-sm-4 mui-col-xs-12 add_tb-1">
+                <img class="addressimg" src="../../image/45788787.png" />
+            </div>
+            <div class="mui-col-sm-7 mui-col-xs-12 add_tb-2">
+                <div><span class="nametest"><%=demos.receiver%></span><span class="phone"><%=demos.phone%></span></div>
+                <div class="addrestext"><%=demos.address%></div>
+            </div>
+        </div>
+        <div class="mui-row" style="padding-top: 8px;margin-top:15px;height:40px;border-bottom:1px solid #eeeeee;border-top:1px solid #eeeeee">
+            <div class="mui-col-sm-3 mui-col-xs-12 add_tb-3">
+                <div class="" style="padding-left: 34px;">
+                    <!-- <input name="checkbox1" value="Item 1" type="checkbox" class="check_box"> -->
+                    <span class="no_img yes_img"></span>
+                </div>
+            </div>
+            <div class="mui-col-sm-9 mui-col-xs-12 add_tb-2">
+                <span class="alter_div t_text">设置为默认地址</span>
+                <div class="t_div">
+                    <img class="del_img t_img" src="../../image/shouhuo_delet.png" />
+                    <span class="del_div t_text">删除</span>
+                </div>
+
+                <div class="t_div">
+                    <img class="alter_img t_img" src="../../image/3467778.png" />
+                    <span class="alter_div t_text">修改</span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </script>
+    <script id="list_box" type="text/template">
+      <%for(var i=0;i<list.length;i++){%>
+        <div class="linest"></div>
+      <div class="items items_deafult" data-id='<%=list[i].id%>'>
+        <div class="mui-row">
+            <div class="mui-col-sm-4 mui-col-xs-12 add_tb-1">
+                <img class="addressimg" src="../../image/78877887.png" />
+            </div>
+            <div class="mui-col-sm-7 mui-col-xs-12 add_tb-2">
+                <div><span class="nametest"><%=list[i].receiver%></span><span class="phone"><%=list[i].phone%></span></div>
+                <div class="addrestext"><%=list[i].address%></div>
+            </div>
+        </div>
+        <div class="mui-row" style="padding-top: 8px;margin-top:15px;height:40px;border-bottom:1px solid #eeeeee;border-top:1px solid #eeeeee">
+            <div class="mui-col-sm-3 mui-col-xs-12 add_tb-3">
+                <div class="" style="padding-left: 34px;">
+                    <!-- <input name="checkbox1" value="Item 1" type="checkbox" class="check_box"> -->
+                    <span class="no_img"></span>
+                </div>
+            </div>
+            <div class="mui-col-sm-9 mui-col-xs-12 add_tb-2">
+                <span class="alter_div t_text">设置为默认地址</span>
+                <div class="t_div">
+                    <img class="del_img t_img" src="../../image/shouhuo_delet.png" />
+                    <span class="del_div t_text">删除</span>
+                </div>
+
+                <div class="t_div">
+                    <img class="alter_img t_img" src="../../image/3467778.png" />
+                    <span class="alter_div t_text">修改</span>
+                </div>
+            </div>
+        </div>
+      </div>
+      <%}%>
+    </script>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+      app.ready()
+      var back=api.pageParam.c_back
+      if(back==1){
+         $('.hides').on('tap',function(){
+             api.openWin({
+                 name: 'push-gift',
+                 url: '../push-gift/index.html',
+                 pageParam: {
+                     name: 'test'
+                 }
+             });
+
+         })
+      }else{
+        $('.hides').on('tap',function(){
+           api.closeToWin({
+               name: 'root',
+               pageParam:{
+                  wan:1
+               }
+           });
+         })
+      }
+          app.ajax({
+            url:'member/getMyAddress',
+            data:{
+              memberId:app.memberId,
+              token:app.token
+            },
+            success:function(data){
+              $('.add_button').show()
+               var datas=data.data.addressList
+               var deafults=data.data.deafultAddress
+               console.info(deafults)
+               var info={
+                  list:datas
+               }
+               var demos={
+                  demos:deafults
+               }
+               if(deafults!=null){
+                 var demos=template('list_box_deafult',demos)
+                 $(".items_box").append(demos)
+               }
+               var text=template('list_box',info)
+               $(".items_box").append(text)
+               if($('.items_box .items').length>0){
+                   $('.title_show').css('display','none')
+               }else{
+                    $('.title_show').css('display','block')
+               }
+               //默然设置第一项为默认地址
+
+               //删除
+               var items=$('.items')
+               for(var i=0;i<items.length;i++){
+                  $(items[i]).find('.del_div').on('tap',function(){
+                      var addressId=$(this).parents('.items').attr('data-id')
+                      var $item=$(this).parents('.items')
+                      api.confirm({
+                        title:'提示',
+                          msg: '你确定删除此地址吗？'
+                      }, function(ret, err){
+                          if( ret.buttonIndex==2 ){
+                            app.ajax({
+                               url:'member/deleteAddress',
+                               data:{
+                                  'memberId':app.memberId,
+                                  'token':app.token,
+                                  'addressId':addressId
+                               },
+                               success:function(data){
+                                  if(data.code==0){
+                                     $item.remove()
+                                     window.location.reload()
+                                  }
+                                  if($('.items_box .items').length>0){
+                                      $('.title_show').css('display','none')
+                                  }else{
+                                       $('.title_show').css('display','block')
+                                  }
+                               }
+                            })
+                          }
+                      });
+                  })
+                  $(items[i]).find('.no_img').on('tap',function(){
+                       $(this).addClass('yes_img').parents('.items').siblings('.items').find('.no_img').removeClass('yes_img')
+                       if($(this).hasClass('yes_img')){
+                            var addressID=$(this).parents('.items').attr('data-id')
+                            app.ajax({
+                              url:'member/setDefaultAddress',
+                              data:{
+                                memberId:app.memberId,
+                                token:app.token,
+                                addressId:addressID
+                              },
+                              success:function(data){
+                                 console.log(data)
+                                 app.toast('设置默认地址成功')
+                              }
+                            })
+                       }
+                  })
+                  //修改收货地址
+                  $(items[i]).find('.alter_div').on('tap',function(){
+                      var addressID=$(this).parents('.items').attr('data-id')
+                      app.ajax({
+                         url:'member/addressDetail',
+                         data:{
+                            memberId:app.memberId,
+                            token:app.token,
+                            addressId:addressID
+                         },
+                         success:function(data){
+                               console.log(data)
+                               if(data.code==0){
+                               api.openWin({
+                                   name: 'edit_addres',
+                                   url: './edit_addres.html',
+                                   reload:true,
+                                   pageParam: {
+                                     receiver:data.data.receiver,
+                                     phone:data.data.phone,
+                                     area:data.data.area,
+                                     street:data.data.street,
+                                     detail:data.data.detail,
+                                     address:data.data.address,
+                                     addressId:addressID
+                                   }
+                               });
+
+                            }
+                         }
+                      })
+                  })
+               }
+            }
+          })
+
+      mui('#list_address').on('tap', '#add_but', function(){
+        api.openWin({
+            name: 'add_addres',
+            url: './add_addres.html',
+            reload:true,
+            animation: {
+              type: 'movein',
+              duration: 200
+            }
+        });
+      })
+
+
+
+    };
+</script>
+
+</html>

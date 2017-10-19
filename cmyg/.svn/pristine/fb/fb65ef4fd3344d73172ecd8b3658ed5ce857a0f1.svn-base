@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>系統消息</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    .mui-scroll-wrapper{position:relative!important;}
+    .boxs ul li{border-bottom:1px solid #f0f0f0;height: 70px;font-size:14px;-webkit-transition: all 0.1s linear;transition: all 0.1s linear;overflow:hidden;width: 119%;}
+    .boxs li .delet {float: right;width: 15%;text-align: center;background: #E2421B;color: #fff;display:block;height: 100%;line-height: 70px;z-index:100;font-size:15px;text-align: center;}
+    .boxs ul li div:nth-child(2){float:left;width: 17%;line-height:70px;}
+    .boxs ul li div:nth-child(1){float: left;padding:0 25px 0 20px;width: 67%;}
+    .boxs ul li div:nth-child(1) span:nth-child(2){display:block;}
+    .boxs ul li div:nth-child(1) span:nth-child(1){margin-top:14px;}
+    .detail{font-size:14px;}
+    .kong{background: url(../../image/shop-empty.png) 50% 50% no-repeat;position: fixed;top: 40%;width: 100%;text-align: center;height: 64px;line-height: 140px;display:none;
+        transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #A0A0A0;}
+    .boxs ul li div:nth-child(1) span:nth-child(2){overflow: hidden;white-space: nowrap;text-overflow:ellipsis;}
+    .oks{color: #A0A0A0!important;}
+    .swipeleft {
+            transform: translateX(-15%);
+            -webkit-transform: translateX(-15%);
+        }
+        .load-more{padding:10px;display:none;}
+    </style>
+</head>
+<body>
+  <div id="list_address">
+      <div class="mui-inner-wrap">
+          <!-- 主页面标题 -->
+          <header id="header" class="mui-bar mui-bar-nav">
+              <h1 class="mui-title">系统消息</h1>
+              <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+          </header>
+          <div class="mui-content mui-scroll-wrapper">
+            <div class="boxs">
+                <ul class="uls">
+
+                </ul>
+            </div>
+          </div>
+          <div class="kong">暂无系统消息</div>
+          <p class="load-more"></p>
+      </div>
+  </div>
+  <script id="temID" type="text/template">
+    <%for(var i=0;i<list.length;i++){%>
+        <li data-id="<%=list[i].id%>" data-remove="<%=list[i].params%>" data-flag='<%=list[i].readflag%>'>
+          <div>
+            <span><%=list[i].title%></span>
+            <span class="detail"><%=list[i].content%></span>
+          </div>
+          <div class="times">
+             <%=list[i].opat%>
+          </div>
+          <i class="delet">刪除</i>
+       </li>
+    <%}%>
+  </script>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+apiready=function(){
+  app.ready()
+    var datas
+    var awaitajax=app.ajaxWithLoadMorePush({
+       url:'message/getMessageList',
+       type:'GET',
+       data:{
+         'memberId': app.memberId,
+         'token':app.token,
+         'messageType':1
+       },
+       success:function(data){
+         datas=data.data.data
+         console.log(JSON.stringify(data))
+         for(var i=0;i<datas.length;i++){
+            var times=app.formatMsgTime((datas[i].opat)*1000)
+            datas[i].opat=times
+         }
+         if(awaitajax.status === 'NOMORE') return;
+         if(awaitajax.status === 'REFRESH') $('.uls').html('') // 刷新 清空数据
+         var info={
+           list:datas
+         }
+         var text = template('temID',info)
+         $(".uls").append(text)
+         api.refreshHeaderLoadDone()
+         var items=$('.uls li')
+         if(items.length>9){
+           $('.load-more').show()
+         }
+         if(items.length<1){
+            $('.kong').show()
+         }else{
+           $('.kong').hide()
+         }
+         for(var i=0;i<items.length;i++){
+           if($(items[i]).attr('data-flag')==1){
+              $(items[i]).addClass('oks')
+           }
+           //deletes
+           app.touchs()
+           $(items[i]).find('.delet').on('tap',function(event){
+              var ids=$(this).parents('li').attr('data-id')
+              $(this).parents('li').remove()
+                app.ajax({
+                   url:'message/delMessageById',
+                   type:'post',
+                   data:{
+                     'memberId': $api.getStorage('memberId'),
+                     'token':$api.getStorage('token'),
+                     'id':ids
+                   },
+                   success:function(data){
+                      //  app.toast(data.msg)
+                   }
+                })
+                event.stopPropagation();
+                api.sendEvent({
+                    name: 'removes',
+                    extra: {
+                        key1: 'value1',
+                        key2: 'value2'
+                    }
+                });
+           })
+           //details
+           $(items[i]).on('tap',function(event){
+              var ids=$(this).attr('data-remove')
+              var msgid=$(this).attr('data-id')
+              $(this).css('color','#A0A0A0')
+              // $(this).find('.detail').css('color','#A0A0A0')
+              api.openWin({
+                  name: 'details',
+                  url: './sysMsgDetail.html',
+                  pageParam: {
+                      ids:ids,
+                      msgid:msgid
+                  },
+                  animation: {
+                    type: 'movein',
+                    duration: 200
+                  }
+              });
+            event.stopPropagation();
+           })
+         }
+       }
+    })
+    api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+
+        }, function(ret, err) {
+            awaitajax.init()()
+        })
+    api.addEventListener({
+        name: 'scrolltobottom'
+    }, function(ret, err) {
+        app.throttle(awaitajax)
+    })
+    awaitajax.init()()
+}
+</script>
+
+</html>

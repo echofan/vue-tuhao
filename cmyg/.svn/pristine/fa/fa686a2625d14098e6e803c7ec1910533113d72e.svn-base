@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>系统设置</title>
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+		<style>
+			body {overflow-y: scroll;}
+			.clear{clear: both;}
+			.signOut {margin-top: 20px;text-align: center;}
+			.signOut button {width: 80%;height: 40px;font-size: .6rem;}
+			.mui-table-view li {font-size: .6rem;}
+			.logo {text-align: center;margin: 10px 0;}
+			.mui-table-view-cell:after {left: 0px !important;}
+			#footer {
+				width: 100%;
+				margin-top: 40px;
+				position: relative;
+				bottom: 0;
+				/*z-index:2;*/
+			}
+
+			.mui-scroll-wrapper{
+				position: static;
+			}
+			#footer p {width: 100%;text-align: center;font-size: .5rem;}
+		</style>
+	</head>
+
+	<body>
+	<div class="box">
+		<div class="mui-inner-wrap">
+			<header id="header" class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">系统设置</h1>
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<div class="clear"></div>
+			</header>
+			<div class="clear"></div>
+			<div class="mui-content mui-scroll-wrapper">
+				<div class="logo">
+					<img src="../../image/7878891UI.png" alt="">
+				</div>
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" id="versionUpdata">版本更新
+						<span class="mui-badge mui-badge-danger">new</span>
+					</li>
+					<li class="mui-table-view-cell" id="clearCache">清除缓存
+						<span style="float:right;" class="cacheClear"></span>
+					</li>
+					<li class="mui-table-view-cell" id="aboutUsBtn">关于我们</li>
+					<li class="mui-table-view-cell" id="msgs">意见建议</li>
+				</ul>
+				<div class="signOut">
+					<button type="button" class="mui-btn mui-btn-danger" id="signOut-btn" name="button">退出登录</button>
+				</div>
+				<div id="footer">
+					<p>
+						<a href="" class="xy">《创盟易购软件许可及服务协议》</a>和
+						<a href="" class="zc">《创盟易购隐私政策》</a>
+					</p>
+					<p>创盟易购公司&nbsp;&nbsp;版权所有</p>
+					<p>Copyright &copy; 2015-2017 Cmyg.</p>
+					<p>All Rights Reserved</p>
+				</div>
+			</div>
+
+		</div>
+		<div class="clear"></div>
+	</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/mui.min.js"></script>
+	<script type="text/javascript" src="../../script/zepto.min.js"></script>
+	<script type="text/javascript" src="../../script/common.js"></script>
+	<script type="text/javascript">
+
+		apiready = function() {
+			// $(".xy").on("tap",function(){
+			// 	api.confirm({
+			// 	    title: '协议',
+			// 	    msg: '阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓，阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓',
+			// 	    buttons: ['确定', '取消']
+			// 	}, function(ret, err) {
+			// 	    var index = ret.buttonIndex;
+			// 	})
+			// })
+			if(api.systemType == "ios"){
+				$("#versionUpdata").hide()
+			}
+			//获取登录状态token
+			var gToken = $api.getStorage('token');
+			var gMemberId = $api.getStorage('memberId');
+			//获取缓存大小
+			function cache() {
+				api.getCacheSize(function(ret) {
+					var size = ret.size / 1024 / 1024;
+					size = size.toFixed(2)
+					$(".cacheClear").html(size + 'MB');
+				});
+			}
+			cache();
+
+			$("#aboutUsBtn").on("tap",function() {
+				api.openWin({
+					name: 'aboutUs',
+					url: './aboutUs.html',
+					pageParam: {
+						name: 'test'
+					}
+				});
+
+			});
+
+			//清除缓存
+			$("#clearCache").on("tap",function() {
+				api.clearCache(function() {
+					api.toast({
+						msg: '清除完成',
+						duration: 2000,
+    					location: 'middle'
+					});
+				});
+				cache();
+			})
+
+			$("#signOut-btn").on("tap",function() {
+				app.ready()
+				app.ajax({
+					url: 'member/layout',
+					type: 'POST',
+					data: {
+						token: gToken,
+						memberId: gMemberId
+					},
+					success: function(ret) {
+						$api.clearStorage('token')
+						$api.clearStorage('memberId')
+						api.openWin({
+							name: 'login',
+							url: '../login-frames/login.html',
+							pageParam:{
+								 quit:1,
+								 tuichu:1
+							},
+							animation: {
+								type: 'movein',
+								duration: 200
+							}
+						});
+						api.closeWin()
+					},
+					error: function(err) {
+						alert("错误！")
+					}
+				})
+			});
+			//检测更新
+			$("#versionUpdata").on("tap",function(){
+
+				var appVersion = api.appVersion;
+				// alert(appVersion)
+
+				var mam = api.require('mam');
+            	mam.checkUpdate(function(ret, err) {
+                if (ret) {
+                    var result = ret.result;
+                    if (result.update == true && result.closed == false) {
+                        var str = '新版本型号:' + result.version + ';   更新提示:' + result.updateTip + ';   发布时间:' + result.time;
+                        api.confirm({
+                            title : '有新的版本,是否下载并安装 ',
+                            msg : str,
+                            buttons : ['确定', '取消']
+                        }, function(ret, err) {
+                            if (ret.buttonIndex == 1) {
+                                if (api.systemType == "android") {
+                                    api.download({
+                                        url : result.source,
+                                        report : true
+                                    }, function(ret, err) {
+                                        if (ret && 0 == ret.state) {/* 下载进度 */
+                                            api.toast({
+                                                msg : "正在下载应用" + ret.percent + "%",
+                                                duration : 2000
+                                            });
+                                        }
+                                        if (ret && 1 == ret.state) {/* 下载完成 */
+                                            var savePath = ret.savePath;
+                                            api.installApp({
+                                                appUri : savePath
+                                            });
+                                        }
+                                    });
+                                }
+                                // if (api.systemType == "ios") {
+								// 	api.installApp({
+								// 		appUri : 'itms-services://?action=download-manifest&url=https://downloadpkg.apicloud.com:443/zip/80/9d/809dfb3c96f7b49fd2e6baf1962f28e8.plist'
+								// 	});
+                                // }
+                            }
+                        });
+                    }else{
+						api.alert({
+                            msg : "暂无更新"
+                        });
+					}
+                } else {
+                    // api.alert({
+                    //     msg : err.msg
+                    // });
+                }
+            });
+			});
+}
+	</script>
+
+</html>

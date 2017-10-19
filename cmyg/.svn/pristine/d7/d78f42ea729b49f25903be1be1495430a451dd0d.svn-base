@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>消息</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+       .mui-scroll-wrapper{position:relative!important;}
+       .boxs ul li{border-bottom:1px solid #f0f0f0;height: 70px;font-size:14px;-webkit-transition: all 0.1s linear;transition: all 0.1s linear;overflow:hidden;width: 120%;color:#B2B2B2;}
+       .boxs ul li div:nth-child(1){float:left;width: 11%;}
+       .boxs li .delet {float: right;width: 14%;text-align: center;background: #E2421B;color: #fff;display:block;height: 100%;line-height: 55px;z-index:100;font-size:15px;text-align: center;}
+       .boxs ul li .class1 i{background: url(../../image/massage/icon5.png) no-repeat;width: 30px;height: 30px;background-size: 30px;margin:0 auto;margin-top:19px;margin-left:20px;background-color: #B2B2B2;border-radius: 50%;}
+       .boxs ul li .class2 i{background: url(../../image/massage/icon6.png) no-repeat;width: 30px;height: 30px;background-size: 30px;margin:0 auto;margin-top:19px;margin-left:20px;background-color: #B2B2B2;border-radius: 50%;}
+       .boxs ul li .class3 i{background: url(../../image/massage/icon1.png) no-repeat;width: 30px;height: 30px;background-size: 30px;margin:0 auto;margin-top:19px;margin-left:20px;background-color: #B2B2B2;border-radius: 50%;}
+       .boxs ul li .class4 i{background: url(../../image/massage/icon4.png) no-repeat;width: 30px;height: 30px;background-size: 30px;margin:0 auto;margin-top:19px;margin-left:20px;background-color: #B2B2B2;border-radius: 50%;}
+       .boxs ul li .class5 i{background: url(../../image/massage/icon3.png) no-repeat;width: 30px;height: 30px;background-size: 30px;margin:0 auto;margin-top:19px;margin-left:20px;background-color: #B2B2B2;border-radius: 50%;}
+       .boxs ul li .class6 i{background: url(../../image/massage/icon2.png) no-repeat;width: 30px;height: 30px;background-size: 30px;margin:0 auto;margin-top:19px;margin-left:20px;background-color: #B2B2B2;border-radius: 50%;}
+       .boxs ul li div:nth-child(2){float: left;padding:0 0 0 10px;width: 56%;}
+       .boxs ul li div:nth-child(2) span:nth-child(2){display:block;}
+       .boxs ul li div:nth-child(2) span:nth-child(1){margin-top:14px;position:relative;}
+       .boxs ul li div:nth-child(2) span:nth-child(1) i{border-radius: 50%;background-color: red;color: #fff;text-align: center;font-size: 12px;width: 15px;height: 15px;font-size: 12px;
+                    position: absolute;right: -14px;top: -4px;}
+       .boxs ul li div:nth-child(2) span:nth-child(2){overflow: hidden;white-space: nowrap;text-overflow:ellipsis;}
+       .times{float:left;width: 17%;line-height:55px;}
+       .sps{color:#474747;font-size:15px;}
+       .kong{background: url(../../image/shop-empty.png) 50% 50% no-repeat;top: 40%;width: 100%;margin-top:100px;text-align: center;height: 64px;line-height: 140px;display:none;
+           transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #bfbfbf;}
+       .swipeleft {
+               transform: translateX(-15%);
+               -webkit-transform: translateX(-15%);
+           }
+    </style>
+</head>
+<body>
+  <div id="list_address">
+      <div class="mui-inner-wrap">
+          <!-- 主页面标题 -->
+          <header id="header" class="mui-bar mui-bar-nav">
+              <h1 class="mui-title">消息</h1>
+              <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+          </header>
+          <div class="mui-content mui-scroll-wrapper">
+            <div class="boxs">
+              <ul class="uls">
+
+              </ul>
+              <div class="kong">暂无推送消息</div>
+              <!-- <p class="load-more"></p> -->
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+<script id="temID" type="text/template">
+      <%for(var i=0;i<list.length;i++){%>
+      <li class="system" data-id="<%=list[i].id%>" data-memberid="<%=list[i].memberid%>" data-type="<%=list[i].messagetype%>">
+         <div class="class<%=list[i].messagetype%>"><i></i></div>
+         <div>
+           <span class="sps">
+            <%if(list[i].messagetype==1){%>
+            系统消息
+            <%}%>
+            <%if(list[i].messagetype==2){%>
+            注册消息
+            <%}%>
+            <%if(list[i].messagetype==3){%>
+            推广消息
+            <%}%>
+            <%if(list[i].messagetype==4){%>
+            推广收益
+            <%}%>
+            <%if(list[i].messagetype==5){%>
+            收益消息
+            <%}%>
+            <%if(list[i].messagetype==6){%>
+            商品分享
+            <%}%>
+            <%if(list[i].count>0&&list[i].count<100){%>
+              <i class="counts"><%=list[i].count%></i>
+            <%}%>
+            <%if(list[i].count>99){%>
+              <i class="counts" style="font-size:10px; text-align:left;line-height:15px;">99+</i>
+            <%}%>
+          </span>
+            <span><%=list[i].title%></span>
+         </div>
+         <div class="times">
+             <%=list[i].opat%>
+         </div>
+         <span class="delet">刪除</span>
+       </li>
+       <%}%>
+</script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    apiready=function(){
+      api.addEventListener({
+          name: 'count'
+      }, function(ret, err){
+          if( ret ){
+              window.location.reload()
+          }else{
+               alert( JSON.stringify( err ) );
+          }
+      });
+      api.addEventListener({
+          name: 'removes'
+      }, function(ret, err){
+          if( ret ){
+              window.location.reload()
+          }else{
+               alert( JSON.stringify( err ) );
+          }
+      });
+
+        app.ready()
+        var datas
+        var allMsg=app.ajaxWithLoadMore({
+           url:'message/getLastMessage',
+           type:'GET',
+           data:{
+             'memberId': $api.getStorage('memberId'),
+             'token':$api.getStorage('token')
+           },
+           success:function(data){
+             console.log(JSON.stringify(data))
+              datas=data.data.data.list
+
+              for(var i=0;i<datas.length;i++){
+                 var times=app.formatMsgTime((datas[i].opat)*1000)
+                 datas[i].opat=times
+              }
+             if(allMsg.status === 'NOMORE') return;
+             if (allMsg.status === 'REFRESH') $('.uls').html('') // 刷新 清空数据
+             var info={
+               list:datas
+             }
+             var text = template('temID',info)
+             $(".uls").append(text)
+             api.refreshHeaderLoadDone()
+             var items=$('.uls li')
+             if(items.length<1){
+                $('.kong').show()
+             }else{
+               $('.kong').hide()
+             }
+             for(var i=0;i<items.length;i++){
+               //删除
+               $(items[i]).find('.delet').on('tap',function(event){
+                 var types=$(this).parents('li').attr('data-type')
+                 $(this).parents('li').remove()
+                 app.ajax({
+                    url:'/message/delMessageByType',
+                    type:'post',
+                    data:{
+                      'memberId': $api.getStorage('memberId'),
+                      'token':$api.getStorage('token'),
+                      'messageType':types
+                    },
+                    success:function(data){
+                        app.toast(data.msg)
+                    }
+                 })
+                 event.stopPropagation();
+                 api.sendEvent({
+                     name: 'count',
+                     extra: {
+                         key1: 'value1',
+                         key2: 'value2'
+                     }
+                 });
+               })
+               $(items[i]).on('tap',function(event){
+                 event.stopPropagation();
+                 event.preventDefault();
+                //  api.sendEvent({
+                //      name: 'count',
+                //      extra: {
+                //          key1: 'value1',
+                //          key2: 'value2'
+                //      }
+                //  });
+                 var types=$(this).attr('data-type')
+                 var typeIndex=['','systemMsg','registerMsg','tgMsg','tgEarnings','earningsMsg','shares']
+                 index=typeIndex[types]
+                 api.openWin({
+                   name: index,
+                   url: './'+index+'.html',
+                   pageParam: {
+                     name: 'test'
+                   },
+                   animation: {
+                     type: 'movein',
+                     duration: 200
+                   }
+                 });
+               })
+             }
+             app.touchs()
+           }
+        })
+        // 下拉刷新
+        api.setRefreshHeaderInfo({
+                bgColor: '#fff',
+                textColor: '#333',
+                textDown: '下拉刷新...',
+                textUp: '松开刷新...'
+
+            }, function(ret, err) {
+                //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+                allMsg.init()()
+                // window.location.reload()
+            })
+        // 底部加载更多
+        api.addEventListener({
+            name: 'scrolltobottom'
+        }, function(ret, err) {
+        })
+        allMsg.init()()
+    }
+</script>
+
+</html>

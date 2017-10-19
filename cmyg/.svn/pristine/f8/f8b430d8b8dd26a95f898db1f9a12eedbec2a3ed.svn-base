@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, initial-scale=1.0, width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>我的积分</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+       body{position:relative;width: 100%;}
+       .mys{margin-top:30px;position:absolute;width: 100%;}
+       ul li{height: 50px;line-height: 50px;background-color: #fff;border-top:1px solid #f0f0f2;border-bottom:1px solid #f0f0f2;margin-bottom:25px;padding:0 15px 0 25px;}
+       ul li span:nth-child(1){float:left;}
+       ul li span:nth-child(2){float:right;background:url(../../image/Image1.png) no-repeat;width: 15px;height: 25px;background-size:100%;display:inline-block;margin-top:15px;}
+       ul li .num{margin-left:50px;}
+       .task{width: 50%;background-color: #E6254C;height: 50px;border-radius: 8px;color:#fff;line-height: 50px;text-align: center;margin:0 auto;margin-top:150px;position:relative;}
+       .task i{background:url(../../image/87785445.png) no-repeat; width: 25px;height: 25px;vertical-align: middle;background-size: 25px;display:inline-block;margin-right:3px;}
+       .await i{background:url(../../image/3452342.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+       .being i{background:url(../../image/2313I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+       .complete i{background:url(../../image/13231.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+        .moneyIcon i{background:url(../../image/5874I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+        .icon-donate {position: relative;top:5px;}
+  </style>
+</head>
+<body>
+   <div class="mys" id="mys">
+       <ul>
+         <li class="await">
+             <span><i></i>购物分</span>
+             <span></span>
+             <span class="num"></span>
+         </li>
+         <li class="being">
+             <span><i></i>广告分</span>
+             <span></span>
+             <span class="num"></span>
+         </li>
+         <li class="complete">
+             <span><i></i>创业分</span>
+             <span></span>
+             <span class="num"></span>
+         </li>
+         <li class="moneyIcon">
+             <span><i></i>消费分</span>
+             <span></span>
+             <span class="num"></span>
+         </li>
+         <li class="jf-give">
+             <span><i class="iconfont icon-donate"></i>积分赠送</span>
+             <span></span>
+             <span class="num"></span>
+         </li>
+       </ul>
+       <!-- <div class="task">
+           兑换购物分
+       </div> -->
+   </div>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+    apiready=function(){
+      api.sendEvent({
+          name: 'integral',
+          extra: {
+              key1: 'value1',
+              key2: 'value2'
+          }
+      });
+      api.execScript({
+          frameName: 'rob-frame',
+          script: 'stops();'
+      });
+      app.ajax({
+        url:'member/getMyInfo',
+        data:{
+          memberId:$api.getStorage('memberId'),
+          token: $api.getStorage('token')
+        },
+        success:function(data){
+           var datas=data.data.memberAccout
+           console.log(JSON.stringify(datas))
+           $('.await').find('.num').text(datas.shopScore)
+           $('.being').find('.num').text(datas.adSscore)
+           $('.complete').find('.num').text(datas.startupSscore)
+           $('.moneyIcon').find('.num').text(datas.amount)
+           api.refreshHeaderLoadDone()
+        }
+      })
+
+      // 下拉刷新
+      api.setRefreshHeaderInfo({
+              bgColor: '#fff',
+              textColor: '#333',
+              textDown: '下拉刷新...',
+              textUp: '松开刷新...'
+
+          }, function(ret, err) {
+              //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+              window.location.reload()
+          })
+    }
+    $(".await").on("tap",function(){
+      api.openWin({
+          name: 'integral',
+          url: './integral-frame/shopIntegral.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    });
+    $(".being").on("tap",function(){
+      api.openWin({
+          name: 'advertisement',
+          url: './integral-frame/advertisement.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    })
+    $(".jf-give").on("tap",function(){
+      api.openWin({
+          name: 'jf-give',
+          url: '../jf-give/index.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    })
+    $(".complete").on("tap",function(){
+      api.openWin({
+          name: 'chuangye',
+          url: './integral-frame/chuangye.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    })
+    $(".moneyIcon").on("tap",function(){
+      api.openWin({
+          name: 'chuangye',
+          url: './integral-frame/xiaofen.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    })
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>支付页面</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    /*支付弹框*/
+    .play_type_xianji{background:#f0f0f2;position:relative;width:100%;height:100%;left:0;top:0;z-index:10;display:none;}
+    .play_type_xianji .head{height: 35px;background-color: #ccc;color:#000;font-size:18px;text-align: center;line-height: 35px;}
+    .play_type_xianji .head span{position:absolute;top:0px;left:8px;padding:5px;}
+    .play_type_xianji .head i{background:url(../../image/zuo.png) no-repeat;display:inline-block;height: 20px;width: 20px;background-size: 20px;}
+    .play_type_xianji .nav{font-size:15px;color:red;padding:20px 20px 10px 25px;}
+    .play_type_xianji ul{border-top:1px solid #ccc;background-color: #fff;}
+    .play_type_xianji ul li{height: 50px;line-height:50px;width: 100%;box-sizing: border-box;padding:0 25px;color:#000;font-size:15px;border-bottom:1px solid #ccc;}
+    .play_type_xianji ul li span:nth-child(2){margin-left:30px;}
+    .play_type_xianji ul li span i{background: url(../../image/u200.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;vertical-align: sub;}
+    .play_type_xianji .play_type{margin-top:20px;}
+    .play_type_xianji .play_type .item{height: 50px;line-height:50px;padding:0 35px 0 30px;background-color: #fff;border-top:1px solid #ccc;border-bottom: 1px solid #ccc;margin-bottom:10px;}
+    .play_type_xianji .play_type .item .no_img{background: url(../../image/no.png) no-repeat;width: 20px;height: 20px;background-size:20px;display:inline-block;float:right;margin-top:15px;}
+    .play_type_xianji .play_type .item .yes_img{background: url(../../image/yes.png) no-repeat;width: 20px;height: 20px;background-size:20px;display:inline-block;float:right;margin-top:15px;}
+    .play_type_xianji .play_foot{width: 70%;background-color: red;color:#fff;height: 50px;line-height: 50px;text-align: center;font-size:18px;border-radius:10px;margin:50px auto;}
+    .wx i{background:url(../../image/zfb.png) no-repeat;width: 115px;height: 35px;background-size:100%;display:inline-block;margin-top:11px;}
+    .zfb i{background:url(../../image/wx.png) no-repeat;width: 92px;height: 35px;background-size:100%;display:inline-block;margin-top:7px;}
+  /*weixin支付*/
+    .play_type_jifen{background:#f0f0f2;position:relative;width:100%;height:100%;left:0;top:0;z-index:10;display: none;}
+    .play_type_jifen .head{height: 35px;background-color: #ccc;color:#000;font-size:18px;text-align: center;line-height: 35px;}
+    .play_type_jifen .head span{position:absolute;top:0px;left:8px;padding:5px;}
+    .play_type_jifen .head i{background:url(../../image/zuo.png) no-repeat;display:inline-block;height: 20px;width: 20px;background-size: 20px;}
+    .play_type_jifen .nav{font-size:15px;color:red;padding:20px 20px 10px 25px;}
+    .play_type_jifen .cont{height: 50px;padding-left:25px;background-color: #fff;border-top:1px solid #ccc;border-bottom: 1px solid #ccc;line-height: 50px;font-size:15px;}
+    .play_type_jifen .cont span:nth-child(2){margin-left:20px;color:#75BCC6;}
+    .play_type_jifen .cont span:nth-child(2) span:nth-child(1) i{margin-right:5px;background: url(../../image/u200.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;vertical-align: sub;}
+    .play_type_jifen .cont span:nth-child(2) span:nth-child(2){margin-left:3px;}
+    .play_type_jifen ul{margin-top:20px;border-top:1px solid #ccc;background-color: #fff;}
+    .play_type_jifen ul li{height: 50px;line-height:50px;width: 100%;box-sizing: border-box;padding:0 25px;color:#000;font-size:15px;border-bottom:1px solid #ccc;}
+    .play_type_jifen ul li span:nth-child(2){margin-left:38px;}
+    .play_type_jifen ul li span:nth-child(2) span:nth-child(1) i{margin-right:5px;background: url(../../image/u200.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;vertical-align: sub;}
+    .play_type_jifen ul li span:nth-child(2) span:nth-child(2){margin-left:3px;}
+    .play_type_jifen .play_foot_surplus{width: 70%;background-color: red;color:#fff;height: 50px;line-height: 50px;text-align: center;font-size:18px;border-radius:10px;margin:50px auto;}
+    /*------输入密码-------*/
+    .ftc_wzsf { display:none; width: 100%; height: 100%; position: fixed; z-index: 999; top: 0; left: 0; }
+    .ftc_wzsf .hbbj { width: 100%; height: 100%; position: absolute; z-index: 8; background: #000; opacity: 0.4; top: 0; left: 0; }
+    .ftc_wzsf .srzfmm_box { position: absolute; z-index: 10; background: #f8f8f8; width: 88%; left: 50%; margin-left: -44%; top: 25px; }
+    .qsrzfmm_bt { font-size: 16px; border-bottom: 1px solid #c9daca; overflow: hidden; }
+    .qsrzfmm_bt a { display: block; width: 10%; padding: 10px 0; text-align: center; }
+    .qsrzfmm_bt img.tx { width: 10%;vertical-align: middle;}
+    .qsrzfmm_bt span { padding: 15px 5px; }
+    .zfmmxx_shop { text-align: center; font-size: 12px; padding: 10px 0; overflow: hidden; }
+    .zfmmxx_shop .mz { font-size: 14px; float: left; width: 100%; }
+    .zfmmxx_shop .wxzf_price { font-size: 24px; float: left; width: 100%;margin-top:3px; }
+    .blank_yh { width: 89%; margin: 0 auto; line-height: 40px; display: block; color: #636363; font-size: 16px; padding: 5px 0; overflow: hidden; border-bottom: 1px solid #e6e6e6; border-top: 1px solid #e6e6e6; }
+    .blank_yh img { height: 40px; }
+    .ml5 { margin-left: 5px; }
+    .mm_box { width: 89%; margin: 10px auto; height: 40px; overflow: hidden; border: 1px solid #bebebe; }
+    .mm_box li { border-right: 1px solid #efefef; height: 40px; float: left; width: 16.3%; background: #FFF; }
+    .mm_box li.mmdd{ background:#FFF url(../../image/dd_03.jpg) center no-repeat ; background-size:25%;}
+    .mm_box li:last-child { border-right: none; }
+    .xiaq_tb { padding: 5px 0; text-align: center; border-top: 1px solid #dadada; }
+    .numb_box { position: absolute; z-index: 10; background: #f5f5f5; width: 100%; bottom: 0px; }
+    .nub_ggg { border: 1px solid #dadada; overflow: hidden; border-bottom: none; }
+    .nub_ggg li { width: 33.3333%; border-bottom: 1px solid #dadada; float: left; text-align: center; font-size: 22px; }
+    .nub_ggg li a { display: block; color: #000; height: 50px; line-height: 50px; overflow: hidden; }
+    .nub_ggg li a:active  { background: #e0e0e0;}
+    .nub_ggg li a.zj_x { border-left: 1px solid #dadada; border-right: 1px solid #dadada; }
+    .nub_ggg li span { display: block; color: #e0e0e0; background: #e0e0e0; height: 50px; line-height: 50px; overflow: hidden; }
+    .nub_ggg li span.del img { width: 30%; }
+    .fh_but{ position:absolute; right:0px; top:12px; font-size:14px; color:#20d81f;}
+    .zfcg_box{ background:#f2f2f2;  height: 56px; line-height:56px;   font-size:20px; color:#1ea300; }
+    .zfcg_box img{ width:10%;}
+    .cgzf_info{ background:#FFF; border-top:1px solid #dfdfdd; }
+    .spxx_shop{ background:#FFF; margin-left:4.35%; border-top:1px solid #dfdfdd; padding:10px 0; }
+    .spxx_shop td{ color:#7b7b7b; font-size:14px; padding:10px 0;}
+    .wzxfcgde_tb{ position:fixed; width:100%; z-index:999; bottom:20px; text-align:center;}
+    .wzxfcgde_tb img{ width:20.6%;}
+    .mlr_pm{margin-right:4.35%;}
+    .player{width: 100%;position:fixed;width: 100%;height: 100%;background: rgba(0,0,0,0.3);top:0;left:0;display:none;z-index:1000;}
+    .player .box{width: 200px;height: 100px;background-color: #fff;position:fixed;top:50%;margin-top:-50px;left:50%;margin-left:-100px;border-radius:8px;}
+    .player .box div:nth-child(1){height: 50px;line-height: 50px;border-bottom:1px solid #ccc;text-align: center;}
+    .player .box div:nth-child(2){height: 40px;width: 100px;margin:0 auto;text-align: center;background-color: red;color:#fff;margin-top:5px;line-height: 40px;border-radius: 5px;}
+    </style>
+</head>
+
+<body>
+  <div class="play_type_xianji">
+      <div class="head">
+          <span><i></i></span>
+          订单支付
+      </div>
+      <div class="nav">现金订单</div>
+      <ul>
+        <li>
+            <span>订单编号</span>
+            <span class="bianh"></span>
+        </li>
+        <li>
+            <span>订单金额</span>
+            <span class="price_xj"></span>
+        </li>
+        <li>
+            <span><i></i>购物分</span>
+            <span class="shopfen"></span>
+        </li>
+      </ul>
+      <div class="play_type">
+           <div class="item wx">
+               <i></i>
+               <span class="no_img yes_img"></span>
+           </div>
+           <div class="item zfb">
+             <i></i>
+             <span class="no_img"></span>
+           </div>
+      </div>
+      <div class="play_foot">立即支付</div>
+  </div>
+  <div class="play_type_jifen">
+      <div class="head">
+          <span><i></i></span>
+          订单支付
+      </div>
+      <div class="nav"><!--购物分订单--></div>
+      <div class="cont">
+         <span class="cont_ky"><!--可用购物积分--></span>
+         <span class="cont_money">
+             <!-- <span><i></i>购物分</span>
+             <span>1000</span> -->
+         </span>
+      </div>
+      <ul>
+        <li>
+           <span>订单编号</span>
+           <span class="order"></span>
+        </li>
+        <li class="nums">
+           <span class="nums_type">订单金额</span>
+           <span class="nums_count">
+               <!-- <span><i></i>购物分</span>
+               <span>1000</span> -->
+           </span>
+        </li>
+      </ul>
+      <div class="play_foot_surplus">立即支付</div>
+  </div>
+  <div class="ftc_wzsf">
+      <div class="srzfmm_box">
+          <div class="qsrzfmm_bt clear_wl"> <img src="../../image/xx_03.jpg" class="tx close fl"> <span class="fl">请输入支付密码</span> </div>
+          <div class="zfmmxx_shop">
+              <div class="mz">共计</div>
+              <div class="wxzf_price"></div>
+          </div>
+          <a href="javascript:void(0);" class="blank_yh"><span class="fl ml5 shengyu"></span><span class="shoping_rules"></span></a>
+          <ul class="mm_box">
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+              <li></li>
+          </ul>
+      </div>
+      <div class="numb_box">
+          <div class="xiaq_tb"> <img src="../../image/jftc_14.jpg" height="10"> </div>
+          <ul class="nub_ggg">
+              <li class="li_sum"><a href="javascript:void(0);">1</a></li>
+              <li class="li_sum"><a href="javascript:void(0);" class="zj_x">2</a></li>
+              <li class="li_sum"><a href="javascript:void(0);">3</a></li>
+              <li class="li_sum"><a href="javascript:void(0);">4</a></li>
+              <li class="li_sum"><a href="javascript:void(0);" class="zj_x">5</a></li>
+              <li class="li_sum"><a href="javascript:void(0);">6</a></li>
+              <li class="li_sum"><a href="javascript:void(0);">7</a></li>
+              <li class="li_sum"><a href="javascript:void(0);" class="zj_x">8</a></li>
+              <li class="li_sum"><a href="javascript:void(0);">9</a></li>
+              <li><span></span></li>
+              <li class="li_sum"><a href="javascript:void(0);" class="zj_x">0</a></li>
+              <li><span class="del"> <img src="../../image/jftc_18.jpg"   ></span></li>
+          </ul>
+      </div>
+      <div class="hbbj"></div>
+      <p class="ceshi" style="display:none"></p>
+  </div>
+  <div class="player">
+       <div class="box" id="player_box">
+            <div>完善资料，设置密码</div>
+            <div class="con_back">马上前去</div>
+       </div>
+  </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/md5.min.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+        api.addEventListener({
+            name: 'ziliao'
+        }, function(ret, err){
+            if( ret ){
+                window.location.reload()
+                 alert( JSON.stringify( ret ) );
+            }else{
+                 alert( JSON.stringify( err ) );
+            }
+        });
+
+        var params=api.pageParam.play_type
+        var play_type=api.pageParam.play_type
+        var play_bh=api.pageParam.play_bh
+        var play_price=api.pageParam.play_price
+        var play_getshop=api.pageParam.play_getshop
+        var play_shoping=api.pageParam.play_shoping
+        var play_id=api.pageParam.play_id
+        var play_time=api.pageParam.play_time
+        var play_orderNum=api.pageParam.play_orderNum
+        app.ajax({
+           url:'member/getMyInfo',
+           data:{
+             token:app.token,
+             memberId:app.memberId
+           },
+           success:function(data){
+              var surplus_shop=data.data.memberAccout.shopScore
+              var surplus_price=data.data.memberAccout.amount
+        switch (play_type) {
+          case '1':
+              $('.play_type_xianji').show()
+              $('.bianh').html(play_bh)
+              $('.price_xj').html((play_price)/100)
+              $('.shopfen').html((play_getshop))
+            break;
+          case '2':
+              $('.play_type_jifen').show()
+              $('.nav').html('消费分订单')
+              $('.cont_ky').html('可用消费分')
+              $('.order').html(play_bh)
+              $('.nums_type').html('订单金额')
+              $('.nums_count').html((play_price)/100)
+              //需要调用余额的接口
+              $('.cont_money').html(surplus_price)
+
+              $('.wxzf_price').html((play_price)/100+'<span style="font-size:25px;">消费分</span>')
+              $('.shengyu').text('可用消费分')
+              $('.shoping_rules').text(surplus_price)
+            break;
+          case '3':
+              $('.play_type_jifen').show()
+              $('.nav').html('购物分订单')
+              $('.cont_ky').html('可用购物分')
+              $('.order').html(play_bh)
+              $('.nums_type').html('消费金额')
+              $('.nums_count').html('<span><i></i>购物分</span><span class="nums_title"></span>')
+              $('.wxzf_price').html('<span><i></i>购物分</span><span class="nums_title"></span>') //弹框支付
+
+              $('.nums_count .nums_title').text(play_shoping)
+              $('.wxzf_price .nums_title').text(play_shoping)
+              //需要调用可用购物分接口
+              $('.cont_money').html('<span><i></i>购物分</span><span class="cont_money_title"></span>')
+              $('.cont_money_title').text(surplus_shop)
+              $('.shengyu').text('可用购物分')
+              $('.shoping_rules').text(surplus_shop)
+          default:
+        }
+      }
+   })
+    //点击选择支付（现金支付）
+       var items=$('.play_type .item')
+       for(var i=0;i<items.length;i++){
+          // var $this=$(this)
+          $(items[i]).on('tap',function(){
+             $(this).find('.no_img').addClass('yes_img').parents('.item').siblings('.item').find('.no_img').removeClass('yes_img')
+          })
+       }
+       $('.play_foot').on('tap',function(){
+         var orderGoodsId=$('.bianh').html()
+         //微信支付
+          if($('.play_type .wx').find('.no_img').hasClass('yes_img')){
+            app.ajax({
+              url:'ordergoods/wxpay',
+              data:{
+                token:$api.getStorage('token'),
+                memberId:$api.getStorage('memberId'),
+                orderGoodsId:play_id
+              },
+              success:function(data){
+                console.log(JSON.stringify(data.data))
+                if(data.code==0){
+                  var wxPay = api.require('wxPay');
+                   wxPay.payOrder({
+                     apiKey:data.data.appId,
+                     orderId: data.data.prepayId,
+                     mchId: '1486180922',
+                     nonceStr:data.data.nonceStr,
+                     timeStamp:data.data.timeStamp,
+                     package: 'Sign=WXPay',
+                     sign: data.data.paySign
+                   }, function(ret, err) {
+
+                     if (ret.status) {
+                       //支付成功
+                       alert('支付成功')
+                       api.sendEvent({
+                           name: 'kobe',
+                           extra: {
+                               key1: 'value1',
+                               key2: 'value2'
+                           }
+                       });
+                       api.closeToWin({
+                         name: 'root'
+                       });
+                     } else {
+                      if(err.code==-2){
+                        alert('您已取消支付')
+                        api.sendEvent({
+                            name: 'back',
+                            extra: {
+                                key1: 'value1',
+                                key2: 'value2'
+                            }
+                        });
+                        api.closeToWin({
+                          name: 'root'
+                        });
+                      }else if(err.code==-1){
+                        alert('未知错误')
+                        api.sendEvent({
+                            name: 'back',
+                            extra: {
+                                key1: 'value1',
+                                key2: 'value2'
+                            }
+                        });
+                        api.closeToWin({
+                          name: 'root'
+                        });
+                      }else if(err.code==1){
+                        alert('apikey错误')
+                        api.sendEvent({
+                            name: 'back',
+                            extra: {
+                                key1: 'value1',
+                                key2: 'value2'
+                            }
+                        });
+                        api.closeToWin({
+                          name: 'root'
+                        });
+                      }
+                     }
+                   });
+                }
+              }
+            })
+          }
+          //支付宝支付
+          if($('.play_type .zfb').find('.no_img').hasClass('yes_img')){
+            // alert(play_id)
+              app.ajax({
+                 url:'ordergoods/preAlipayAction',
+                 data:{
+                   token:$api.getStorage('token'),
+                   memberId:$api.getStorage('memberId'),
+                   orderGoodsId:play_id
+                 },
+                 success:function(data){
+                   var datas=data.data
+                    console.log(data.data.zfbOrderInfo)
+                    var aliPay = api.require('aliPay');
+                    aliPay.payOrder({
+                      orderInfo: datas.zfbOrderInfo
+                     }, function(ret, err) {
+                         //支付成功
+                         if(ret.code==9000){
+                           alert('支付成功')
+                           api.sendEvent({
+                               name: 'kobe',
+                               extra: {
+                                   key1: 'value1',
+                                   key2: 'value2'
+                               }
+                           });
+                           api.closeToWin({
+                             name: 'root'
+                           });
+                         }else if(ret.code==4000){
+                          alert('系统异常')
+                          api.sendEvent({
+                              name: 'back',
+                              extra: {
+                                  key1: 'value1',
+                                  key2: 'value2'
+                              }
+                          });
+                          api.closeToWin({
+                              name: 'root'
+                          });
+                        }else if(ret.code==4006){
+                           alert('订单支付失败')
+                           api.sendEvent({
+                               name: 'back',
+                               extra: {
+                                   key1: 'value1',
+                                   key2: 'value2'
+                               }
+                           });
+                           api.closeToWin({
+                               name: 'root'
+                           });
+                        }else if(ret.code==6001){
+                           alert('您已取消支付')
+                           api.sendEvent({
+                               name: 'back',
+                               extra: {
+                                   key1: 'value1',
+                                   key2: 'value2'
+                               }
+                           });
+                           api.closeToWin({
+                               name: 'root'
+                           });
+                        }
+                  });
+                 }
+              })
+          }
+       })
+
+
+ //关闭浮动
+ $(".close").on('tap',function(){
+   $(".ftc_wzsf").hide();
+   });
+   //数字显示隐藏
+   $(".xiaq_tb").on('tap',function(){
+      $(".numb_box").hide();
+   });
+   $(".mm_box").on('tap',function(){
+       $(".numb_box").show();
+   });
+   //----
+$(".play_foot_surplus").on('tap',function(){
+  $(".ftc_wzsf").show();
+  var urls;
+  if(play_type==3){
+      urls='ordergoods/shopScorePay'
+  }else if(play_type==2){
+      urls='ordergoods/balancePay'
+  }
+   var nums=$('.li_sum'),k=0,mima=[];
+     for(var i=0;i<nums.length;i++){
+         $(nums[i]).on('tap',function(){
+           k++
+           mima.push($(this).find('a').html())
+          if(k>6){
+            $(nums[i]).attr('disabled',true)
+          }else if(k<6){
+             $(".mm_box li").eq(k-1).addClass("mmdd");
+             }else{
+               $(".mm_box li").eq(k-1).addClass("mmdd");
+               setTimeout(function(){
+                var total=mima
+                     $.ajax({
+                        url:app.server+urls,
+                        type:'POST',
+                        data:{
+                           memberId: $api.getStorage('memberId'),
+                           token:$api.getStorage('token'),
+                           orderGoodsId:play_id,
+                           password:md5(total.join(''))
+                        },
+                        beforeSend:function(){
+                          app.loading()
+                        },
+                        success:function(data){
+                          app.closeLoading()
+                          app.toast(data.msg)
+                          if(data.code==0){
+                             api.openWin({
+                                 name: 'play_detail',
+                                 url: './play_detail.html',
+                                 reload:true,
+                                 rect:{
+                                    x:0,
+                                    y:0,
+                                    w:'auto',
+                                    h:0
+                                 },
+                                 pageParam: {
+                                     types:play_type,
+                                     orderNum:play_orderNum,
+                                     times:play_time,
+                                     price:play_price,
+                                     shoping:play_shoping
+                                 }
+                             });
+                            //  api.closeWin()
+                          }
+                          if(data.code==4){
+                            // app.toast('密码输入错误')
+                              $('.mm_box').find('li').attr('class','')
+                              mima=[]
+                              $('.ftc_wzsf').hide()
+                          }
+                          if(data.code==3){
+                            $('.player').show()
+                            $(".ftc_wzsf").hide();
+                            app.toast(data.msg)
+                            mima=[]
+                          }
+
+                        },
+                        error:function(data){
+                            alert(data)
+                        }
+                     })
+               },500);
+
+            }
+         })
+     }
+     $(".nub_ggg li .del").on('tap',function(){
+       if(k>0){
+         k--
+         $(".mm_box li").eq(k).removeClass("mmdd");
+         k==0;
+         }
+       console.log(k);
+      // $('.mm_box li').removeClass("mmdd")
+        mima=[]
+     });
+
+  });
+   var nums=$('.li_sum')
+        //关闭当前窗口
+        $(".head span").on('tap',function(){
+          api.closeWin();
+        })
+    };
+    $('.player .con_back').on('tap',function(){
+        api.openWin({
+            name: 'info',
+            url: '../me-frames/info.html',
+            pageParam: {
+                name: 'test',
+                task:1
+            }
+        });
+        $(this).parents('.player').hide(300)
+    })
+</script>
+
+</html>

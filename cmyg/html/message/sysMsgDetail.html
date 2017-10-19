@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>系統消息详情</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    body{background-color: #f0f0f2!important;}
+        .mui-scroll-wrapper{position:relative!important;background-color: #f0f0f2!important;}
+        .mui-content{background-color: #f0f0f2;padding-top:70px!important;}
+        .boxs{background-color: #fff;width: 90%;margin:0 auto;padding:10px 15px 25px 15px;}
+        .boxs .head{height: 40px;line-height: 40px;text-align: center;}
+        .boxs .content{border:1px dashed #000;padding:10px;font-size:14px;text-indent: 30px;overflow: hidden;word-wrap:break-word}
+        .times{margin:0 auto;margin-bottom:30px;text-align: center;}
+    </style>
+</head>
+<body>
+  <div id="list_address">
+      <div class="mui-inner-wrap">
+          <!-- 主页面标题 -->
+          <header id="header" class="mui-bar mui-bar-nav">
+              <h1 class="mui-title">消息详情</h1>
+              <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+          </header>
+          <div class="mui-content mui-scroll-wrapper">
+
+          </div>
+      </div>
+  </div>
+  <script id="temID" type="text/template">
+     <div class="times"><%=list.opAt%></div>
+       <div class="boxs">
+           <div class="head"><%=list.title%></div>
+           <div class="content">
+               <%=list.content%>
+           </div>
+       </div>
+   </script>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+apiready=function(){
+  api.sendEvent({
+      name: 'count',
+      extra: {
+          key1: 'value1',
+          key2: 'value2'
+      }
+  });
+  api.refreshHeaderLoadDone()
+  app.ready()
+    var ids=api.pageParam.ids
+    var msgid=api.pageParam.msgid
+    app.ajax({
+       url:'message/getSystemNoticeById',
+       type:'GET',
+       data:{
+         'memberId': $api.getStorage('memberId'),
+         'token':$api.getStorage('token'),
+         'id':ids,
+         'msgId':msgid
+       },
+       success:function(data){
+         var datas=data.data
+         console.log(JSON.stringify(datas))
+         var times=app.times(datas.opAt*1000)
+         datas.opAt=times
+          var info={
+             list:datas
+          }
+          var text = template('temID',info)
+          $('.mui-content').append(text)
+          api.refreshHeaderLoadDone()
+       }
+    })
+    // 下拉刷新
+    api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            // bagListAjax.init()()
+            window.location.reload()
+        })
+
+}
+
+</script>
+
+</html>

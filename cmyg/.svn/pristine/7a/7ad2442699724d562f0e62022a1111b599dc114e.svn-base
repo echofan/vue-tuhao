@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, initial-scale=1.0, width=device-width" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>我的推广</title>
+  <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+  <style>
+       body{position:relative;width: 100%;}
+       /*ul{margin-top:20px;}*/
+       /*.mui-content{background-color: #f0f0f2!important;}*/
+       .mys{margin-top:30px;position:absolute;width: 100%;padding-bottom:100px;}
+       ul li{height: 50px;line-height: 50px;background-color: #fff;border-top:1px solid #f0f0f2;border-bottom:1px solid #f0f0f2;margin-bottom:25px;padding:0 15px 0 25px;}
+       ul li span:nth-child(1){float:left;position:relative;}
+       ul li span:nth-child(2){float:right;background:url(../../image/Image1.png) no-repeat;width: 15px;height: 25px;background-size:100%;display:inline-block;margin-top:15px;}
+       ul li span i{border-radius: 50%;background-color: red;color: #fff;text-align: center;font-size: 13px;width: 15px;height: 15px;font-size: 12px;
+                    position: absolute;right: -14px;top: 17px;display: none;}
+       .task{width: 50%;background-color: #E6254C;height: 50px;border-radius: 8px;color:#fff;line-height: 50px;text-align: center;margin:0 auto;margin-bottom:50px;position:relative;}
+       .task i{background:url(../../image/87785445.png) no-repeat; width: 25px;height: 25px;vertical-align: middle;background-size: 25px;display:inline-block;margin-right:3px;}
+  </style>
+</head>
+<body>
+   <div class="mys" id="mys">
+       <ul>
+         <li class="apply item">
+             <span class="sp">推广申请中<i></i></span>
+             <span></span>
+         </li>
+         <li class="await item">
+             <span class="sp">开始推广<i></i></span>
+             <span></span>
+         </li>
+         <li class="taskZ item">
+             <span class="sp">广告任务中<i></i></span>
+             <span></span>
+         </li>
+         <li class="being item">
+             <span class="sp">计时开始<i></i></span>
+             <span></span>
+         </li>
+         <li class="complete item">
+             <span class="sp">推广完成<i></i></span>
+             <span></span>
+         </li>
+       </ul>
+       <div class="task">
+           <i></i>我的推广任务
+       </div>
+   </div>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script>
+    apiready=function(){
+      api.sendEvent({
+          name: 'myFrame',
+          extra: {
+              key1: 'value1',
+              key2: 'value2'
+          }
+      });
+
+      api.execScript({
+          frameName: 'rob-frame',
+          script: 'stops();'
+      });
+       app.ajax({
+          url:'score/getPromotionNum',
+          data:{
+            memberId:$api.getStorage('memberId'),
+            token: $api.getStorage('token')
+          },
+          success:function(data){
+            api.refreshHeaderLoadDone()
+             console.log(JSON.stringify(data.data))
+             $('.apply .sp i').append(data.data.applyingCount)
+             $('.taskZ .sp i').append(data.data.taskingCount)
+             $('.await .sp i').append(data.data.waitingCount)
+             $('.being .sp i').append(data.data.onGoingCount)
+             $('.complete .sp i').append(data.data.finishCount)
+             var nums=$('.item .sp i')
+             for(var i=0;i<nums.length;i++){
+                if($(nums[i]).html()>0){
+                    $(nums[i]).show()
+                }
+             }
+          }
+       })
+       // 下拉刷新
+       api.setRefreshHeaderInfo({
+               bgColor: '#fff',
+               textColor: '#333',
+               textDown: '下拉刷新...',
+               textUp: '松开刷新...'
+
+           }, function(ret, err) {
+               //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+               window.location.reload()
+           })
+    }
+    $('.await').on('tap',function(){
+      api.openWin({
+          name: 'await',
+          url: './my-frame/await.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+    })
+    $('.being').on('tap',function(){
+      api.openWin({
+          name: 'being',
+          url: './my-frame/being.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+    })
+    $('.complete').on('tap',function(){
+      api.openWin({
+          name: 'complete',
+          url: './my-frame/complete.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+    })
+    $('.apply').on('tap',function(){
+      api.openWin({
+          name: 'apply',
+          url: './my-frame/apply.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+    })
+    $('.taskZ').on('tap',function(){
+      api.openWin({
+          name: 'taskZ',
+          url: './my-frame/taskZ.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+    })
+    $(".task").on('tap',function(){
+      api.openWin({
+          name: 'task',
+          url: '../spread/index-wow.html',
+          pageParam: {
+              name: 'test'
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+
+    })
+  </script>
+</body>
+</html>
