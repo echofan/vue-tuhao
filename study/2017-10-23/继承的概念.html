@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      function Animal(name){
+          this.name=name
+      }
+      Animal.prototype.sayName=function(){
+          return this.name
+      }
+      function Dog(name,barking){
+          Animal.call(this,name)
+          this.barking=barking
+      }
+      Dog.prototype=new Animal()     //让Dog继承Animal
+      Dog.prototype.constructor=Dog
+      Dog.prototype.makeBarking=function(){
+          return this.barking
+      }
+      const dog=new Dog('zimo','汪汪汪')
+      console.log(dog.makeBarking())
+      console.log(dog.sayName())
+    </script>
+</body>
+</html>

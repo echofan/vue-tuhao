@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+         /*
+              previousValue   =>  初始值或上一次回调函数叠加的值
+              currentValue    =>  本次回调(循环将要执行的值
+              index           =>  currentValue的索引
+              initialValue    =>  用来声明回调函数(第一个参数)的previousValue的类型和初始值   
+         */
+          let log=console.log.bind(console)
+          let arr=[1,2,3,4,5,6]
+          arr=arr.reduce((previousValue,currentValue) => {
+                return previousValue+currentValue   
+          },0)   //指定arr的类型为number并且初始值为0，
+          log(arr)
+     </script>
+</body>
+</html>

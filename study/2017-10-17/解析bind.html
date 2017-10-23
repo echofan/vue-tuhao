@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+        Function.prototype.testBind=function(that){
+             var _this=this
+             slice=Array.prototype.slice,
+             args=slice.apply(arguments,[1])
+             //返回函数
+             return function(){
+                //apply绑定作用域，进行参数传递
+                return _this.apply(that,args)  
+             }
+        }
+
+        var test=function(a,b){
+            console.log('作用域绑定'+this.value)
+            console.log('testBind参数传递'+this.value2)
+            console.log('调用参数传递'+b)
+        }
+        var obj={
+            value:'ok'
+        }
+        var fun_new=test.testBind(obj,{value2:'also ok'})
+
+        fun_new('hello world')
+     </script>
+</body>
+</html>

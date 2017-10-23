@@ -7,6 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-      var reg=/([0-9]/g)/
+     <script>
+           var arr=[[0, 1], [2, 3], [4, 5],[0, 1], [2, 3], [4, 5]]
+           var persons=arr.reduce((a,b)=>{
+               return a.concat(b) 
+           },[])
+           console.log(persons)
+     </script>
 </body>
 </html>

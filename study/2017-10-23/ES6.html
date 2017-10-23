@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES6</title>
+</head>
+<body>
+    <script>
+        /*
+        //var 没有块级作用域
+        if(true){
+            var a=10 
+            let a=10 
+            const a=10 
+        }
+        console.log(a)   //如果是let跟const 定义a的话 就形成了块级作用域  外部访问不了
+        */
+
+
+
+        //变量提升
+        var a=10;
+        function hello(){
+            console.log(a)             
+            var a=11;
+            console.log(a)
+        }
+        hello()         //undifined    11 变量提升 
+
+    </script>
+
+</body>
+</html>

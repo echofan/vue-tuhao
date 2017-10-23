@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+      <script>
+           function Animal(name){
+               this.name=name
+           }
+           Animal.prototype.sayName=function(){
+               console.log('My name is'+this.name)
+           }
+
+           //extends来继承封装
+           var Dog = Animal.extends({                            //使用extends方法来实现类的封装
+            constructor: function(name, lan){
+              this._super(name);
+              this.lan = lan
+            },
+            sayname: function(){
+              this._super.sayName();
+            },
+            sayLan: function(){
+             console.log(this.lan);
+            }
+          });
+           var animal=new Animal('animal')
+           var dog=new Dog('dog','汪汪汪')
+
+           console.log(animal.sayName())
+           console.log(dog.sayName())
+           console.log(dog.sayLan())
+      </script>
+</body>
+</html>

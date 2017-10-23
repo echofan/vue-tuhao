@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+     <script>
+        //  //箭头函数不能作为构造函数
+        //  var Arrow=(a)=>{
+        //       this.name=a
+
+        //  }
+        //  var arrow=new Arrow('arrow')
+
+        //箭头函数没有自己的this值，箭头函数内的this值继承外围作用域
+        var name='lifan'
+        var obj={
+            name:'wanliang'
+        }
+        var sayName = () => this.name
+        sayName.apply(obj)
+        // console.log(sayName.name)
+     </script>  
+</body>
+</html>

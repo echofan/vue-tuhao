@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //依次找到数组里面的每一项，如果已经找到了 就会去找下一项
+        //symbol.iterator  
+        let arr=['a','b','c','d']
+        let iter=arr[Symbol.iterator]();
+        console.log(iter.next())
+        console.log(iter.next())
+        console.log(iter.next())
+
+
+
+        for(let item of arr){
+             console.log(item)   
+        }
+    </script>
+</body>
+</html>

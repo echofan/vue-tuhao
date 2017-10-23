@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      function Vehicle(wheel,spped){  //首先构造一个交通工具
+         this.wheel=wheel
+         this.speed=spped
+         this.color='black'   
+      }
+      //在它的原型上定义方法
+      Vehicle.prototype.run=function(time){
+          return this.speed*time
+      }
+      //通过在汽车类中去调用父类
+      function Car(wheel,speed,brand){
+          Vehicle.call(this,wheel,speed)
+          this.brand=brand
+      }
+      //将汽车类的原型指向交通工具的实例
+      Car.prototype=new Vehicle()
+
+      //构造一个自行车类，在其中调用父类
+      function Bicycle(wheel,speed,owner){
+          Vehicle.call(this,wheel,speed)
+          this.owner=owner
+      }
+
+      //将其原型指向交通工具实例
+      Bicycle.prototype=new Vehicle()
+
+      const car=new Car(4,10,'baoma')
+
+      const bicycle=new Bicycle(2,5,'mobai')
+
+      console.log(car.run(10))
+
+      console.log(bicycle.run(10))
+
+    </script>
+</body>
+</html>

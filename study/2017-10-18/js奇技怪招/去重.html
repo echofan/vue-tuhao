@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+      <script>
+            let log = console.log.bind(console);
+            let person = [
+               {id: 0, name: "小明"},
+               {id: 1, name: "小张"},
+               {id: 2, name: "小李"},
+               {id: 3, name: "小孙"},
+               {id: 1, name: "小周"},
+               {id: 2, name: "小陈"},   
+             ];
+             let obj={}
+             person=person.reduce((cur,next)=>{
+                 obj[next.id]?'':obj[next.id]=true&&cur.push(next)   //判断本次回调是否存在当前的id  如果有的话就赋值为空  不然就让其id再次等于下一个并且赋值给cur
+                 return cur   
+             },[])      //设置cur为默认数组，并且赋值为空
+             console.log(person)
+      </script>
+</body>
+</html>
