@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>线下消费</title>
+      <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+      <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+      <style>
+            body{
+
+            }
+            .height45{height: 47px;}
+            .sellerImg{float: left;}
+            .clear{clear: both;}
+            .sellerImg img{width: 100px;height: 100px;margin-right: 6px;float: left;}
+            .sellerList{padding: 10px;border-bottom: 1px solid #ccc;}
+            .sellerCont{margin: 4px;float: left;width: 64%;}
+            .sellerInfo{width: 100%;margin-top: 30px;}
+            .orderInfo>span{font-size: 12px;}
+            .color999{color: #999;}
+            .font12{font-size: 12px}
+            .font14{font-size: 14px}
+            .orderPrice{margin-right: 30px;}
+            .playBtn{width: 80px;height: 24px;border-radius: 4px;color:#fff;background: #f00;font-size: 14px;text-align: center;line-height: 24px;  float: right;}
+      </style>
+  </head>
+  <body>
+        <div class="page page-status-bar">
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">线下商家</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="height45"></div>
+
+            <div id="main">
+
+
+            </div>
+        </div>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script type="text/javascript">
+        apiready = function(){
+            app.ajax({
+                url:'goods/lineDownProductList',
+                type:'get',
+                data:{
+                    pageSize:10,
+                    pageNum:1,
+                    keyword:'',
+                    orderBy:''
+                },
+                success:function(ret){
+                    console.log(JSON.stringify(ret.data));
+                        for(i in ret.data){
+                            var html =  '<div class="sellerList" data-productid="'+ret.data[i].productid+'" data-goodsid="'+ret.data[i].goodsid+'" data-Price="'+ret.data[i].price+'" data-title="'+ret.data[i].title+'">'+
+                                            '<div class="sellerImg" data-productid="'+ret.data[i].productid+'" data-goodsid="'+ret.data[i].goodsid+'">'+
+                                                '<img src="'+ret.data[i].imgurl+'" alt="">'+
+                                            '</div>'+
+                                            '<div class="sellerCont">'+
+                                                '<h4 class="sellerName" data-productid="'+ret.data[i].productid+'" data-goodsid="'+ret.data[i].goodsid+'">'+ret.data[i].title+'</h4>'+
+                                                '<div class="sellerInfo">'+
+                                                    '<div class="orderInfo">'+
+                                                        '<span class="orderPrice color999 font12">价格￥：'+ret.data[i].price+'</span>'+
+                                                        '<span class="shopscore color999 font12">赠送购物分：'+ret.data[i].shopscore+'</span>'+
+                                                    '</div>'+
+                                                    // '<div class="orderName color999 font14">描述</div>'+
+                                                    // '<div class="sellerAdderss color999 font14">广东省东莞市三元里万凯商务中心</div>'+
+                                                    '<div class="playBtn" data-productid="'+ret.data[i].productid+'" data-goodsid="'+ret.data[i].goodsid+'" data-Price="'+ret.data[i].price+'" data-title="'+ret.data[i].title+'">立即支付</div>'+
+                                                '</div>'+
+                                            '</div>'+
+                                            '<div class="clear"></div>'+
+                                        '</div>';
+                                        $("#main").append(html)
+                        }
+                        if($(".sellerList").length<1){
+                            var nullHtml = '<p style="text-align:center;margin-top:200px;font-size:14px;">暂无商家</p>';
+                            $("#main").append(nullHtml);
+                        }
+                    }
+
+            })
+
+            $("body").on("tap",".playBtn",function(){
+                var goodsid = $(this).attr('data-goodsid');
+                var productid = $(this).attr('data-productid');
+                var title = $(this).attr('data-title');
+                var totalPrice = $(this).attr('data-Price');
+                api.openWin({
+                    name: 'linePay',
+                    url: '../plays/linePay.html',
+                    pageParam: {
+                        prePayType: 1,
+                        orderName : title,
+                        totalPrice: totalPrice,
+                        goodsId:goodsid,
+                        productId:productid
+
+                    },
+                    animation:{
+                       type:'movein',
+                       duration:200
+                    }
+                });
+
+            });
+
+
+
+            $("body").on("tap",".sellerImg",function(){
+                api.openWin({
+                    name: 'productLine',
+                    url: './productLine.html',
+                    pageParam: {
+                        goodsId: $(this).data('goodsid'),
+                        productId: $(this).data('productid')
+                    }
+                });
+            });
+            $("body").on("tap",".sellerName",function(){
+                api.openWin({
+                    name: 'productLine',
+                    url: './productLine.html',
+                    pageParam: {
+                        goodsId: $(this).data('goodsid'),
+                        productId: $(this).data('productid')
+                    }
+                });
+            })
+
+
+
+
+        };
+
+  </script>
+  </html>

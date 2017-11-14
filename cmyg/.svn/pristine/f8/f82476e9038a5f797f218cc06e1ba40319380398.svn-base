@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>创盟会员</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        body{background-color: #f0f0f2;width: 100%;height: 100%;}
+        #footer{display: flex;border-top: 1px solid #ccc;position: fixed;bottom: 0;width: 100%;background: #fff;}
+        #footer div{text-align: center;height: 50px;line-height: 50px;width: 50%;}
+        .often,.hot{background: #fff;}
+        .title{height: 40px;line-height: 40px;text-indent: 1em;}
+        .oftenInfo li{display: flex;border-top: 1px solid #ccc;}
+        .oftenInfo li div{width: 50%;text-indent: 2em;height: 40px;line-height: 40px;}
+
+        .hot{margin-top: 10px;margin-bottom: 70px;}
+        .hotInfo li{height: 40px;line-height: 40px;text-indent: 2em;border-top: 1px solid #ccc;}
+        .main{margin-bottom: 50px;}
+        li p{padding: 4px 10px;color: #222;}
+        li img{width: 100%;}
+    </style>
+</head>
+
+<body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">会员激活方法</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <div style="height:50px;"></div>
+    <div class="main">
+        <ul>
+            <li>
+                <p>1、 须会员本人申请开具发票，非会员本人申请不予受理。</p>
+                <p>2、 必须是以现金购买商品，才能开具发票。如果以现金购买礼包产品的，只能直接开具现金礼包金额的发票。 </p>
+                <p>3、 本平台只能开具普通消费购物发票  </p>
+                <p>4、 如非本人亲自到公司领取发票的 ，则由公司寄送到会员系统预留地址。  </p>
+
+            </li>
+
+
+        </ul>
+    </div>
+    <dix id="footer">
+        <div>智能客服</div>
+        <div class="serviceLz"><i></i>人工客服</div>
+    </dix>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+
+    apiready = function() {
+        var liIndex = api.pageParam.liIndex;
+
+
+        $("body").on("tap",".serviceLz",function(){
+            api.openWin({
+                name: 'page1',
+                url:'https://static.meiqia.com/dist/standalone.html?_=t&eid=70856'
+
+            });
+        })
+
+
+    }
+</script>
+
+</html>

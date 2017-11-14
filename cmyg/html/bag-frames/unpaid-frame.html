@@ -377,6 +377,17 @@
         $('.kong').show()
       }
     }
+//constrol me  NUMS
+    function mes(){
+       api.sendEvent({
+           name: 'me',
+           extra: {
+               key1: 'value1',
+               key2: 'value2'
+           }
+       });
+    }
+
     // unpaids()
   function plays(idst){
     var types=idst.parents('.box_item').attr('data-type')
@@ -470,13 +481,10 @@
           },
           success: function(rst){
             var datas=rst.data
-            console.log(JSON.stringify(datas))
             for(var i=0;i<datas.length;i++){
-              //  var times=new Date(parseInt(datas[i].createTime)*1000).toISOString().replace(/T/," ").substring(0,19)
                   var times=app.times((datas[i].createTime)*1000)
                  datas[i].createTime=times
             }
-            console.log(JSON.stringify(datas))
             var info={
                list:datas
             }
@@ -533,6 +541,7 @@
                               app.toast('删除成功')
                               $item.remove()
                               window.location.reload()
+                              // mes()
                               unpaids()
                               new_active()
                               if(items.length<3){

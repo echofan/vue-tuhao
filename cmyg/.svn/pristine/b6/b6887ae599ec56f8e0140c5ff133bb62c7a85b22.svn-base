@@ -1,0 +1,604 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>个人中心</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        #page-me {color: #333;}
+        .page-header {background: #E61C4C;color: #fff;display: flex;display: -webkit-flex;justify-content: space-between;padding: 1.5rem 1rem .5rem;align-items: flex-end;font-size: .6rem;}
+        i.i-header {width: 2.6rem;height: 2.6rem;background: #fff;border: 2px solid #efefef;border-radius: 50%;}
+        .me-header-wrap {display: flex;display: -webkit-flex;flex-direction: column;align-items: center;position: relative;}
+        i.i-type {width: 3rem;margin-top: 10px;position: relative;}
+        .me-info {flex: 1;margin: 0 .5rem;margin-bottom: -.2rem;}
+        i.i-level {     width: 50px;        }
+        .me-info>div {display: flex;    display: -webkit-flex;justify-content: space-between;    margin-top: 1rem;        }
+        .i-setting {  width: 25px;  height: 24px;  display: block;    }
+        .i-money,.i-score { width: .65rem; margin: 0 4px; vertical-align: sub; }
+        a.add-address {display: block;padding: 0 30px 0 20px;color: #333;line-height: 50px;border-bottom: 1px solid #ddd;position: relative;font-size: 14px;}
+        a.add-address::after { right: 10px; color: #333; }
+        .shop-box { display: flex; display: -webkit-flex; padding: 10px; }
+        .shop-box>div { flex: 1; display: flex; display: -webkit-flex;flex-direction: column; text-align: center;align-items: center;}
+        .shop-box>div>span { color: #666; font-size: 12px; }
+        table.tb-function {width: 100%;border-bottom: 1px solid #ddd; text-align: center;}
+        table.tb-function i { display: block; margin: auto; line-height: 1.2; }
+        table.tb-function i::before {    font-size: 24px;        }
+        table.tb-function td>span {font-size: 12px;color: #666;margin-top: 5px;}
+        table.tb-function td {border-top: 1px solid #ddd;border-right: 1px solid #ddd;padding: 10px 0;width: 33.333%;        }
+        .shop-box>div {position: relative;        }
+        .mui-badge {position: absolute; top: 2px; right: 7px; background-color: #f00; color: #fff !important;}
+        .icon-item {border-radius: 50%;background-color: red;color: #fff;text-align: center;font-size: 13px; width: 15px;height: 15px; font-size: 12px;position: absolute;right: 3px;top: 5px;display: none;}
+        .bar-tab a {position: relative;}
+        .icon-item {border-radius: 50%;background-color: red;color: #fff;text-align: center;font-size: 13px;width: 15px;height: 15px;font-size: 12px;position: absolute;right: 3px;top: 5px;display: none;}
+        .i-setting {position: absolute;top: 2.6rem;right: 1.2rem;}
+        #star{position: absolute;bottom: 6px;left: 56px;width: 12px;height: 12px;z-index: 299;display: none;}
+        .moda{width: 100%;height:100%;background: rgba(0,0,0,.5);position: absolute;top:0;}
+        .modaMain{border-radius: 4px;width: 90%;margin: 0 auto;margin-top: 100px;background: #fff;}
+        .modaTitle{width: 100%;height:40px;border-bottom: 1px solid #777;text-align: center;line-height: 40px;position: relative;}
+        .i-close{position: absolute;right: 10px;top:12px;font-weight: 800;}
+        .modaCont{width: 100%;min-height: 100px;}
+        .lvimg{height: 18px;margin-right: 30px;position: relative;top: 4px;right: 20px;}
+    </style>
+</head>
+
+<body>
+    <div id="page-me">
+        <div class="page-header" id="page-me-header">
+            <div class="me-header-wrap">
+                <i class="i-header"><img src=""  id="userImg"></i>
+                <i class="i-type">
+                    <img src="" alt="" id="userLv">
+                    <img src="../../image/star.png" id="star" alt="">
+                </i>
+            </div>
+            <div class="me-info">
+                <div>
+                    <div><label>昵称：</label><span class="sp-nickname"></span></div>
+                    <img src="" class="lvimg"  alt="">
+                    <div style="display:none;">
+                        上传进度：<p id="progress"></p>
+                    </div>
+                    <p id="backurl" style="display:none;"></p>
+                    <!-- <i class="i-level"><img src="../../image/level-1.png" alt=""></i> -->
+                </div>
+                <div>
+                    <div><i class="i-money"><img src="../../image/ic-money.png" alt=""></i><span class="sp-money"></span></div>
+                    <div><i class="i-score"><img src="../../image/ic-score.png" alt=""></i><label>可用积分：</label><span class="sp-score"></span></div>
+                </div>
+            </div>
+            <div><i id="info-page" class="i-setting"><img src="../../image/ic-setting.png" alt=""></i></div>
+        </div>
+        <a class="mui-navigate-right add-address">购物服务<label id="add_address_bt" class="fl-right">我的收货地址</label></a>
+        <div class="shop-box">
+            <div class="icon-bags icon_item">
+                <i class="iconfont icon-bag">
+                  <span class="icon-item icon-bag-num"></span>
+                </i>
+                <span>购物袋</span>
+            </div>
+            <div class="icon-moneys icon_item">
+                <i class="iconfont icon-money">
+                  <span class="icon-item icon-money-num"></span>
+                </i>
+                <span>待付款</span>
+            </div>
+            <div class="icon-sends icon_item">
+                <i class="iconfont icon-send">
+                  <span class="icon-item icon-send-num"></span>
+                </i>
+                <span>待发货</span>
+            </div>
+            <div class="icon-delivers icon_item">
+                <i class="iconfont icon-deliver">
+                  <span class="icon-item icon-deliver-num"></span>
+                </i>
+                <span>待收货</span>
+            </div>
+            <div class="icon_item shouhou">
+                <i class="iconfont icon-message"></i>
+                <span>售后客服</span>
+            </div>
+        </div>
+        <table class="tb-function">
+            <tr>
+                <td attr-ids='3' class="tg-item" id="asd">
+                    <i class="iconfont icon-points"></i>
+                    <span>我的积分</span>
+                </td>
+                <td class="jf-give">
+                    <i class="iconfont icon-qrcode"></i>
+                    <span>创客推广</span>
+                </td>
+                <!-- <td attr-ids='4' class="tg-item"> -->
+                <td attr-ids='4' class="nos">
+                    <i class="iconfont icon-deal"></i>
+                    <span>积分转让</span>
+                </td>
+            </tr>
+            <tr>
+                <td attr-ids='5' class="txbtn">
+                    <i class="iconfont icon-charge"></i>
+                    <span>自动提现</span>
+                </td>
+                <td class="bg-red tuiguang">
+                    <i class="iconfont icon"></i>
+                    <span style="color: #fff;">联盟推广中心</span>
+                </td>
+                <td class="mytg">
+                    <i class="iconfont icon-share"></i>
+                    <span>我的推广</span>
+                </td>
+            </tr>
+            <tr>
+                <!-- <td class="nos" id="cmck"> -->
+                <td id="cmck">
+                    <i class="iconfont icon-alliance"></i>
+                    <span>创盟创客</span>
+                </td>
+                <td class="ckActive">
+                    <i class="iconfont icon-active"></i>
+                    <span>推客激活</span>
+                </td>
+                <td class="mediaCore">
+                    <i class="iconfont icon-logistic"></i>
+                    <span>媒体中心</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="nos">
+                    <i class="iconfont icon-libra"></i>
+                    <span>万商盟</span>
+                </td>
+                <td class="nos">
+                    <i class="iconfont icon-welfare"></i>
+                    <span>创盟公益</span>
+                </td>
+                <td class="setUp">
+                    <i class="iconfont icon-set"></i>
+                    <span>系统设置</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+<!-- 弹窗 -->
+    <!-- <div class="moda">
+        <div class="modaMain">
+            <div class="modaTitle">
+                <span>这是弹框</span>
+                <i class="i-close iconfont icon-close" onclick="$('.moda').hide()"></i>
+            </div>
+            <div class="modaCont"></div>
+        </div>
+    </div> -->
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+
+    function getMyInfo() {
+        app.ajax({
+            url: 'member/getMyInfo',
+            data: {
+                token: $api.getStorage('token'),
+                memberId: $api.getStorage('memberId')
+            },
+            showLoading: false,
+            success: function(ret) {
+                console.log(JSON.stringify(ret.data))
+                if(ret.data.parentId == "" || ret.data.parentId == null){
+                    // alert(1)
+                    $("#star").hide();
+                }else{
+                    // alert(2)
+                    $("#star").show()
+                }
+                var imgSplit = ret.data.headImg
+                //用户头像
+                if (ret.data.headImg == '' || ret.data.headImg == null) {
+                    $("#userImg").attr('src', '../../image/2431UI.png');
+                } else {
+                    $("#userImg").attr('src', imgSplit);
+                }
+                //用户类型989898989.png
+                if (ret.data.type === 'common') {
+                    $("#userLv").attr('src', '../../image/type-normal.png');
+                } else if (ret.data.type === 'promotion') {
+                    $("#userLv").attr('src', '../../image/21UI.png');
+                } else if (ret.data.type === 'chuangmeng') {
+                    $("#userLv").attr('src', '../../image/123213.png');
+                }else if(ret.data.type === 'experience'){
+                    $("#userLv").attr('src', '../../image/989898989.png');
+                }
+                $(".sp-nickname").text(ret.data.nickname); //姓名昵称
+                $(".sp-money").text(ret.data.memberAccout.amount); //金额
+                $(".sp-score").text(ret.data.memberAccout.shopScore); //积分
+                if(ret.data.memberLevel == null){
+                    $(".lvimg").hide()
+                }else{
+                    $(".lvimg").attr("src",ret.data.memberLevel.logo);
+                }
+
+                api.refreshHeaderLoadDone()
+            },
+            error: function() {
+                alert("错误！")
+            }
+        });
+    }
+   function bagNum(){
+     var urls='caritem/getCartAndOrderNum'
+     $.ajax({
+        url:app.server+urls,
+        type:'POST',
+        data:{
+          memberId:$api.getStorage('memberId'),
+          token: $api.getStorage('token')
+        },
+        success:function(data){
+          console.log(data)
+             $('.icon-bag-num').text(data.data.cartItemcount)
+             $('.icon-money-num').text(data.data.orderNoPaycount)
+             $('.icon-send-num').text(data.data.orderNoConsigncount)
+             $('.icon-deliver-num').text(data.data.orderConsigncount)
+             var icons=$('.icon-item')
+             for(var i=0;i<icons.length;i++){
+               $(icons[i]).hide()
+               if($(icons[i]).html()>0){
+                  $(icons[i]).show()
+               }
+             }
+              api.refreshHeaderLoadDone()
+        }
+     })
+   }
+    apiready = function() {
+        // api.setStatusBarStyle({
+        //     style: 'dark',
+        //     color: '#E61C4C'
+        // });
+        // app.ready()
+        api.addEventListener({
+            name: 'me'
+        }, function(ret, err){
+            if( ret ){
+                //  alert( JSON.stringify( ret ) );
+                window.location.reload()
+            }else{
+                 alert( JSON.stringify( err ) );
+            }
+        });
+
+        api.addEventListener({
+            name: 'logins'
+        }, function(ret, err){
+            if( ret ){
+              // bagNum()
+              // getMyInfo()
+              window.location.reload()
+            }else{
+                 alert( JSON.stringify( err ) );
+            }
+        });
+        api.addEventListener({
+            name: 'tiyan'
+        }, function(ret, err){
+            if( ret ){
+              bagNum()
+              getMyInfo()
+            }else{
+                 alert( JSON.stringify( err ) );
+            }
+        });
+        bagNum()
+        getMyInfo()
+        api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            // getMyInfo()
+            // bagNum()
+            window.location.reload()
+        })
+    };
+
+    $("#userImg").on('tap', function() {
+        api.getPicture({
+            sourceType: 'library',
+            encodingType: 'jpg',
+            mediaValue: 'pic',
+            destinationType: 'base64',
+            allowEdit: true,
+            quality:100,
+            targetWidth:500,
+            targetHeight: 500,
+            saveToPhotoAlbum: false
+        }, function(res, err) {
+            if (res) {
+              console.log(JSON.stringify(res.data))
+              var a = document.getElementById('progress'); //显示进度，也可用进度条，在进度从95%到100%的时候有个明显停顿，此时文件已经传输完成，是在获取回调信息。
+              var b = document.getElementById('userImg');
+              var fileurl = res.data; //文件地址，也可通过文件选择器获得
+              var baseUrl = 'http://oriuj6hhx.bkt.clouddn.com/'; //七牛给你的测试域名，也可使用自己捆绑的域名youe.xxx.com
+              var qiniu = api.require('qiniuUpfile');
+              var timestamp=new Date().getTime();
+              qiniu.upfile({
+                  file: fileurl,
+                  name: timestamp
+              }, function(ret, err) {
+                  if (ret.status) {
+                      if (ret.oper == "complete") {
+                          //上传成功后组装访问路径，或直接访问文档
+                          console.log(JSON.stringify(ret))
+                          app.ajax({
+                            url:'member/updateImgAndNickName',
+                            type:'POST',
+                            data:{
+                                token: $api.getStorage('token'),
+                                memberId: $api.getStorage('memberId'),
+                                headImg : baseUrl + ret.info.key
+                            },
+                            success : function(res){
+                                $("#userImg").attr("src",baseUrl + ret.info.key)
+                            },
+                            error : function(err){
+                              alert("上传失败！")
+                            }
+                          })
+                          console.log(b, baseUrl + ret.info.key);
+                      } else if (ret.oper == "progress") {
+                          //上传过程中获取进度数据
+                          console.log(a, ret.percent);
+                      }
+                  }
+              });
+
+            } else {
+                // alert(JSON.stringify(err));
+            }
+        });
+    })
+    $(".setUp").on('tap', function() {
+        api.openWin({
+            name: 'setUp',
+            url: './signOut.html',
+            animation: {
+                type: 'movein',
+                duration: 200
+            }
+        });
+
+    });
+    $(".mytg").on("tap",function(){
+        api.openWin({
+            name: 'mytg',
+            url: '../spread/index-wow.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+    })
+    $(".mediaCore").on("tap",function(){
+        api.openWin({
+            name: 'mediaCore',
+            url: '../spread/index-tg.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
+
+    });
+
+    mui('#page-me').on('tap', '#add_address_bt', function() {
+        api.openWin({
+            name: 'list_address',
+            url: './list_address.html',
+            animation: {
+                type: 'movein',
+                duration: 200
+            }
+        });
+    })
+    $('.txbtn').on('tap',function() {
+        api.openWin({
+            name: 'withdrawals',
+            url: './withdrawCash.html',
+            animation: {
+                type: 'movein',
+                duration: 200
+            }
+        });
+    })
+
+
+    mui('#page-me').on('tap', '.ckActive', function() {
+        api.openWin({
+            name: 'push-gift',
+            url: '../push-gift/index.html',
+            animation: {
+                type: 'movein',
+                duration: 200
+            }
+        });
+    })
+    mui('#page-me').on('tap', '#info-page', function() {
+        api.openWin({
+            name: 'info',
+            url: './info.html',
+            animation: {
+                type: 'movein',
+                duration: 200
+            }
+        });
+    })
+    mui('#page-me').on('tap', '.jf-give', function() {
+        api.openWin({
+            name: 'makeRQcode',
+            url: '../myRQcode/makeRQcode.html',
+            animation: {
+                type: 'movein',
+                duration: 200
+            }
+        });
+    })
+
+    mui('#page-me').on('tap', '.tuiguang', function() {
+      // api.openWin({
+      //     name: 'userType',
+      //     url: '../win/userType.html',
+      //     pageParam: {
+      //         tg_id: 1
+      //     },
+      //     animation: {
+      //         type: 'movein',
+      //         duration: 200
+      //     }
+      // });
+      api.openWin({
+          name: 'tg-frames',
+          url: '../tg-frames/index.html',
+          reload: true,
+          scrollEnabled: false,
+          vScrollBarEnabled:false,
+          pageParam: {
+              tg_id: 3
+          },
+          animation: {
+              type: 'movein',
+              duration: 200
+          }
+      });
+
+    })
+    var items = $('.tg-item');
+    for (var i = 0; i < items.length; i++) {
+        $(items[i]).on('tap', function() {
+            var ids = $(this).attr('attr-ids')
+            api.openWin({
+                name: 'tg-frames',
+                url: '../tg-frames/index.html',
+                reload: true,
+                scrollEnabled: false,
+                vScrollBarEnabled:false,
+                pageParam: {
+                    tg_id: 3,
+                    homes: ids
+                },
+                animation: {
+                    type: 'movein',
+                    duration: 200
+                }
+            });
+        })
+    }
+
+$('#cmck').on('tap',function(){
+  api.openWin({
+      name: 'cmck',
+      url: '../ck-upgrade/index.html',
+      reload: true,
+      animation: {
+          type: 'movein',
+          duration: 200
+      }
+  });
+})
+
+
+    mui('#page-me').on('tap', '.shop-box .icon-bags', function() {
+      api.execScript({
+          name: 'root',
+          script: 'openFrame("bag")'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'reloadFrames(0)'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'titles("购物袋")'
+      });
+
+    })
+    mui('#page-me').on('tap', '.shop-box .icon-moneys', function() {
+      api.execScript({
+          name: 'root',
+          script: 'openFrame("bag")'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'reloadFrames(1)'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'titles("待付款")'
+      });
+    })
+    mui('#page-me').on('tap', '.shop-box .icon-sends', function() {
+      api.execScript({
+          name: 'root',
+          script: 'openFrame("bag")'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'reloadFrames(2)'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'titles("待发货")'
+      });
+    })
+    mui('#page-me').on('tap', '.shop-box .icon-delivers', function() {
+      api.execScript({
+          name: 'root',
+          script: 'openFrame("bag")'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'reloadFrames(3)'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'titles("待收货")'
+      });
+    })
+    mui('#page-me').on('tap', '.shop-box .shouhou', function() {
+      api.execScript({
+          name: 'root',
+          script: 'openFrame("bag")'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'reloadFrames(4)'
+      })
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script: 'titles("售后服务")'
+      });
+    })
+    $('.nos').on('click',function(){
+       app.toast('敬请期待~~~')
+    })
+</script>
+
+</html>

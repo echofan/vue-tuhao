@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>售后服务</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        body{background-color: #f0f0f2;width: 100%;height: 100%;}
+        #footer{display: flex;border-top: 1px solid #ccc;position: fixed;bottom: 0;width: 100%;background: #fff;}
+        #footer div{text-align: center;height: 50px;line-height: 50px;width: 50%;}
+        .often,.hot{background: #fff;}
+        .title{height: 40px;line-height: 40px;text-indent: 1em;}
+        .oftenInfo li{display: flex;border-top: 1px solid #ccc;}
+        .oftenInfo li div{width: 50%;text-indent: 2em;height: 40px;line-height: 40px;}
+
+        .hot{margin-top: 10px;margin-bottom: 70px;}
+        .hotInfo li{height: 40px;line-height: 40px;text-indent: 2em;border-top: 1px solid #ccc;}
+        .main{margin-bottom: 50px;}
+
+    </style>
+</head>
+
+<body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">帮助中心</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <div style="height:50px;"></div>
+    <div class="main">
+
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+
+    apiready = function() {
+            api.openFrame({
+                name: 'serviceWeb',
+                url: 'url:https://static.meiqia.com/dist/standalone.html?_=t&eid=70856',
+                rect: {
+                    x: 0,
+                    y: 44,
+                    w: 'auto',
+                    h: 'auto'
+                },
+                pageParam: {
+                    name: 'test'
+                },
+                bounces: true,
+                bgColor: 'rgba(0,0,0,0)',
+                vScrollBarEnabled: true,
+                hScrollBarEnabled: true
+            });
+
+
+
+
+    }
+</script>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>体验激活方法</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        body{background-color: #f0f0f2;width: 100%;height: 100%;}
+        #footer{display: flex;border-top: 1px solid #ccc;position: fixed;bottom: 0;width: 100%;background: #fff;}
+        #footer div{text-align: center;height: 50px;line-height: 50px;width: 50%;}
+        .often,.hot{background: #fff;}
+        .title{height: 40px;line-height: 40px;text-indent: 1em;}
+        .oftenInfo li{display: flex;border-top: 1px solid #ccc;}
+        .oftenInfo li div{width: 50%;text-indent: 2em;height: 40px;line-height: 40px;}
+
+        .hot{margin-top: 10px;margin-bottom: 70px;}
+        .hotInfo li{height: 40px;line-height: 40px;text-indent: 2em;border-top: 1px solid #ccc;}
+        .main{margin-bottom: 50px;}
+        li p{padding: 4px 10px;color: #222;}
+        li img{width: 100%;}
+    </style>
+</head>
+
+<body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">体验激活方法</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <div style="height:50px;"></div>
+    <div class="main">
+        <ul>
+            <li>
+                <h4>体验会员—激活方法：</h4>
+                <p>1、个人中心—右上方“我的收货地址”，填写保存 </p>
+                <img src="../../../image/service/tiyanhuiyuan/t1.jpg" alt="">
+                <img src="../../../image/service/tiyanhuiyuan/t2.jpg" alt="">
+            </li>
+            <li>
+                <p>2、个人中心—推客激活—选址地址，点支付（支持信用卡）   </p>
+                <img src="../../../image/service/tiyanhuiyuan/t3.jpg" alt="">
+            </li>
+            <li>
+                <p>3、体验会员选择“激活体验会员”，然后支付   </p>
+                <img src="../../../image/service/tiyanhuiyuan/t4.jpg" alt="">
+                <img src="../../../image/service/tiyanhuiyuan/t5.jpg" alt="">
+
+            </li>
+            <li>
+                <p>4、按住屏幕不动往下拉，刷新，看到头像下方显示绿色的“体验会员” 完成以上激活，即可体验联盟推广任务，并且平台将会给您赠送价值241元的产品  </p>
+                <img src="../../../image/service/tiyanhuiyuan/t7.jpg" alt="">
+
+            </li>
+            <li>
+                <p>5、 个人中心—升级会员，支付1000，获得1000购物分和1000消费，不占用礼包购买次数   </p>
+                <img src="../../../image/service/tiyanhuiyuan/t8.jpg" alt="">
+                <img src="../../../image/service/tiyanhuiyuan/t9.jpg" alt="">
+
+            </li>
+
+        </ul>
+    </div>
+    <dix id="footer">
+        <div>智能客服</div>
+        <div class="serviceLz"><i></i>人工客服</div>
+    </dix>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+
+    apiready = function() {
+        var liIndex = api.pageParam.liIndex;
+
+
+        $("body").on("tap",".serviceLz",function(){
+            api.openWin({
+                name: 'service-info',
+                url: '../service-info.html',
+                pageParam: {
+                    name: 'test'
+                },
+
+            });
+
+        });
+
+
+    }
+</script>
+
+</html>

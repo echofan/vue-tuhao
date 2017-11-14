@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>兑换积分</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        body{width: 100%;height: 100%;position:relative;}
+        #page-bag .mui-scroll-wrapper {
+            position: relative;
+        }
+        header{margin-bottom:10px;}
+        .head{padding:20px;display:flex;}
+        .head div{text-align: center;font-size:13px;flex:1;}
+        .head .left{color:#5EA877;border-right:1px solid #ccc;}
+        .head .left span i{background: url(../../../image/23464364.png) no-repeat;width: 20px;height: 20px;background-size: 20px;display:inline-block;vertical-align: top;margin-right: 5px;}
+        .head .right span i{background: url(../../../image/23442I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;display:inline-block;vertical-align: top;margin-right: 5px;}
+        .head .right{color:#EE6F1F;}
+        .content{padding:0 50px;}
+        .content .top_img{padding:0 15px;display:flex;}
+        .content .top_img div{flex:1;text-align: center;}
+        .content .top_img div:nth-child(1) span:nth-child(1){background: url(../../../image/23442I.png) no-repeat;width: 35px;height: 35px;background-size: 35px;display:block;margin:0 auto;margin-bottom:5px;}
+        .content .top_img div:nth-child(2) span{background: url(../../../image/1234231342.png) no-repeat;width: 45px;height: 45px;background-size: 45px;display:block;margin:0 auto;margin-bottom:5px;}
+        .content .top_img div:nth-child(3) span:nth-child(1){background: url(../../../image/2343562423.png) no-repeat;width: 35px;height: 35px;background-size: 35px;display:block;margin:0 auto;margin-bottom:5px;}
+        .content .top_img div:nth-child(1){color:#EE6F1F;}
+        .content .top_img div:nth-child(3){color:#747474;}
+        .deal_num{display:flex;margin-top:35px;height: 50px;}
+        .deal_num input.ipt{flex:3;background-color: #EEEEEE;border:none;outline: none;border-radius:10px;display:inline-block;text-align: center;}
+        .deal_num span{flex:2;text-align: center;line-height:40px;}
+        .passwd{margin-top:20px;display:flex;height: 40px;}
+        .passwd span{flex:1;line-height:40px;}
+        .passwd input{flex:2;background-color: #EEEEEE;border:none;outline: none;border-radius:10px;display:inline-block;text-align: center;}
+        .foots{width: 100%;height: 50px;background-color: #E61C4C;text-align: center;line-height: 50px;color:#fff;border-radius:10px;margin:50px auto;font-size: 20px;}
+        .explain{margin-top:70px;color:#747474;font-size: 15px;padding:0 50px;}
+        .explain h1{font-size:17px;}
+        .highcharts-legend,
+        .highcharts-credits,
+        .highcharts-button {
+            /*display: none!important;*/
+        }
+        .highcharts-legend-item,.highcharts-button,.highcharts-credits{
+          display: none!important;
+        }
+         .highcharts-container {height: 300px!important;}
+    </style>
+</head>
+
+<body>
+  <script type="text/template" id="temID">
+    <div class="left">
+       <span><i></i>可用购物分</span>
+       <span><%=list.shopScore%></span>
+    </div>
+    <div class="right">
+       <span><i></i>广告分</span>
+       <span><%=list.adSscore%></span>
+    </div>
+  </script>
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+          <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">兑换积分</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+              <div class="head">
+
+              </div>
+              <div class="kkk" id="container" style="width:100%;height:280px;"></div>
+              <div class="content">
+                    <div class="top_img">
+                        <div>
+                            <span></span>
+                            <span>广告分</span>
+                        </div>
+                        <div>
+                             <span></span>
+                        </div>
+                        <div>
+                             <span></span>
+                             <span>购物分</span>
+                        </div>
+                    </div>
+                    <div class="deal_num">
+                        <input type="tel" id="ads" class="ipt" placeholder="兑换数量">
+                        <span>1:1</span>
+                        <input type="tel" id="shops" class="ipt" placeholder="兑换数量" readonly="readonly">
+                    </div>
+                    <div class="passwd">
+                         <span>交易密码</span>
+                         <input type="password" id="psd" placeholder="请输入密码" maxlength="6">
+                    </div>
+                    <div class="foots">
+                        确定
+                    </div>
+              </div>
+              <div class="explain">
+                  <h1>兑换说明</h1>
+                  <ul>
+                    <li>1、兑换比例1:1，100广告分兑换100购物分；</li>
+                    <li>2、只能兑换100的整数倍兑换（100-1000）</li>
+                    <li>3、只能单项广告分兑换购物分，购物分不能兑换广告分；</li>
+                  </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<!-- <script type="text/javascript" src="../../../script/zepto.min.js"></script> -->
+<script type="text/javascript" src="../../../script/jquery.min.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript" src="../../../script/md5.min.js"></script>
+<script src="../../../script/highcharts.js"></script>
+<script src="../../../script/exporting.js"></script>
+<script src="../../../script/highcharts-zh_CN.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+    apiready = function() {
+        app.ready()
+        app.tgNum('temID','.head')
+        $('#ads').on('blur',function(){
+           $('#shops').val($('#ads').val())
+        })
+        $('.foots').on('click',function(){
+           if($('#ads').val()==''){
+              alert('请输入广告分')
+           }else if($('#ads').val()!=''&&$('#psd').val()==''){
+              alert('请输入密码')
+           }else{
+              app.ajax({
+                url:'score/exchangeShopScore',
+                data:{
+                  memberId:$api.getStorage('memberId'),
+                  token: $api.getStorage('token'),
+                  adScore:$('#ads').val(),
+                  password:md5($('#psd').val())
+                },
+                success:function(data){
+                   console.log(data)
+                }
+              })
+           }
+        })
+    }
+    $('.hides').on('tap',function(){
+       api.closeWin()
+    })
+</script>
+
+<script>
+$(function () {
+$('#container').highcharts({
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: ''
+    },
+    subtitle: {
+        text: ''
+    },
+    xAxis: {
+        categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+    },
+    yAxis: {
+        title: {
+            text: ''
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true          // 开启数据标签
+            },
+            enableMouseTracking: false // 关闭鼠标跟踪，对应的提示框、点击事件会失效
+        }
+    },
+    series: [{
+        name: '',
+        data: [7.0, 6.9, 9.5, 10.5, 12.4, 15.5, 16.2, 17.5, 19.3, 20.3, 22.9, 25]
+    }]
+});
+});
+  </script>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>创客升级</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+      /*body{background-color: #656464;}*/
+      .mui-inner-wrap{position:relative!important;}
+      .mui-content{background-color: #EEEEEE!important;position:relative!important;padding-bottom:70px;overflow: scroll;}
+      .heads{padding:15px 20px 20px 20px;background-color: #FBE59B;display: flex;background: url(../../image/cks/bjs.png) no-repeat;width: 100%;height: 100%;background-size: cover;}
+      .heads div:nth-child(2){flex:2;position:relative;;}
+      .heads div:nth-child(2) span{width: 70px;height: 70px;border:2px #D9B865 solid; border-radius:50%;text-align: center;line-height: 70px;color:#D9B865;position:absolute;right:0;top:50%;margin-top:-35px;}
+      .heads div:nth-child(2) span img{width: 100%;height: 100%;background-size: 100% 100%;}
+      .heads div:nth-child(1){flex:2;position:relative;margin-top:10px;}
+      .heads div:nth-child(1) img{width: 100%;height: 80%;background-size: 100%;}
+      .heads div:nth-child(3){flex:3;text-align: right;}
+      .welfare .level1{text-align: center!important;width: 100%;}
+      .welfare .level1 i{background: url(../../image/13231.png) no-repeat;width:15px;height: 15px;background-size: 100%;display:inline-block;vertical-align: middle;}
+      .welfare .level2{width: 80%;margin:0 auto;border-radius:8px;background-color:#E61C4C;color:#fff;text-align: center;height: 35px;line-height: 35px;margin-top:10px;}
+      .welfare .level3{margin-top:10px;color:#6F5D12;font-size:18px;text-align: center!important;width: 100%;}
+      .remark{padding:8px 0 8px 20px;background-color: #EEEEEE;color:#656464;}
+      .details{font-size:12px;}
+      .dj_ul li{padding:0px 15px 25px 15px;background-color: #fff;border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;margin-bottom:5px;}
+      .dj_ul li .top{height: 50px;line-height: 50px;font-size:17px;display:flex;}
+      .dj_ul li .top span:nth-child(1){flex:1;}
+      .dj_ul li .top span:nth-child(2){flex:1;}
+      .dj_ul li .top span:nth-child(2) img{width: 80px;height: 30px;background-size: 100% 100%;border-radius:20px;margin-top:10px;}
+      /*.dj_ul li .top i{background: url(../../image/78UI.png) no-repeat;width: 18px;height: 18px;background-size: 100%;display:inline-block;margin-left:15px;margin-right: 5px;vertical-align: sub;}*/
+      .dj_ul li .bot{display:flex;margin-top:5px;}
+      .dj_ul li .bot div{flex:1;}
+      .dj_ul li .bot div:nth-child(1){border-right:2px solid #ccc;position:relative;}
+      /*.dj_ul li .bot .left span{width: 100%;height: 100%;}*/
+      .dj_ul li .bot .left img{width: 100px;height: 70px;background-size: 100%;margin:0 auto;position:absolute;left:50%;margin-left:-70px;top:50%;margin-top:-45px;}
+      .dj_ul li .bot .right{font-size:12px;color:#6A6967;padding-left:10px;}
+      /*.dj_ul li .bot .right span:nth-child(1){background: url(../../image/cks/432432423.png) no-repeat; width: 80px;height: 25px;background-size: 100% 100%;border-radius:20px;}*/
+      .jhtj{height: 50px;line-height: 50px;font-size:18px;color:#656464;padding-left:20px;background-color: #fff;}
+      .condition{margin-top:5px;background-color: #fff;}
+      .condition div{display:flex;height: 50px;line-height: 50px;padding:0 20px;border-bottom: 1px solid #ccc;}
+      .condition div span:nth-child(1){flex:3;}
+      .condition div span:nth-child(2){flex:3;text-align: center;}
+      .condition div span:nth-child(3){flex:2;text-align: right;}
+      .condition div:nth-child(1) i{background:url(../../image/cks/23464346.png) no-repeat;width: 20px;height: 20px;background-size: 100%;display:inline-block;vertical-align:middle;margin-right:5px;}
+      .condition div:nth-child(2) i{background:url(../../image/cks/4234643.png) no-repeat;width: 20px;height: 20px;background-size: 100%;display:inline-block;vertical-align:middle;margin-right:5px;}
+      .condition div:nth-child(3) i{background:url(../../image/cks/324236543.png) no-repeat;width: 20px;height: 20px;background-size: 100%;display:inline-block;vertical-align:middle;margin-right:5px;}
+      .activate{height: 60px;line-height: 60px;padding:0 15px;background-color: #fff;color:#797979;fonr-size:20px;margin-top:15px;}
+      .activate span:nth-child(2){width: 100px;height: 40px;line-height: 40px;background-color: #E61C4C;color:#fff;fone-size:16px;text-align: center;border-radius:8px;float:right;margin-top:10px;}
+      .player{width: 80%;position: fixed;top:50%;margin-top:-50px;left:50%;margin-left:-40%;background-color:#585656;padding:20px 15px 15px 15px;z-index:1000;display:none;}
+      .player p{color:#fff;}
+      .player .bottom{width: 100%;height: 50px;margin-top:10px;}
+      .player .bottom .xz{height: 40px;width: 100px;line-height: 40px;text-align: center;border-radius:8px;font-size:18px;float:left;background-color: #ccc;color:#fff;}
+      .player .bottom .nos{float:left;margin-left:15px;}
+      .player .bottom .yes{float:right;background-color: #E50044;margin-right:15px;}
+      .ors{color:red;}
+      .user span{background-color: #fff;}
+      .items{display:none;}
+    </style>
+</head>
+
+<body>
+    <div id="page-add_address">
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">创客升级</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="heads">
+                  <div class="grade">
+                      <!-- <img src="../../image/cks/cks.png" alt=""> -->
+                  </div>
+                    <div class="user">
+                        <span>
+                            <!-- <img src="../../image/cks/31254543.png" alt=""> -->
+                            <!-- 未激活 -->
+                        </span>
+                    </div>
+                    <div class="welfare">
+                        <span class="level1">
+                             <i></i>
+                             <!-- <span>创业分</span> -->
+                              <span class="nums"></span>
+                        </span>
+                        <span class="level2">
+                        </span>
+                        <span class="level3">
+                        </span>
+                    </div>
+                </div>
+                <div class="remark">
+                     <p>备注：</p>
+                     <p class="details">1、5-10号发送津贴到绑定支付宝账户</p>
+                     <p class="details">2、25号到月底才能申请领取津贴</p>
+                </div>
+                <ul class="dj_ul">
+                  <li class="firest">
+                        <div class="top">
+                           <span>下一创客等级  <span class="djs"></span></span>
+                           <span>
+                             <img src="../../image/cks/432432423.png" alt="">
+                           </span>
+                        </div>
+                        <div class="bot">
+                            <div class="left">
+                                  <img src="" alt="" id="imgs">
+                            </div>
+                            <div class="right">
+                                <!-- <span></span> -->
+                                <!-- 等级一 -->
+                                <!-- <span>1、月兑换2000元劳资津贴</span>
+                                <span>2、自动提现增加到300广告分</span>
+                                <span>3、获赠创客实物礼包（真皮创客手提包、高档T恤、创客微章）</span> -->
+                                <!-- 等级二 -->
+                                <span class='name1'></span>
+                                <span class='name2'></span>
+                                <span class='name3'></span>
+                            </div>
+                        </div>
+                  </li>
+                </ul>
+                <p class="jhtj">升级条件</p>
+                <div class="condition">
+                    <div class="Startup items">
+                        <span><i></i>创业分</span>
+                        <span class="sps"></span>
+                        <span class="ors"></span>
+                    </div>
+                    <div class="promotion items">
+                        <span><i></i>推广值</span>
+                        <span class="sps"></span>
+                        <span  class="ors"></span>
+                    </div>
+                    <div class="consume items">
+                        <span><i></i>消费值</span>
+                        <span class="sps"></span>
+                        <span class="ors"></span>
+                    </div>
+                </div>
+                <div class="activate">
+                    <span class="explain">创盟创客激活规则说明？</span>
+                    <span class="haves">我要升级</span>
+                </div>
+            </div>
+        </div>
+        <div class="player player1">
+            <!-- <p>您已达成条件将消耗2000创业分升级创客LV1</p> -->
+            <p></p>
+            <div class="bottom">
+                <div class="nos xz noclick">取消</div>
+                <div class="yes xz">确定</div>
+            </div>
+        </div>
+        <div class="player player2">
+            <!-- <p>您已达成条件将消耗2000创业分升级创客LV1</p> -->
+            <p></p>
+            <div class="bottom">
+                <div class="nos xz noclick">取消</div>
+                <div class="yes xz">确定</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/md5.min.js"></script>
+<script type="text/javascript">
+  function readys(){
+    app.ajax({
+       url:'member/level/getNextLevel',
+       data:{
+         token: $api.getStorage('token'),
+         memberId: $api.getStorage('memberId')
+       },
+       success:function(data){
+         console.log(JSON.stringify(data))
+         $('.name1').html(data.data.nextRemark1)
+         $('.name2').html(data.data.nextRemark2)
+         $('.name3').html(data.data.nextRemark3)
+         $('#imgs').attr('src',data.data.nextBigLogo)
+         $('.player1').attr('data-num',data.data.targetStartupSscore)
+         $('.level1 .nums').html(data.data.currentStartupSscore)
+         if(data.data.targetStartupSscore<data.data.currentStartupSscore) $('.Startup .ors').html('已完成')
+         if(data.data.targetPromotionScore<data.data.currentPromotionScore) $('.promotion .ors').html('已完成')
+         if(data.data.targetConsumeScore<data.data.currentConsumeScore) $('.consume .ors').html('已完成')
+         if(data.data.targetStartupSscore>0){
+            $('.Startup').show()
+            $('.Startup .sps').html(data.data.currentStartupSscore+'/'+data.data.targetStartupSscore)
+         }else{
+           $('.Startup').hide()
+         }
+         if(data.data.targetPromotionScore>0){
+            $('.promotion').show()
+            $('.promotion .sps').html(data.data.currentPromotionScore+'/'+data.data.targetPromotionScore)
+         }else{
+           $('.promotion').hide()
+         }
+         if(data.data.targetConsumeScore>0){
+            $('.consume').show()
+            $('.consume .sps').html(data.data.currentConsumeScore+'/'+data.data.targetConsumeScore)
+         }else{
+           $('.consume').hide()
+         }
+         if(data.data.upLevelFlag==false){
+             $('.user span').html('未激活')
+             $('.grade').html('<img src="../../image/cks/cks.png" alt="">')
+             $('.level2').hide()
+             $('.level3').hide()
+         }else{
+             $('.user span').html('<img src="../../image/cks/31254543.png" alt="">')
+             $('.grade').html('<img src="'+data.data.curBigLogo+'" alt="">')
+             $('.level2').html('￥'+data.data.award+'元')
+             $('.level2').attr('fen',data.data.award)
+             $('.level3').html('领取津贴')
+
+         }
+          api.refreshHeaderLoadDone()
+       }
+    })
+  }
+    apiready = function() {
+        app.ready()
+        readys()
+        api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            window.location.reload()
+            // readys()
+        })
+    };
+    $('.haves').on('tap',function(){
+        $('.player1').show()
+        var nums=$('.player').attr('data-num')
+        if(nums==2000){
+          $('.player1 p').html('您已达成条件将消耗'+nums+'创业分升级创客LV1')
+        }else if(nums==5000){
+           $('.player1 p').html('您已达成条件将消耗'+nums+'创业分升级创客LV2')
+        }else if(nums==10000){
+           $('.player1 p').html('您已达成条件将消耗'+nums+'创业分升级创客LV3')
+        }
+    })
+    // 升级
+    $('.player1 .yes').on('tap',function(){
+        app.ajax({
+           url:'member/level/upLevel',
+           data:{
+             token: $api.getStorage('token'),
+             memberId: $api.getStorage('memberId')
+           },
+           success:function(data){
+              console.log('----------'+JSON.stringify(data))
+              // ready()
+              if(data.code==0){
+                 app.toast('升级成功！')
+                 window.location.reload()
+                //  readys()
+              }
+           }
+        })
+    })
+    $('.player1 .nos').on('tap',function(){
+       $('.player1').hide()
+    })
+    $('.explain').on('tap',function(){
+      api.openWin({
+          name: 'explain',
+          url: './explain.html',
+          pageParam: {
+              name: 'test'
+          }
+      });
+    })
+    $('.level3').on('tap',function(){
+        $('.player2').show()
+        nums=$('.level2').attr('fen')
+        $('.player p').html('您将消耗'+nums+'创业分申请津贴')
+    })
+  $('.player2 .yes').on('tap',function(){
+    app.ajax({
+      url:'member/level/getAward',
+      data:{
+        token: $api.getStorage('token'),
+        memberId: $api.getStorage('memberId')
+      },
+      success:function(data){
+        // alert(JSON.stringify(data))
+        if(data.code==0){
+          alert(data.msg)
+          window.location.reload()
+        }
+      }
+    })
+  })
+  $('.player2 .nos').on('tap',function(){
+      $('.player2').hide()
+  })
+</script>
+
+</html>

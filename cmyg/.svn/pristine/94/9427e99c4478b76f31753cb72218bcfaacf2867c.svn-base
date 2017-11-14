@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>线下支付</title>
+		<link rel="stylesheet" href="../../css/aui.css">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+		<style>
+			body {overflow-y: scroll;}
+			.clear{clear: both;}
+			.signOut {margin-top: 20px;text-align: center;}
+			.signOut button {width: 80%;height: 40px;font-size: .6rem;}
+			.mui-table-view li {font-size: .6rem;}
+			.logo {text-align: center;margin: 10px 0;}
+			.mui-table-view-cell:after {left: 0px !important;}
+			.mui-scroll-wrapper{position: absolute;top: -17px;}
+            .payType{display:flex;padding:20px 10px;}
+            .payType div{width: 50%;text-align: center;}
+            .wxpay{margin-top: 3px;}
+            .wxpay img{width: 70%;}
+            .alipay img{width: 50%;}
+			/*.payType>div{position: ;}*/
+			.radio1{position: relative;top: 2px;width: 20px;height: 20px;}
+            .radio2{position: relative;top: 6px;width: 20px;height: 20px;}
+            .cacheClear{}
+            .textTit{display: inline-block;width: 50px;text-align: justify; text-align-last: justify;}
+			#pay-btn{}
+		</style>
+	</head>
+
+	<body>
+	<div class="box">
+		<div class="mui-inner-wrap">
+			<header id="header" class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">请选择支付方式</h1>
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<div class="clear"></div>
+			</header>
+
+			<!-- <div class="clear"></div> -->
+			<div class="mui-content mui-scroll-wrapper">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell" id="versionUpdata">
+                        <span class="textTit">订单号</span>：
+                        <span style="" class="cacheClear">11</span>
+					</li>
+					<li class="mui-table-view-cell" id="clearCache">
+                        <span class="textTit">订号</span>：
+						<span style="" class="cacheClear">11</span>
+					</li>
+					<li class="mui-table-view-cell" id="aboutUsBtn">
+                        <span class="textTit">订单号</span>：
+                        <span style="" class="cacheClear">11</span>
+                    </li>
+                    <li class="mui-table-view-cell" id="aboutUsBtn">
+                        <span class="textTit">订单号</span>：
+                        <span style="" class="cacheClear">11</span>
+                    </li>
+				</ul>
+                <div class="payType">
+                    <div class="wxpay">
+                        <label>
+                            <input type="radio" name="pay" class="payRadio aui-radio radio1" value="1" checked="checked">
+                            <img src="../../image/zfb.png" alt="">
+                        </label>
+                    </div>
+                    <div class="alipay">
+                        <label>
+                            <input type="radio" name="pay" class="payRadio aui-radio radio2" value="2">
+                            <img src="../../image/wx.png" alt="">
+                        </label>
+                    </div>
+                </div>
+				<div class="signOut">
+					<button type="button" class="mui-btn mui-btn-danger" id="pay-btn" name="button">确认并支付</button>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="clear"></div>
+	</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/mui.min.js"></script>
+	<script type="text/javascript" src="../../script/zepto.min.js"></script>
+	<script type="text/javascript" src="../../script/common.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			$("#pay-btn").on("tap",function(){
+				$(".payRadio").each(function(){
+					if($(this).is(':checked')){
+						var thisVal = $(this).val()
+						if(thisVal === '1'){
+							app.ajax({
+								url:'ordergoods/wxpay',
+								type:'post',
+								data:{
+									token:$api.getStorage("token"),
+									memberId:$api.getStorage("memberId"),
+									orderGoodsId:''
+								},success:function(ret){
+									alert(JSON.stringify(ret))
+								},error:function(err){
+
+								}
+							})
+						}
+						if(thisVal === '2'){
+							app.ajax({
+								url:'ordergoods/preAlipayAction',
+								type:'post',
+								data:{
+									token:$api.getStorage("token"),
+									memberId:$api.getStorage("memberId"),
+									orderGoodsId:''
+								},success:function(ret){
+									alert(JSON.stringify(ret))
+								},error:function(err){
+
+								}
+							})
+						}
+					}
+				})
+
+			})
+        }
+	</script>
+
+</html>

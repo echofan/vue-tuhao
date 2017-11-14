@@ -115,8 +115,8 @@
                     <i class="iconfont icon-qrcode"></i>
                     <span>创客推广</span>
                 </td>
-                <!-- <td attr-ids='4' class="tg-item"> -->
-                <td attr-ids='4' class="nos">
+                <td attr-ids='4' class="tg-item">
+                <!-- <td attr-ids='4' class="nos"> -->
                     <i class="iconfont icon-deal"></i>
                     <span>积分转让</span>
                 </td>
@@ -255,23 +255,40 @@
                   $(icons[i]).show()
                }
              }
-              api.refreshHeaderLoadDone()
         }
      })
    }
     apiready = function() {
-        // api.setStatusBarStyle({
-        //     style: 'dark',
-        //     color: '#E61C4C'
-        // });
-        // app.ready()
         api.addEventListener({
             name: 'me'
         }, function(ret, err){
             if( ret ){
-                //  alert( JSON.stringify( ret ) );
-                window.location.reload()
+              var urls='caritem/getCartAndOrderNum'
+              $.ajax({
+                 url:app.server+urls,
+                 type:'POST',
+                 data:{
+                   memberId:$api.getStorage('memberId'),
+                   token: $api.getStorage('token')
+                 },
+                 success:function(data){
+                   console.log(data)
+                      $('.icon-bag-num').text(data.data.cartItemcount)
+                      $('.icon-money-num').text(data.data.orderNoPaycount)
+                      $('.icon-send-num').text(data.data.orderNoConsigncount)
+                      $('.icon-deliver-num').text(data.data.orderConsigncount)
+                      var icons=$('.icon-item')
+                      for(var i=0;i<icons.length;i++){
+                        $(icons[i]).hide()
+                        if($(icons[i]).html()>0){
+                           $(icons[i]).show()
+                        }
+                      }
+                 }
+              })
+
             }else{
+              bagNum()
                  alert( JSON.stringify( err ) );
             }
         });
@@ -346,7 +363,7 @@
                             data:{
                                 token: $api.getStorage('token'),
                                 memberId: $api.getStorage('memberId'),
-                              headImg : baseUrl + ret.info.key
+                                headImg : baseUrl + ret.info.key
                             },
                             success : function(res){
                                 $("#userImg").attr("src",baseUrl + ret.info.key)
@@ -453,17 +470,6 @@
     })
 
     mui('#page-me').on('tap', '.tuiguang', function() {
-      // api.openWin({
-      //     name: 'userType',
-      //     url: '../win/userType.html',
-      //     pageParam: {
-      //         tg_id: 1
-      //     },
-      //     animation: {
-      //         type: 'movein',
-      //         duration: 200
-      //     }
-      // });
       api.openWin({
           name: 'tg-frames',
           url: '../tg-frames/index.html',
@@ -480,6 +486,7 @@
       });
 
     })
+
     var items = $('.tg-item');
     for (var i = 0; i < items.length; i++) {
         $(items[i]).on('tap', function() {
@@ -487,9 +494,6 @@
             api.openWin({
                 name: 'tg-frames',
                 url: '../tg-frames/index.html',
-                reload: true,
-                scrollEnabled: false,
-                vScrollBarEnabled:false,
                 pageParam: {
                     tg_id: 3,
                     homes: ids

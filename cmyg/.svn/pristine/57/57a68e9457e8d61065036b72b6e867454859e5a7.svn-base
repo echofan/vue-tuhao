@@ -1,0 +1,192 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>升级说明</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+      body{background-color: #EEEEEE;}
+      .mui-inner-wrap{position:relative!important;}
+      .mui-content{background-color: #EEEEEE!important;position:relative!important;padding-bottom:70px;overflow: scroll;}
+      ul{border-top:1px solid #ccc;}
+      ul li{height: 50px;line-height: 50px;display:flex;border-bottom:1px solid #ccc;padding:0 15px;background-color: #fff;}
+      ul li span:nth-child(1){flex:3;}
+      ul li span:nth-child(1) img{width: 70px;height: 30px;background-size: cover;margin-top:10px;}
+      ul li span:nth-child(2){flex:1;position: relative;}
+      ul li span:nth-child(2) img{width: 20px;height: 25px;background-size: cover;margin-top:13px;position:absolute;right:0;}
+      .items{display:none;background-color: #fff;width: 100%;height: 100%;padding:20px;border-bottom:1px solid #ccc;}
+      /*.items div{background-color: #f0f0f2;padding:10px;overflow: hidden;word-wrap:break-word}*/
+      .items div span{height: 30px;font-size:14px;}
+      h1{font-size:18px;}
+      .items div{margin-top:15px;margin-bottom:10px;}
+      .items .dv1{border:1px dashed red;padding:10px;overflow: hidden;word-wrap:break-word}
+      .items .dv2{border:1px dashed #ccc;padding:10px;overflow: hidden;word-wrap:break-word}
+    </style>
+</head>
+
+<body>
+    <div id="page-add_address">
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">升级说明</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <ul>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/123.png" alt="">
+                      </span>
+                      <span>
+                          <img src="../../image/Image1.png" alt="">
+                      </span>
+                  </li>
+                  <div class="items">
+                    <h1>创客激活升级条件及说明：</h1>
+                     <div class="dv1">
+                       <span>首次激活升级创客，需满足两个条件即可;</span>
+                       <span>1、创业分达到2000;</span>
+                       <span>2、推广值达到10；（推广值：参与联盟推广次数）达到以上条件后，使用2000创业分即可升级创客；升级创客后每月5-10号,创业分满足2000即扣除2000发放上月创客劳资津贴2000元；（指定银行卡或支付宝绑定账户）</span>
+                     </div>
+                     <h1>创客特权</h1>
+                     <div class="dv2">
+                       <span>1、自动提现额升级到300广告分每天</span>
+                       <span>2、领取2000元/月，创客劳资津贴；</span>
+                     </div>
+                  </div>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/535436.png" alt="">
+                      </span>
+                      <span>
+                          <img src="../../image/Image1.png" alt="">
+                      </span>
+                  </li>
+                  <div class="items">
+                    <h1>创客激活升级条件及说明：</h1>
+                     <div class="dv1">
+                       <span>一级升级到二级创客，需要满足3个条件即可；</span>
+                       <span>1、创业分达到5000；</span>
+                       <span>2、推广值达到30；（推广值：参与联盟推广次数）</span>
+                       <span>3、消费值达到500；（现金购物获得购物分数值）达到以上条件后，使用5000创业分即可升级创客；升级创客后每月5-10号,创业分满足5000即扣除5000发放上月创客劳资津贴5000元;（指定银行卡或支付宝绑定账户）</span>
+                     </div>
+                     <h1>创客特权</h1>
+                     <div class="dv2">
+                       <span>1、自动提现额升级到300广告分/天；</span>
+                       <span>2、领取5000元/月，创客劳资津贴；</span>
+                       <span>3、广告分兑换发布额限500广告分/天；</span>
+                     </div>
+                  </div>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/324464.png" alt="">
+                      </span>
+                      <span>
+                          <img src="../../image/Image1.png" alt="">
+                      </span>
+                  </li>
+                  <div class="items">
+                    <h1>创客激活升级条件及说明：</h1>
+                     <div class="dv1">
+                       <span>二级升级到三级创客，需要满足6个条件即可；</span>
+                       <span>1、创业分达到10000；</span>
+                       <span>2、推广值达到60；（推广值：参与联盟推广次数）</span>
+                       <span>3、消费值达到1000；（现金购物获得购物分数值）</span>
+                       <span>4、分享值达到5；（直接分享会员成为创客1的数量）</span>
+                       <span>5、营销值达到100；（推荐会员的激活推客总数）</span>
+                       <span>6、共享值达到20；（推荐会员的创客总数）达到以上条件后，使用10000创业分即可升级创客；升级创客后每月5-10号,创业分满足10000即扣除10000发放上月创客劳资津贴10000元；（指定银行卡或支付宝绑定账户）</span>
+                     </div>
+                     <h1>创客特权</h1>
+                     <div class="dv2">
+                       <span>1、自动提现额升级到300广告分/天；</span>
+                       <span>2、领取10000元/月，创客劳资津贴；</span>
+                       <span>3、广告分兑换发布额限1000广告分/天；</span>
+                     </div>
+                  </div>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/1325354.png" alt="">
+                      </span>
+                      <span>
+                          <!-- <img src="../../image/Image1.png" alt=""> -->
+                      </span>
+                  </li>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/32554.png" alt="">
+                      </span>
+                      <span>
+                          <!-- <img src="../../image/Image1.png" alt=""> -->
+                      </span>
+                  </li>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/234326463.png" alt="">
+                      </span>
+                      <span>
+                          <!-- <img src="../../image/Image1.png" alt=""> -->
+                      </span>
+                  </li>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/543534643.png" alt="">
+                      </span>
+                      <span>
+                          <!-- <img src="../../image/Image1.png" alt=""> -->
+                      </span>
+                  </li>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/u2541.png" alt="">
+                      </span>
+                      <span>
+                          <!-- <img src="../../image/Image1.png" alt=""> -->
+                      </span>
+                  </li>
+                  <li>
+                      <span>
+                          <img src="../../image/cks/level9.png" alt="">
+                      </span>
+                      <span>
+                          <!-- <img src="../../image/Image1.png" alt=""> -->
+                      </span>
+                  </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript" src="../../script/md5.min.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+        api.refreshHeaderLoadDone()
+        api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+            window.location.reload()
+        })
+    };
+    $('ul li').on('tap',function(){
+       $(this).next('div').toggle()
+      //  $(this).siblings('li').next('div').hide()
+    })
+</script>
+
+</html>

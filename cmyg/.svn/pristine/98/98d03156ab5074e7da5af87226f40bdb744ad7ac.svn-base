@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>媒体中心</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    .footer{
+		 animation:bounceInUp .3s 1;
+	}
+
+	@-webkit-keyframes bounceInUp{
+		0%{opacity:0;
+		-webkit-transform:translateY(1600px)}
+		100%{-webkit-transform:translateY(0)}
+	}
+        body {
+            font-size: 10px;
+        }
+
+        main {
+            padding-top: 44px;
+        }
+
+        .mui-media-object {
+            max-width: 120px !important;
+            height: 80px !important;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .liCont {
+            padding-top: 10px;
+            margin: 20px;
+            position: relative;
+            border-bottom: 1px solid #CCCCCC;
+        }
+
+        .contImg {
+            width: 104%;
+            overflow: hidden;
+        }
+
+        .contImg>img {
+            width: 30%;
+            height: 70px;
+            border: 1px solid #ccc;
+            margin-right: 3%;
+        }
+
+        .contTitle {
+            font-size: .8rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .allBtn {
+            margin-top: 10px;
+        }
+
+        .allBtn>span {
+            font-size: .5rem;
+            margin-right: 20px;
+        }
+
+        .allBtn-fxbtn {
+            float: right;
+            margin-right: 10px !important;
+        }
+
+        .allBtn-look i {
+            background: url("../../image/575877887.png")no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+            margin-top: 6px;
+        }
+
+        .allBtn-star i {
+            background: url("../../image/785788787.png")no-repeat;
+            width: 16px;
+            height: 16px;
+            background-size: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .allBtn-fx i {
+            background: url("../../image/7557545.png")no-repeat;
+            width: 16px;
+            height: 16px;
+            background-size: 16px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .allBtn-fxbtn i {
+            background: url("../../image/23442356.png")no-repeat;
+            width: 20px;
+            height: 20px;
+            background-size: 20px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .footer {
+            width: 100%;
+            background: #F4F4F4;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0px;
+            border-top: 1px solid #000;
+            /*display: none;*/
+        }
+
+        .footer ul li {
+            float: left;
+            width: 50%;
+            text-align: center;
+            padding-top: 14px;
+        }
+
+        .footer ul li img {
+            width: 30%;
+        }
+
+        .footer ul li span {
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .quxiao {
+            border-top: 1px solid #999;
+            text-align: center;
+            color: #000 !important;
+            font-size: .7rem;
+            height: 50px;
+            line-height: 50px;
+        }
+        .moda{
+            position: fixed;;
+            top:0;
+            left:0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">媒体中心</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <main>
+      <!-- <img src="" alt="" id='hc' style="display:none;"> -->
+        <ul class="spreadList"></ul>
+        <div class="thisNull" style="margin-top:160px;text-align:center;display:none;">
+            <img src="../../../../image/shop-empty.png" alt="" style="width:40px;">
+            <p style="text-align:center;">暂无更多数据</p>
+        </div>
+        <!-- <p class="load-more"></p> -->
+        <div class="moda">
+            <div class="footer">
+                <ul>
+                    <li class="wxpyq">
+                        <img src="../../image/325I.png" alt="">
+                        <span>微信朋友圈</span>
+                    </li>
+                    <li class="wxhy">
+                        <img src="../../image/235234.png" alt="">
+                        <span>微信好友</span>
+                    </li>
+                </ul>
+                <div class="clear"></div>
+                <div class="quxiao">
+                    取消
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    $(".quxiao").on("tap", function() {
+        $(".moda").hide(200);
+    })
+    apiready = function() {
+        var productListAjax = app.ajaxWithLoadMore({
+            url: 'cms/articleList',
+            type: 'post',
+            data: {
+                pageSize: 10,
+                pageNum: 1
+            },
+            showLoading: false,
+            success: function(ret) {
+                // app.ready()
+                var retData = ret.data;
+                console.log(JSON.stringify(ret.data))
+                console.log(productListAjax.status)
+                if (productListAjax.status === 'REFRESH') {$(".spreadList").html('')}
+                for (i in retData) {
+                    console.log(retData[i].id)
+                    var date = new Date((retData[i].publishAt) * 1000);
+                    Y = date.getFullYear() + '-';
+                    M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    D = date.getDate() + ' ';
+                    h = date.getHours() + ':';
+                    m = date.getMinutes();
+                    Imgurl = JSON.parse(retData[i].picurl)
+                    if(Imgurl.length>=3){
+                        var listHtml = '<li class="liCont" data-src="'+Imgurl[0].url+'" data-id="' + retData[i].id + '" data-info="'+retData[i].info+'">' +
+                            '<p class="times">' + Y + M + D + '&nbsp;&nbsp;' + h + m + '</p>' +
+                            '<div class="contImg">' +
+                                '<img src="' + Imgurl[0].url + '" class="orderImg">' +
+                                '<img src="' + Imgurl[1].url + '" class="orderImg">' +
+                                '<img src="' + Imgurl[2].url + '" class="orderImg">' +
+                            '</div>' +
+                            '<div class="contTitle">' + retData[i].title + '</div>' +
+                            '<div class="allBtn">' +
+                                '<span class="allBtn-look"><i></i>' + retData[i].readNum + '</span>' +
+                                '<span class="allBtn-fxbtn"><i></i></span>' +
+                            '</div>'
+                        '</li>';
+                        $(".spreadList").append(listHtml);
+                    }
+                    api.refreshHeaderLoadDone()
+                }
+
+                        //微信分享
+                        var wx = api.require("wx");
+                        $("body").on("tap",".allBtn-fxbtn",function(){
+                          var index=$(this).parents('.liCont').index()
+                            textId = $(this).parent().parent().attr("data-id");
+                            info = $(this).parent().parent().attr("data-info");
+                            $(".moda").show(200);
+                            textCont = $(this).parent().parent().find(".contTitle").html();
+                            imgs=$(this).parents('.liCont').attr('data-src')
+                            var indexUrl='a'+index+'.png'
+                            $('.moda').attr('data-index',indexUrl)
+                             api.download({
+                               url:imgs,
+                               savePath: 'fs://indexUrl',       //定义图片名称  循环遍历所得
+                               report: true,
+                               cache: false,
+                               allowResume: true
+                             }, function(ret, err) {
+                              //  $api.attr($api.byId('hc'), 'src', ret.savePath);
+                              //  $api.attr($api.byId('hc'), 'imgs', ret.savePath);
+                              //  urls=$api.attr($api.byId('hc'), 'imgs');
+                             });
+
+                                $(".wxpyq").click(function() {
+                                    var indexUrl=$(this).parents('.moda').attr('data-index');
+                                    wx.shareWebpage({
+                                        apiKey: 'wxdace5ee36e9b94bf',
+                                        scene: 'timeline',
+                                        title: textCont,
+                                        description: info,
+                                        thumb: "fs://indexUrl",
+                                        contentUrl: app.fxUrl + 'shares/article/webArticle.html?id=' +textId
+                                    }, function(ret, err) {
+
+                                          if(ret.code==0){
+                                             alert('分享成功')
+                                          }
+                                          $(".moda").hide();
+                                    });
+                                });
+                                $(".wxhy").click(function() {
+                                    var indexUrl=$(this).parents('.moda').attr('data-index')
+                                    wx.shareWebpage({
+                                        apiKey: 'wxdace5ee36e9b94bf',
+                                        scene: 'session',
+                                        title: textCont,
+                                        description: info,
+                                        thumb: "fs://indexUrl",
+                                        contentUrl: app.fxUrl + 'shares/article/webArticle.html?id=' +textId
+                                    }, function(ret, err) {
+                                      if(ret.code==0){
+                                         alert('分享成功')
+                                      }
+                                      $(".moda").hide();
+                                    });
+                                })
+                        });
+                        $(".contImg").each(function() {
+                            $(this).on("tap", function() {
+                                var textId = $(this).parent().attr("data-id");
+                                var imgs=$(this).parents('.liCont').attr('data-src')
+                                api.openWin({
+                                    name: 'article',
+                                    url: './article0.html',
+                                    pageParam: {
+                                        name: textId,
+                                        img:imgs
+                                    }
+                                });
+                            })
+
+                        });
+
+                    },
+                    error: function(err) {
+                        alert(JSON.stringify(err))
+                    }
+        })
+
+        var f=true;
+        api.setRefreshHeaderInfo({
+            bgColor: '#fff',
+            textColor: '#333',
+            textDown: '下拉刷新...',
+            textUp: '松开刷新...'
+        }, function(ret, err) {
+            if(f){
+                f=false;
+                productListAjax.init()()
+                setTimeout(function(){
+                    f=true;
+                },1000);
+            }
+        })
+        api.addEventListener({
+            name: 'scrolltobottom'
+        }, function (ret, err) {
+            if(f){
+                f=false
+                productListAjax();
+                f=true;
+            }
+        })
+      productListAjax.init()()
+    }
+
+</script>
+
+</html>

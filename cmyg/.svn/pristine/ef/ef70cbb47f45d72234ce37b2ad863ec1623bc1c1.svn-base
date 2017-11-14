@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+		<meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+		<title>支付成功</title>
+		<link rel="stylesheet" href="../../css/aui.css">
+		<link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/api.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+		<style>
+			.price{height: 100px;text-align: center;line-height: 100px;font-size: 30px;}
+			li{padding:10px;}
+			.back{text-align: center;margin-top: 30px;}
+			.back span{display: inline-block;padding: 10px 30px;text-align: center;border: 1px solid #46BF1A;border-radius: 3px;}
+		</style>
+	</head>
+
+	<body>
+	<div class="box">
+		<div>
+			<header id="header" class="mui-bar mui-bar-nav">
+				<h1 class="mui-title">交易详情</h1>
+			</header>
+			<div style="height:50px;"></div>
+			<mian>
+				<div class="price">
+					<div>金额：<span class="orderPrice"></span>元</div>
+				</div>
+				<div class="info">
+					<ul>
+						<li>支付时间：<span class="time"></span></li>
+						<li>商品名称：<span class="orderName"></span></li>
+					</ul>
+				</div>
+				<div class="back">
+					<span class="backBtn">返回首页</span>
+				</div>
+			</mian>
+		</div>
+
+
+	</div>
+	</body>
+	<script type="text/javascript" src="../../script/api.js"></script>
+	<script type="text/javascript" src="../../script/mui.min.js"></script>
+	<script type="text/javascript" src="../../script/zepto.min.js"></script>
+	<script type="text/javascript" src="../../script/common.js"></script>
+	<script type="text/javascript">
+		apiready = function() {
+			var times=app.times(new Date().getTime())
+			$(".orderName").text(api.pageParam.orderName);
+			$(".orderPrice").text(api.pageParam.totalPrice)
+			$(".time").text(times)
+
+			$(".backBtn").on("tap",function(){
+				api.closeToWin({
+			        name:'root'
+		      	})
+
+			})
+        }
+	</script>
+
+</html>

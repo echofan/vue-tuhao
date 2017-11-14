@@ -1,0 +1,32 @@
+{
+    "status": true,
+    "currentNum": 20,
+    "pageIndex": 0,
+    "totalPage": 202,
+    "totalNum": 4027,
+    "results": [
+        {
+            "lon": 113.74743,
+            "lat": 23.013545,
+            "name": "张铁柱",
+            "uid": "17365033c5c497c6b320a8a4",
+            "address": "广东省东莞市大岭山镇大学路1号",
+            "city": "东莞市",
+            "phone": "(0769)22861109",
+            "poiType": 0
+},
+        {
+            "lon": 113.74741,
+            "lat": 23.013549,
+            "name": "宋铁柱",
+            "uid": "8cba4bb00a829784ad045745",
+            "address": "光明大道68号(光明中学侧)",
+            "city": "东莞市",
+            "phone": "(0769)22655838",
+            "poiType": 0
+}
+
+]
+
+
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>退换货</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        body{background-color: #f0f0f2;width: 100%;height: 100%;}
+        #footer{display: flex;border-top: 1px solid #ccc;position: fixed;bottom: 0;width: 100%;background: #fff;}
+        #footer div{text-align: center;height: 50px;line-height: 50px;width: 50%;}
+        .often,.hot{background: #fff;}
+        .title{height: 40px;line-height: 40px;text-indent: 1em;}
+        .oftenInfo li{display: flex;border-top: 1px solid #ccc;}
+        .oftenInfo li div{width: 50%;text-indent: 2em;height: 40px;line-height: 40px;}
+
+        .hot{margin-top: 10px;margin-bottom: 70px;}
+        .hotInfo li{height: 40px;line-height: 40px;text-indent: 2em;border-top: 1px solid #ccc;}
+        .main{margin-bottom: 50px;}
+        li p{padding: 4px 10px;color: #222;text-indent: 2em;}
+        li img{width: 100%;}
+    </style>
+</head>
+
+<body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">退换货</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    </header>
+    <div style="height:50px;"></div>
+    <div class="main">
+        <ul>
+            <li>
+                <h4 style="padding:4px;font-size:16px;">1、非产品问题 </h4>
+                <p>使用消费分兑换商品非质量问题和物流中运损不予退换。此产品是由平台所赠送消费积分兑换，非现金购买 的，所以不支持退换。</p>
+            </li>
+            <li>
+                <h4 style="padding:4px;font-size:16px;">2、产品和物流原因（少发 漏发 错发 描述不一致）  </h4>
+                <p>客户提供相应的图片资料到客服，审核通过后。客服回复会员。 （换货）由会员先行寄回供应商，供应商收到后，再重新寄送。 </p>
+            </li>
+
+        </ul>
+    </div>
+    <dix id="footer">
+        <div>智能客服</div>
+        <div class="serviceLz"><i></i>人工客服</div>
+    </dix>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+
+    apiready = function() {
+        var liIndex = api.pageParam.liIndex;
+
+
+        $("body").on("tap",".serviceLz",function(){
+            api.openWin({
+                name: 'page1',
+                url:'https://static.meiqia.com/dist/standalone.html?_=t&eid=70856'
+
+            });
+        })
+
+
+    }
+</script>
+
+</html>

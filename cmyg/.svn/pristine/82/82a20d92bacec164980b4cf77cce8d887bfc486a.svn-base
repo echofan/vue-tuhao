@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+      <title>线下消费</title>
+      <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+      <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+      <style>
+            body{
+
+            }
+            .height45{height: 47px;}
+            .sellerImg img{width: 100px;height: 100px;margin-right: 6px;}
+            .sellerList{padding: 10px;display: flex;border-bottom: 1px solid #ccc;}
+            .sellerCont{padding: 4px;width: 100%;}
+            .color999{color: #999;}
+            .font12{font-size: 12px}
+            .font14{font-size: 14px}
+            .orderPrice{margin-right: 30px;}
+            .playBtn{width: 80px;height: 24px;border-radius: 4px;color:#fff;background: #f00;font-size: 14px;text-align: center;line-height: 24px;  float: right;}
+      </style>
+  </head>
+  <body>
+        <div class="page page-status-bar">
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">线下商家</h1>
+                <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            </header>
+
+            <div id="main">
+                <div class="height45"></div>
+                <div class="sellerList">
+                    <div class="sellerImg">
+                        <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1508391368469&di=c049c4869f2d75cc442c7e8fd484b35f&imgtype=0&src=http%3A%2F%2Fa.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F72f082025aafa40ff360cb1ca264034f79f01948.jpg" alt="">
+                    </div>
+                    <div class="sellerCont">
+                        <h4 class="sellerName">欧蔓婚纱摄影</h4>
+                        <div class="sellerInfo">
+                            <div class="orderInfo">
+                                <span class="orderPrice color999 font12">价格￥：3000</span>
+                                <span class="shopscore color999 font12">赠送购物分：2000</span>
+                            </div>
+                            <div class="orderName color999 font14">婚纱真好看</div>
+                            <div class="sellerAdderss color999 font14">广东省东莞市三元里万凯商务中心</div>
+                            <div class="playBtn">立即支付</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script type="text/javascript">
+        apiready = function(){
+            $("body").on("tap",".playBtn",function(){
+                api.openWin({
+                    name: 'linePay',
+                    url: '../plays/linePay.html',
+                    pageParam: {
+                        name: 'test'
+                    },
+                    animation:{
+                       type:'movein',
+                       duration:200
+                    }
+                });
+
+
+            })
+
+
+        };
+
+  </script>
+  </html>

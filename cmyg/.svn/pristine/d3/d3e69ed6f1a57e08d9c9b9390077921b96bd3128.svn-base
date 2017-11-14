@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>线下首页</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+    .clear{clear: both;}
+    .page-search-bar {display: flex; display: -webkit-flex; color: #333; padding: 10px 10px 0; align-items: stretch; background: #E60144; z-index: 10; position: fixed;width: 100%;height: 50px;}
+    .page-search-bar>div:nth-child(2n+1) { align-items: center; display: flex; display: -webkit-flex; margin: 0 2px; }
+    .page-search-bar span {        white-space: nowrap;    }
+    .page-search-bar .i-search { position: absolute; right: 5px;bottom: 0;transform: translateY(-50%);   -webkit-transform: translateY(-50%);  }
+    .page-search-bar i.iconfont.i-search::before {color: #E60144; }
+    .page-search-bar .ip-search[type=text] { margin: 0;background: hsla(0, 0%, 100%, 0.85);border-radius: 4px;padding: 0;border: none;height: 30px;}
+    .page-search-bar>div:nth-child(2) {flex: auto;position: relative;height: 40px;margin: 0 5px;    }
+    .page-search-bar>div>span {font-size: 14px;color: #fff;line-height: 1.5;height: 25px;    }
+    .page-search-bar i.iconfont::before { color: #fff; font-size: 20px;  }
+    i.iconfont.icon-comments { margin-right: 4px; }
+
+    .bar{height: 40px;width: 100%;position: fixed;background: #fff;top: 50px;z-index: 99;}
+    .bar ul{width: 200%;overflow: hidden;}
+    .bar ul li{float: left;width: 50px;font-style: normal !important;height: 40px;line-height: 40px;text-align: center;}
+    .active{color: #E60144; }
+
+    .lineImg{position:relative; }
+    .lineImg img{width: 100%;height: 180px;float: left;}
+    .lineImg .option{height: 40px;background:rgba(0,0,0,.8);position: absolute;top:140px;z-index: 1;width: 100%;}
+    .info{padding: 10px;display: flex;width: 100%;overflow: hidden;}
+    .left img{width: 80%;height: 80;float: left;}
+    .left {display: inline-block; width: 25%; float: left;}
+    .right{width: 75%;height: 70px; display: inline-block; float: left;}
+    .orderInfo{overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+    /*.orderPrice{display: flex;text-align: center; vertical-align: middle;}*/
+    .orderPrice div{display: inline-block;width: 32%; margin-top: 28px;}
+    .price{font-size: 20px;color: #E60144; }
+    .score i {background: url("../../image/312321I.png")no-repeat; width:19px;height: 19px;background-size: 16px; display: inline-block; vertical-align: middle;  }
+    .score b{font-size: 8px;font-weight: 100;background:#E60144;border-radius: 50%;color: #fff;padding: 2px;position: relative;top: -10px;}
+    .sale{font-size: 10px;}
+
+    .lineCont li{border-bottom: 1px solid #ccc;margin-bottom: 10px;}
+    .option span{float: left; color: #fff;}
+    .name{line-height: 40px;padding-left: 10px;width: 70%;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
+    .buyBtn{background: #E60144;padding:4px 30px;border-radius: 30px;margin-top: 5px;}
+    </style>
+</head>
+
+<body>
+    <div class="bigBox">
+        <!-- 搜索 -->
+        <!-- <div class="page-search-bar">
+            <div class="spreadBtn">
+                <span>东莞</span>
+                <i class="iconfont icon-generalize"></i>
+            </div>
+            <div>
+                <i class="i-search iconfont icon-search"></i>
+                <input class="ip-search" readonly type="text">
+            </div>
+            <div class="msg">
+                <i class="iconfont icon-comments"></i>
+                <span class="ages">扫码</span>
+            </div>
+        </div> -->
+        <!-- 导航 -->
+        <!-- <div class="bar">
+            <ul class="bar-scroll">
+                <li class="active">全部</li>
+                <li>美食</li>
+                <li>酒店</li>
+                <li>旅游</li>
+                <li>娱乐</li>
+                <li>汽车</li>
+                <li>服务</li>
+                <li>医疗</li>
+            </ul>
+        </div> -->
+        <!-- <div style="height:90px;"></div> -->
+        <div class="lineCont">
+            <ul>
+                <li>
+                    <div class="lineImg">
+                        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3226200644,3630729940&fm=27&gp=0.jpg" alt="">
+                        <div class="clear"></div>
+                        <div class="option">
+                            <span class="name">爱尚射影（南城万达店）</span>
+                            <span class="buyBtn">购买</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="left"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2581016759,1818062400&fm=11&gp=0.jpg" alt=""></div>
+                        <div class="right">
+                            <p class="orderInfo">巴黎婚纱么么哒，写真只要998，来呀快活啊，反正有大把时光！</p>
+                            <div class="orderPrice">
+                                <div class="price">￥<span>14000</span></div>
+                                <div class="score"><i></i><span>12000</span><b>赠</b></div>
+                                <div class="sale">已售<span>10000</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lineImg">
+                        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3226200644,3630729940&fm=27&gp=0.jpg" alt="">
+                        <div class="clear"></div>
+                        <div class="option">
+                            <span class="name">爱尚射影（南城万达店）</span>
+                            <span class="buyBtn">购买</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="left"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2581016759,1818062400&fm=11&gp=0.jpg" alt=""></div>
+                        <div class="right">
+                            <p class="orderInfo">巴黎婚纱么么哒，写真只要998，来呀快活啊，反正有大把时光！</p>
+                            <div class="orderPrice">
+                                <div class="price">￥<span>14000</span></div>
+                                <div class="score"><i></i><span>12000</span><b>赠</b></div>
+                                <div class="sale">已售<span>10000</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+                <li>
+                    <div class="lineImg">
+                        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3226200644,3630729940&fm=27&gp=0.jpg" alt="">
+                        <div class="clear"></div>
+                        <div class="option">
+                            <span class="name">爱尚射影（南城万达店）</span>
+                            <span class="buyBtn">购买</span>
+                        </div>
+                    </div>
+                    <div class="info">
+                        <div class="left"><img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2581016759,1818062400&fm=11&gp=0.jpg" alt=""></div>
+                        <div class="right">
+                            <p class="orderInfo">巴黎婚纱么么哒，写真只要998，来呀快活啊，反正有大把时光！</p>
+                            <div class="orderPrice">
+                                <div class="price">￥<span>14000</span></div>
+                                <div class="score"><i></i><span>12000</span><b>赠</b></div>
+                                <div class="sale">已售<span>10000</span></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+
+    </div>
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        $(".bar ul").width($(".bar ul li").width()*$(".bar ul li").length)
+        mui('.bar-scroll').scroll({
+        	deceleration: 0.0005,//flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006,
+            indicators: false //是否显示滚动条
+        });
+        mui('.bar').scroll({
+        	deceleration: 0.0005,//flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006,
+            indicators: false //是否显示滚动条
+        });
+
+    }
+
+
+</script>
+
+</html>

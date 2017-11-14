@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <meta name="format-detection" content="telephone=no" />
+      <title>地图</title>
+      <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+      <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+      <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+      <style>
+          body{
+
+          }
+      </style>
+  </head>
+  <body>
+
+  </body>
+  <script type="text/javascript" src="../../script/api.js"></script>
+  <script type="text/javascript" src="../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../script/common.js"></script>
+  <script type="text/javascript">
+    apiready = function(){
+        var map = api.require('bMap');
+        map.open({
+            rect: {
+                x: 0,
+                y: 0,
+                w: 360,
+                h: 480
+            },
+            center: {
+                lon: '',
+                lat: ''
+            },
+            zoomLevel: 10,
+            showUserLocation: true,
+            fixedOn: api.frameName,
+            fixed: true
+            }, function(ret) {
+                if (ret.status) {
+                // alert('地图打开成功');
+            }
+        });
+
+    };
+  </script>
+  </html>

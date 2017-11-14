@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title挂卖信息</title>
+        <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+        <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+        <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+        <style>
+        .mui-inner-wrap{position:relative!important;}
+        .mui-scroll-wrapper{position:relative!important;padding-bottom:100px;}
+        .item_box .uls li{display:flex;height: 50px;line-height: 50px;padding:0 20px;box-sizing:border-box;border-bottom: 1px solid #ccc;}
+        .item_box .uls li span:nth-child(1){flex:1;text-align: center;}
+        .item_box .uls li span:nth-child(2){flex:4;padding-left:20px;}
+        .uls{position:relative;}
+        .one{height: 50px;border-bottom:1px solid #ccc;padding: 0 20px;line-height: 50px;}
+        .one span:nth-child(1){float:left;}
+        .one span:nth-child(2){float:right;}
+        .uls .right{position:absolute;right:0;height: 100%;width: 35%;border-left:1px solid #ccc;top:0;background-color: #fff;border-bottom:1px solid #ccc;text-align: center;}
+        .right .box{width: 90%;height: 80%;margin:0 auto;margin-top:10%;position:relative;}
+         .right .box img{width: 100%;height: 100%;background-size: 100%;}
+         .box span{position:absolute;bottom:0;left:0;z-index:0;width: 100%;height: 30px;line-height: 30px;text-align: center;color:#fff;background:rgba(255,0,0,0.5) ;}
+         .right span{text-align: center;margin-top:3px;}
+        .ggf{color:#D88F61;}
+        .price{color:#656364;}
+        .ggf i{background:url(../../../image/3213532.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;margin-right: 3px;}
+        .price i{background:url(../../../image/241I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;margin-right: 3px;}
+        .fukuan{display:flex;height: 50px;line-height: 50px;padding:0 20px;}
+        .fukuan span:nth-child(1){flex:1;text-align: center;}
+        .fukuan span:nth-child(2){flex:4;padding-left: 20px;}
+        .skf{height: 50px;padding:0 20px;line-height: 50px;background-color: #E61C4C;color:#fff;font-size:18px;}
+        .ul_skf{background-color: #f0f0f2;}
+        .ul_skf li{display:flex;height: 50px;line-height: 50px;padding:0 20px;box-sizing:border-box;border-bottom: 1px solid #ccc;}
+        .ul_skf li span:nth-child(1){flex:1;text-align: center;}
+        .ul_skf li span:nth-child(2){flex:4;padding-left:30px;}
+        .residue{height: 60px;padding:0 20px;line-height: 60px;display:flex;}
+        .residue span{flex:1;text-align: center;}
+        .big_img{width: 100%;height: 100%;background-color:rgba(0,0,0,0.6);position:fixed;top:0;left:0;display:none;}
+        .img_box{width: 80%;height: 70%;position:absolute;left:50%;margin-left:-40%;top:20%;}
+        .img_box img{width: 100%;height: 100%;background-size: cover;}
+        .delete{background:url(../../../image/654734.png) no-repeat;width: 25px;height: 25px;background-size: cover;position:absolute;right:5px;top:5px;}
+        </style>
+</head>
+
+<body>
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">交易信息</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="item_box">
+                    <div class="one">
+                        <span>付款方信息</span>
+                        <span>2017-4-14  10.59</span>
+                    </div>
+                    <ul class="uls">
+                        <li>
+                            <span>手&nbsp;&nbsp;机</span>
+                            <span>58585858525</span>
+                        </li>
+                        <li>
+                            <span>广告分</span>
+                            <span class="ggf"><i></i>58585</span>
+                        </li>
+                        <li>
+                            <span>金&nbsp;&nbsp;额</span>
+                            <span class="price"><i></i>585858</span>
+                        </li>
+                        <li>
+                            <span>实&nbsp;&nbsp;名</span>
+                            <span>5858585</span>
+                        </li>
+                        <li>
+                            <span>支付宝</span>
+                            <span>58585858525</span>
+                        </li>
+                        <div class="right">
+                            <div class="box">
+                                <img src="../../../image/g3.jpg" alt="" id="userImg">
+                                <span class="lookDetail">查看详情</span>
+                            </div>
+                            <span>已付款截图</span>
+                        </div>
+                    </ul>
+                    <div class="fukuan">
+                        <span>状态</span>
+                        <span>已付款</span>
+                    </div>
+                    <div class="skf">收款方信息</div>
+                    <ul class="ul_skf">
+                        <li>
+                            <span>编&nbsp;&nbsp;号</span>
+                            <span>58585858525</span>
+                        </li>
+                        <li>
+                            <span>时&nbsp;&nbsp;间</span>
+                            <span>58585858525</span>
+                        </li>
+                        <li>
+                            <span>用&nbsp;&nbsp;户</span>
+                            <span>58585858525</span>
+                        </li>
+                        <li>
+                            <span>手&nbsp;&nbsp;机</span>
+                            <span>58585858525</span>
+                        </li>
+                        <li>
+                            <span>广告分</span>
+                            <span class="ggf"><i></i>58585858525</span>
+                        </li>
+                        <li>
+                            <span>金&nbsp;&nbsp;额</span>
+                            <span class="price"><i></i>58585858525</span>
+                        </li>
+                        <li>
+                            <span>实&nbsp;&nbsp;名</span>
+                            <span>58585858525</span>
+                        </li>
+                        <li>
+                            <span>支付宝</span>
+                            <span>58585858525</span>
+                        </li>
+                    </ul>
+                    <div class="residue">
+                        <span>剩余确认时间</span>
+                        <span class="downtime"></span>
+                        <span>待确认</span>
+                    </div>
+                    <div class="foot">
+                        <span>确认收款</span>
+                        <span class="tousu">投诉<i></i></span>
+                    </div>
+                    <div class="big_img">
+                        <div class="img_box">
+                            <img src="" alt="" id="bigImg">
+                            <span class="delete"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+    //头部的更换
+    function rds(){
+       app.ajax({
+         url: 'member/getMyInfo',
+         data: {
+             token: $api.getStorage('token'),
+             memberId: $api.getStorage('memberId')
+         },
+         showLoading: false,
+         success:function(data){
+           if (data.data.headImg == '' || data.data.headImg == null) {
+               $("#userImg").attr('src', '../../../image/g3.jpg');
+               $("#bigImg").attr('src', '../../../image/g3.jpg');
+           } else {
+               $("#userImg").attr('src', data.data.headImg);
+               $("#bigImg").attr('src', data.data.headImg);
+           }
+         }
+       })
+    }
+        apiready = function() {
+        app.ready()
+        app.countDown(5*60)
+        rds()
+        $("#userImg").on('tap', function() {
+            api.getPicture({
+                sourceType: 'library',
+                encodingType: 'jpg',
+                mediaValue: 'pic',
+                destinationType: 'base64',
+                allowEdit: true,
+                quality:100,
+                targetWidth:500,
+                targetHeight: 500,
+                saveToPhotoAlbum: false
+            }, function(res, err) {
+                if (res) {
+                  console.log(JSON.stringify(res.data))
+                  var a = document.getElementById('progress'); //显示进度，也可用进度条，在进度从95%到100%的时候有个明显停顿，此时文件已经传输完成，是在获取回调信息。
+                  var b = document.getElementById('userImg');
+                  var fileurl = res.data; //文件地址，也可通过文件选择器获得
+                  var baseUrl = 'http://oriuj6hhx.bkt.clouddn.com/'; //七牛给你的测试域名，也可使用自己捆绑的域名youe.xxx.com
+                  var qiniu = api.require('qiniuUpfile');
+                  var timestamp=new Date().getTime();
+                  qiniu.upfile({
+                      file: fileurl,
+                      name: timestamp
+                  }, function(ret, err) {
+                      if (ret.status) {
+                          if (ret.oper == "complete") {
+                              //上传成功后组装访问路径，或直接访问文档
+                              console.log(JSON.stringify(ret))
+                              app.ajax({
+                                url:'member/updateImgAndNickName',
+                                type:'POST',
+                                data:{
+                                    token: $api.getStorage('token'),
+                                    memberId: $api.getStorage('memberId'),
+                                    headImg : baseUrl + ret.info.key
+                                },
+                                success : function(res){
+                                    $("#userImg").attr("src",baseUrl + ret.info.key)
+                                    $("#bigImg").attr("src",baseUrl + ret.info.key)
+                                },
+                                error : function(err){
+                                  alert("上传失败！")
+                                }
+                              })
+                              console.log(b, baseUrl + ret.info.key);
+                          } else if (ret.oper == "progress") {
+                              //上传过程中获取进度数据
+                              console.log(a, ret.percent);
+                          }
+                      }
+                  });
+
+                } else {
+                    // alert(JSON.stringify(err));
+                }
+            });
+        })
+    }
+    $('.hides').on('tap', function() {
+        api.closeWin();
+    })
+    $('.lookDetail').on('tap',function(){
+        $('.big_img').show()
+    })
+    $('.delete').on('tap',function(){
+        $(this).parents('.big_img').hide()
+    })
+</script>
+
+</html>

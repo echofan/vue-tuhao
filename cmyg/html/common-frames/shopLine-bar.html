@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>搜索页面</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/common-frames-icon/sfont.css" />
+    <style>
+
+    /* 搜索 */
+
+    .page-search-bar {
+        display: flex;
+        display: -webkit-flex;
+        color: #333;
+        padding: 10px 10px 0;
+        align-items: stretch;
+        background: #E60144;
+        z-index: 10;
+        position: fixed;
+        width: 100%;
+        height: 50px;
+        /*padding-top:30px;*/
+    }
+
+    .page-search-bar>div:nth-child(2n+1) {
+        align-items: center;
+        display: flex;
+        display: -webkit-flex;
+        margin: 0 2px;
+    }
+
+    .page-search-bar span {
+        white-space: nowrap;
+    }
+
+    .page-search-bar .i-search {
+        position: absolute;
+        right: 5px;
+        bottom: 0;
+        transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+    }
+
+    .page-search-bar i.iconfont.i-search::before {
+        color: #E60144;
+    }
+
+    .page-search-bar .ip-search[type=text] {
+        margin: 0;
+        background: hsla(0, 0%, 100%, 0.85);
+        border-radius: 4px;
+        padding: 0;
+        border: none;
+        height: 30px;
+    }
+
+    .page-search-bar>div:nth-child(2) {
+        flex: auto;
+        position: relative;
+        height: 40px;
+        margin: 0 5px;
+    }
+
+    .page-search-bar>div>span {
+        font-size: 14px;
+        color: #fff;
+        line-height: 1.5;
+        height: 25px;
+    }
+
+    .page-search-bar i.iconfont::before {
+        color: #fff;
+        font-size: 20px;
+    }
+
+    i.iconfont.icon-comments {
+        margin-right: 4px;
+    }
+    .i_pin_location,.i_scan{margin-top: -10px;}
+    .ages{margin-left: 4px;margin-top: -3px;}
+
+    .bar{height: 40px;width: 100%;position: fixed;background: #fff;top: 50px;z-index: 99;}
+    .bar ul{width: 200%;overflow: hidden;}
+    .bar ul li{float: left;width: 50px;font-style: normal !important;height: 40px;line-height: 40px;text-align: center;}
+    .active{color: #E60144; }
+    .mui-control-item{ padding: 0 10px !important;}
+    .mui-active { color: #E60144 !important;  border-bottom: 0px solid #007aff !important;  background: 0 0 !important;   }
+    </style>
+</head>
+
+<body>
+      <div class="page-search-bar">
+          <div class="spreadBtn">
+                <span>东莞</span>
+                <i class="iconfont i_pin_location"></i>
+          </div>
+          <div>
+                <i class="i-search iconfont icon-search"></i>
+                <input class="ip-search" readonly type="text">
+          </div>
+          <div class="msg">
+                <i class="iconfont i_scan"></i>
+                <span class="ages">扫码</span>
+          </div>
+      </div>
+
+      <div class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted bar">
+        <div class="mui-scroll">
+            <a class="mui-control-item mui-active" href="#index">全部</a>
+            <a class="mui-control-item" href="#index1">美食</a>
+            <a class="mui-control-item" href="#index2">吃肉</a>
+            <a class="mui-control-item" href="#index3">社会</a>
+            <a class="mui-control-item" href="#index4">婚纱</a>
+            <a class="mui-control-item" href="#index5">东莞</a>
+            <a class="mui-control-item" href="#index6">哇哇</a>
+            <a class="mui-control-item" href="#index7">咔咔</a>
+            <a class="mui-control-item" href="#index8">啪啪</a>
+        </div>
+    </div>
+
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function(){
+
+        mui("body").on('tap', '.mui-control-item:not(.mui-active)', function() {
+            //获取id
+            var id = this.getAttribute('href')
+            api.openFrame({
+                name: 'page2',
+                url: '../shopLine/'+id.slice(1)+'.html',
+                rect: {
+                    x: 0,
+                    y: 90,
+                    w: api.winWidth,
+                    h: api.winHeight - 90
+                },
+                pageParam: {
+                    name: 'test'
+                },
+                bounces: true,
+                bgColor: 'rgba(0,0,0,0)',
+                vScrollBarEnabled: false,
+                hScrollBarEnabled: true
+            });
+
+        });
+
+
+        api.openFrame({
+            name: 'page2',
+            url: '../shopLine/index.html',
+            rect: {
+                x: 0,
+                y: 90,
+                w: api.winWidth,
+                h: api.winHeight - 90
+            },
+            pageParam: {
+                name: 'test'
+            },
+            bounces: true,
+            bgColor: 'rgba(0,0,0,0)',
+            vScrollBarEnabled: false,
+            hScrollBarEnabled: true
+        });
+
+    }
+
+</script>
+
+</html>

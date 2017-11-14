@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title广告分购买详情</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        .item_box ul{padding:0 10px;margin-top:20px;}
+        .item_box ul li{height: 100px;width: 100%;margin-bottom:20px;}
+        .item_box ul li div{height: 33.3px;line-height: 33.3px;display:flex;font-size:14px;}
+        .item_box ul li div span{flex:1;text-align: center;}
+        .item_box ul li div:nth-child(1){background-color:#E61C4C;border-radius:10px 10px 0 0;color:#fff;}
+        .item_box ul li div:nth-child(2){background-color:#FEFEFE;}
+        .item_box ul li div:nth-child(2) span:nth-child(1){font-size:13px;}
+        .item_box ul li div:nth-child(2) span:nth-child(3) i{background:url(../../../image/87915454.png) no-repeat;width: 20px;height: 20px;background-size: 20px;margin-top:7px;}
+        .item_box ul li div:nth-child(3){background-color:#EEEEEE;border-radius:0 0 10px 10px;}
+        .item_box ul li div:nth-child(3) span:nth-child(1){color:#E47936;}
+        .item_box ul li div:nth-child(3) span:nth-child(1) i{background:url(../../../image/3245643243.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;margin-right:3px;vertical-align: sub;}
+        .item_box ul li div:nth-child(3) span:nth-child(2){color:#5E5D5D;}
+        .item_box ul li div:nth-child(3) span:nth-child(2) i{background:url(../../../image/5874I.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;margin-right:3px;vertical-align: sub;}
+        .item_box ul li div:nth-child(3) span:nth-child(3) button{padding:3px 8px;background-color:#5F5D5E;color:#fff;margin-top:8px;}
+        .item_box ul li div:nth-child(3) span:nth-child(3) .await{color:red;}
+        .item_box ul li div:nth-child(3) span:nth-child(3) .oks{color:green;}
+    </style>
+</head>
+
+<body>
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+          <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">广告分购买详情</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+             <div class="mui-content mui-scroll-wrapper">
+        <div class="item_box">
+          <ul class="uls">
+            <li>
+                <div>
+                    <span>时间</span>
+                    <span>出售单号</span>
+                    <span>状态</span>
+                </div>
+                <div>
+                    <span>2017-4-29  10.59</span>
+                    <span>T13123123123</span>
+                    <span class="sets">
+                      分配<i></i>
+                    </span>
+                </div>
+                <div>
+                    <span>
+                      <i></i>2000
+                    </span>
+                    <span>
+                       <i></i>1800
+                    </span>
+                    <span>
+                       <button>取消</button>
+                    </span>
+                </div>
+            </li>
+            <li>
+              <div>
+                  <span>时间</span>
+                  <span>出售单号</span>
+                  <span>状态</span>
+              </div>
+              <div>
+                  <span>2017-4-29  10.59</span>
+                  <span>T13123123123</span>
+                  <span class="await_ok">
+                    待确认<i></i>
+                  </span>
+              </div>
+              <div>
+                  <span>
+                    <i></i>2000
+                  </span>
+                  <span>
+                     <i></i>1800
+                  </span>
+                  <span>
+                     <span class="await">待确认</span>
+                  </span>
+              </div>
+            </li>
+            <li>
+              <div>
+                  <span>时间</span>
+                  <span>出售单号</span>
+                  <span>状态</span>
+              </div>
+              <div>
+                  <span>2017-4-29  10.59</span>
+                  <span>T13123123123</span>
+                  <span class="complate">
+                    冻结<i></i>
+                  </span>
+              </div>
+              <div>
+                  <span>
+                    <i></i>2000
+                  </span>
+                  <span>
+                     <i></i>1800
+                  </span>
+                  <span>
+                     <span class="oks">已完成</span>
+                  </span>
+              </div>
+            </li>
+            <li>
+              <div>
+                  <span>时间</span>
+                  <span>出售单号</span>
+                  <span>状态</span>
+              </div>
+              <div>
+                  <span>2017-4-29  10.59</span>
+                  <span>T13123123123</span>
+                  <span class="complate">
+                    已完成<i></i>
+                  </span>
+              </div>
+              <div>
+                  <span>
+                    <i></i>2000
+                  </span>
+                  <span>
+                     <i></i>1800
+                  </span>
+                  <span>
+                     <span class="oks">已完成</span>
+                  </span>
+              </div>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+  //头部的更换
+
+    apiready = function() {
+        app.ready()
+    }
+    // $('')
+    $('.hides').on('tap',function(){
+       api.closeWin()
+    })
+    $('.set').on('tap',function(){
+       $('.hide_box').show()
+    })
+    $('.delete').on('tap',function(){
+      $('.hide_box').hide()
+    })
+    $('.sets').on('tap',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './buy_cancel_status.html',
+        pageParam: {
+          name: 'test'
+        }
+      });
+    })
+    $('.await_ok').on('tap',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './buydealMsg.html',
+        pageParam: {
+          name: 'test'
+        }
+      });
+    })
+    $('.complate').on('tap',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './buyComplate.html',
+        pageParam: {
+          name: 'test'
+        }
+      });
+    })
+</script>
+
+</html>
