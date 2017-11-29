@@ -1,0 +1,305 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title广告分出售详情</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+        .mui-content{padding-bottom:50px!important;position:relative;}
+        .item_box ul{padding:0 10px;margin-top:20px;}
+        .item_box ul li{height: 100px;width: 100%;}
+        .item_box ul li div{height: 50px;line-height: 50px;display:flex;font-size:14px;}
+        .item_box ul li div span{flex:1;text-align: center;}
+        .item_box ul li div:nth-child(1){background-color:#FEFEFE;border-radius:10px 10px 0 0;}
+        /*.item_box ul li div:nth-child(2){background-color:#FEFEFE;}*/
+        .item_box ul li div:nth-child(1) span:nth-child(1){font-size:13px;}
+        .item_box ul li div:nth-child(1) span:nth-child(3) i{background:url(../../../image/87915454.png) no-repeat;width: 20px;height: 20px;background-size: 20px;margin-top:7px;}
+        .item_box ul li div:nth-child(2){background-color:#B6B6B6;border-radius:0 0 10px 10px;}
+        .item_box ul li div:nth-child(2) span:nth-child(1){color:#fff;}
+        .item_box ul li div:nth-child(2) span:nth-child(1) i{background:url(../../../image/589.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;margin-right:3px;vertical-align: sub;}
+        .item_box ul li div:nth-child(2) span:nth-child(2){color:#fff;}
+        .item_box ul li div:nth-child(2) span:nth-child(3){color:#fff;}
+        .item_box ul li div:nth-child(2) span:nth-child(2) i{background:url(../../../image/bk/nv-charge.png) no-repeat;width: 15px;height: 15px;background-size: 15px;display:inline-block;margin-right:3px;vertical-align: sub;}
+        .item_box ul li div:nth-child(2) span:nth-child(3) button{color:#fff;background-color: #56AAB7;border-radius:3px;padding:3px 8px;margin-top:10px;}
+        .item_box ul li div:nth-child(2) span:nth-child(3) .cx{background-color: #E61C4C!important;}
+        .item_box ul li div:nth-child(2) span:nth-child(3) .await{color:red;}
+        .item_box ul li div:nth-child(2) span:nth-child(3) .oks{color:green;}
+        .item_box .tems i{vertical-align:sub;  margin-left:5px;}
+        .headers{height: 40px;display:flex;border-radius:10px 10px 0 0;background-color: #747474;line-height: 40px;}
+        .headers span{flex:1;text-align: center;color:#fff;}
+        .kong{background: url(../../../image/shop-empty.png) 50% 50% no-repeat;position: fixed;top: 40%;width: 100%;text-align: center;height: 64px;line-height: 140px;display:none;
+            transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #bfbfbf;}
+    </style>
+</head>
+
+<body>
+    <script type="text/template" id="temID">
+
+      <%for(var i=0;i<list.length;i++){%>
+        <li attr-id="<%=list[i].id%>" attr-memberid="<%=list[i].memberid%>" attr-bh="<%=list[i].orderNum%>" attr-phone="<%=list[i].receivePhone%>"
+               attr-adscore="<%=list[i].adscore%>" attr-cash="<%=list[i].cash%>" attr-bili="<%=list[i].adToShopRadio%>" attr-getshop="<%=list[i].getShopscore%>"
+                attr-name="<%=list[i].receiveRealName%>" attr-zfb="<%=list[i].receiveAilayAccount%>" attr-time="<%=list[i].opAt%>" attr-createT="<%=list[i].createTime%>"
+                 attr-url="<%=list[i].payUrl%>">
+            <div>
+                <span><%=list[i].opAt%></span>
+                <span><%=list[i].orderNum%></span>
+                <%if(list[i].orderStatus==1){%>
+                  <span class="sets tems greens">
+                    挂卖中
+                    <i></i>
+                  </span>
+                <%}%>
+                <%if(list[i].orderStatus==2){%>
+                  <span class="await_ok tems reds">
+                    待确认
+                    <i></i>
+                  </span>
+                <%}%>
+                <%if(list[i].orderStatus==3){%>
+                  <span class="complate tems greens">
+                    已完成
+                    <i></i>
+                  </span>
+                <%}%>
+                <%if(list[i].orderStatus==4){%>
+                  <span class="fenpei tems blues">
+                    分配中
+                    <i></i>
+                  </span>
+                <%}%>
+                <%if(list[i].orderStatus==5){%>
+                  <span class="tems">
+                    已撤销
+                    <i></i>
+                  </span>
+                <%}%>
+                <%if(list[i].orderStatus==6){%>
+                  <span class="freeze tems blues">
+                    已冻结
+                    <i></i>
+                  </span>
+                <%}%>
+            </div>
+            <div>
+                <span>
+                  <i></i><%=list[i].adscore%>
+                </span>
+                <span>
+                   <i></i><%=list[i].cash%>
+                </span>
+                <span>
+                    <%if(list[i].orderStatus==1){%>
+                      <button class="cx">可撤销</button>
+                    <%}else{%>
+                      <button class="kf">客服</button>
+                    <%}%>
+                </span>
+            </div>
+        </li>
+      <%}%>
+    </script>
+
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+          <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">广告分出售详情</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+             <div class="mui-content mui-scroll-wrapper">
+        <div class="item_box">
+          <ul class="uls">
+            <div class="headers">
+              <span>时间</span>
+              <span>出售单号</span>
+              <span>状态</span>
+            </div>
+            <div class="boxs"></div>
+          </ul>
+          </div>
+        </div>
+        <div class="kong">当前没有出售数据</div>
+        <p class="load-moreTG"></p>
+      </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/template-native.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+function hides(){
+   if($('.boxs li').length>0){
+      $('.kong').hide()
+   }else{
+     $('.kong').show()
+   }
+}
+    apiready = function() {
+        app.ready()
+        hides()
+        $('.headers').hide()
+        if(api.pageParam.on_back==1){
+          $('.hides').on('tap',function(){
+             api.openWin({
+               name: 'fan',
+               url: '../index.html',
+               reload: true,
+               pageParam: {
+                 homes: 4
+               },
+               animation: {
+                 type: 'movein',
+                 duration: 200
+               }
+             });
+          })
+        }else{
+          $('.hides').on('tap',function(){
+             api.closeWin()
+          })
+        }
+        var awaitajax=app.ajaxWithLoadMore({
+          url:'score/trade/getMyHangUpOrder',
+          type:'GET',
+          data:{
+            memberId:$api.getStorage('memberId'),
+            token: $api.getStorage('token')
+          },
+            success:function(data){
+              var datas=data.data
+
+              if(awaitajax.status === 'NOMORE') return;
+              if(awaitajax.status === 'REFRESH') $('.boxs').html('') // 刷新 清空数据
+              console.log(JSON.stringify(datas)+'--------------------')
+              for(var i=0;i<datas.length;i++){
+                console.log(datas[i].opAt)
+                 var times=app.timesJf((datas[i].opAt)*1000)
+                 datas[i].opAt=times
+              }
+                var info={
+                   list:datas
+                }
+                var text=template('temID',info)
+                $('.boxs').append(text)
+                hides()
+                api.refreshHeaderLoadDone()
+                var items=$('.boxs li')
+                if(items.length<1){
+                   $('.headers').hide()
+                }else{
+                  $('.headers').show()
+                }
+                if(items.length>9){
+                  $(".load-moreTG").show()
+                }
+            }
+        })
+        // 下拉刷新
+        api.setRefreshHeaderInfo({
+                bgColor: '#fff',
+                textColor: '#333',
+                textDown: '下拉刷新...',
+                textUp: '松开刷新...'
+
+            }, function(ret, err) {
+                //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+                awaitajax.init()()
+                // window.location.reload()
+                hides()
+            })
+            // 底部加载更多
+            api.addEventListener({
+                name: 'scrolltobottom'
+            }, function(ret, err) {
+                app.throttle(awaitajax)
+            })
+          awaitajax.init()()
+    }
+    $('.set').on('tap',function(){
+       $('.hide_box').show()
+    })
+    $('.delete').on('tap',function(){
+      $('.hide_box').hide()
+    })
+    $('.boxs').on('tap','.boxs li .sets',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './sell_allocated.html',
+        pageParam: {
+          name: 'test',
+          id:$(this).parents('li').attr('attr-id'),
+        }
+      });
+    })
+    $('.boxs').on('tap','.boxs li .await_ok',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './sell_await_ok.html',
+        pageParam: {
+          name: 'test',
+          id:$(this).parents('li').attr('attr-id'),
+        }
+      });
+    })
+    $('.boxs').on('tap','.boxs li .complate',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './sell_complate.html',
+        pageParam: {
+          id:$(this).parents('li').attr('attr-id'),
+        }
+      });
+    })
+    $('.boxs').on('tap','.boxs li .freeze',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './sell_freeze.html',
+        pageParam: {
+          id:$(this).parents('li').attr('attr-id'),
+        }
+      });
+    })
+    $('.boxs').on('tap','.boxs li .fenpei',function(){
+      api.openWin({
+        name: 'buy-status',
+        url: './sell_fenpei.html',
+        pageParam: {
+          id:$(this).parents('li').attr('attr-id'),
+        }
+      });
+    })
+
+    $('.boxs').on('tap','.boxs li .kf',function(){
+      api.closeToWin({
+        name:'root'
+      })
+      api.execScript({
+          name: 'root',
+          script: 'openFrame("bag")'
+      })
+      setTimeout(function(){
+      //
+      // api.execScript({
+      //     name: 'root',
+      //     frameName: 'bag',
+      //     script: 'reloadFrames(4)'
+      // })
+      // api.execScript({
+      //     name: 'root',
+      //     frameName: 'bag',
+      //     script: 'titles("售后客服")'
+      // });
+    },500)
+    })
+</script>
+
+</html>

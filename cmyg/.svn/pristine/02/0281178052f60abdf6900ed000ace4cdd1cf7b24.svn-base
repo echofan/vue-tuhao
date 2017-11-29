@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>挂卖中的任务</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+    .mui-content{background-color: #EEEEEE;}
+    .item_box{background-color: #EEEEEE;}
+    .item_box .uls li{display:flex;height: 50px;line-height: 50px;padding:0 20px;box-sizing:border-box;border-bottom: 1px solid #ccc;background-color: #fff;}
+    .item_box .uls li span:nth-child(1){flex:1;text-align: center;}
+    .item_box .uls li span:nth-child(2){flex:3;padding-left:30px;}
+    .ggf i{background:url(../../../image/3213532.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;margin-right: 3px;}
+    .price i{background:url(../../../image/241I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;margin-right: 3px;}
+    .cancel{width: 70%;height: 50px;background-color: #5F5D5E;color:#fff;text-align: center;border-radius:10px;margin:0 auto;margin-top:50px;line-height: 50px;}
+    h1{color:#433E3D;font-size:22px;padding-left:25px;height: 60px;line-height: 60px;}
+
+    .foot{background-color:#E61C4C ;color:#fff;line-height: 50px;text-align: center;width: 70%;border-radius: 8px;margin:0 auto;margin-top:30px;font-size:22px;}
+    .mes{background-color: #fff;}
+    .mes div{display:flex;height: 50px;line-height: 50px;padding:0 20px;}
+    .mes div:nth-child(1){border-bottom:1px solid #ccc;}
+    .mes div span:nth-child(1){flex:1;text-align: center;}
+    .mes div span:nth-child(2){flex:4;padding-left:30px;}
+    .yous{background-color: #fff;}
+    .yous div{display:flex;height: 50px;line-height: 50px;padding:0 20px;}
+    .yous div:nth-child(1){border-bottom:1px solid #ccc;}
+    .yous div span:nth-child(1){flex:1;text-align: center;}
+    .yous div span:nth-child(2){flex:4;padding-left:30px;}
+    .players{position:fixed;width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);top:0;display:none;}
+    .players .box{background-color: #4A4647;width: 90%;padding:15px 20px 25px 20px;position:fixed;top:30%;left:50%;margin-left:-45%;}
+    .players .box p{color:#fff;margin-top:10px;}
+    .players .box .bottom{width: 100%;height: 50px;margin-top:30px;}
+    .players .box .xz{height: 40px;width: 100px;line-height: 40px;text-align: center;border-radius:8px;font-size:18px;float:left;background-color: #ccc;color:#fff;}
+    .players .box .nos{float:right;margin-left:15px;}
+    .players .box .yes{float:left;background-color: #E50044;margin-right:15px;}
+    .players .box .bt_delet{background:url(../../image/654734.png) no-repeat;position:absolute;width: 20px;vertical-align: baseline;height: 20px;background-size:20px;position:sbsolute;right:5px;top:5px;}
+    </style>
+</head>
+
+<body>
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">分配中(等待付款)</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="item_box">
+                    <h1>收款账户</h1>
+                    <div class="mes">
+                        <div>
+                           <span>实&nbsp;&nbsp;名</span>
+                           <span class="name"></span>
+                        </div>
+                        <div>
+                           <span>支付宝</span>
+                           <span class="zfb"></span>
+                        </div>
+                    </div>
+                    <h1>订单信息</h1>
+                    <ul class="uls">
+                        <li>
+                            <span>编&nbsp;&nbsp;号</span>
+                            <span class="bianhao"></span>
+                        </li>
+                        <li>
+                            <span>时&nbsp;&nbsp;间</span>
+                            <span class="time"></span>
+                        </li>
+                        <li>
+                            <span>广告分</span>
+                            <span class="ggf"></span>
+                        </li>
+                        <li>
+                            <span>金&nbsp;&nbsp;额</span>
+                            <span class="price"></span>
+                        </li>
+                    </ul>
+                    <h1>付款人信息</h1>
+                    <div class="yous">
+                        <div>
+                           <span>实&nbsp;&nbsp;名</span>
+                           <span class="you_name"></span>
+                        </div>
+                        <div>
+                           <span>手机号</span>
+                           <span class="you_zfb"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="players">
+                   <div class="box">
+                        <p></p>
+                        <span class="bt_delet noclick"></span>
+                        <div class="bottom">
+                            <div class="yes xz">确定</div>
+                            <div class="nos xz noclick">撤销</div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+        app.ajax({
+           url:'score/trade/detail',
+           type:'GET',
+           data:{
+             memberId:$api.getStorage('memberId'),
+             token: $api.getStorage('token'),
+             orderId:api.pageParam.id
+           },
+           success:function(data){
+               console.log('------------------------'+JSON.stringify(data))
+               $('.name').html(data.data.order.receiveRealName)
+               $('.zfb').html(data.data.order.receiveAilayAccount)
+               $('.bianhao').html(data.data.order.orderNum)
+              $('.time').html(app.timesJf((data.data.order.opAt)*1000))
+               $('.ggf').html('<i></i>'+data.data.order.adscore)
+               $('.price').html('<i></i>'+data.data.order.cash)
+               $('.phone').html(data.data.order.receivePhone)
+               $('.you_zfb').html(data.data.order.payPhone)
+               $('.you_name').html(data.data.order.payRealName)
+               $('.foot').on('tap',function(){
+                  $('.players').show()
+                  $('.players p').html('您的交易订单'+data.data.order.orderNum+'广告分'+data.data.order.adscore+'将重新回到您的账户')
+               })
+               api.refreshHeaderLoadDone()
+           }
+        })
+        //撤销订单
+        $('.players .yes').on('tap',function(){
+          app.ajax({
+            url:'score/trade/cancelOreder',
+            data:{
+              memberId:$api.getStorage('memberId'),
+              token: $api.getStorage('token'),
+              orderId:api.pageParam.id
+            },
+            success:function(data){
+               console.log(JSON.stringify(data))
+               api.openWin({
+                  name:'sell-detail',
+                  url:'./sell-detail.html',
+                  reload:true,
+                  pageParam:{
+                    on_back:1
+                  }
+               })
+            }
+          })
+
+        })
+
+        // 下拉刷新
+        api.setRefreshHeaderInfo({
+                bgColor: '#fff',
+                textColor: '#333',
+                textDown: '下拉刷新...',
+                textUp: '松开刷新...'
+
+            }, function(ret, err) {
+                //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+                window.location.reload()
+            })
+    }
+    $('.hides').on('tap', function() {
+        api.closeWin();
+    })
+    $('.play_fk').on('tap',function(){
+       $('.hide_box').show()
+    })
+    $('.heads i').on('tap',function(){
+       $('.hide_box').hide()
+    })
+    $('.lookDetail').on('tap',function(){
+      $('.big_img').show()
+    })
+    $('.big_img img').on('tap',function(){
+      $(this).parents('.big_img').hide()
+    })
+
+    $('.nos').on('tap',function(){
+       $(this).parents('.players').hide()
+    })
+</script>
+
+</html>

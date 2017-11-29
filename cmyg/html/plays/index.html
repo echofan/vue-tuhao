@@ -221,7 +221,6 @@
                  alert( JSON.stringify( err ) );
             }
         });
-
         var params=api.pageParam.play_type
         var play_type=api.pageParam.play_type
         var play_bh=api.pageParam.play_bh
@@ -231,6 +230,7 @@
         var play_id=api.pageParam.play_id
         var play_time=api.pageParam.play_time
         var play_orderNum=api.pageParam.play_orderNum
+        // alert(params+'==='+play_id+'==='+play_time+'==='+play_orderNum+'==='+play_bh+'==='+play_price+'==='+play_shoping+'==='+play_type+'==='+play_bh)
         app.ajax({
            url:'member/getMyInfo',
            data:{
@@ -240,45 +240,80 @@
            success:function(data){
               var surplus_shop=data.data.memberAccout.shopScore
               var surplus_price=data.data.memberAccout.amount
-        switch (play_type) {
-          case '1':
-              $('.play_type_xianji').show()
-              $('.bianh').html(play_bh)
-              $('.price_xj').html((play_price)/100)
-              $('.shopfen').html((play_getshop))
-            break;
-          case '2':
-              $('.play_type_jifen').show()
-              $('.nav').html('消费分订单')
-              $('.cont_ky').html('可用消费分')
-              $('.order').html(play_bh)
-              $('.nums_type').html('订单金额')
-              $('.nums_count').html((play_price)/100)
-              //需要调用余额的接口
-              $('.cont_money').html(surplus_price)
+            if(play_type==1){
+                 $('.play_type_xianji').show()
+                 $('.bianh').html(play_bh)
+                 $('.price_xj').html((play_price)/100)
+                 $('.shopfen').html((play_getshop))
+            }else if(play_type==2){
+                 $('.play_type_jifen').show()
+                 $('.nav').html('消费分订单')
+                 $('.cont_ky').html('可用消费分')
+                 $('.order').html(play_bh)
+                 $('.nums_type').html('订单金额')
+                 $('.nums_count').html((play_price)/100)
+                 //需要调用余额的接口
+                 $('.cont_money').html(surplus_price)
 
-              $('.wxzf_price').html((play_price)/100+'<span style="font-size:25px;">消费分</span>')
-              $('.shengyu').text('可用消费分')
-              $('.shoping_rules').text(surplus_price)
-            break;
-          case '3':
-              $('.play_type_jifen').show()
-              $('.nav').html('购物分订单')
-              $('.cont_ky').html('可用购物分')
-              $('.order').html(play_bh)
-              $('.nums_type').html('消费金额')
-              $('.nums_count').html('<span><i></i>购物分</span><span class="nums_title"></span>')
-              $('.wxzf_price').html('<span><i></i>购物分</span><span class="nums_title"></span>') //弹框支付
+                 $('.wxzf_price').html(play_price+'<span style="font-size:25px;">消费分</span>')
+                 $('.shengyu').text('可用消费分')
+                 $('.shoping_rules').text(surplus_price)
+            }else if(play_type==3){
+                 $('.play_type_jifen').show()
+                 $('.nav').html('购物分订单')
+                 $('.cont_ky').html('可用购物分')
+                 $('.order').html(play_bh)
+                 $('.nums_type').html('消费金额')
+                 $('.nums_count').html('<span><i></i>购物分</span><span class="nums_title"></span>')
+                 $('.wxzf_price').html('<span><i></i>购物分</span><span class="nums_title"></span>') //弹框支付
 
-              $('.nums_count .nums_title').text(play_shoping)
-              $('.wxzf_price .nums_title').text(play_shoping)
-              //需要调用可用购物分接口
-              $('.cont_money').html('<span><i></i>购物分</span><span class="cont_money_title"></span>')
-              $('.cont_money_title').text(surplus_shop)
-              $('.shengyu').text('可用购物分')
-              $('.shoping_rules').text(surplus_shop)
-          default:
-        }
+                 $('.nums_count .nums_title').text(play_shoping)
+                 $('.wxzf_price .nums_title').text(play_shoping)
+                 //需要调用可用购物分接口
+                 $('.cont_money').html('<span><i></i>购物分</span><span class="cont_money_title"></span>')
+                 $('.cont_money_title').text(surplus_shop)
+                 $('.shengyu').text('可用购物分')
+                 $('.shoping_rules').text(surplus_shop)
+            }
+        // switch (play_type) {
+        //   case '1':
+        //       $('.play_type_xianji').show()
+        //       $('.bianh').html(play_bh)
+        //       $('.price_xj').html((play_price)/100)
+        //       $('.shopfen').html((play_getshop))
+        //     break;
+        //   case '2':
+        //       $('.play_type_jifen').show()
+        //       $('.nav').html('消费分订单')
+        //       $('.cont_ky').html('可用消费分')
+        //       $('.order').html(play_bh)
+        //       $('.nums_type').html('订单金额')
+        //       $('.nums_count').html((play_price)/100)
+        //       //需要调用余额的接口
+        //       $('.cont_money').html(surplus_price)
+        //
+        //       $('.wxzf_price').html((play_price)/100+'<span style="font-size:25px;">消费分</span>')
+        //       $('.shengyu').text('可用消费分')
+        //       $('.shoping_rules').text(surplus_price)
+        //     break;
+        //   case '3':
+        //       $('.play_type_jifen').show()
+        //       $('.nav').html('购物分订单')
+        //       $('.cont_ky').html('可用购物分')
+        //       $('.order').html(play_bh)
+        //       $('.nums_type').html('消费金额')
+        //       $('.nums_count').html('<span><i></i>购物分</span><span class="nums_title"></span>')
+        //       $('.wxzf_price').html('<span><i></i>购物分</span><span class="nums_title"></span>') //弹框支付
+        //
+        //       $('.nums_count .nums_title').text(play_shoping)
+        //       $('.wxzf_price .nums_title').text(play_shoping)
+        //       //需要调用可用购物分接口
+        //       $('.cont_money').html('<span><i></i>购物分</span><span class="cont_money_title"></span>')
+        //       $('.cont_money_title').text(surplus_shop)
+        //       $('.shengyu').text('可用购物分')
+        //       $('.shoping_rules').text(surplus_shop)
+        //   default:
+        // }
       }
    })
     //点击选择支付（现金支付）

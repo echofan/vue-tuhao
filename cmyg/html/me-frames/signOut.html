@@ -81,15 +81,26 @@
 	<script type="text/javascript">
 
 		apiready = function() {
-			// $(".xy").on("tap",function(){
-			// 	api.confirm({
-			// 	    title: '协议',
-			// 	    msg: '阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓，阿萨德反恐联合军阿萨德反恐联合姐啊四大皆空放缓',
-			// 	    buttons: ['确定', '取消']
-			// 	}, function(ret, err) {
-			// 	    var index = ret.buttonIndex;
-			// 	})
-			// })
+			$(".xy").on("tap",function(){
+				api.openWin({
+				    name: 'zcxieyi',
+				    url: './zcxieyi.html',
+				    pageParam: {
+				        name: 'test'
+				    }
+				});
+
+			});
+			$(".zc").on("tap",function(){
+				api.openWin({
+				    name: 'Privacy',
+				    url: './Privacy.html',
+				    pageParam: {
+				        name: 'test'
+				    }
+				});
+
+			});
 			if(api.systemType == "ios"){
 				$("#versionUpdata").hide()
 			}
@@ -205,8 +216,12 @@
                             }
                         });
                     }else{
+					
+						// api.alert({
+                        //     msg : "暂无更新"
+                        // });
 						api.alert({
-                            msg : "暂无更新"
+                            msg : result.version
                         });
 					}
                 } else {

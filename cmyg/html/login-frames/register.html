@@ -118,6 +118,7 @@
         .active{
           background: #E61C4C;
         }
+        .zcxieyi{color: #0F82E6;}
     </style>
 </head>
 <body>
@@ -143,8 +144,8 @@
           </div>
           <div class="content-footer">
             <div class="mui-input-row mui-checkbox mui-left">
-              <label>我已阅读并同意创盟易购注册协议</label>
-              <input name="protocal-agreed" ref='.bt-register-next' type="checkbox" checked>
+              <label>我已阅读并同意<span class="zcxieyi">创盟易购注册协议</span></label>
+              <input name="protocal-agreed" ref='.bt-register-next' type="checkbox" >
             </div>
           </div>
         </div>
@@ -155,7 +156,16 @@
 <script type="text/javascript" src="../../script/zepto.min.js"></script>
 <script type="text/javascript" src="../../script/common.js"></script>
 <script type="text/javascript">
+    $(".content-footer").on("tap",function(){
+        api.openWin({
+            name: 'Privacy',
+            url: '../me-frames/zc.html',
+            pageParam: {
+                name: 'test'
+            }
+        });
 
+    })
   apiready = function(){
       app.ready();
         mui('#page-register').on('tap', '.bt-register-next.active', function(){

@@ -131,7 +131,6 @@
     fxUrl:'http://119.23.144.5/',
     // server: 'http://www.cmyigou.com/cmadmin/open/api/',
     // fxUrl:'http://www.cmyigou.com/',
-
     memberId: $api.getStorage('memberId'),
     token   : $api.getStorage('token'),
     // 需要调用到api的方法或属性的一些公共操作
@@ -472,6 +471,20 @@
             $(player).hide()
         })
     },
+    nums:function(){
+      var urls='caritem/getCartAndOrderNum'
+      $.ajax({
+         url:app.server+urls,
+         type:'POST',
+         data:{
+           memberId:$api.getStorage('memberId'),
+           token: $api.getStorage('token')
+         },
+         success:function(data){
+              window.refreshAllCartItemcount(data.data.cartItemcount)
+         }
+      })
+    },
     //转换时间戳  年月日分秒
     times:function(text){
       var date = new Date(text);
@@ -784,10 +797,59 @@
 
         return hour + ":" +min + ":" +sec
       }else{
-         return "等待撤销中..."
+         return '等待撤销中'
       }
     }
   }(),
+
+  //积分转让倒计时部分
+   awaits:function(ids,text){
+     var list = [],
+       interval;
+
+     return function(id,timeStamp){
+       if(!interval){
+         interval = setInterval(go,1);
+       }
+       list.push({ele:document.getElementById(id),time:timeStamp});
+     }
+
+     function go() {
+       for (var i = 0; i < list.length; i++) {
+         list[i].ele.innerHTML = changeTimeStamp(list[i].time);
+         if (!list[i].time)
+           list.splice(i--, 1);
+       }
+     }
+     //传入时间戳，得到倒计时
+     function changeTimeStamp(timeStamp){
+       var distancetime = new Date(timeStamp*1000).getTime() - new Date().getTime();
+      //  var distancetime = new Date(timeStamp*1000).getTime();
+       if(distancetime > 0){
+    　　　　　　　　　　　　　　//如果大于0.说明尚未到达截止时间
+         var ms = Math.floor(distancetime%1000);
+         var sec = Math.floor(distancetime/1000%60);
+         var min = Math.floor(distancetime/1000/60%60);
+         var hour =Math.floor(distancetime/1000/60/60);
+         if(ms<100){
+           ms = "0"+ ms;
+         }
+         if(sec<10){
+           sec = "0"+ sec;
+         }
+         if(min<10){
+           min = "0"+ min;
+         }
+         if(hour<10){
+           hour = "0"+ hour;
+         }
+
+         return hour + ":" +min + ":" +sec
+       }else{
+          return '等待确认中'
+       }
+     }
+   }(),
 }
 
   // String类型扩展 模板解析函数

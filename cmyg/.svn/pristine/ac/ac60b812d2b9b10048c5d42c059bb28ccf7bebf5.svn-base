@@ -1,0 +1,300 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>等待确认</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../../fonts/iconfont.css" />
+    <style>
+    .mui-content{background-color: #EEEEEE;}
+    .item_box{background-color: #EEEEEE;}
+    .item_box .uls li{display:flex;height: 50px;line-height: 50px;padding:0 20px;box-sizing:border-box;border-bottom: 1px solid #ccc;background-color: #fff;}
+    .item_box .uls li span:nth-child(1){flex:1;text-align: center;}
+    .item_box .uls li span:nth-child(2){flex:3;padding-left:30px;}
+    .ggf i{background:url(../../../image/3213532.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;margin-right: 3px;}
+    .price i{background:url(../../../image/241I.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;margin-right: 3px;}
+    .cancel{width: 70%;height: 50px;background-color: #5F5D5E;color:#fff;text-align: center;border-radius:10px;margin:0 auto;margin-top:50px;line-height: 50px;}
+    h1{color:#595757;font-size:25px;padding-left:25px;height: 60px;line-height: 60px;}
+    .foot{margin-top:30px;display:flex;}
+    .foot div{flex:1;}
+    .foot .foot_left{text-align: center;}
+    .foot .foot_left span{display:block;}
+    .foot .foot_left span:nth-child(1){color:#5F5F5F;}
+    .foot .foot_left span:nth-child(2){coloe:#322C29;font-size:18px;margin-top:5px;}
+    .foot_right span{background-color: #E61C4C;color:#fff;font-size: 18px;width: 90%;text-align: center;height: 40px;line-height: 40px;border-radius:8px;}
+    /*.li_box{padding-bottom:50px!important;}*/
+    .mes{background-color: #fff;}
+    .mes div{display:flex;height: 50px;line-height: 50px;padding:0 20px;}
+    .mes div:nth-child(1){border-bottom:1px solid #ccc;}
+    .mes div span:nth-child(1){flex:1;text-align: center;}
+    .mes div span:nth-child(2){flex:4;padding-left:30px;}
+    .sure{width: 50%;height: 40px;background-color: #E61C4C;color:#fff;text-align: center;font-size:18px;line-height: 40px;border-radius:8px;margin-top:20px;}
+    .freeze{width: 50%;height: 40px;background-color: #00A2EA;color:#fff;text-align: center;font-size:18px;line-height: 40px;border-radius:8px;margin-top:10px;}
+    .isOk{display:none;}
+    .isOk .box{background-color: #fff;width: 90%;padding:15px 20px 25px 20px;position:fixed;top:30%;left:50%;margin-left:-45%;}
+    .isOk .box p{margin-top:10px;}
+    .isOk .box .bottom{width: 100%;height: 50px;margin-top:30px;}
+    .isOk .box .xz{height: 40px;width: 100px;line-height: 40px;text-align: center;border-radius:8px;font-size:18px;float:left;background-color: #ccc;color:#fff;}
+    .isOk .box .nos{float:right;margin-left:15px;}
+    .isOk .box .yes{float:left;background-color: #E50044;margin-right:15px;}
+    .isOk .box .bt_delet{background:url(../../image/654734.png) no-repeat;position:absolute;width: 20px;vertical-align: baseline;height: 20px;background-size:20px;position:sbsolute;right:5px;top:5px;}
+    </style>
+</head>
+
+<body>
+    <div class="page" id="page-bag">
+        <!-- 主页面容器 -->
+        <div class="mui-inner-wrap">
+            <!-- 主页面标题 -->
+            <header id="header" class="mui-bar mui-bar-nav">
+                <h1 class="mui-title">待付款</h1>
+                <a class=" mui-icon mui-icon-left-nav  hides"></a>
+            </header>
+            <div class="mui-content mui-scroll-wrapper">
+                <div class="item_box">
+                  <h1>收款账户</h1>
+                  <div class="mes">
+                      <div>
+                         <span>实&nbsp;&nbsp;名</span>
+                         <span class="name"></span>
+                      </div>
+                      <div>
+                         <span>支付宝</span>
+                         <span class="zfb"></span>
+                      </div>
+                  </div>
+                    <h1>订单信息</h1>
+                    <ul class="uls">
+                        <li>
+                            <span>编&nbsp;&nbsp;号</span>
+                            <span class="bianhao"></span>
+                        </li>
+                        <li>
+                            <span>时&nbsp;&nbsp;间</span>
+                            <span class="time"></span>
+                        </li>
+                        <li>
+                            <span>广告分</span>
+                            <span class="ggf"><i></i></span>
+                        </li>
+                        <li>
+                            <span>金&nbsp;&nbsp;额</span>
+                            <span class="price"><i></i></span>
+                        </li>
+                    </ul>
+                    <div class="foot">
+                        <div class="foot_left">
+                            <span>剩余时间</span>
+                            <span id="down_time"></span>
+                        </div>
+                        <div class="foot_right">
+                            <span class="play_fk">订单详情</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hide_box">
+                    <div class="box">
+                        <div class="heads">
+                            <span>订单详情</span>
+                            <span class="time"></span>
+                            <i></i>
+                        </div>
+                        <ul>
+                          <li>
+                              <span>编&nbsp;&nbsp;号</span>
+                              <span class="bianhao"></span>
+                          </li>
+                          <li>
+                              <span>实&nbsp;&nbsp;名</span>
+                              <span class="name"></span>
+                          </li>
+                          <li>
+                              <span>支付宝</span>
+                              <span class="zfb"></span>
+                          </li>
+                            <li>
+                               <span>手&nbsp;&nbsp;机</span>
+                               <span class="phone"></span>
+                            </li>
+                            <div class="li_box">
+                            <li>
+                               <span>广告分</span>
+                               <span class="ggf"></span>
+                            </li>
+                            <li>
+                               <span>金&nbsp;&nbsp;额</span>
+                               <span class="price"></span>
+                            </li>
+                            <div class="sure">确定收款</div>
+                            <div class="freeze">冻结交易</div>
+                            <div class="img_box">
+                               <img src="../../../image/cmck/jt.png" alt="" class='img_up'>
+                               <span class="lookDetail">查看详情</span>
+                            </div>
+                          </div>
+                        </ul>
+                        <div class="explain">
+                          <div>说明：</div>
+                          <p>1、请把已经通过支付宝支付成功的截图上传，此截图将作为交易发生争执的裁决依据；</p>
+                          <p>2、请把已经通过支付宝支付成功的截图上传，此截图将作为交易发生争执的裁决依据；</p>
+                        </div>
+                    </div>
+                    <div class="big_img">
+                      <img src="../../../image/cmck/jt.png" alt="" class='img_up'>
+                      <!-- <span class="delete"></span> -->
+                    </div>
+                </div>
+              <!-- 确定or 冻结 -->
+              <div class="class1 isOk">
+                <div class="box">
+                     <p>确认收到对方有效转款后，本次订单广告分对兑换购物分将直接转入付款方账户</p>
+                     <span class="bt_delet noclick"></span>
+                     <div class="bottom">
+                         <div class="yes xz">确定</div>
+                         <div class="nos xz noclick">撤销</div>
+                     </div>
+                </div>
+              </div>
+              <div class="class2 isOk">
+                <div class="box">
+                     <p>冻结后本订单将转移客服处理，核实交易详情并给出处理结果，执行或撤销交易</p>
+                     <span class="bt_delet noclick"></span>
+                     <div class="bottom">
+                         <div class="yes xz">确定</div>
+                         <div class="nos xz noclick">撤销</div>
+                     </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../../../script/api.js"></script>
+<script type="text/javascript" src="../../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../../script/common.js"></script>
+<script type="text/javascript">
+    apiready = function() {
+        app.ready()
+        app.ajax({
+           url:'score/trade/detail',
+           type:'GET',
+           data:{
+             memberId:$api.getStorage('memberId'),
+             token: $api.getStorage('token'),
+             orderId:api.pageParam.id
+           },
+           success:function(data){
+               console.log('------------------------'+JSON.stringify(data))
+               $('.name').html(data.data.order.receiveRealName)
+               $('.zfb').html(data.data.order.receiveAilayAccount)
+               $('.bianhao').html(data.data.order.orderNum)
+               $('.time').html(app.timesJf((data.data.order.opAt)*1000))
+               $('.ggf').html('<i></i>'+data.data.order.adscore)
+               $('.price').html('<i></i>'+data.data.order.cash)
+               $('.phone').html(data.data.order.receivePhone)
+               $('.img_up').attr('src',data.data.order.payUrl)
+               var text=data.data.order.lastTime
+               app.awaits('down_time',text)
+               $('.class1 .yes').on('tap',function(){
+                   app.ajax({
+                       url:'score/trade/comfirmReceive',
+                       data:{
+                         memberId:$api.getStorage('memberId'),
+                         token: $api.getStorage('token'),
+                         orderId:api.pageParam.id
+                       },
+                       success:function(data){
+                           console.log(JSON.stringify(data))
+                           setTimeout(function(){
+                               window.location.reload()
+                           },1000)
+                           api.openWin({
+                             name:'sell-detail',
+                             url:'./sell-detail.html',
+                             reload:true,
+                             pageParam:{
+                               on_back:1
+                             }
+                           })
+                       }
+                   })
+               })
+               $('.class2 .yes').on('tap',function(){
+                   app.ajax({
+                       url:'score/trade/freezeOrder',
+                       data:{
+                         memberId:$api.getStorage('memberId'),
+                         token: $api.getStorage('token'),
+                         orderId:api.pageParam.id
+                       },
+                       success:function(data){
+                           console.log(JSON.stringify(data))
+                           setTimeout(function(){
+                               window.location.reload()
+                           },1000)
+                           api.openWin({
+                             name:'sell-detail',
+                             url:'./sell-detail.html',
+                             reload:true,
+                             pageParam:{
+                               on_back:1
+                             }
+                           })
+                       }
+                   })
+               })
+               api.refreshHeaderLoadDone()
+           }
+        })
+        // 下拉刷新
+        api.setRefreshHeaderInfo({
+                bgColor: '#fff',
+                textColor: '#333',
+                textDown: '下拉刷新...',
+                textUp: '松开刷新...'
+
+            }, function(ret, err) {
+                //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+                window.location.reload()
+            })
+    }
+    $('.hides').on('tap', function() {
+        api.closeWin();
+    })
+    $('.play_fk').on('tap',function(){
+       $('.hide_box').show()
+    })
+    $('.heads i').on('tap',function(){
+       $('.hide_box').hide()
+    })
+    $('.lookDetail').on('tap',function(){
+      $('.big_img').show()
+    })
+    $('.big_img img').on('tap',function(){
+      $(this).parents('.big_img').hide()
+    })
+
+    $('.sure').on('tap',function(){
+      $('.class1').show()
+    })
+    $('.freeze').on('tap',function(){
+      $('.class2').show()
+    })
+    $('.class1 .nos').on('tap',function(){
+      $('.class1').hide()
+    })
+    $('.class2 .nos').on('tap',function(){
+      $('.class2').hide()
+    })
+    // var text='1510130646'
+    // app.jifens('down_time',text)
+
+</script>
+
+</html>

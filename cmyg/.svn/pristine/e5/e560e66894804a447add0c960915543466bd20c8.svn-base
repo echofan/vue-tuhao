@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>创业分明细</title>
+  <link rel="stylesheet" type="text/css" href="../../../../css/mui.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../css/api.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../../../../fonts/iconfont.css" />
+  <style>
+       body{position:relative;width: 100%;background: #fff;}
+       /*.nav{overflow: hidden;}*/
+       .clear{clear: both;}
+       /*.navTab{width: 120%;overflow-x: scroll;position: absolute;}*/
+       .shoping{margin-top:0px;position:absolute;width: 100%; }
+       /*.nav{position: relative;}*/
+       .nav ul li{float: left;width:33.33%;text-align: center;height: 40px;line-height: 40px;color:#666;border-bottom: 1px solid #666}
+       .nav ul .thisLi{color:#E71C4C;border-bottom: 3px solid #E71C4C}
+       .allOrder{text-align: center;margin: 10px 0;}
+       .allOrder i{background:url(../../../../image/6778.png) no-repeat;width: 20px;height: 20px;background-size: 20px;vertical-align: sub;display:inline-block;margin-right:3px;}
+       .times{width: 15%;}
+       .nos{width: 30%;}
+       .tablesTitle{background-color: #ED7020;height: 30px;line-height: 30px;margin-bottom: 10px;}
+       .tablesTitle span{display: inline-block;text-align: center;font-size: 12px;color:#fff;}
+
+       .tablesCont ul li span{display: inline-block;font-size: 12px;text-align: center;color: #747474}
+       .titTime,.contTime{width: 32%;}
+       .titShop,.contShop{width: 40%;}
+       .titAdScore,.contAd{width: 23%;}
+       /*.contShop,.contOrder,.contInt,.contRatio,.contggf{line-height: 46px;position: relative;top:-8px;}*/
+       .contTime,.contShop,.contAd{line-height: 50px;}
+       .tablesContUl li{height: 50px;}
+       .tablesContUl li:nth-child(odd){background-color: #FFF9B1  }
+       .tablesContUl li:nth-child(even){background-color: #FFFCDB  }
+       .hide{display:none;;}
+  </style>
+</head
+<body>
+
+   <div class="shoping" id="shoping">
+      <div class="allOrder">
+        <span class="allOrderTitle">累计使用</span>
+        <i></i>
+        <span class="allOrderNum">0</span>
+      </div>
+
+      <!-- 创客 -->
+      <div class="tables recharge">
+        <div class="tablesTitle">
+          <span class="titTime">时间</span>
+          <span class="titShop">分享账户</span>
+          <span class="titAdScore">广告分奖励</span>
+        </div>
+        <div class="tablesCont">
+          <ul class="tablesContUl"></ul>
+          <div class="thisNull" style="margin-top:160px;text-align:center;display:none;">
+              <img src="../../../../image/shop-empty.png" alt="" style="width:40px;">
+              <p style="text-align:center;">暂无更多数据</p>
+          </div>
+          <p class="load-moreLz"></p>
+        </div>
+      </div>
+   </div>
+  <script type="text/javascript" src="../../../../script/api.js"></script>
+  <script type="text/javascript" src="../../../../script/mui.min.js"></script>
+  <script type="text/javascript" src="../../../../script/template-native.js"></script>
+  <script type="text/javascript" src="../../../../script/zepto.min.js"></script>
+  <script type="text/javascript" src="../../../../script/common.js"></script>
+  <script type="text/javascript" src="../index.js"> </script>
+  <script>
+    apiready=function(){
+        var tmpData = app.ajaxWithLoadMore({
+            url: 'score/record/adScoreUpgradeAwardDetail',
+            type: 'get',
+            data: {
+                token: $api.getStorage('token'),
+                memberId: $api.getStorage('memberId'),
+                pageSize: '10',
+                pageNum: '1'
+            },
+            showLoading: false,
+            success: function(ret) {
+               moreLy(ret)
+               if (tmpData.status === 'NOMORE') return;
+                if (tmpData.status === 'REFRESH')  $(".tablesContUl").html('')
+                console.log(JSON.stringify(ret))
+                for (i in ret.data) {
+                    var times = formatDateTime(ret.data[i].createTime)
+                    var gouwuHtml = '<li>' +
+                        '<span class="contTime">' + times + '</span>' +
+                        '<span class="contShop">' + ret.data[i].shareLoginname + '</span>' +
+                        '<span class="contAd">' + ret.data[i].awardAdScore + '</span>' +
+                        '</li>';
+                    $(".tablesContUl").append(gouwuHtml);
+                }
+                 api.refreshHeaderLoadDone()
+            }
+        });
+        function scNum(){
+        app.ajax({
+            url: 'score/record/adScoreUpgradeAwardDetailCount',
+            type: 'get',
+            data: {
+                token: $api.getStorage('token'),
+                memberId: $api.getStorage('memberId')
+            },
+            success: function(ret) {
+                $(".allOrderNum").text(ret.data.count)
+            }
+        })
+        }scNum()
+        // 下拉刷新
+        // 下拉刷新
+          var f=true;
+          api.setRefreshHeaderInfo({
+              bgColor: '#fff',
+              textColor: '#333',
+              textDown: '下拉刷新...',
+              textUp: '松开刷新...'
+          }, function(ret, err) {
+              if(f){
+                  f=false;
+                  tmpData.init()()
+                  $(".load-moreLz").hide()
+                  scNum()
+                  setTimeout(function(){
+                      f=true;
+                  },1000);
+              }
+          })
+
+          api.addEventListener({
+              name: 'scrolltobottom'
+          }, function (ret, err) {
+                  if(f){
+                      f=false
+                      app.throttle(tmpData)
+                      footerFn()
+                      f=true;
+                  }
+          })
+        tmpData.init()()
+    }
+
+
+
+
+  </script>
+</body>
+</html>

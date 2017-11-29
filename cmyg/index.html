@@ -262,22 +262,11 @@
             }
         }
     apiready = function() {
-      api.addEventListener({
-          name: 'taps'
-      }, function(ret, err){
-          if( ret ){
-          indexData()
-              //  alert( JSON.stringify( ret ) );
-          }else{
-               alert( JSON.stringify( err ) );
-          }
-      });
-
       if(api.pageParam.tuichu!=1){
-          welcome()
-       }else{
-          indexData()
-       }
+     welcome()
+     }else{
+       indexData()
+     }
         app.ready()
         api.setFullScreen({
             fullScreen: false
@@ -315,8 +304,6 @@ if (/iphone|ipad|ipod/.test(ua)) {
         var ajpush = ret.value;
         var content = ajpush.content;
         var extra = ajpush.extra;
-        // console.log(JSON.stringify(extra)+'++++++++'+content+'++++++++')
-        // console.log(extra.MessageType)
         if(extra.MessageType==1){
           api.openWin({
               name: 'details',

@@ -36,6 +36,30 @@
         .mui-bar-tab {
           table-layout: inherit;
         }
+        i.checkbox {
+            margin-right: 5px;
+            font-style: normal;
+            /*height: 100%;*/
+        }
+
+        i.checkbox::before {
+            content: '\e65d';
+            display: block;
+            color: #ccc;
+            margin-right: 10px;
+            font-size: 18px;
+            position: relative;
+            top: 50%;
+            margin-top: -10px;
+            width: 10px;
+            vertical-align:middle;
+        }
+
+        i.checkbox.checked::before {
+            content: '\e663';
+            color: #E50043;
+        }
+
         i.icon-qian {
           color: #E50043;
         }
@@ -121,7 +145,17 @@
         .stockNum,.priceNum,.scoreNum{font-style: normal;font-size: 12px;}
         #orderColor{padding-left: 10px;}
         .mui-icon-closeempty{padding:0 10px 10px 10px}
-
+        .playType{background: rgba(0,0,0,0.6);position:absolute;z-index:999;width: 100%;height: 120%;left:0;top:0;display:none;}
+        .playType .play_box{padding-bottom:10px;background-color: #F8F8F8;width: 80%;left:50%;margin-left:-40%;top:10%;position: absolute;}
+        .playType .play_box h1{border-bottom:1px solid #ccc;font-size:18px;text-align: center;height: 35px;line-height: 35px;}
+        .playType .play_box h1 i{background:url(../../image/xx_03.jpg) no-repeat;width: 30px;height: 30px;background-size:100% 100%;float:right;}
+        .playType .item i.checkbox {vertical-align: sub;}
+        .playType .item{margin-top:10px;padding-left:10px;border-bottom:1px solid #cccccc;box-sizing: border-box;}
+        .playType .item .iconfont{overflow: initial!important;}
+        /*.playType .item i{float:left;}*/
+        /*.playType .item span{float:left;}*/
+        .type-play{color:#fff;background-color: #E50043;width: 100px;height: 35px;line-height: 35px;text-align: center;border-radius:8px;margin:0 auto;margin-top:15px;}
+        .type_hides{display:none;margin-left:10px;margin-top:15px;}
     </style>
 </head>
 
@@ -152,22 +186,45 @@
                 </div>
             </div>
             <nav class="mui-bar mui-bar-tab">
-                <a class="mui-tab-item" href="#home">
+                <a class="mui-tab-item mui-items" href="#home">
                     <span class="mui-icon iconfont icon-home"></span>
                     <span class="mui-tab-label">首页</span>
                 </a>
-                <a class="mui-tab-item" href="#Give">
-                    <span class="mui-icon iconfont icon-category"></span>
-                    <span class="mui-tab-label">分类</span>
+                <!-- <a class="mui-tab-item" href="#Give"> -->
+                <a class="mui-tab-item" id="kefu">
+                    <span class="mui-icon iconfont icon-message"></span>
+                    <span class="mui-tab-label">客服</span>
                 </a>
-                <a class="mui-tab-item" href="#bag">
+                <a class="mui-tab-item mui-items" href="#bag">
                     <span class="mui-icon iconfont icon-bag"></span>
                     <span class="mui-tab-label">购物袋</span>
                 </a>
-                <a class="mui-tab-item add-bags">
+                <a class="mui-tab-item add-bags" style="background:#FF9500;">
                     <span class="white">加入购物袋</span>
                 </a>
+                <a class="mui-tab-item add-plays" style="background:#E50043;">
+                    <span class="white">立即购买</span>
+                </a>
             </nav>
+        </div>
+        <div class="playType">
+          <div class="play_box">
+            <h1>请选择支付方式<i></i></h1>
+            <div class="item shopfen">
+              <i id="checkeds" class="checkbox foot-checkbox iconfont"></i>
+              <span>购物分</span>
+            </div>
+            <div class="item xiaofeifen">
+              <i id="checkeds" class="checkbox foot-checkbox iconfont"></i>
+              <span>消费分</span>
+            </div>
+            <div class="item">
+              <i id="checkeds" class="checkbox get-jifen foot-checkbox checked iconfont"></i>
+              <span>在线支付</span>
+            </div>
+            <p class="type_hides">可以获得<i class="iconfont icon-jewelry"></i><span class="shop-score red"></span></p>
+            <div class="type-play">立即支付</div>
+          </div>
         </div>
     </div>
 </body>
@@ -176,13 +233,91 @@
 <script type="text/javascript" src="../../script/zepto.min.js"></script>
 <script type="text/javascript" src="../../script/common.js"></script>
 <script type="text/javascript">
+mui(".playType").on('tap','.item',function(){
+    $(this).find('.foot-checkbox').addClass('checked').parents('.item').siblings().find('.foot-checkbox').removeClass('checked');
+})
+$('.playType .play_box h1 i').on('tap',function(){
+   $(this).parents('.playType').hide()
+})
+//判断点击checkbox
+   var items=$(".playType").find('.item');
+    for(var i=0;i<items.length;i++){
+      if($(items[0]).children('.foot-checkbox').hasClass('checked')){
+           $('.type_hides').css('display','none')
+      }
+      if($(items[1]).children('.foot-checkbox').hasClass('checked')){
+           $('.type_hides').css('display','none')
+      }
+      if($(items[2]).children('.foot-checkbox').hasClass('checked')){
+          $('.type_hides').css('display','block')
+      }
+      $(items[i]).on('tap',function(){
+         if($(this).find('.foot-checkbox').hasClass('get-jifen')){
+           $('.type_hides').css('display','block')
+         }else{
+           $('.type_hides').css('display','none')
+         }
+      })
+    }
+
+    $('.type-play').on('tap',function(){
+      var prePayType=[]
+      for(var i=0;i<items.length;i++){
+        if($(items[0]).children('.foot-checkbox').hasClass('checked')){
+          prePayType=3
+        }
+        if($(items[1]).children('.foot-checkbox').hasClass('checked')){
+          prePayType=2
+        }
+        if($(items[2]).children('.foot-checkbox').hasClass('checked')){
+          prePayType=1
+        }
+      }
+      var play_type = prePayType;
+      var play_id = $("#orderColor>.spActive").attr("data-id");
+      var play_bh = $("#orderColor>.spActive").attr("data-bh");
+      var play_price = $("#orderColor>.spActive").attr("data-prices");
+      var play_time = $("#orderColor>.spActive").attr("data-time");
+      var play_orderNum=$("#orderColor>.spActive").attr('data-orderNum')
+      var play_getshop=$("#orderColor>.spActive").attr('data-score')
+      var play_shoping=$("#orderColor>.spActive").attr('data-score')
+
+      api.openWin({
+          name: 'plays',
+          url: '../plays/index.html',
+          reload:true,
+          rect: {
+              x: 0,
+              y: 0,
+              w: 'auto',
+              h: 0
+          },
+          pageParam: {
+              'play_type':play_type,
+              'play_bh':play_bh,
+              'play_price':play_price,
+              'play_getshop':play_getshop,
+              'play_shoping':play_shoping,
+              'play_id':play_id,
+              'play_time':play_time,
+              'play_orderNum':play_orderNum
+          },
+          animation:{
+             type:'movein',
+             duration:200
+          }
+      });
+    })
+
     $(".mui-icon-closeempty").on("tap",function(){
         $(".modaBox").hide();
         $(".add-bags").removeClass("add-bagsShow")
+        $(".add-plays").removeClass("add-play")
     });
     $("body").on("tap",".liBtn",function(){
         $(".modaBox").show();
         $(".add-bags").addClass("add-bagsShow");
+        $(".add-plays").addClass("add-play");
     })
     function mes(){
        api.sendEvent({
@@ -285,6 +420,8 @@
             success: function(data){
               // 渲染页面
                 render(data);
+                console.log('*******************'+JSON.stringify(data))
+
                 var dataSize = data.data.productsList;
                 var dataLength = dataSize.length;
                 var arr = new Array();
@@ -308,13 +445,15 @@
                 }
 
                 for(i in dataSize){
-                    var spanHtml = '<span class="colorBox" data-id="'+dataSize[i].id+'" data-price="'+(dataSize[i].price)/100+'" data-score="'+dataSize[i].shopScore+'" data-stockNum="'+dataSize[i].stock+'" data-length="'+dataSize.length+'">'+dataSize[i].name+'</span>';
+                    var spanHtml = '<span class="colorBox" data-id="'+dataSize[i].id+'"  data-goodid="'+dataSize[i].goodsId+'" data-time="'+dataSize[i].opAt+'" data-orderNum="'+dataSize[i].goodsId+'" data-bh="'+dataSize[i].price+'" data-price="'+(dataSize[i].price)/100+'"  data-prices="'+(dataSize[i].price)+'" data-score="'+dataSize[i].shopScore+'"  data-stockNum="'+dataSize[i].stock+'" data-length="'+dataSize.length+'">'+dataSize[i].name+'</span>';
                     $(".spanColor").append(spanHtml);
                     document.getElementsByClassName("colorBox")[0].click();
                     $(".colorBox").eq(0).addClass("spActive");
                     $(".stockNum").text($(".colorBox").eq(0).attr("data-stockNum"));
                     $(".priceNum").text($(".colorBox").eq(0).attr("data-price"))
                     $(".scoreNum").text($(".colorBox").eq(0).attr("data-score"))
+                    var play_getshop=$("#orderColor>.spActive").attr('data-score')
+                    $('.shop-score').html(play_getshop)
                     if(dataSize.length<2){
                         $("#selectBox").hide();
                     }else {
@@ -334,9 +473,28 @@
           $('.icon-bag').html('<span class="mui-badge">' + $api.getStorage('cartItemcount') + '</span>')
         }
     }
-
+   $('#kefu').on('tap',function(){
+     api.closeToWin({
+       name:'root'
+     })
+     api.execScript({
+         name: 'root',
+         script: 'openFrame("bag")'
+     })
+     api.execScript({
+         name: 'root',
+         frameName: 'bag',
+         script: 'reloadFrames(4)'
+    })
+     api.execScript({
+         name: 'root',
+         frameName: 'bag',
+         script: 'titles("售后客服")'
+     });
+   });
     // 底部bar 点击事件
-    mui(".mui-bar-tab").on('tap', '.mui-tab-item:not(.add-bags)', function() {
+    // mui(".mui-bar-tab").on('tap', '.mui-tab-item:not(.add-bags)', function() {
+    mui(".mui-bar-tab").on('tap', '.mui-items', function() {
         //获取id
         var id = this.getAttribute("href");
 
@@ -363,6 +521,9 @@
     });
     mui('.page').on('tap','.add-bagsShow', function(e){
         shopOrder()
+    })
+    mui('.page').on('tap','.add-play', function(e){
+        shopPlay()
     })
     function shopOrder(){
         var orderType = $("#orderColor>.spActive").attr("data-id");
@@ -392,6 +553,42 @@
         }
     }
 
+    function shopPlay(){
+        var orderType = $("#orderColor>.spActive").attr("data-id");
+        var stockNumber = $("#orderColor>.spActive").attr("data-stockNum");
+        if(stockNumber < 0){
+            app.toast("该商品暂无库存，请选其他规格或其他商品！")
+        }else{
+          $('.playType').show()
+            // app.ajax({
+            //   url : 'caritem/addCaritem',
+            //   data: {
+            //     memberId : $api.getStorage('memberId'),
+            //     goodsId  : api.pageParam.goodsId,
+            //     productId: orderType,
+            //     token:$api.getStorage('token'),
+            //     num : 1,
+            //   },
+            //   success: function(rst){
+            //     app.toast('成功加入购物车');
+            //     mes()
+            //     console.log(JSON.stringify(rst))
+            //     console.log('nums='+rst.data.cartCount)
+            //     window.refreshAllCartItemcount(rst.data.cartCount)
+            //
+            //   }
+            // })
+        }
+    }
+  //立即购买
+  mui('.page').on('tap','.add-plays', function(e){
+    if($(".colorBox").attr("data-length")<2){
+        shopPlay()
+    }else{
+        $(".modaBox").show();
+        $(this).addClass("add-play");
+    }
+  })
 
 
 </script>

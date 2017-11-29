@@ -1,0 +1,671 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, initial-scale=1.0, width=device-width" />
+    <meta name="format-detection" content="telephone=no, email=no, date=no, address=no">
+    <title>商品列表</title>
+    <link rel="stylesheet" type="text/css" href="../../css/mui.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/api.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../fonts/iconfont.css" />
+    <style>
+        .product-list {
+            margin-bottom: 10px;
+            border-bottom:10px solid #f0f0f2;
+        }
+        .product-list:last-child {
+        }
+        .foot_check{
+           width: 100%;
+        }
+        #page-bag-frame{
+           padding:bottom:0!important;
+        }
+        .product-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            display: -webkit-flex;
+            align-items: center;
+            position:relative;
+        }
+
+        .product-list li .product-img {
+            width: 3.5rem;
+            height: 3.5rem;
+            background-size: 3.5rem;
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+            margin-right: 10px;
+        }
+
+        .product-list li .title {
+          width: 89%;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            word-break: break-all;
+        }
+
+        .price-line {
+            /*display: flex;*/
+            /*display: -webkit-flex;*/
+            /*justify-content: space-between;*/
+            margin-top: 20px;
+        }
+
+        .mui-content {
+            position: relative;
+        }
+
+        i.checkbox {
+            margin-right: 5px;
+            font-style: normal;
+            /*height: 100%;*/
+        }
+
+        i.checkbox::before {
+            content: '\e65d';
+            display: block;
+            color: #ccc;
+            margin-right: 10px;
+            font-size: 18px;
+            position: relative;
+            top: 50%;
+            margin-top: -10px;
+            width: 10px;
+            vertical-align:middle;
+        }
+
+        i.checkbox.checked::before {
+            content: '\e663';
+            color: #E50043;
+        }
+
+        .product-list li i.checkbox {
+            height: 80px;
+            align-self: stretch;
+        }
+
+        .foot_check{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            bottom:0;
+            background-color: #fff;
+        }
+
+        .foot_check div {
+            margin-right: auto;
+            margin-left: 20px;
+        }
+
+        .foot_check .checkbox {
+            margin-left: 10px;
+        }
+
+        .foot_check .checkbox::before {
+            margin-right: 0;
+        }
+
+        .foot-tj {
+            height: 100%;
+            line-height: 50px;
+            padding: 0 15px;
+            float: right!important;
+        }
+        .product-list.editable li i.i-del {
+            display: inline-block;
+        }
+        .foot_show{display:none;position:fixed;bottom:0;height: 100px;width: 100%;z-index:1000;}
+        .foots{display:flex;width: 100%;font-size:14px;justify-content: space-between;height: 50px;
+          background-color: #fff;border-top:1px solid #f0f0f2;line-height: 50px;padding:0 10px;box-sizing:border-box;}
+        .foots .item i.checkbox {vertical-align: sub;}
+        .foots .item{flex:1;}
+        .foots .item i{float:left;}
+        .foots .item span{float:left;}
+         div.lefts{float:left!important;width: 100%;}
+        .delete{padding:15px;position:absolute;right:0px;top:10px;}
+        .delet{background:url(../../image/654734.png) no-repeat;width: 15px;vertical-align: sub;height: 15px;background-size:15px;}
+        .kong{background: url(../../image/shop-empty.png) 50% 50% no-repeat;position: fixed;top: 40%;width: 100%;text-align: center;height: 64px;line-height: 140px;display:none;
+            transform: translateY(-50%);-o-transform: translateY(-50%);-webkit-transform: translateY(-50%);-moz-transform: translateY(-50%);font-size: 12px;color: #bfbfbf;}
+        .type_hide{display:none;}
+        i.foot-checkbox{}
+        i.foot-checkbox::before{margin-top: 0px!important;}
+        /*i.foot-checkbox{line-height: inherit;}*/
+        @media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone5 */
+          i.foot-checkbox::before{margin-top: -10px!important;}
+          .item span{font-size: 12px;}
+         }
+
+         @media (device-height:667px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6 */
+           i.foot-checkbox::before{margin-top: -10px!important;}
+         }
+         @media (device-height:736px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone6 Plus */
+            i.foot-checkbox::before{margin-top: -10px!important;}
+         }
+        .orderTitle{padding: 2px 3px;display: inline-block;font-size:15px;}
+         ul li{background-color:#FFF6F5;}
+        .orderList{position:relative;padding-bottom:150px;}
+        .orderList ul:last-child{border-bottom:0;}
+        .heads{height: 35px;line-height: 30px;position:relative;}
+        /*.load-mores{padding:0 0 100px 0;display:none;text-align: center;}*/
+        #hides1{padding-bottom:150px;text-align: center;display:none;color:#ccc;}
+        #hides2{padding-bottom:150px;text-align: center;display:none;color:#ccc;}
+    </style>
+</head>
+
+<body style="position:relative;" class="wrap">
+    <script type="text/template" id="temID">
+        <%for(var i=0;i<list.length;i++){%>
+            <ul class="product-list data-empty">
+                <div class="shopName">
+                  <div class="heads">
+                    <i class="checkbox all-checked  iconfont allCheck" style="width:20px;height:20px;position:absolute;z-index:99;left:10px;top:7px;"></i>
+                    <!-- <label class="label all-checked"></label> -->
+                    <span class="orderTitle" style="position:absolute;left:30px;"><%=list[i].title%></span>
+                  </div>
+                      <%for(var j=0;j<list[i].cartitem.length;j++){%>
+                            <li class="iconfont" data-id='<%=list[i].cartitem[j].id%>' data-productid='<%=list[i].cartitem[j].productid%>' data-goodsid='<%=list[i].cartitem[j].goodsid%>' data-type='<%=list[i].cartitem[j].goodsid%>'>
+                                <div style="width:24px;"><i id="checkeds" class="checkbox listCheck" style="margin-right:5px;"></i></div>
+                                <i class="product-img" style="margin-left:10px;"><img src='<%=list[i].cartitem[j].imgurl%>' alt="" /></i>
+                                <div class="lefts" style="margin-left:3px;">
+                                     <h1 class="title"><%=list[i].cartitem[j].title%></h1>
+                                     <span id="delete"  class="delete"><span class="delet"></span></span>
+                                      <div class="price-line">
+                                          <div style="margin-left:3px;">
+                                            <i class="iconfont icon-qian red" style="margin-left:10px!important;"><span class="price"><%=list[i].cartitem[j].price/100%></span></i>
+                                          </div>
+                                          <div>
+                                              <em>赠</em><i class="iconfont icon-jewelry"></i><span class="score"><%=list[i].cartitem[j].shopscore%></span>
+                                          </div>
+                                          <div class="numbox" id="numbox">
+                                            <span class="sp-del">-</span>
+                                            <input type="number" class="ip-amount" value='<%=list[i].cartitem[j].num%>' data-num='<%=list[i].cartitem[j].num%>' />
+                                            <span class="sp-add">+</span>
+                                          </div>
+                                      </div>
+                                  </div>
+                            </li>
+                      <%}%>
+                </div>
+            </ul>
+        <%}%>
+        </script>
+    <div class="page" id="page-bag-frame" style="padding-bottom:0;">
+        <!-- 主页面容器 -->
+        <!-- <div class="mui-inner-wrap"> -->
+
+                <div class="orderList">
+
+                </div>
+                <div id="hides1"><span style="background:url(../../image/loading.gif) no-repeat; width:22px;height:22px;background-size:22px;vertical-align:middle;display:inline-block;margin-right:5px;"></span>加载更多....</div>
+                <div id="hides2">暂无更多数据</div>
+                <!-- <div class="load-mores"></div> -->
+                <div class="foot_show">
+                  <div class="foots">
+                     <span class="item">支付方式</span>
+                     <div class="item shopfen">
+                         <i id="checkeds" class="checkbox foot-checkbox iconfont"></i>
+                         <span>购物分</span>
+                     </div>
+                     <div class="item xiaofeifen">
+                       <i id="checkeds" class="checkbox foot-checkbox iconfont"></i>
+                       <span>消费分</span>
+                     </div>
+                     <div class="item">
+                       <i id="checkeds" class="checkbox get-jifen foot-checkbox checked iconfont"></i>
+                       <span>在线支付</span>
+                     </div>
+                  </div>
+                  <nav class="foot_check">
+                      <div>
+                          <p><span class="count"></span>件商品总计：<span class="amount red"></span></p>
+                          <p class="type_hide">可以获得<i class="iconfont icon-jewelry"></i><span class="shop-score red"></span></p>
+                      </div>
+                      <span class="bg-red foot-tj">提交订单</span>
+                  </nav>
+                </div>
+
+        <!-- </div> -->
+        <div class="kong">您的购物车暂无商品 赶紧去购物吧</div>
+
+    </div>
+
+</body>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/mui.min.js"></script>
+<script type="text/javascript" src="../../script/template-native.js"></script>
+<script type="text/javascript" src="../../script/zepto.min.js"></script>
+<script type="text/javascript" src="../../script/common.js"></script>
+<script type="text/javascript">
+    //  切换 编辑状态
+    function mes(){
+       api.sendEvent({
+           name: 'me',
+           extra: {
+               key1: 'value1',
+               key2: 'value2'
+           }
+       });
+    }
+    function hide_show(){
+      if($('.orderList ul').length>0){
+         $('.foot_show').css('display','block')
+      }else{
+         $('.foot_show').css('display','none')
+        app.dataNull('.orderList','.orderList ul')
+      }
+    }
+    hide_show()
+    mui(".foots").on('tap','.foot-checkbox',function(){
+        $(this).addClass('checked').parent().siblings().find('.foot-checkbox').removeClass('checked');
+    })
+    mui('body').on('tap','.delete',function(){
+      var $item  = $(this).parents('li')
+          api.confirm({
+              title: '提示',
+              msg: '要删除该商品吗？',
+          }, function(ret, err){
+              if( ret.buttonIndex === 2 ){
+                  app.ajax({
+                    url : 'caritem/deleteCaritem',
+                    data: {
+                      'memberId': $api.getStorage('memberId'),
+                      'cartitemIds[]': $item.data('id'),
+                      'token':$api.getStorage('token')
+                    },
+                    success: function(){
+                      app.toast('删除成功')
+                      window.location.reload()
+                      $item.remove()
+                      new_active()
+                      mes()
+                      window.refreshAllCartItemcount($('body').attr('key'))
+                      !$('.product-list li').length && app.dataNull('.product-list')
+                      countAmount()
+                      hide_show()
+                    }
+                  })
+              }
+          })
+    })
+    // 更新商品数量
+    function updateOne(params){
+        console.log(JSON.stringify(params))
+        app.ajax({
+            url : 'caritem/addCaritem',
+            data: {
+                memberId : $api.getStorage('memberId'),
+                goodsId  : params.goodsId,
+                productId: params.productId,
+                num : params.num,
+                token:$api.getStorage('token'),
+                type: 'update',
+            },
+            success: function(){
+              params.success && params.success()
+            }
+        })
+    }
+
+    // 更新数量 金额
+    function countAmount(){
+      var count  = 0,
+          amount = 0,
+          score  = 0
+      $('.checkbox.checked').parents('li').each(function(){
+          var $this = $(this)
+          count  += Number($this.find('.ip-amount').val())
+          amount += Number($this.find('.ip-amount').val()) * Number($this.find('.price').text())
+          score  += Number($this.find('.ip-amount').val()) * Number($this.find('.score').text())
+      })
+      $('nav .count').text(count)
+      $('nav .amount').text(amount)
+      $('nav .shop-score').text(score)
+    }
+    function new_active(){
+      api.execScript({
+          name: 'root',
+          frameName: 'bag',
+          script:'inits()'
+      })
+    }
+    apiready = function() {
+       api.addEventListener({
+           name: 'logins'
+       }, function(ret, err){
+           if( ret ){
+             window.location.reload()
+           }else{
+                alert( JSON.stringify( err ) );
+           }
+       });
+       api.addEventListener({
+           name: 'bag_s'
+       }, function(ret, err){
+           if( ret ){
+             $('body').attr('key',ret.value.key1)
+           }else{
+                alert( JSON.stringify( err ) );
+           }
+       });
+      //  app.ready()
+        var bagData
+
+        hide_show()
+        new_active()
+        var bagListAjax = app.ajaxWithLoadMorebag({
+            url: 'caritem/queryCaritemList',
+            data: {
+                'memberId': $api.getStorage('memberId'),
+                'token':$api.getStorage('token'),
+                'pageSize':10,
+                'pageNum':1
+            },
+            success: function(rst) {
+                console.log(JSON.stringify(rst))
+                 var datas=rst.data
+                 console.log(JSON.stringify)
+                 var info={
+                    list:datas
+                 }
+                var text = template('temID',info)
+                if(bagListAjax.status === 'NOMORE') return;
+                if(bagListAjax.status === 'REFRESH') $('.orderList').html('') // 刷新 清空数据
+                $('.orderList').append(text)
+                countAmount()
+                window.refreshAllCartItemcount($('body').attr('key'))
+                api.refreshHeaderLoadDone()
+                hide_show()
+                var ua = navigator.userAgent.toLowerCase();
+                var lens=$('.product-list').length
+                if(lens>10){
+                  $('.load-more').show()
+                }else{
+                  $('.load-more').hide()
+                }
+
+                if (/iphone|ipad|ipod/.test(ua)) {
+                  $('.foots .item i').css('line-height','74px')
+                  var lens=$('.orderList').find('li').length
+                  // if(lens>0,lens<3){
+                  //   $(".orderList").css({
+                  //       'margin-bottom':'300px!important',
+                  //    })
+                  // }else if(lens>=3,lens<4){
+                  //   $(".orderList").css({
+                  //       'margin-bottom':'200px!important',
+                  //    })
+                  // }else if(lens>=4,lens<5){
+                  //   $(".orderList").css({
+                  //       'margin-bottom':'200px!important',
+                  //    })
+                  // }else if(lens>=5){
+                  //   $(".orderList").css({
+                  //       'margin-bottom':'130px!important',
+                  //    })
+                  // }
+                } else if (/android/.test(ua)) {
+                }
+            }
+        })
+
+        // 下拉刷新
+        api.setRefreshHeaderInfo({
+                bgColor: '#fff',
+                textColor: '#333',
+                textDown: '下拉刷新...',
+                textUp: '松开刷新...'
+
+            }, function(ret, err) {
+                //在这里从服务器加载数据，加载完成后调用api.refreshHeaderLoadDone()方法恢复组件到默认状态
+                bagListAjax.init()()
+                // window.location.reload()
+                hide_show()
+                new_active()
+                $('#hides2').hide()
+                $('.orderList').css('padding-bottom','150px!important')
+            })
+
+        // 底部加载更多
+        api.addEventListener({
+            name: 'scrolltobottom'
+        }, function(ret, err) {
+            var ALL=$('body').attr('key'),
+                L=$('.orderList').find('li').length
+                if(L==ALL){
+                //   alert(666)
+                   $('#hides1').hide()
+                   $('#hides2').show()
+                   $('.orderList').css('padding-bottom','0px!important')
+                }else if(L!=ALL){
+                  app.ready()
+                   $('#hides1').show()
+                   $('.orderList').css('padding-bottom','0px!important')
+                }
+            app.throttle(bagListAjax);
+        })
+
+        bagListAjax.init()()
+    }
+
+    var itmesl = $(".allCheck");
+    for(var i=0;i<itmesl.length;i++){
+        $(itmesl[0]).addClass('checked');
+    }
+
+    mui('body').on('tap','.all-checked', function(){
+        if($(this).is('.checked')){
+            $(this).removeClass('checked');
+            $(this).parents('.heads').siblings('li').find('.checkbox').removeClass('checked');
+        }else {
+            $(this).addClass('checked');
+            $(this).parents('ul').siblings().find('.all-checked').removeClass('checked')
+            $(this).parents('ul').siblings().find('li').find('.checkbox').removeClass('checked')
+            $(this).parents('.heads').siblings('li').find('.checkbox').addClass('checked');
+        }
+        countAmount()
+    });
+ //选择个体商家下
+mui('body').on('tap','.listCheck', function(){
+    $(this).toggleClass('checked')
+    $(this).parents('ul').siblings().find('.all-checked').removeClass('checked')
+    $(this).parents('ul').siblings().find('.listCheck').removeClass('checked')
+    if($(this).is('.checked')){
+      // $(this).parents('li').siblings('all-checked').removeClass('checked')
+    }else{
+      $(this).parents('li').siblings('.heads').find('.all-checked').removeClass('checked')
+    }
+        var Leng=$(this).parents('ul').find('li').length
+        var allLeng=$(this).parents('ul').find('li .checked').length
+        if(Leng==allLeng){
+          $(this).parents('li').siblings('.heads').find('.all-checked').addClass('checked')
+        }else{
+          $(this).parents('li').siblings('.heads').find('.all-checked').removeClass('checked')
+        }
+        countAmount()
+})
+    // 数量 -
+    mui('body').on('tap','.sp-del', function(){
+      var $item  = $(this).parents('li'),
+          $input = $(this).siblings('input')
+      if($input.val() ==  1) {
+          api.confirm({
+              title: '提示',
+              msg: '要删除该商品吗？',
+          }, function(ret, err){
+              if( ret.buttonIndex === 2 ){
+                  app.ajax({
+                    url : 'caritem/deleteCaritem',
+                    data: {
+                      'memberId': $api.getStorage('memberId'),
+                      'cartitemIds[]': $item.data('id'),
+                      'token':$api.getStorage('token')
+                    },
+                    success: function(){
+                      app.toast('删除成功')
+                      // window.location.reload()
+                      $item.remove()
+                      new_active()
+                      window.refreshAllCartItemcount($('body').attr('key'))
+                      !$('.product-list li').length && app.dataNull('.product-list')
+                      countAmount()
+                      hide_show()
+                    }
+                  })
+              }
+          })
+      } else {
+        updateOne({
+          productId: $item.data('productid'),
+          goodsId  : $item.data('goodsid'),
+          num: Number($input.val()) - 1,
+          success: function(){
+            $input.val(Number($input.val()) - 1)
+            countAmount()
+          }
+        })
+      }
+    })
+    // 数量 +
+    mui('body').on('tap', '.sp-add', function(){
+      var $input = $(this).siblings('input'),
+          $item  = $(this).parents('li');
+      updateOne({
+        productId: $item.data('productid'),
+        goodsId  : $item.data('goodsid'),
+        num: Number($input.val()) + 1,
+        success: function(){
+          $input.val(Number($input.val()) + 1)
+          countAmount()
+        }
+      })
+    })
+    // 数量 input
+    mui('body').on('input', 'input.ip-amount', function(){
+      $(this).val($(this).val().replace(/[^0-9]/g, ''))
+    })
+    mui('.product-list').on('change', 'input.ip-amount', function(){
+      var $input = $(this)
+      if(!$input.val().trim() || $input.val().trim() == 0) {
+        api.confirm({
+            title: '提示',
+            msg: '要删除该商品吗？',
+        }, function(ret, err){
+            if( ret.buttonIndex === 2 ){
+                $input.parents('li').remove()
+                !$('.product-list li').length && app.dataNull('.product-list')
+                $input.data('num', $input.val())
+                mes()
+            } else {
+                $input.val($input.data('num'))
+            }
+        })
+      }
+    })
+    // 编辑购物车
+    mui('header').on('tap', '#edit-or-finished', function() {
+        $('.product-list').toggleClass('editable') // 切换是否可编辑
+            // 编辑模式下
+        if ($('.product-list').hasClass('editable')) {
+            $('#edit-or-finished').text('完成')
+        }
+        // 购买模式下
+        else {
+            $('#edit-or-finished').text('编辑')
+        }
+    })
+   //判断点击checkbox
+      var items=$(".foots").children('.item');
+       for(var i=0;i<items.length;i++){
+         if($(items[1]).children('.foot-checkbox').hasClass('checked')){
+              $('.foots').siblings('.foot_check').find('.type_hide').css('display','none')
+         }
+         if($(items[2]).children('.foot-checkbox').hasClass('checked')){
+              $('.foots').siblings('.foot_check').find('.type_hide').css('display','none')
+         }
+         if($(items[3]).children('.foot-checkbox').hasClass('checked')){
+             $('.foots').siblings('.foot_check').find('.type_hide').css('display','block')
+         }
+         $(items[i]).children('.foot-checkbox').on('tap',function(){
+            if($(this).hasClass('get-jifen')){
+              $('.foots').siblings('.foot_check').find('.type_hide').css('display','block')
+            }else{
+              $('.foots').siblings('.foot_check').find('.type_hide').css('display','none')
+            }
+         })
+       }
+  //提交订单
+  $('.foot_check').on('tap','.foot-tj',function(){
+       var cats=[],ids=$(this).parents('.foot_show').siblings('.orderList').find('li.iconfont')
+       for(var i=0; i<ids.length;i++){
+        var hasClass=$(ids[i]).find('#checkeds').hasClass("checked")
+         if(hasClass){
+           var cartId=$(ids[i]).attr("data-id")
+              cats.push(cartId)
+         }else if(!hasClass){
+              // alert(123)
+         }
+       }
+        var prePayType=[]
+        for(var i=0;i<items.length;i++){
+             if($(items[1]).children('.foot-checkbox').hasClass('checked')){
+                 prePayType=3
+             }
+             if($(items[2]).children('.foot-checkbox').hasClass('checked')){
+                 prePayType=2
+             }
+             if($(items[3]).children('.foot-checkbox').hasClass('checked')){
+                 prePayType=1
+             }
+        }
+        var prePayTypes=prePayType
+        var totalPrice=$(".amount").html()
+        console.log(prePayTypes)
+        if(cats==''){
+          app.toast('请选择产品再提交')
+        }else{
+          app.ajax({
+            url:'ordergoods/addOrdergoods',
+            data:{
+              'token':$api.getStorage('token'),
+              'memberId':$api.getStorage('memberId'),
+              'prePayType':prePayTypes,
+              'totalPrice':totalPrice,
+              'cartIds[]':cats.join(',')
+            },
+            success:function(data){
+              countAmount()
+              console.log("==================================>"+JSON.stringify(data))
+              api.sendEvent({
+                  name: 'taps',
+                  extra: {
+                      key1: 'value1',
+                      key2: 'value2'
+                  }
+              });
+
+              if(data.code==0){
+                new_active()
+                mes()
+                window.location.reload()
+                api.execScript({
+                  name: 'root',
+                  frameName: 'bag',
+                  script: 'reloadFrames(1)'
+                })
+              }else{
+                alert(data.msg)
+              }
+            }
+          })
+        }
+  })
+  app.details('.product-list li','data-goodsid','data-productid','checkeds','delete','numbox')
+
+</script>
+</html>

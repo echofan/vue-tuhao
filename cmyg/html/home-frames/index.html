@@ -160,9 +160,9 @@
                 <span>推客激活</span>
             </div>
         </div>
-        <!-- <div class="recommend">
+        <div class="recommend">
             <img src="../../image/list2.png" alt="" style="width:100%;">
-        </div> -->
+        </div>
         <div class="home-product-list">
         </div>
         <p class="load-more"></p>
@@ -185,7 +185,7 @@
         },
         showLoading: false,
         success: function(rst) {
-          console.log(JSON.stringify(rst))
+        //   console.log(JSON.stringify(rst))
             if(productListAjax.status === 'NOMORE') return;
             if (productListAjax.status === 'REFRESH') $('.home-product-list').html('') // 刷新 清空数据
             for(i in rst.data){
@@ -216,6 +216,7 @@
                 token: app.token
             },
             success: function(rst) {
+                console.log(JSON.stringify(rst))
                 var slider
                 $('.home-slider-wrap').html(app.template.slider({
                     id: 'home-slider',
@@ -327,26 +328,21 @@
 
     //jf-give
     $('.jf-give').on('tap', function() {
-        // api.openWin({
-        //     name: 'consumptionLine',
-        //     url: '../shop-frames/consumptionLine.html',
-        //     pageParam: {
-        //         name: 'test'
-        //     }
-        // });
-
         api.openWin({
-            name: 'shopLine',
-            url: '../common-frames/shopLine-bar.html',
+            name: 'consumptionLine',
+            url: '../shop-frames/consumptionLine.html',
             pageParam: {
                 name: 'test'
             }
         });
-
-
-
+        // api.openWin({
+        //     name: 'shopLine',
+        //     url: '../common-frames/shopLine-bar.html',
+        //     pageParam: {
+        //         name: 'test'
+        //     }
+        // });
     });
-
 
     $(".recommend").on("tap",function(){
         api.openWin({

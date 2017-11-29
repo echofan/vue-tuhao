@@ -156,6 +156,7 @@
                     <span>万商盟</span>
                 </td>
                 <td class="nos">
+                <!-- <td class="nosss"> -->
                     <i class="iconfont icon-welfare"></i>
                     <span>创盟公益</span>
                 </td>
@@ -184,6 +185,16 @@
 <script type="text/javascript">
 
     function getMyInfo() {
+        // $(".nosss").on("tap",function(){
+        //     api.openWin({
+        //         name: 'test',
+        //         url: '../win/test.html',
+        //         pageParam: {
+        //             name: 'test'
+        //         }
+        //     });
+        //
+        // })
         app.ajax({
             url: 'member/getMyInfo',
             data: {
